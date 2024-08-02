@@ -71,5 +71,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShotgunBullet Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5292666828356153134, guid: 888db1ba4a616304a9397238621216b3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5292666828356153134, guid: 888db1ba4a616304a9397238621216b3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 873916143
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 888db1ba4a616304a9397238621216b3, type: 3}

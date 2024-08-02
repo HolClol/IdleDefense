@@ -9,13 +9,13 @@ public class SplitterController : AbilitiesController
     [SerializeField] GameObject _lineRenderer;
 
     private float BulletLifetime = 0.4f;
-    private int BulletNumb = 3;
-    private int Radius = 3;
+    private int BulletNumb = 5;
+    private int Radius = 4;
     private int Bounce = 0;
     private int Repeat = 1;
 
     private Vector3 TargetPos;
-    private Quaternion TargetRotate;
+    private Transform Target;
     private bool TargetSpotted;
     private GameObject clonedlineRenderer;
 
@@ -32,15 +32,22 @@ public class SplitterController : AbilitiesController
     }
 
     void FixedUpdate() {
-        if (TimeBeforeFire <= 0f && TargetSpotted) {
-            StartCoroutine(FireBullet());
-            TimeBeforeFire = AbilitiesStat.Cooldown;
+        if (TimeBeforeFire <= 0f && TargetSpotted && Target != null) {
+            if (IsFacingTarget(Target.transform))
+            {
+                StartCoroutine(FireBullet());
+                TimeBeforeFire = AbilitiesStat.Cooldown;
+            }
+            
         }
         else {
             TimeBeforeFire -= Time.deltaTime;
         }
-
+ 
         TargetSpotted = AutoTargetNearestEnemy();
+        float angle = Mathf.Atan2(TargetPos.y - FiringPoint.transform.position.y, TargetPos.x - FiringPoint.transform.position.x) * Mathf.Rad2Deg;
+        FiringPoint.transform.localRotation = Quaternion.Lerp(FiringPoint.transform.localRotation, Quaternion.Euler(0, 0, angle), 2.5f * Time.deltaTime);
+        
     }
 
     private IEnumerator FireBullet() {
@@ -53,7 +60,7 @@ public class SplitterController : AbilitiesController
                 GameObject ClonedBullet = GetPooledObject(0);
                 Vector3 RandomPos = new Vector3(0, 0, Random.Range(-Angle, Angle));
                 ClonedBullet.transform.position = transform.position;
-                ClonedBullet.transform.rotation = FiringPoint.transform.rotation * Quaternion.Euler(RandomPos);
+                ClonedBullet.transform.rotation = FiringPoint.transform.rotation * Quaternion.Euler(0,0,-90) * Quaternion.Euler(RandomPos);
             }
             yield return new WaitForSeconds(0.25f);
         }
@@ -64,17 +71,33 @@ public class SplitterController : AbilitiesController
     private bool AutoTargetNearestEnemy() {
         bool inrange = false;
         if (playerController.EnemyInZone.Count > 0) {
+            foreach (GameObject selectFirstTarget in playerController.EnemyInZone)
+            {
+                float firstdistance = Vector2.Distance(transform.position, selectFirstTarget.transform.position);
+                if (firstdistance < Radius)
+                {
+                    TargetPos = selectFirstTarget.transform.position;
+                    Target = selectFirstTarget.transform;
+
+                    inrange = true;
+                    break;
+                }
+            }
+
             foreach (GameObject enemyTarget in playerController.EnemyInZone) {
                 if (enemyTarget != null) {
                     float distance = Vector2.Distance(transform.position, enemyTarget.transform.position);
-                    // Target nearest enemy
-                    if (distance < Radius & enemyTarget.name != "Molten") {
-                        TargetPos = enemyTarget.transform.position;
-                        TargetRotate = enemyTarget.transform.rotation;
-                        // Rotate to the target
-                        float angle = Mathf.Atan2(TargetPos.y - FiringPoint.transform.position.y, TargetPos.x - FiringPoint.transform.position.x) * Mathf.Rad2Deg;
-                        FiringPoint.transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0, 0, angle), 0.25f * Time.deltaTime);
-                        inrange = true;
+                    float lastdistance = Vector2.Distance(transform.position, TargetPos);
+
+                    if (enemyTarget.name != "Molten") 
+                    {
+                        if (distance < Radius && distance < lastdistance)
+                        {
+                            TargetPos = enemyTarget.transform.position;
+                            Target = enemyTarget.transform;
+
+                            inrange = true;
+                        }
                     }   
                     
                 }
@@ -83,6 +106,16 @@ public class SplitterController : AbilitiesController
         }
         return inrange;
         
+    }
+
+    private bool IsFacingTarget(Transform target)
+    {
+        Vector2 forward = FiringPoint.transform.right;
+        Vector2 directionToTarget = (target.position - FiringPoint.transform.position).normalized;
+
+        float angle = Vector2.Angle(forward, directionToTarget);
+
+        return angle < 5f;
     }
 
     private GameObject GetPooledObject(int prefabindex) {
@@ -144,7 +177,7 @@ public class SplitterController : AbilitiesController
                 Bounce = 2;
             break;
             case 4:
-                BulletNumb = 5;
+                BulletNumb = 8;
             break;
             case 5:
                 Repeat = 2;

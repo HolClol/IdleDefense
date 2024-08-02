@@ -134,12 +134,6 @@ public class PlayerController : MonoBehaviour
                 if (distance < lastdistance & enemyTarget.name != "Molten") {
                     TargetPos = enemyTarget.transform.position;
                 }
-
-                // Prioritize low HP targets
-                int Health = enemyTarget.GetComponent<EnemyAI>().Health;
-                if (Health < PlayerStats.BaseDamage & enemyTarget.name != "Molten") {
-                    TargetPos = enemyTarget.transform.position;
-                }
                 
             }
             
