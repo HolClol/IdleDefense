@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5128561756875863553
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2035451952, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: EnemyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035451952, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: MaxHealth
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035451952, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: Experience
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035451952, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: EnemyVFXPrefab
+      value: 
+      objectReference: {fileID: 11400000, guid: 9ec06d1c733419b418c4bd9170261bb4, type: 2}
+    - target: {fileID: 2957214932916236506, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: EnemyType
+      value: 
+      objectReference: {fileID: 11400000, guid: d712451dfaa01e54d9d84ce6224b8bba, type: 2}
+    - target: {fileID: 2957214932916236506, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: MaxHealth
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 2957214932916236506, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: Experience
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992166145972510169, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992166145972510169, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992166145972510169, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992166145972510169, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992166145972510169, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992166145972510169, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992166145972510169, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992166145972510169, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992166145972510169, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992166145972510169, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992166145972510169, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992166145972510169, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992166145972510169, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: m_Name
+      value: TriangleEnemyArmor Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6929051109327946527, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}

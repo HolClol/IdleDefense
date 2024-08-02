@@ -1,0 +1,44 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+
+public class DamageCalculateManager : MonoBehaviour
+{
+    public UpgradesScriptableObject UpgradesData;
+    public GameObject _damageDisplayPrefab;
+
+    private List<GameObject> PooledDisplay = new List<GameObject>();
+    private List<DamageDisplay> PooledDisplayScript = new List<DamageDisplay>();
+
+    // Generally the array consist of follow: int[] {dmg, id}; float[] {knockback, debouncetime}
+    public void DamageCalculate(GameObject enemy, int[] intstat, float[] floatstat) {
+        if (!enemy.GetComponent<EnemyAI>().GetDebounce(intstat, floatstat))
+        {
+            GameObject damageDisplay = GetPooledObject(enemy.transform.position, intstat[0]);
+            damageDisplay.transform.position = enemy.transform.position + new Vector3(0, 1, 0);
+        }  
+    }
+    private GameObject GetPooledObject(Vector3 pos, int damage)
+    {
+        for (int i = 0; i < PooledDisplay.Count; i++)
+        {
+            if (!PooledDisplay[i].activeInHierarchy)
+            {
+                PooledDisplay[i].SetActive(true);
+                PooledDisplayScript[i].UpdateDisplay(damage);
+                return PooledDisplay[i];
+            }
+        }
+
+        // Optionally expand pool if needed
+        GameObject DisplayNew = Instantiate(_damageDisplayPrefab, pos, Quaternion.identity, GameObject.Find("_Effects").transform);
+
+        DisplayNew.SetActive(true);
+        DisplayNew.GetComponent<DamageDisplay>().UpdateDisplay(damage);
+
+        PooledDisplay.Add(DisplayNew);
+        PooledDisplayScript.Add(DisplayNew.GetComponent<DamageDisplay>());
+        return DisplayNew;
+    }
+}

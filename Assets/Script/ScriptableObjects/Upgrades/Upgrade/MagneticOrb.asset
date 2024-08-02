@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d67168d7cf5c442b03b03aa55941ff, type: 3}
+  m_Name: MagneticOrb
+  m_EditorClassIdentifier: 
+  Upgrade:
+    UpgradeType: 1
+    UpgradeName: Magnetic Field
+    UpgradeDescription:
+    - Cast four rotating orbs surrounding that pushes enemies back
+    - Increase piercing and longer duration
+    - Increase size and longer duration
+    - Increase knockback and damage
+    - Increase piercing, increase number of orbs to six
+    - Now remains permanently
+    MaxLevel: 6
+    ID: 3
