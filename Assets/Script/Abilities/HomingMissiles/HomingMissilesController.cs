@@ -33,12 +33,14 @@ public class HomingMissilesController : AbilitiesController
     private IEnumerator FireMissiles() {
         playerController.EnemyInZone.RemoveAll(GameObject => GameObject == null);
         for (int i = 0; i < MissileNumbers; i++) {
-            //int randomIndex = Random.Range(0, playerController.EnemyInZone.Count);
-
-            Transform SpawnLocation = playerController.EnemyInZone[Random.Range(0, playerController.EnemyInZone.Count - 1)].transform;
-            GameObject ClonedBullet = GetPooledObject();
-            ClonedBullet.transform.position = SpawnLocation.position;
-            yield return new WaitForSeconds(0.2f);
+            if (playerController.EnemyInZone.Count > 0)
+            {
+                Transform SpawnLocation = playerController.EnemyInZone[Random.Range(0, playerController.EnemyInZone.Count - 1)].transform;
+                GameObject ClonedBullet = GetPooledObject();
+                ClonedBullet.transform.position = SpawnLocation.position;
+                yield return new WaitForSeconds(0.2f);
+            }
+            
         }
         
     }

@@ -7,9 +7,9 @@ public class PlayerManager : MonoBehaviour
 {
     [Header("Set Up")]
     [SerializeField] UIPlayerManager PlayerUI;
-    [SerializeField] PlayerController PlayerStat;
     [SerializeField] Camera PlayerCamera;
     public UnityEvent UpgradePopUp;
+    public UnityEvent<int[]> UpdateDamage;
     // Start is called before the first frame update
     [Header("Stats")]
     [SerializeField] int MaxHealth = 100;
@@ -84,7 +84,7 @@ public class PlayerManager : MonoBehaviour
             Level += 1;
 
             UpdateStat(new int[] { 4, 50 });
-            PlayerStat.UpdateDamage(1);
+            UpdateDamage.Invoke(new int[] { 1 });
             UpgradePopUp.Invoke();
             yield return new WaitForSeconds(1f);
         }

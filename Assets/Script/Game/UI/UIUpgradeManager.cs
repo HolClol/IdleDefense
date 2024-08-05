@@ -7,14 +7,17 @@ using TMPro;
 
 public class UIUpgradeManager : MonoBehaviour
 {
-    [SerializeField] GameObject _upgradeManager;
-    [System.Serializable] public class UpgradePanels {
+    [System.Serializable] public class UpgradePanels
+    {
         public Button UpgradeOptionsButton;
         public TMP_Text UpgradeOptionsName;
         public TMP_Text UpgradeOptionsDesc;
         public TMP_Text UpgradeOptionsStar;
         public int UpgradeOptionsID;
     }
+
+    [SerializeField] GameObject _upgradeManager;
+    [SerializeField] FloatVariable GameSpeed;
     [SerializeField] List<UpgradePanels> UpgradeOptions;
     private UpgradeManager _upgradeManagerScript;
     private float LastTimeScale;
@@ -28,6 +31,7 @@ public class UIUpgradeManager : MonoBehaviour
         Selected = false;
         LastTimeScale = Time.timeScale;
         Time.timeScale = 0.0f;
+        GameSpeed.Value = Time.timeScale;
         for (int i = 0; i < UpgradeOptions.Count; i++) {
             int[] UpgradeID = _upgradeManagerScript.UpgradeIntInfo();
             string[] UpgradeInfos = _upgradeManagerScript.UpgradeStringInfo();
@@ -51,7 +55,7 @@ public class UIUpgradeManager : MonoBehaviour
             Selected = true;
         }
         Time.timeScale = LastTimeScale;
-
+        GameSpeed.Value = Time.timeScale;
     }
 
 }

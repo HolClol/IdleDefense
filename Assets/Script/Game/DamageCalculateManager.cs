@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,23 @@ using UnityEngine.Events;
 
 public class DamageCalculateManager : MonoBehaviour
 {
+    [System.Serializable] public class AbilitiesStat
+    {
+        public int UpgradeLevel;
+        public int Damage;
+
+        public AbilitiesStat(int level, int damage)
+        {
+            UpgradeLevel = level;
+            Damage = damage;
+        }
+    }
+
     public UpgradesScriptableObject UpgradesData;
     public GameObject _damageDisplayPrefab;
+
+    private Dictionary<int, AbilitiesStat> AbilitiesDict = new Dictionary<int, AbilitiesStat>();
+    private int TotalDamage;
 
     private List<GameObject> PooledDisplay = new List<GameObject>();
     private List<DamageDisplay> PooledDisplayScript = new List<DamageDisplay>();
@@ -17,6 +33,13 @@ public class DamageCalculateManager : MonoBehaviour
         {
             GameObject damageDisplay = GetPooledObject(enemy.transform.position, intstat[0]);
             damageDisplay.transform.position = enemy.transform.position + new Vector3(0, 1, 0);
+
+            if (AbilitiesDict.ContainsKey(intstat[1])) 
+                AbilitiesDict[intstat[1]].Damage += intstat[0];
+            else
+                AbilitiesDict[intstat[1]] = new AbilitiesStat(1, intstat[0]);
+
+            TotalDamage += intstat[0];
         }  
     }
     private GameObject GetPooledObject(Vector3 pos, int damage)

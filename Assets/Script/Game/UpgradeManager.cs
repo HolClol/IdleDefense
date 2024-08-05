@@ -5,37 +5,24 @@ using UnityEngine.Events;
 
 public class UpgradeManager : MonoBehaviour
 {
-    [SerializeField] GameObject MainPlayer;
+    public GameObject MainPlayer;
     public UpgradesScriptableObject UpgradesData;
     public UnityEvent<int[]> UpdateStat;
+    public UnityEvent<int[]> UpdateDamage;
+    public UnityEvent<int[]> SendPlayerUpgrade;
 
-    private PlayerController playerController;
+    private List<int> CurrentIDUpgradeTable = new List<int>();
     private int RandomUpgradeIndex;
     private int Level;
-    private List<int> CurrentIDUpgradeTable = new List<int>();
-
-    private void Start() {
-        playerController = MainPlayer.GetComponent<PlayerController>();
-    }
-
-    // Check whether the player has the upgrade or not
-    private int CheckPlayerUpgrade(int ID) {
-        int result = 0;
-        for (int i = 0; i < playerController.PlayerStats.Upgrades.Count; i++) {
-            if (ID == playerController.PlayerStats.Upgrades[i].UpgradeID) {
-                result = playerController.PlayerStats.Upgrades[i].UpgradeLevel;
-                return result; //Looped
-            }
-        }
-        return result; //No upgrade
-    }
 
     //Select a random upgrade in the table (This should run in the first info collect signal)
     private int UpgradeOptionRandom() {
         int random = Random.Range(0, UpgradesData.UpgradeInfoTable.Count);
         int maxlevel = UpgradesData.UpgradeInfoTable[random].Upgrade.MaxLevel;
         int index = CurrentIDUpgradeTable.Count;
-        Level = CheckPlayerUpgrade(UpgradesData.UpgradeInfoTable[random].Upgrade.ID);
+        //Level = CheckPlayerUpgrade(UpgradesData.UpgradeInfoTable[random].Upgrade.ID);
+        //Level = ReceivePlayerUpgrade.Invoke(new int[] { UpgradesData.UpgradeInfoTable[random].Upgrade.ID });
+        SendPlayerUpgrade.Invoke(new int[] {0, UpgradesData.UpgradeInfoTable[random].Upgrade.ID });
 
         for (int i = 0; i < CurrentIDUpgradeTable.Count; i++) {
             // Check if the upgrade is duped or maxed
@@ -43,7 +30,7 @@ public class UpgradeManager : MonoBehaviour
                 random = RerollOption(random);
                 
                 maxlevel = UpgradesData.UpgradeInfoTable[random].Upgrade.MaxLevel;
-                Level = CheckPlayerUpgrade(UpgradesData.UpgradeInfoTable[random].Upgrade.ID);
+                SendPlayerUpgrade.Invoke(new int[] {0, UpgradesData.UpgradeInfoTable[random].Upgrade.ID });
             }
         }
 
@@ -52,7 +39,7 @@ public class UpgradeManager : MonoBehaviour
             random = RerollOption(random);
 
             maxlevel = UpgradesData.UpgradeInfoTable[random].Upgrade.MaxLevel;
-            Level = CheckPlayerUpgrade(UpgradesData.UpgradeInfoTable[random].Upgrade.ID);
+            SendPlayerUpgrade.Invoke(new int[] {0, UpgradesData.UpgradeInfoTable[random].Upgrade.ID });
         }
 
         CurrentIDUpgradeTable.Add(random);
@@ -81,6 +68,12 @@ public class UpgradeManager : MonoBehaviour
         return random;
     }
 
+    // Check whether the player has the upgrade or not
+    public void CheckPlayerUpgrade(int[] ID)
+    {
+        Level = ID[0];
+    }
+
     // Send the upgrade int informations to UI 
     public int[] UpgradeIntInfo() {
         RandomUpgradeIndex = UpgradeOptionRandom();
@@ -101,19 +94,9 @@ public class UpgradeManager : MonoBehaviour
     // Receive back the selected upgrade from UI
     public void UpgradeOptionSelected(int ID) {
         CurrentIDUpgradeTable.Clear();
-        bool existed = false;
         int upgradelevel = 0; 
         int RealId = UpgradesData.UpgradeInfoTable[ID].Upgrade.ID;
-        for (int i = 0; i < playerController.PlayerStats.Upgrades.Count; i++) {
-            if (RealId == playerController.PlayerStats.Upgrades[i].UpgradeID) {
-                existed = true;
-                playerController.AdjustUpgrade(1, i, 0);
-                upgradelevel = playerController.PlayerStats.Upgrades[i].UpgradeLevel;
-            }
-        }
-        if (!existed) {
-            playerController.AdjustUpgrade(0, RealId, 1);
-        }
+        SendPlayerUpgrade.Invoke(new int[] {1, UpgradesData.UpgradeInfoTable[ID].Upgrade.ID });
 
         string ScriptName = "";
         switch (RealId) { //Most upgrades does not need a special case and is calculated through the projectile handler itself
@@ -139,7 +122,7 @@ public class UpgradeManager : MonoBehaviour
                 UpdateStat.Invoke(new int[] {3, 20});
             break;
             case 21:
-                playerController.UpdateDamage(5);
+                UpdateDamage.Invoke(new int[] { 5 });
             break;
         }
 
