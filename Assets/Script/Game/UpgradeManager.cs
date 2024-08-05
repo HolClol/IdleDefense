@@ -139,8 +139,7 @@ public class UpgradeManager : MonoBehaviour
                 UpdateStat.Invoke(new int[] {3, 20});
             break;
             case 21:
-                playerController.PlayerStats.BaseDamage += 5;
-                playerController.UpdateDamage(1);
+                playerController.UpdateDamage(5);
             break;
         }
 

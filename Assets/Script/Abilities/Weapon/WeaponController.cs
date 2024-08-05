@@ -57,7 +57,6 @@ public class WeaponController : MonoBehaviour
             AnimationDisabled = true;
         }
     }
-
     private void FireBullet(int repeat) {
         if (repeat > 3) 
             repeat = 3;
