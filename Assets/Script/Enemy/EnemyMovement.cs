@@ -4,25 +4,37 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    public float Delay;
+
     protected Transform Target;
-    protected EnemyAI MainEnemyController;
+    protected EnemyMain MainEnemyController;
     protected Rigidbody2D Rb;
     protected bool Hurt;
     protected float DamageKnockback;
     protected float CurrentCooldown = 0;
+    protected float DelayPlay;
 
     protected virtual void Start()
     {
         Rb = GetComponent<Rigidbody2D>();
-        MainEnemyController = GetComponent<EnemyAI>();
+        MainEnemyController = GetComponent<EnemyMain>();
+        DelayPlay = Delay;
     }
 
     protected virtual void Update()
     {
-        if (!Target)
-            GetTarget();
+        if (DelayPlay <= 0)
+        {
+            if (!Target)
+                GetTarget();
+            else
+                RotateToTarget();
+        }
         else
-            RotateToTarget();
+        {
+            DelayPlay -= Time.deltaTime;
+        }
+        
     }
 
     protected void GetTarget()
@@ -33,7 +45,11 @@ public class EnemyMovement : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        MoveProgress(Time.fixedDeltaTime);
+        if (!MainEnemyController.Dead)
+        {
+            MoveProgress(Time.fixedDeltaTime);
+        }
+        
     }
 
     protected void MoveProgress(float deltaTime)

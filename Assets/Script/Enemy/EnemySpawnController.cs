@@ -128,8 +128,8 @@ public class EnemySpawnController : MonoBehaviour
             
 
             GameObject Enemy = Instantiate(enemyToSpawn, enemyToSpawnPos.position, Quaternion.identity, _enemySpawn);
-            Enemy.GetComponent<EnemyAI>().MaxHealth += (Enemy.GetComponent<EnemyAI>().MaxHealth * HealthMulti)/2;
-            Enemy.GetComponent<EnemyAI>().Experience += (Enemy.GetComponent<EnemyAI>().Experience * HealthMulti);
+            Enemy.GetComponent<EnemyMain>().MaxHealth += (Enemy.GetComponent<EnemyMain>().MaxHealth * HealthMulti)/2;
+            Enemy.GetComponent<EnemyMain>().Experience += (Enemy.GetComponent<EnemyMain>().Experience * HealthMulti);
             // Enemy.GetComponent<EnemyBehaviourScript>().EnemyMovespeed += SpeedIncrease;
         }
     }

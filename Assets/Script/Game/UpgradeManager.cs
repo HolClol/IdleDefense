@@ -20,6 +20,7 @@ public class UpgradeManager : MonoBehaviour
         int random = Random.Range(0, UpgradesData.UpgradeInfoTable.Count);
         int maxlevel = UpgradesData.UpgradeInfoTable[random].Upgrade.MaxLevel;
         int index = CurrentIDUpgradeTable.Count;
+        Level = 0;
         //Level = CheckPlayerUpgrade(UpgradesData.UpgradeInfoTable[random].Upgrade.ID);
         //Level = ReceivePlayerUpgrade.Invoke(new int[] { UpgradesData.UpgradeInfoTable[random].Upgrade.ID });
         SendPlayerUpgrade.Invoke(new int[] {0, UpgradesData.UpgradeInfoTable[random].Upgrade.ID });
@@ -50,6 +51,7 @@ public class UpgradeManager : MonoBehaviour
         int backupthird = 0;
         int random = number;
         int coinflip = 0; 
+
         do { 
             coinflip = Random.Range(-random, UpgradesData.UpgradeInfoTable.Count - (random + 1)); 
         } while (coinflip == 0);
@@ -77,7 +79,8 @@ public class UpgradeManager : MonoBehaviour
     // Send the upgrade int informations to UI 
     public int[] UpgradeIntInfo() {
         RandomUpgradeIndex = UpgradeOptionRandom();
-        int[] InfoInt = new int[] {RandomUpgradeIndex, Level};
+        int MaxLevel = UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].Upgrade.MaxLevel;
+        int[] InfoInt = new int[] {RandomUpgradeIndex, Level, MaxLevel};
         return InfoInt;
     }
 
@@ -94,51 +97,54 @@ public class UpgradeManager : MonoBehaviour
     // Receive back the selected upgrade from UI
     public void UpgradeOptionSelected(int ID) {
         CurrentIDUpgradeTable.Clear();
-        int upgradelevel = 0; 
+        Level = 0;
         int RealId = UpgradesData.UpgradeInfoTable[ID].Upgrade.ID;
-        SendPlayerUpgrade.Invoke(new int[] {1, UpgradesData.UpgradeInfoTable[ID].Upgrade.ID });
+        SendPlayerUpgrade.Invoke(new int[] {1, RealId });
 
         string ScriptName = "";
-        switch (RealId) { //Most upgrades does not need a special case and is calculated through the projectile handler itself
+        switch (RealId)
+        { //Most upgrades does not need a special case and is calculated through the projectile handler itself
             case 0: //Weapon Upgrade
-                MainPlayer.transform.Find("PlayerChar").GetComponent<WeaponController>().CheckUpgrade(upgradelevel);
-            break;
+                MainPlayer.transform.Find("PlayerChar").GetComponent<WeaponController>().CheckUpgrade(Level-1);
+                break;
             case 1:
                 ScriptName = "HomingMissilesController";
-            break;
+                break;
             case 2:
                 ScriptName = "FieryEruptionController";
-            break;
+                break;
             case 3:
                 ScriptName = "MagneticFieldController";
-            break;
+                break;
             case 4:
                 ScriptName = "SplitterController";
-            break;
+                break;
             case 5:
                 ScriptName = "EnigmaticSawController";
-            break;
+                break;
             case 20:
-                UpdateStat.Invoke(new int[] {3, 20});
-            break;
+                UpdateStat.Invoke(new int[] { 3, 20 });
+                break;
             case 21:
                 UpdateDamage.Invoke(new int[] { 5 });
-            break;
+                break;
         }
 
         AbilitiesController ScriptComponent;
-        if (ScriptName != "") {
+        if (ScriptName != "")
+        {
             ScriptComponent = MainPlayer.transform.Find("PlayerChar").GetComponent(ScriptName) as AbilitiesController;
-            switch (upgradelevel) {
+            switch (Level)
+            {
                 case 0:
                     ScriptComponent.enabled = true;
-                break;
+                    break;
                 default:
-                    ScriptComponent.CheckUpgrade(upgradelevel-1); //Real upgrade value is smaller by 1
-                break;
+                    ScriptComponent.CheckUpgrade(Level - 1); //Real upgrade value is smaller by 1
+                    break;
             }
         }
-        
+
 
     }
 }

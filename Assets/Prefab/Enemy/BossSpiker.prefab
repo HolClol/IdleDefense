@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 6947487980923986100}
   - component: {fileID: 6947487980923986101}
   - component: {fileID: 431674289863444649}
+  - component: {fileID: 7835420612337697049}
   m_Layer: 0
   m_Name: BossSpiker
   m_TagString: Enemy
@@ -250,28 +251,12 @@ MonoBehaviour:
   MaxHealth: 30000
   Health: 0
   Damage: 100
-  Experience: 50000
+  Experience: 200000
   EnemyMovespeed: 0.8
   EnemyRotateSpeed: 25
   SkillCooldown: 5
-  Delay: 0
-  EnemyVFXPrefab: {fileID: 11400000, guid: 4e666e6fdb9df7f47a470d7be8da6dd7, type: 2}
-  _enemyMovement: {fileID: 431674289863444649}
-  UpdateStat:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: e09cb86794959894c918895ce5d9ee15, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  Dead: 0
+  m_SpriteColor: {r: 0, g: 0, b: 0, a: 0}
   _spriteRenderer: {fileID: 6947487980923986096}
   _projectile: {fileID: 4470205101560659765, guid: 68edb3488b5277741ae4101639445cd9, type: 3}
   CameraChange:
@@ -342,6 +327,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda8c773087c9ce4893caf74ddeca9d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Delay: 0
+--- !u!114 &7835420612337697049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6947487980923986090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799503c7284396a44bca7622b96097c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyVFXPrefab: {fileID: 11400000, guid: 95d5af7cdea5ef84eb3f69ab5f101bb4, type: 2}
+  UpdateStat:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: e09cb86794959894c918895ce5d9ee15, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6947487981036833163
 GameObject:
   m_ObjectHideFlags: 0

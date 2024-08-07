@@ -22,7 +22,7 @@ public class UIBossBar : MonoBehaviour
 
     public void UpdateName(int[] value)
     {
-        m_Text.text = enemyPrefab.BossPrefab[value[0]].gameObject.GetComponent<EnemyAI>().EnemyName;
+        m_Text.text = enemyPrefab.BossPrefab[value[0]].gameObject.GetComponent<EnemyMain>().EnemyName;
     }
     public void HealthChange(int[] value)
     {

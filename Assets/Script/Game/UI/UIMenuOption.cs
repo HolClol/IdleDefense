@@ -7,6 +7,7 @@ using TMPro;
 public class UIMenuOption : MonoBehaviour
 {
     [SerializeField] TMP_Text _FastForwardText;
+    [SerializeField] GameObject PauseMenuPanel;
     public FloatVariable GameSpeed;
     private bool FastForwardOn =  false;
     private bool Paused = false;
@@ -33,11 +34,13 @@ public class UIMenuOption : MonoBehaviour
         if (!Paused)
         {
             Time.timeScale = 0f;
+            PauseMenuPanel.SetActive(true);
             Paused = true;
         }
         else
         {
             Time.timeScale = GameSpeed.Value;
+            PauseMenuPanel.SetActive(false);
             Paused = false;
         }
     }

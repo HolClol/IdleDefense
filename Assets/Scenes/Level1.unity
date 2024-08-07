@@ -693,7 +693,7 @@ Transform:
   m_GameObject: {fileID: 112801010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1236,6 +1236,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: c90dfc9e63cf6cd4a80a092f2d9e6cb7, type: 2}
+          m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+          m_MethodName: Raise
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &230999866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1398,7 +1410,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 186.45
+  m_fontSize: 174.8
   m_fontSizeBase: 186
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2114,13 +2126,15 @@ GameObject:
   - component: {fileID: 393643203}
   - component: {fileID: 393643205}
   - component: {fileID: 393643204}
+  - component: {fileID: 393643206}
+  - component: {fileID: 393643207}
   m_Layer: 5
   m_Name: PausePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &393643203
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2136,7 +2150,7 @@ RectTransform:
   - {fileID: 147372227}
   - {fileID: 1313699578}
   m_Father: {fileID: 1648626909}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2181,6 +2195,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 393643202}
   m_CullTransparentMesh: 1
+--- !u!114 &393643206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393643202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcb85fc8d56a67c47b926c4c9f6a0035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AbilityPanelPrefab: {fileID: 2861966764239237131, guid: f6ac8788315443f47b95c7adcff0fbc0, type: 3}
+  UpgradeScriptableObject: {fileID: 11400000, guid: d9c0810356405ec4abe6edab0ce49bce, type: 2}
+  GameUpgradeInfo: {fileID: 11400000, guid: 264b5bed6e44aa84b9b82648a679d95f, type: 2}
+  ContentPanel: {fileID: 413301022}
+  DamageText: {fileID: 377566215}
+  AbilityPanels: []
+--- !u!114 &393643207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393643202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa8834eac6cb76a4f99a7d7eed75c4f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: c90dfc9e63cf6cd4a80a092f2d9e6cb7, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 393643206}
+        m_TargetAssemblyTypeName: UIDamageProgress, Assembly-CSharp
+        m_MethodName: UpdateDisplay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &401410113
 GameObject:
   m_ObjectHideFlags: 0
@@ -2986,7 +3046,7 @@ Camera:
   far clip plane: 1000
   field of view: 100
   orthographic: 1
-  orthographic size: 12
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3100,8 +3160,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -62.5}
-  m_SizeDelta: {x: -60, y: -225}
+  m_AnchoredPosition: {x: 0, y: -87.5}
+  m_SizeDelta: {x: -60, y: -275}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &532218928
 MonoBehaviour:
@@ -4252,6 +4312,7 @@ GameObject:
   - component: {fileID: 825236932}
   - component: {fileID: 825236931}
   - component: {fileID: 825236930}
+  - component: {fileID: 825236933}
   m_Layer: 0
   m_Name: M_DamageManager
   m_TagString: Untagged
@@ -4299,7 +4360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b346f29eaae0e614aaadd708ac0cab30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpgradesData: {fileID: 11400000, guid: d9c0810356405ec4abe6edab0ce49bce, type: 2}
+  UpgradesInfo: {fileID: 11400000, guid: 264b5bed6e44aa84b9b82648a679d95f, type: 2}
   _damageDisplayPrefab: {fileID: 1944545030824558814, guid: 17aa8f65f0d29944fa99ae992bbcda82, type: 3}
 --- !u!4 &825236932
 Transform:
@@ -4316,6 +4377,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &825236933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825236929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe33dbf6389482459a6e7ddcee3e691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 237923ebb2f62214c84e210a25590fbf, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 825236931}
+        m_TargetAssemblyTypeName: DamageCalculateManager, Assembly-CSharp
+        m_MethodName: ReceiveUpgrade
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &892776119
 GameObject:
   m_ObjectHideFlags: 0
@@ -4484,7 +4573,7 @@ RectTransform:
   m_Children:
   - {fileID: 2023933923}
   m_Father: {fileID: 1648626909}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5653,6 +5742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _FastForwardText: {fileID: 892776120}
+  PauseMenuPanel: {fileID: 393643202}
   GameSpeed: {fileID: 11400000, guid: bf96c0f0b8592e64fada9bef75f45b61, type: 2}
 --- !u!1 &1260284248
 GameObject:
@@ -6214,7 +6304,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341381597}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 16.6, z: -1.2752004}
+  m_LocalPosition: {x: 0, y: 18.59, z: -1.2752004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6255,7 +6345,7 @@ RectTransform:
   m_Children:
   - {fileID: 16976687}
   m_Father: {fileID: 1648626909}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7084,8 +7174,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 0, y: -250}
+  m_AnchoredPosition: {x: 0, y: 25}
+  m_SizeDelta: {x: 0, y: -400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1492065949
 MonoBehaviour:
@@ -7274,6 +7364,7 @@ GameObject:
   - component: {fileID: 1535707015}
   - component: {fileID: 1535707018}
   - component: {fileID: 1535707016}
+  - component: {fileID: 1535707021}
   - component: {fileID: 1535707020}
   - component: {fileID: 1535707019}
   m_Layer: 0
@@ -7314,26 +7405,11 @@ MonoBehaviour:
   CrosshairTarget: {fileID: 516030767}
   PlayerChar: {fileID: 1823820048}
   PlayerStats:
-    BaseDamage: 20
+    BaseDamage: 45
     RotateSpeed: 25
     Upgrades:
     - UpgradeID: 0
-      UpgradeLevel: 0
-  SendLevel:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: c5ed4ce7eaf36a94d883afdab4287d0b, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      UpgradeLevel: 1
   TouchPriority: 0
   LockedIn: 0
   EnemyInZone: []
@@ -7391,8 +7467,8 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1535707016}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 1535707021}
+        m_TargetAssemblyTypeName: PlayerGameStat, Assembly-CSharp
         m_MethodName: GetUpgradeLevel
         m_Mode: 0
         m_Arguments:
@@ -7419,9 +7495,36 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1535707016}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 1535707021}
+        m_TargetAssemblyTypeName: PlayerGameStat, Assembly-CSharp
         m_MethodName: UpdateDamage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1535707021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535707014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073daa45d5540b243b623b294cadfbb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SendLevel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: c5ed4ce7eaf36a94d883afdab4287d0b, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7719,9 +7822,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 393643203}
   - {fileID: 907278864}
   - {fileID: 1363428736}
+  - {fileID: 393643203}
   - {fileID: 173667713}
   - {fileID: 1234760579}
   - {fileID: 2136696154}
@@ -7951,7 +8054,7 @@ MonoBehaviour:
   PlayerChar: {fileID: 1535707014}
   playerController: {fileID: 1535707016}
   circleRenderer: {fileID: 1677748594}
-  loop: 8
+  loop: 9
 --- !u!58 &1677748593
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7967,7 +8070,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 8
+  m_Radius: 8.5
 --- !u!120 &1677748594
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -8473,7 +8576,7 @@ MonoBehaviour:
   AbilitiesStat:
     ObjectsPrefab:
     - {fileID: 220286102038309757, guid: d7ee0c45267802241b119b1a98ed0b28, type: 3}
-    Damage: 15
+    Damage: 12
     ID: 5
     Cooldown: 10
     Knockback: 3
@@ -8919,7 +9022,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9211,9 +9314,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -47, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2022226104
 MonoBehaviour:
@@ -9502,10 +9605,10 @@ RectTransform:
   m_Father: {fileID: 1648626909}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -750}
-  m_SizeDelta: {x: 0, y: -1600}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 300}
+  m_SizeDelta: {x: 1000, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &2136696155
 Animator:

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class SplitterController : AbilitiesController
@@ -29,6 +30,7 @@ public class SplitterController : AbilitiesController
         BaseDamage = AbilitiesStat.Damage;
         CheckUpgrade(WeaponUpgradeLevel);
         clonedlineRenderer = Instantiate(_lineRenderer, transform.position, Quaternion.identity);
+        DamageScaling = 0.8f;
     }
 
     void FixedUpdate() {
@@ -73,15 +75,19 @@ public class SplitterController : AbilitiesController
         if (playerController.EnemyInZone.Count > 0) {
             foreach (GameObject selectFirstTarget in playerController.EnemyInZone)
             {
-                float firstdistance = Vector2.Distance(transform.position, selectFirstTarget.transform.position);
-                if (firstdistance < Radius)
+                if (selectFirstTarget != null)
                 {
-                    TargetPos = selectFirstTarget.transform.position;
-                    Target = selectFirstTarget.transform;
+                    float firstdistance = Vector2.Distance(transform.position, selectFirstTarget.transform.position);
+                    if (firstdistance < Radius)
+                    {
+                        TargetPos = selectFirstTarget.transform.position;
+                        Target = selectFirstTarget.transform;
 
-                    inrange = true;
-                    break;
+                        inrange = true;
+                        break;
+                    }
                 }
+                
             }
 
             foreach (GameObject enemyTarget in playerController.EnemyInZone) {

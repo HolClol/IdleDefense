@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d48c47818c7b71948885582db08a1a6d, type: 3}
-  m_Name: EnemyEffectPrefab
+  m_Script: {fileID: 11500000, guid: 84dbb9a39a1c7434dae040e6a61b0230, type: 3}
+  m_Name: SendDamageInfo
   m_EditorClassIdentifier: 
-  EffectPrefab:
-  - {fileID: 8577502916208021774, guid: 1828f4ac416c97e4ebe8c2fad0f55fe2, type: 3}
-  - {fileID: 7825114726667242426, guid: 333ef9b9e8e561e46a4f6809407d51f3, type: 3}

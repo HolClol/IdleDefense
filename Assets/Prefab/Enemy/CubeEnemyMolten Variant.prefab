@@ -45,11 +45,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1380406969235032802, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.6
+      value: -5.4496
       objectReference: {fileID: 0}
     - target: {fileID: 1380406969235032802, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.29
+      value: 8.2773485
       objectReference: {fileID: 0}
     - target: {fileID: 1380406969235032802, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: m_LocalPosition.z
@@ -97,7 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2832402760923136410, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: Experience
-      value: 300
+      value: 725
       objectReference: {fileID: 0}
     - target: {fileID: 4929148439200437284, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: m_Color.b

@@ -22,7 +22,7 @@ public class FieryEruptionController : AbilitiesController
 
         TimeBeforeFire = AbilitiesStat.Cooldown/4;
         BaseDamage = AbilitiesStat.Damage;
-        DamageScaling += 0.4f;
+        DamageScaling += 0.2f;
         CheckUpgrade(WeaponUpgradeLevel);
 
         MainEruption = Instantiate(AbilitiesStat.ObjectsPrefab[0], CrosshairTarget.transform.position, Quaternion.identity, GameObject.Find("_Projectiles").transform);
@@ -99,11 +99,12 @@ public class FieryEruptionController : AbilitiesController
                 AdditionalEruptions += 1;
             break;
             case 4:
-                AbilitiesStat.Cooldown -= 2f;
+                AbilitiesStat.Cooldown -= 1f;
                 for (int i = 0; i < AdditionalEruptions; i++) {
                     GameObject MiniEruption = GetPooledObject(0);
                     MiniEruption.transform.localScale = MiniEruption.transform.localScale + IncreaseScale;
                 }
+                DamageScaling += 0.2f;
             break;
             case 5:
                 AdditionalEruptions += 1;

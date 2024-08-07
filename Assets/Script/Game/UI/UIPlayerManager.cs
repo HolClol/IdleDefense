@@ -43,7 +43,7 @@ public class UIPlayerManager : MonoBehaviour
             else
                 m_HealthBar.fillAmount += 0.001f;
 
-            yield return new WaitForSeconds(0.05f/TransitionLoop);
+            yield return new WaitForSeconds(0.005f/TransitionLoop);
         }
         
     }

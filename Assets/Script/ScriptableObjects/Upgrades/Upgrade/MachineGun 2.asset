@@ -16,6 +16,7 @@ MonoBehaviour:
     UpgradeType: 3
     UpgradeName: Machine Gun
     UpgradeDescription:
+    - 
     - Increase damage
     - Increase piercing by one
     - Increase damage
@@ -26,5 +27,5 @@ MonoBehaviour:
     - Increase fire rate
     - Increase piercing by one
     - Increase bullet count
-    MaxLevel: 10
+    MaxLevel: 11
     ID: 0

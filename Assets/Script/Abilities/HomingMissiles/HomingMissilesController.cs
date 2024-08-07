@@ -18,6 +18,7 @@ public class HomingMissilesController : AbilitiesController
         TimeBeforeFire = AbilitiesStat.Cooldown;
         BaseDamage = AbilitiesStat.Damage;
         CheckUpgrade(WeaponUpgradeLevel);
+        DamageScaling = 0.6f;
     }
 
     void FixedUpdate() {
@@ -75,7 +76,7 @@ public class HomingMissilesController : AbilitiesController
                 AbilitiesStat.Cooldown -= 1f;
             break;
             case 2:
-                DamageScaling += 0.3f;
+                DamageScaling += 0.2f;
             break;
             case 3:
                 InternalExplode -= 0.15f;
@@ -84,7 +85,7 @@ public class HomingMissilesController : AbilitiesController
                 MissileNumbers += 2;
             break;
             case 5:
-                DamageScaling += 0.3f;
+                DamageScaling += 0.2f;
                 AdditionalScale += new Vector3(2, 2, 2);
             break;
             case 6:

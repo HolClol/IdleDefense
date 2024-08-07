@@ -9,6 +9,7 @@ public class GameEvent : ScriptableObject
 {
     private List<BaseGameEventListener> listeners = new List<BaseGameEventListener>();
 
+    [Button]
     public void Raise()
     {
         for (int i = listeners.Count - 1; i >= 0; i--)

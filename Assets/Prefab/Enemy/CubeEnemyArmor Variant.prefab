@@ -93,7 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2832402760923136410, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: Experience
-      value: 250
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 4929148439200437284, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: m_Color.b

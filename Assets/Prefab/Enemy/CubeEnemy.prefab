@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1537852670157503703}
   - component: {fileID: 2014570052}
   - component: {fileID: 2832402760923136410}
+  - component: {fileID: 7701894864385247766}
   m_Layer: 0
   m_Name: CubeEnemy
   m_TagString: Enemy
@@ -147,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a206b9d8a308045a4a60ecdf664a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Delay: 0
   BurstCooldown: 4
   BurstMultiplier: 10
   BurstRepeat: 10
@@ -167,14 +169,26 @@ MonoBehaviour:
   EnemyMovement: {fileID: 11400000, guid: 8797ff7805e236b48bd1b40006e72bb4, type: 2}
   MaxHealth: 175
   Health: 0
-  Damage: 1
-  Experience: 150
+  Damage: 20
+  Experience: 125
   EnemyMovespeed: 0.2
   EnemyRotateSpeed: 25
   SkillCooldown: 0
-  Delay: 0
-  EnemyVFXPrefab: {fileID: 11400000, guid: 4e666e6fdb9df7f47a470d7be8da6dd7, type: 2}
-  _enemyMovement: {fileID: 2014570052}
+  Dead: 0
+  m_SpriteColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &7701894864385247766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7791449681480683818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d464d8f929e18d47b3496f8663bc857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyVFXPrefab: {fileID: 11400000, guid: ed614eaf0ac6c154693e9ce50060f374, type: 2}
   UpdateStat:
     m_PersistentCalls:
       m_Calls:

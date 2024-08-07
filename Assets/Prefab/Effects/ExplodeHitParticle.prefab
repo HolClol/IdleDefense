@@ -608,13 +608,13 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 1
-      scalar: 5
+      scalar: 15
       minScalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0.3
+          time: 0.4
           value: -1
           inSlope: 0
           outSlope: 0
@@ -805,9 +805,9 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
     arc:
-      value: 120
+      value: 360
       mode: 0
-      spread: 0.5
+      spread: 0
       speed:
         serializedVersion: 2
         minMaxState: 0

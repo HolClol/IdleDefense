@@ -26,10 +26,9 @@ public class PlayerController : MonoBehaviour
     }
 
     [Header("Player Set Up")]
-    [SerializeField] GameObject CrosshairTarget;
-    [SerializeField] GameObject PlayerChar;
+    public GameObject CrosshairTarget;
+    public GameObject PlayerChar;
     public PlayerInGameStat PlayerStats;
-    public UnityEvent<int[]> SendLevel;
 
     [Header("Player Manager")]
     public bool TouchPriority;
@@ -140,62 +139,6 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-    }
-
-    public void AdjustUpgrade(int type, int id, int level) {
-        switch (type) {
-            case 0:
-                PlayerUpgradeStat newUpgrade = new PlayerUpgradeStat(id, level);
-                PlayerStats.Upgrades.Add(newUpgrade);
-                break;
-            case 1:
-                PlayerStats.Upgrades[id].UpgradeLevel += 1;
-                break;
-        }
-
-    }
-
-    public void UpdateDamage(int[] damage) {
-        PlayerStats.BaseDamage += damage[0];
-        PlayerChar.SendMessage("UpdateDamage", PlayerStats.BaseDamage);
-    }
-
-    // Check players upgrade
-    public void GetUpgradeLevel(int[] id)
-    {
-        switch (id[0]) //Type of call
-        {
-            case 0: //Asking for upgrade level call
-                int result = 0;
-                for (int i = 0; i < PlayerStats.Upgrades.Count; i++)
-                {
-                    if (id[1] == PlayerStats.Upgrades[i].UpgradeID)
-                    {
-                        result = PlayerStats.Upgrades[i].UpgradeLevel; //Looped
-                        break;
-                    }
-                }
-                SendLevel.Invoke(new int[] { result });
-            break;
-
-            case 1: //Sending the upgraded option
-                bool existed = false;
-                for (int i = 0; i < PlayerStats.Upgrades.Count; i++)
-                {
-                    if (id[1] == PlayerStats.Upgrades[i].UpgradeID)
-                    {
-                        existed = true;
-                        AdjustUpgrade(1, i, 0);
-                        SendLevel.Invoke(new int[] { PlayerStats.Upgrades[i].UpgradeLevel });
-                    }
-                }
-                if (!existed)
-                {
-                    AdjustUpgrade(0, id[1], 1);
-                }
-                break;
-        }
-        
     }
 
 }

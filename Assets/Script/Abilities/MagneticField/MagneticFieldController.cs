@@ -25,6 +25,7 @@ public class MagneticFieldController : AbilitiesController
         TimeBeforeFire = AbilitiesStat.Cooldown/2;
         BaseDamage = AbilitiesStat.Damage;
         CheckUpgrade(WeaponUpgradeLevel);
+        DamageScaling = 0.5f;
     }
 
     void FixedUpdate()
@@ -116,7 +117,7 @@ public class MagneticFieldController : AbilitiesController
             break;
             case 3:
                 AbilitiesStat.Knockback += AbilitiesStat.Knockback;
-                DamageScaling += 0.2f;
+                DamageScaling += 0.25f;
             break;
             case 4:
                 Piercing += 2;

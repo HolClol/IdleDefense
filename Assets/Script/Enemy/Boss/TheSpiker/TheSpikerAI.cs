@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TheSpikerAI : EnemyAI
+public class TheSpikerAI : EnemyMain
 {
     [SerializeField] SpriteRenderer _spriteRenderer;
     [SerializeField] GameObject _projectile;
@@ -19,11 +19,11 @@ public class TheSpikerAI : EnemyAI
 
     protected override void Start()
     {
-        Rb = GetComponent<Rigidbody2D>();
+        base.Start();
         Health = MaxHealth;
         TimeBeforeFire = SkillCooldown;
         m_SpriteColor = _spriteRenderer.color;
-        m_SpriteRenderer = _spriteRenderer;
+        m_spriteRenderer = _spriteRenderer;
         CameraChange.Invoke(new float[] { 18, 5 });
         UpdateBossUI[0].Invoke(new int[] { 0 });
         UpdateBossUI[1].Invoke(new int[] { Health, MaxHealth });
@@ -31,7 +31,7 @@ public class TheSpikerAI : EnemyAI
     private void Update()
     {
 
-        if (TimeBeforeFire <= 0f) {
+        if (TimeBeforeFire <= 0f && !Dead) {
             angle = 0f;
             offsetangle = 0f;
             StartCoroutine(FireProjectile());
@@ -46,34 +46,22 @@ public class TheSpikerAI : EnemyAI
     protected override IEnumerator HurtPlay()
     {
         Health -= DamageDealt;
-        m_SpriteRenderer.color = Color.red;
+        m_spriteRenderer.color = Color.red;
         Color tempColorLerped = m_SpriteColor;
-        _enemyMovement.SetHurt(true);
+        m_enemyMovement.SetHurt(true);
         float lerp = 0f;
         UpdateBossUI[1].Invoke(new int[] { Health, MaxHealth });
 
         while (lerp < 1f)
         {
             tempColorLerped = Color.LerpUnclamped(Color.red, m_SpriteColor, lerp);
-            m_SpriteRenderer.color = tempColorLerped;
+            m_spriteRenderer.color = tempColorLerped;
             lerp += 0.1f;
             yield return new WaitForSeconds(0.01f);
         }
 
-        m_SpriteRenderer.color = m_SpriteColor;
-        _enemyMovement.SetHurt(false);
-    }
-
-
-    protected override void DeathCondition()
-    {
-        UpdateStat.Invoke(new int[] { 1, Experience });
-        CameraChange.Invoke(new float[] { 12, 5 });
-        UpdateBossUI[1].Invoke(new int[] { 0, MaxHealth });
-        Destroy(gameObject);
-        Dead = true;
-
-        GameObject ClonedParticle = Instantiate(EnemyVFXPrefab.EffectPrefab[0], transform.position, transform.rotation, GameObject.Find("_Projectiles").transform);
+        m_spriteRenderer.color = m_SpriteColor;
+        m_enemyMovement.SetHurt(false);
     }
 
     private IEnumerator FireProjectile()

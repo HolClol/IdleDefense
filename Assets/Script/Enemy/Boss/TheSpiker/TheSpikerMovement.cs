@@ -12,7 +12,6 @@ public class TheSpikerMovement : EnemyMovement
     {
         
     }
-
     protected override void MoveMethod(float deltaTime)
     {
         if (ZigzagMovement < 0 && !Stop)

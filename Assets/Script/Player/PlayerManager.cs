@@ -67,7 +67,7 @@ public class PlayerManager : MonoBehaviour
         while (ExperienceValue >= EXPToLevelUp)
         {
             ExperienceValue -= EXPToLevelUp;
-            EXPToLevelUp = (int)((float)EXPToLevelUp + (float)(EXPToLevelUp * 0.25f));
+            EXPToLevelUp = (int)((float)EXPToLevelUp + (float)(EXPToLevelUp * 0.4f));
             loop += 1;
         }
         if (!Leveling)
@@ -84,7 +84,7 @@ public class PlayerManager : MonoBehaviour
             Level += 1;
 
             UpdateStat(new int[] { 4, 50 });
-            UpdateDamage.Invoke(new int[] { 1 });
+            UpdateDamage.Invoke(new int[] { 2 });
             UpgradePopUp.Invoke();
             yield return new WaitForSeconds(1f);
         }

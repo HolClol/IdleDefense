@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3180319763879089459}
   - component: {fileID: 4172520763231136018}
   - component: {fileID: 7873883086220068331}
+  - component: {fileID: 3830184994728737616}
   m_Layer: 0
   m_Name: CircleEnemy
   m_TagString: Enemy
@@ -142,14 +143,39 @@ MonoBehaviour:
   EnemyMovement: {fileID: 11400000, guid: 8cfe5224360c4594bab9b210b343f8c3, type: 2}
   MaxHealth: 100
   Health: 0
-  Damage: 1
+  Damage: 5
   Experience: 50
   EnemyMovespeed: 0.4
   EnemyRotateSpeed: 25
   SkillCooldown: 0
+  Dead: 0
+  m_SpriteColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &7873883086220068331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341003208591917980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51833653705fa5d438bf551fd21cb7c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   Delay: 0
-  EnemyVFXPrefab: {fileID: 11400000, guid: 4e666e6fdb9df7f47a470d7be8da6dd7, type: 2}
-  _enemyMovement: {fileID: 7873883086220068331}
+--- !u!114 &3830184994728737616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341003208591917980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d464d8f929e18d47b3496f8663bc857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyVFXPrefab: {fileID: 11400000, guid: ed614eaf0ac6c154693e9ce50060f374, type: 2}
   UpdateStat:
     m_PersistentCalls:
       m_Calls:
@@ -165,15 +191,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7873883086220068331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1341003208591917980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51833653705fa5d438bf551fd21cb7c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

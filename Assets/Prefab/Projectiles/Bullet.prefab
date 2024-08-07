@@ -262,8 +262,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectileSpeed: 15
-  ProjectileLifetime: 1.2
-  Damage: 20
+  ProjectileLifetime: 1
+  Damage: 0
   Piercing: 0
   ResponseDamage:
     m_PersistentCalls:

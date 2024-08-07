@@ -71,7 +71,7 @@ public class EnigmaticSawController : AbilitiesController
 
         switch (WeaponUpgradeLevel) {
             case 1:
-                DamageScaling += 0.2f;
+                DamageScaling += 0.1f;
             break;
             case 2:
                 Duration += 2f;
@@ -86,7 +86,7 @@ public class EnigmaticSawController : AbilitiesController
             break;
             case 5:
                 RazorbladeNumbers = 3;
-                DamageScaling += 0.2f;
+                DamageScaling += 0.15f;
             break;
             case 6:
                 RazorbladeNumbers = 4;

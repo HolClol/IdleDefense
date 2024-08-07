@@ -9,7 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10e655099a5344e469ef5a9e2511c235, type: 3}
-  m_Name: GameSpeed
+  m_Script: {fileID: 11500000, guid: 5ca5ade81cc6d1b469c1e5c9bb00735d, type: 3}
+  m_Name: UpgradeInfo
   m_EditorClassIdentifier: 
-  Value: 1.5
+  TotalDamage: 863
+  AbilitiesStat:
+  - ID: 0
+    UpgradeLevel: 1
+    Damage: 831
+  - ID: 5
+    UpgradeLevel: 1
+    Damage: 32

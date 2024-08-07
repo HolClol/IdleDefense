@@ -30,7 +30,7 @@ public class WeaponController : MonoBehaviour
         MainChar = GameObject.Find("Player");
         playerController = MainChar.GetComponent<PlayerController>();
         for (int i = 0; i < FiringPoint.Length; i++) { _animators.Add(FiringPoint[i].GetComponent<Animator>()); }
-        DamageScaling -= 0.2f;
+        DamageScaling -= 0.6f;
         CheckUpgrade(WeaponUpgradeLevel);
     }
 
@@ -109,7 +109,7 @@ public class WeaponController : MonoBehaviour
         
         switch (WeaponUpgradeLevel) {
             case 1:
-                DamageScaling += 0.1f;
+                DamageScaling += 0.05f;
             break;
             case 2:
                 Piercing += 1;
@@ -130,7 +130,7 @@ public class WeaponController : MonoBehaviour
                 AdditionalBulletSpeed += 10f;
             break;
             case 7:
-                DamageScaling += 0.1f;
+                DamageScaling += 0.15f;
             break;
             case 8:
                 FireRate -= 0.025f;
