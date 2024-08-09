@@ -11,14 +11,15 @@ public class UIPlayerManager : MonoBehaviour
     //[SerializeField] Image m_ShieldBar;
     //[SerializeField] TMP_Text m_HealthText;
     
-    public void DisplayUpdate(int ID, int[] stat)
+    public void DisplayUpdate(int[] stat)
     {
-        switch(ID) {
+        switch(stat[0]) {
             case 0: //Update Health
-                StartCoroutine(UpdateHealthBar(stat[0], stat[1]));
+                //StartCoroutine(UpdateHealthBar(stat[1], stat[2]));
+                UpdateHPBar(stat[1], stat[2]);
             break;
             case 1: //Update EXP
-                UpdateEXPBar(stat[0], stat[1]);
+                UpdateEXPBar(stat[1], stat[2]);
             break;
         }
     }
@@ -46,6 +47,12 @@ public class UIPlayerManager : MonoBehaviour
             yield return new WaitForSeconds(0.005f/TransitionLoop);
         }
         
+    }
+
+    private void UpdateHPBar(int health, int maxHealth)
+    {
+        float HealthPercent = (float)health / (float)maxHealth;
+        m_HealthBar.fillAmount = HealthPercent;
     }
 
     private void UpdateEXPBar(int exp, int EXPReq) {

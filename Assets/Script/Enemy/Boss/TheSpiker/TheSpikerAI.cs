@@ -19,7 +19,9 @@ public class TheSpikerAI : EnemyMain
 
     protected override void Start()
     {
-        base.Start();
+        m_enemyDeath = GetComponent<EnemyDeathHandler>();
+        m_enemyMovement = GetComponent<EnemyMovement>();
+        EnemyName = gameObject.name;
         Health = MaxHealth;
         TimeBeforeFire = SkillCooldown;
         m_SpriteColor = _spriteRenderer.color;

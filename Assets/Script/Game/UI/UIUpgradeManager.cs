@@ -9,7 +9,6 @@ public class UIUpgradeManager : MonoBehaviour
 {
     [System.Serializable] public class UpgradePanels
     {
-        public Button UpgradeOptionsButton;
         public TMP_Text UpgradeOptionsName;
         public TMP_Text UpgradeOptionsDesc;
         public TMP_Text UpgradeOptionsStar;
@@ -31,7 +30,7 @@ public class UIUpgradeManager : MonoBehaviour
         Selected = false;
         LastTimeScale = Time.timeScale;
         Time.timeScale = 0.0f;
-        GameSpeed.Value = Time.timeScale;
+        GameSpeed.Value = 0.0f;
         for (int i = 0; i < UpgradeOptions.Count; i++) {
             int[] UpgradeID = _upgradeManagerScript.UpgradeIntInfo();
             string[] UpgradeInfos = _upgradeManagerScript.UpgradeStringInfo();
@@ -55,6 +54,7 @@ public class UIUpgradeManager : MonoBehaviour
             int parse = int.Parse(eventData.selectedObject.name);
             _upgradeManagerScript.UpgradeOptionSelected(UpgradeOptions[parse].UpgradeOptionsID);
             Selected = true;
+            
         }
         Time.timeScale = LastTimeScale;
         GameSpeed.Value = Time.timeScale;

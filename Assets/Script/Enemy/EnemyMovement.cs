@@ -46,9 +46,9 @@ public class EnemyMovement : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         if (!MainEnemyController.Dead)
-        {
             MoveProgress(Time.fixedDeltaTime);
-        }
+        else
+            Rb.velocity = Vector3.zero;
         
     }
 

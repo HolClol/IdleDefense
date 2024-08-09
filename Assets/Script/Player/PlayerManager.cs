@@ -6,11 +6,10 @@ using UnityEngine.Events;
 public class PlayerManager : MonoBehaviour
 {
     [Header("Set Up")]
-    [SerializeField] UIPlayerManager PlayerUI;
-    [SerializeField] Camera PlayerCamera;
     public UnityEvent UpgradePopUp;
     public UnityEvent<int[]> UpdateDamage;
-    // Start is called before the first frame update
+    public UnityEvent<int[]> UpdateUI;
+
     [Header("Stats")]
     [SerializeField] int MaxHealth = 100;
     [SerializeField] int EXPToLevelUp = 100;
@@ -18,7 +17,6 @@ public class PlayerManager : MonoBehaviour
     public int ExperienceValue, HealthValue, ShieldValue;
 
     private int loop = 0;
-    private float CameraDistance = 12;
     private bool Leveling;
 
     void Start()
@@ -27,7 +25,7 @@ public class PlayerManager : MonoBehaviour
         HealthValue = MaxHealth;
         ExperienceValue = 0;
         ShieldValue = 0;
-        PlayerUI.DisplayUpdate(1, new int[] { ExperienceValue, EXPToLevelUp });
+        UpdateUI.Invoke(new int[] {1,  ExperienceValue, EXPToLevelUp });
     }
 
     // int[] {ID, updatevalue}
@@ -35,14 +33,14 @@ public class PlayerManager : MonoBehaviour
         switch (array[0]) {
             case 0: // Health
                 HealthValue -= array[1];
-                PlayerUI.DisplayUpdate(0, new int[] { HealthValue, MaxHealth });
+                UpdateUI.Invoke(new int[] { 0, ExperienceValue, EXPToLevelUp });
             break;
             case 1: // Experience
                 ExperienceValue += array[1];
                 if (ExperienceValue >= EXPToLevelUp) {
                     LevelUp();
                 }
-                PlayerUI.DisplayUpdate(1, new int[] { ExperienceValue, EXPToLevelUp });
+                UpdateUI.Invoke(new int[] { 1, ExperienceValue, EXPToLevelUp });
             break;
             case 2: // Shield
             break;
@@ -57,7 +55,7 @@ public class PlayerManager : MonoBehaviour
                 else {
                     HealthValue += array[1];
                 }
-                PlayerUI.DisplayUpdate(0, new int[] { HealthValue, MaxHealth });
+                UpdateUI.Invoke(new int[] { 0, ExperienceValue, EXPToLevelUp });
             break;
         }
     }
@@ -103,33 +101,5 @@ public class PlayerManager : MonoBehaviour
                 return 1;
         }
     }
-
-    public void CameraRun(float[] value)
-    {
-        StartCoroutine(ChangeCameraDistance(value[0], value[1]));
-    }
-    public IEnumerator ChangeCameraDistance(float distance, float delay) 
-    {
-        int loop;
-        bool increase = false;
-        yield return new WaitForSeconds(delay);
-
-        if (distance > CameraDistance)
-        {
-            loop = (int)(distance - CameraDistance);
-            increase = true;
-        }
-            
-        else
-            loop = (int)(CameraDistance - distance);
-        for (int i = 0; i < loop*10; i++)
-        {
-            if (increase)
-                PlayerCamera.orthographicSize += 0.1f;
-            else
-                PlayerCamera.orthographicSize -= 0.1f;
-            yield return new WaitForSeconds(0.01f);
-        }
-        CameraDistance = distance;
-    }
+ 
 }

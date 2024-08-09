@@ -925,6 +925,7 @@ GameObject:
   - component: {fileID: 173667715}
   - component: {fileID: 173667714}
   - component: {fileID: 173667716}
+  - component: {fileID: 173667717}
   m_Layer: 5
   m_Name: ResourcePanel
   m_TagString: Untagged
@@ -1006,6 +1007,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HealthBar: {fileID: 1959292457}
   m_EXPBar: {fileID: 1298788641}
+--- !u!114 &173667717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173667712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe33dbf6389482459a6e7ddcee3e691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 1b1a0dcc81512e14fa2f3dcd226b9645, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 173667716}
+        m_TargetAssemblyTypeName: UIPlayerManager, Assembly-CSharp
+        m_MethodName: DisplayUpdate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &176511719
 GameObject:
   m_ObjectHideFlags: 0
@@ -2545,7 +2574,6 @@ GameObject:
   - component: {fileID: 444369455}
   - component: {fileID: 444369456}
   - component: {fileID: 444369458}
-  - component: {fileID: 444369459}
   m_Layer: 0
   m_Name: M_PlayerManager
   m_TagString: Untagged
@@ -2580,8 +2608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 816b6b3f353f7ee4998c261b5a637e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerUI: {fileID: 173667716}
-  PlayerCamera: {fileID: 519420031}
   UpgradePopUp:
     m_PersistentCalls:
       m_Calls:
@@ -2601,6 +2627,21 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 8fb8f5afb8461754e806f281313d9ed1, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  UpdateUI:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 1b1a0dcc81512e14fa2f3dcd226b9645, type: 2}
         m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 0
@@ -2637,34 +2678,6 @@ MonoBehaviour:
       - m_Target: {fileID: 444369456}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
         m_MethodName: UpdateStat
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &444369459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 444369453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10633d9eb30df474095d392db346a027, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: f58fecfa360878d41bd8edd920e16c6b, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 444369456}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: CameraRun
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3004,6 +3017,8 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420035}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3092,6 +3107,48 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: 0}
   damping: 0
   Target: {fileID: 1535707017}
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10633d9eb30df474095d392db346a027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: f58fecfa360878d41bd8edd920e16c6b, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 519420035}
+        m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+        m_MethodName: CameraRun
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &519420035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61fb127ddf9986a4cbc5fdf8abfe4d93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerCamera: {fileID: 519420031}
+  CameraDistance: 15
 --- !u!1 &528720729
 GameObject:
   m_ObjectHideFlags: 0
@@ -4552,6 +4609,7 @@ GameObject:
   m_Component:
   - component: {fileID: 907278864}
   - component: {fileID: 907278865}
+  - component: {fileID: 907278866}
   m_Layer: 5
   m_Name: WarningPanel
   m_TagString: Untagged
@@ -4600,6 +4658,34 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &907278866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907278863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa8834eac6cb76a4f99a7d7eed75c4f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 99826c7df658a194392e33f8449fc768, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 907278865}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Intro
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &922064119
 GameObject:
   m_ObjectHideFlags: 0
@@ -5267,7 +5353,7 @@ MonoBehaviour:
   enemyPrefabs: {fileID: 11400000, guid: ae13208cc6409194ba9f1fca72e5ac01, type: 2}
   _enemySpawnPoint: {fileID: 402612284}
   _bossSpawnPoint: {fileID: 1341381597}
-  CanSpawn: 1
+  CanSpawn: 0
   DifficultySpikeTimer: 15
   DifficultyLevel: 1
   BossCalling:
@@ -6324,6 +6410,7 @@ GameObject:
   - component: {fileID: 1363428737}
   - component: {fileID: 1363428739}
   - component: {fileID: 1363428740}
+  - component: {fileID: 1363428741}
   m_Layer: 5
   m_Name: UpgradePanel
   m_TagString: Untagged
@@ -6425,21 +6512,58 @@ MonoBehaviour:
   _upgradeManager: {fileID: 571897618}
   GameSpeed: {fileID: 11400000, guid: bf96c0f0b8592e64fada9bef75f45b61, type: 2}
   UpgradeOptions:
-  - UpgradeOptionsButton: {fileID: 0}
-    UpgradeOptionsName: {fileID: 610175290}
+  - UpgradeOptionsName: {fileID: 610175290}
     UpgradeOptionsDesc: {fileID: 315482621}
     UpgradeOptionsStar: {fileID: 1913944517}
     UpgradeOptionsID: 0
-  - UpgradeOptionsButton: {fileID: 0}
-    UpgradeOptionsName: {fileID: 545776172}
+  - UpgradeOptionsName: {fileID: 545776172}
     UpgradeOptionsDesc: {fileID: 756338197}
     UpgradeOptionsStar: {fileID: 61390855}
     UpgradeOptionsID: 0
-  - UpgradeOptionsButton: {fileID: 0}
-    UpgradeOptionsName: {fileID: 1404413153}
+  - UpgradeOptionsName: {fileID: 1404413153}
     UpgradeOptionsDesc: {fileID: 570450626}
     UpgradeOptionsStar: {fileID: 1304984991}
     UpgradeOptionsID: 0
+--- !u!114 &1363428741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363428735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa8834eac6cb76a4f99a7d7eed75c4f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ef1df716c07ae724d873e72f7ba5a461, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1363428739}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: UpgradeIntro
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1363428740}
+        m_TargetAssemblyTypeName: UIUpgradeManager, Assembly-CSharp
+        m_MethodName: UpgradePlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1384139345
 GameObject:
   m_ObjectHideFlags: 0
@@ -7738,8 +7862,6 @@ GameObject:
   - component: {fileID: 1648626908}
   - component: {fileID: 1648626907}
   - component: {fileID: 1648626906}
-  - component: {fileID: 1648626913}
-  - component: {fileID: 1648626914}
   - component: {fileID: 1648626916}
   - component: {fileID: 1648626915}
   m_Layer: 5
@@ -7837,74 +7959,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1648626913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1648626905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa8834eac6cb76a4f99a7d7eed75c4f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 99826c7df658a194392e33f8449fc768, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 907278865}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Intro
-          m_BoolArgument: 1
-        m_CallState: 2
---- !u!114 &1648626914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1648626905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa8834eac6cb76a4f99a7d7eed75c4f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: ef1df716c07ae724d873e72f7ba5a461, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1363428739}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: UpgradeIntro
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1363428740}
-        m_TargetAssemblyTypeName: UIUpgradeManager, Assembly-CSharp
-        m_MethodName: UpgradePlay
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1648626915
 MonoBehaviour:
   m_ObjectHideFlags: 0
