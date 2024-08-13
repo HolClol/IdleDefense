@@ -1,21 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class TheSpikerAI : EnemyMain
+public class TheSpikerAI : BossMain
 {
     [SerializeField] SpriteRenderer _spriteRenderer;
     [SerializeField] GameObject _projectile;
 
-    [Header("Events")]
-    public UnityEvent<float[]> CameraChange;
-    public UnityEvent<int[]>[] UpdateBossUI;
-
     private float TimeBeforeFire;
     private int FireRepeat = 1;
     private float angle, offsetangle;
-    
 
     protected override void Start()
     {
@@ -26,7 +20,7 @@ public class TheSpikerAI : EnemyMain
         TimeBeforeFire = SkillCooldown;
         m_SpriteColor = _spriteRenderer.color;
         m_spriteRenderer = _spriteRenderer;
-        CameraChange.Invoke(new float[] { 18, 5 });
+        CameraChange.Invoke(new float[] { 20, 5 });
         UpdateBossUI[0].Invoke(new int[] { 0 });
         UpdateBossUI[1].Invoke(new int[] { Health, MaxHealth });
     }
@@ -47,7 +41,6 @@ public class TheSpikerAI : EnemyMain
 
     protected override IEnumerator HurtPlay()
     {
-        Health -= DamageDealt;
         m_spriteRenderer.color = Color.red;
         Color tempColorLerped = m_SpriteColor;
         m_enemyMovement.SetHurt(true);

@@ -116,7 +116,7 @@ public class FieryEruptionController : AbilitiesController
                 //Burning ground buff
             break;
         }
-
+        BaseDamage += 5;
         UpdateDamage(playerController.PlayerStats.BaseDamage);
     }
 

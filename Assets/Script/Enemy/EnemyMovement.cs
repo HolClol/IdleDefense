@@ -69,7 +69,10 @@ public class EnemyMovement : MonoBehaviour
 
     protected virtual void MoveMethod(float deltaTime)
     {
-        Move(MainEnemyController.EnemyMovespeed);
+        if (!MainEnemyController.Dead)
+            Move(MainEnemyController.EnemyMovespeed);
+        else
+            Rb.velocity = Vector3.zero;
     }
 
     protected void Move(float speed)

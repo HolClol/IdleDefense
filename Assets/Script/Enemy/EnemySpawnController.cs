@@ -123,14 +123,19 @@ public class EnemySpawnController : MonoBehaviour
         int randEnemy = Random.Range(0, actualEnemyPrefabs.Count);
         int randPos = Random.Range(0, enemySpawnPos.Count);
         if (CanSpawn) {
-            GameObject enemyToSpawn = actualEnemyPrefabs[randEnemy];
-            Transform enemyToSpawnPos = enemySpawnPos[randPos];
-            
+            for (int i = 0; i < Random.Range(1,4); i++)
+            {
+                GameObject enemyToSpawn = actualEnemyPrefabs[randEnemy];
+                Transform enemyToSpawnPos = enemySpawnPos[randPos];
 
-            GameObject Enemy = Instantiate(enemyToSpawn, enemyToSpawnPos.position, Quaternion.identity, _enemySpawn);
-            Enemy.GetComponent<EnemyMain>().MaxHealth += (Enemy.GetComponent<EnemyMain>().MaxHealth * HealthMulti)/2;
-            Enemy.GetComponent<EnemyMain>().Experience += (Enemy.GetComponent<EnemyMain>().Experience * HealthMulti);
-            // Enemy.GetComponent<EnemyBehaviourScript>().EnemyMovespeed += SpeedIncrease;
+
+                GameObject Enemy = Instantiate(enemyToSpawn, enemyToSpawnPos.position, Quaternion.identity, _enemySpawn);
+                Enemy.GetComponent<EnemyMain>().MaxHealth += (Enemy.GetComponent<EnemyMain>().MaxHealth * HealthMulti);
+                Enemy.GetComponent<EnemyMain>().Experience += (Enemy.GetComponent<EnemyMain>().Experience * HealthMulti);
+                // Enemy.GetComponent<EnemyBehaviourScript>().EnemyMovespeed += SpeedIncrease;
+                yield return new WaitForSeconds(0.1f);
+            }
+
         }
     }
 

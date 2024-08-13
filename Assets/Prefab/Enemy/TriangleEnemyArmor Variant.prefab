@@ -23,6 +23,10 @@ PrefabInstance:
       propertyPath: EnemyVFXPrefab
       value: 
       objectReference: {fileID: 11400000, guid: 9ec06d1c733419b418c4bd9170261bb4, type: 2}
+    - target: {fileID: 2035451952, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: BurstMultiplier
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2957214932916236506, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
       propertyPath: EnemyType
       value: 
@@ -34,6 +38,10 @@ PrefabInstance:
     - target: {fileID: 2957214932916236506, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
       propertyPath: Experience
       value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 2957214932916236506, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: EnemyMovespeed
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3992166145972510169, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
       propertyPath: m_RootOrder

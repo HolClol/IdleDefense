@@ -16,7 +16,7 @@ public class TheSpikerDeath : EnemyDeathHandler
     {
         _animator.Play("Death");
         UpdateStat.Invoke(new int[] { 1, BossMain.Experience });
-        BossMain.CameraChange.Invoke(new float[] { 15, 10 });
+        BossMain.CameraChange.Invoke(new float[] { 16, 10 });
         BossMain.UpdateBossUI[1].Invoke(new int[] { 0, BossMain.MaxHealth });
         Destroy(gameObject, 5);
         BossMain.Dead = true;

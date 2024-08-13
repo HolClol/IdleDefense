@@ -33,7 +33,7 @@ public class PlayerManager : MonoBehaviour
         switch (array[0]) {
             case 0: // Health
                 HealthValue -= array[1];
-                UpdateUI.Invoke(new int[] { 0, ExperienceValue, EXPToLevelUp });
+                UpdateUI.Invoke(new int[] { 0, HealthValue, MaxHealth });
             break;
             case 1: // Experience
                 ExperienceValue += array[1];
@@ -55,7 +55,7 @@ public class PlayerManager : MonoBehaviour
                 else {
                     HealthValue += array[1];
                 }
-                UpdateUI.Invoke(new int[] { 0, ExperienceValue, EXPToLevelUp });
+                UpdateUI.Invoke(new int[] { 0, HealthValue, MaxHealth });
             break;
         }
     }

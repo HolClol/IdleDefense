@@ -280,17 +280,16 @@ MonoBehaviour:
   EnemyName: The Spiker
   EnemyType: {fileID: 11400000, guid: d712451dfaa01e54d9d84ce6224b8bba, type: 2}
   EnemyMovement: {fileID: 11400000, guid: 4768041a4943e6e4ab00c8ff1d01bf28, type: 2}
-  MaxHealth: 1
+  MaxHealth: 25000
   Health: 0
   Damage: 100
-  Experience: 1
+  Experience: 200000
   EnemyMovespeed: 0.8
   EnemyRotateSpeed: 25
   SkillCooldown: 5
+  DamageDealt: 0
   Dead: 0
   m_SpriteColor: {r: 0, g: 0, b: 0, a: 0}
-  _spriteRenderer: {fileID: 1183391511}
-  _projectile: {fileID: 4470205101560659765, guid: 68edb3488b5277741ae4101639445cd9, type: 3}
   CameraChange:
     m_PersistentCalls:
       m_Calls:
@@ -347,6 +346,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _spriteRenderer: {fileID: 1183391511}
+  _projectile: {fileID: 4470205101560659765, guid: 68edb3488b5277741ae4101639445cd9, type: 3}
 --- !u!114 &431674289863444649
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class EnemyMain : MonoBehaviour
 {
     [Header("Enemy Settings")]
-    public string EnemyName;
+    [HideInInspector] public string EnemyName;
     public EnemyIDAssign EnemyType;
     public EnemyIDAssign EnemyMovement;
     public int MaxHealth = 100;
@@ -17,6 +17,7 @@ public class EnemyMain : MonoBehaviour
     public float EnemyRotateSpeed;
     public float SkillCooldown;
 
+    [HideInInspector] public int DamageDealt;
     [HideInInspector] public bool Dead;
     [HideInInspector] public Color m_SpriteColor;
 
@@ -24,10 +25,7 @@ public class EnemyMain : MonoBehaviour
     protected EnemyDeathHandler m_enemyDeath;
     protected SpriteRenderer m_spriteRenderer;
     protected Dictionary<int, float> damageCooldowns = new Dictionary<int, float>();
-    protected int DamageDealt;
     protected float CurrentCooldown;
-    
-    
 
     // ======================================================
     // Start is called before the first frame update
@@ -43,7 +41,6 @@ public class EnemyMain : MonoBehaviour
     }
 
     protected virtual IEnumerator HurtPlay() {
-        Health -= DamageDealt;
         m_spriteRenderer.color = Color.red;
         Color tempColorLerped = m_SpriteColor;
         m_enemyMovement.SetHurt(true);
@@ -60,6 +57,11 @@ public class EnemyMain : MonoBehaviour
         m_enemyMovement.SetHurt(false);
     }
 
+    protected virtual void TakeDamage(int id)
+    {
+        Health -= DamageDealt;
+    }
+
     protected IEnumerator DamageCooldownPlay(int sourceID, float cooldown)
     {
         damageCooldowns[sourceID] = Time.time + cooldown;
@@ -67,30 +69,20 @@ public class EnemyMain : MonoBehaviour
         damageCooldowns.Remove(sourceID);
     }
 
-    
-
     // Generally the array consist of follow: int[] {dmg, id}; float[] {knockback, debouncetime}
-    protected void ReceiveDamage(int[] intinfo, float[] floatinfo) {
-        if (DamageDealt != intinfo[0]) {
-            DamageDealt = intinfo[0];
-            float DamageKnockback = ((float)DamageDealt/50) + floatinfo[0];
-            if (DamageKnockback > 30f) {
-                DamageKnockback = 30f;
-            }
-            m_enemyMovement.SetDamageKnockback(DamageKnockback);
+    protected virtual void ReceiveDamage(int[] intinfo, float[] floatinfo) {
+        DamageDealt = intinfo[0];
+        float DamageKnockback = ((float)DamageDealt/50) + floatinfo[0];
+        if (DamageKnockback > 30f) {
+            DamageKnockback = 30f;
         }
-
-        switch (EnemyType.EnemyID)
-        {
-            case 1:
-                DamageDealt -= (int)((float)DamageDealt * 0.2f);
-                break;
-        }
+        m_enemyMovement.SetDamageKnockback(DamageKnockback);
 
         if (Health <= DamageDealt && !Dead) {
             m_enemyDeath.DeathCondition();
         }
         else {
+            TakeDamage(intinfo[1]);
             StartCoroutine(HurtPlay());
             if (floatinfo[1] > 0)
                 StartCoroutine(DamageCooldownPlay(intinfo[1], floatinfo[1]));

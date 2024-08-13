@@ -5,7 +5,7 @@ using UnityEngine;
 public class SplitterLineRange : MonoBehaviour
 {
     public LineRenderer circleRenderer;
-    private int loop = 3;
+    private int loop = 4;
     private float size = 0f;
 
     private void Start() {

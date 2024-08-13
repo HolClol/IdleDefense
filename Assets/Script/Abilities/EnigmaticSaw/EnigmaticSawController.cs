@@ -18,7 +18,7 @@ public class EnigmaticSawController : AbilitiesController
 
         TimeBeforeFire = AbilitiesStat.Cooldown / 3;
         BaseDamage = AbilitiesStat.Damage;
-        DamageScaling -= 0.8f;
+        DamageScaling -= 0.6f;
         CheckUpgrade(WeaponUpgradeLevel);
     }
 
@@ -86,14 +86,14 @@ public class EnigmaticSawController : AbilitiesController
             break;
             case 5:
                 RazorbladeNumbers = 3;
-                DamageScaling += 0.15f;
+                DamageScaling += 0.2f;
             break;
             case 6:
                 RazorbladeNumbers = 4;
                 AbilitiesStat.Cooldown -= AbilitiesStat.Cooldown * 0.25f;
                 break;
         }
-
+        BaseDamage += 2;
         UpdateDamage(playerController.PlayerStats.BaseDamage);
     }
 

@@ -152,7 +152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delay: 0
-  ZigzagMovement: 3
+  ZigzagMovement: 5
+  BurstMultiplier: 8
 --- !u!114 &2957214932916236506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,6 +176,7 @@ MonoBehaviour:
   EnemyMovespeed: 1
   EnemyRotateSpeed: 25
   SkillCooldown: 0
+  DamageDealt: 0
   Dead: 0
   m_SpriteColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &7766810266046959208

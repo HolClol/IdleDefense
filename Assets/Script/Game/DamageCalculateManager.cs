@@ -54,7 +54,8 @@ public class DamageCalculateManager : MonoBehaviour
     public void DamageCalculate(GameObject enemy, int[] intstat, float[] floatstat) {
         if (!enemy.GetComponent<EnemyMain>().GetDebounce(intstat, floatstat))
         {
-            GameObject damageDisplay = GetPooledObject(enemy.transform.position, intstat[0]);
+            int Damage = enemy.GetComponent<EnemyMain>().DamageDealt;
+            GameObject damageDisplay = GetPooledObject(enemy.transform.position, Damage);
             damageDisplay.transform.position = enemy.transform.position + new Vector3(0, 1, 0);
 
             if (AbilitiesDict.ContainsKey(intstat[1]))

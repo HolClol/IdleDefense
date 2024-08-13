@@ -16,7 +16,7 @@ public class TheSpikerMovement : EnemyMovement
     {
         if (ZigzagMovement < 0 && !Stop)
         {
-            StartCoroutine(BurstMovement(0.8f, 20, deltaTime));
+            StartCoroutine(BurstMovement(2f, 20, deltaTime));
         }
         else if (!Stop)
         {

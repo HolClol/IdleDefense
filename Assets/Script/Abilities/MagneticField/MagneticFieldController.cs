@@ -128,7 +128,7 @@ public class MagneticFieldController : AbilitiesController
                 MaxLevel = true;
             break;
         }
-
+        BaseDamage += 5;
         UpdateDamage(playerController.PlayerStats.BaseDamage);
     }
 

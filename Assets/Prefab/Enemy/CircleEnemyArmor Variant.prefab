@@ -43,6 +43,10 @@ PrefabInstance:
       propertyPath: Experience
       value: 250
       objectReference: {fileID: 0}
+    - target: {fileID: 4172520763231136018, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      propertyPath: EnemyMovespeed
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 4241021989831952018, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
       propertyPath: m_Color.b
       value: 0

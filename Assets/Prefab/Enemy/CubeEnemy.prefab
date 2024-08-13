@@ -149,9 +149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delay: 0
-  BurstCooldown: 4
-  BurstMultiplier: 10
-  BurstRepeat: 10
+  BurstCooldown: 8
+  BurstMultiplier: 30
+  BurstRepeat: 15
 --- !u!114 &2832402760923136410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,9 +171,10 @@ MonoBehaviour:
   Health: 0
   Damage: 20
   Experience: 125
-  EnemyMovespeed: 0.2
+  EnemyMovespeed: 0.1
   EnemyRotateSpeed: 25
   SkillCooldown: 0
+  DamageDealt: 0
   Dead: 0
   m_SpriteColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &7701894864385247766

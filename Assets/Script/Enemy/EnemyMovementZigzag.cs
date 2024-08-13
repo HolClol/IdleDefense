@@ -5,12 +5,13 @@ using UnityEngine;
 public class EnemyMovementZigzag : EnemyMovement
 {
     [SerializeField] float ZigzagMovement = 3f;
+    [SerializeField] float BurstMultiplier = 5f;
     private int ZigzagAngle = 1;
 
     protected override void MoveMethod(float deltaTime) {
         if (CurrentCooldown <= 0) {
             ZigzagAngle = ZigzagAngle * -1;
-            StartCoroutine(BurstMovement(5f, 5, deltaTime));
+            StartCoroutine(BurstMovement(BurstMultiplier, 5, deltaTime));
         }
         else { 
             CurrentCooldown -= deltaTime;

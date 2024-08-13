@@ -145,7 +145,7 @@ MonoBehaviour:
   Health: 0
   Damage: 5
   Experience: 50
-  EnemyMovespeed: 0.4
+  EnemyMovespeed: 0.45
   EnemyRotateSpeed: 25
   SkillCooldown: 0
   Dead: 0

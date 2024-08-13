@@ -18,7 +18,7 @@ public class HomingMissilesController : AbilitiesController
         TimeBeforeFire = AbilitiesStat.Cooldown;
         BaseDamage = AbilitiesStat.Damage;
         CheckUpgrade(WeaponUpgradeLevel);
-        DamageScaling = 0.6f;
+        DamageScaling = -0.6f;
     }
 
     void FixedUpdate() {
@@ -40,6 +40,10 @@ public class HomingMissilesController : AbilitiesController
                 GameObject ClonedBullet = GetPooledObject();
                 ClonedBullet.transform.position = SpawnLocation.position;
                 yield return new WaitForSeconds(0.2f);
+            }
+            else
+            {
+                break;
             }
             
         }
@@ -93,7 +97,7 @@ public class HomingMissilesController : AbilitiesController
                 MissileNumbers += 3;
             break;
         }
-
+        BaseDamage += 5;
         UpdateDamage(playerController.PlayerStats.BaseDamage);
     }
 

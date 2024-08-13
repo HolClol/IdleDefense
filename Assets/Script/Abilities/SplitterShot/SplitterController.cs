@@ -11,7 +11,7 @@ public class SplitterController : AbilitiesController
 
     private float BulletLifetime = 0.4f;
     private int BulletNumb = 5;
-    private int Radius = 4;
+    private int Radius = 5;
     private int Bounce = 0;
     private int Repeat = 1;
 
@@ -30,7 +30,7 @@ public class SplitterController : AbilitiesController
         BaseDamage = AbilitiesStat.Damage;
         CheckUpgrade(WeaponUpgradeLevel);
         clonedlineRenderer = Instantiate(_lineRenderer, transform.position, Quaternion.identity);
-        DamageScaling = 0.8f;
+        DamageScaling = 0.6f;
     }
 
     void FixedUpdate() {
@@ -171,12 +171,12 @@ public class SplitterController : AbilitiesController
                 FiringPoint.SetActive(true);
                 break;
             case 1:
-                BulletLifetime = 0.6f;
-                Radius += 1;
+                BulletLifetime = 0.7f;
+                Radius += 2;
                 clonedlineRenderer.GetComponent<SplitterLineRange>().IncreaseSize(8);
             break;
             case 2:
-                DamageScaling = 0.2f;
+                DamageScaling = 0.25f;
                 AbilitiesStat.Knockback = 6f;
             break;
             case 3:
@@ -190,11 +190,11 @@ public class SplitterController : AbilitiesController
             break;
             case 6:
                 Bounce = 3;
-                DamageScaling = 0.4f;
+                DamageScaling = 0.5f;
                 AbilitiesStat.Cooldown -= 1f;
             break;
         }
-
+        BaseDamage += 5;
         UpdateDamage(playerController.PlayerStats.BaseDamage);
     }
 

@@ -12,14 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddb9423690f8f4f43b29a9bea8dcd667, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  EffectPrefab:
-  - {fileID: 8577502916208021774, guid: 1828f4ac416c97e4ebe8c2fad0f55fe2, type: 3}
-  - {fileID: 7825114726667242426, guid: 333ef9b9e8e561e46a4f6809407d51f3, type: 3}
   LevelPrefab:
-  - EnemyPrefab:
-    - {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
-    SpawnRate: 0
-    Timer: 0
   - EnemyPrefab:
     - {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
     SpawnRate: 0

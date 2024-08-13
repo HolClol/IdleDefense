@@ -109,13 +109,13 @@ public class WeaponController : MonoBehaviour
         
         switch (WeaponUpgradeLevel) {
             case 1:
-                DamageScaling += 0.05f;
+                DamageScaling += 0.1f;
             break;
             case 2:
                 Piercing += 1;
             break;
             case 3:
-                DamageScaling += 0.1f;
+                DamageScaling += 0.15f;
             break;
             case 4:
                 FireRate -= 0.025f;
@@ -130,7 +130,7 @@ public class WeaponController : MonoBehaviour
                 AdditionalBulletSpeed += 10f;
             break;
             case 7:
-                DamageScaling += 0.15f;
+                DamageScaling += 0.2f;
             break;
             case 8:
                 FireRate -= 0.025f;
