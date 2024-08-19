@@ -62,11 +62,16 @@ public class PlayerManager : MonoBehaviour
 
     private void LevelUp()
     {
+        int templevel = Level;
         while (ExperienceValue >= EXPToLevelUp)
         {
             ExperienceValue -= EXPToLevelUp;
-            EXPToLevelUp = (int)((float)EXPToLevelUp + (float)(EXPToLevelUp * 0.4f));
+            templevel += 1;
             loop += 1;
+
+            float currentexp = (float)EXPToLevelUp;
+            float math = currentexp + (currentexp * 0.25f) + (currentexp * (templevel / currentexp) * 100);
+            EXPToLevelUp = (int)math;
         }
         if (!Leveling)
             StartCoroutine(LoopUpdate());

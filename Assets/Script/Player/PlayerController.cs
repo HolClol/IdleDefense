@@ -53,26 +53,6 @@ public class PlayerController : MonoBehaviour
     // ======================================================
     void Update()
     {
-        /*if (Input.GetMouseButtonDown(0)) {
-            MouseInteracting = true;
-            if (!TouchPriority) {
-                 TouchPriority = true;
-                 LockedIn = true;
-            }
-        }
-
-        if (Input.GetMouseButtonUp(0)) {
-            MouseInteracting = false;
-            if (TouchPriority) {
-                TouchPriority = false;
-                LockedIn = false; 
-            }
-        }
-
-        if (MouseInteracting) {
-            TouchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        }*/
-
         if (Touch.activeTouches.Count > 0) {
             Touch touch = Touch.activeTouches[0];
 

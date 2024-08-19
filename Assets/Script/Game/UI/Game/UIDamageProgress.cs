@@ -29,6 +29,7 @@ public class UIDamageProgress : MonoBehaviour
                 GameObject Clone = Instantiate(AbilityPanelPrefab, ContentPanel.transform);
                 AbilityPanels.Add(Clone);
                 int NewCloneID = GameUpgradeInfo.AbilitiesStat[GameUpgradeInfo.AbilitiesStat.Count - 1 - i].ID;
+
                 for (int c = 0; c < UpgradeScriptableObject.UpgradeInfoTable.Count; c++)
                 {
                     if (UpgradeScriptableObject.UpgradeInfoTable[c].Upgrade.ID == NewCloneID) 

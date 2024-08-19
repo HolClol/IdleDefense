@@ -7,7 +7,7 @@ public class MagneticFieldController : AbilitiesController
     [Header("Weapon Set Up")]
     [SerializeField] int NumbOfOrbs = 4;
     [SerializeField] int Piercing = 0;
-    [SerializeField] float Duration = 5f;
+    [SerializeField] float Duration = 6f;
     [SerializeField] float OrbMoveSpeed;
     [SerializeField] float OrbRecover = 2f;
     
@@ -135,7 +135,7 @@ public class MagneticFieldController : AbilitiesController
 
     public override void UpdateDamage(int dmg) {
         if (this.enabled) {
-            AbilitiesStat.Damage = BaseDamage + (dmg / 2);
+            AbilitiesStat.Damage = BaseDamage + dmg;
             AbilitiesStat.Damage += (int)((float)(AbilitiesStat.Damage) * DamageScaling);
             for (int i = 0; i < ObjectsList.Count; i++) {
                 if (ObjectsList[i].activeInHierarchy) {

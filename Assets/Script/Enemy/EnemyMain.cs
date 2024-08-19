@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EnemyMain : MonoBehaviour
+public class EnemyMain : MonoBehaviour, IDamageDisplay
 {
     [Header("Enemy Settings")]
     [HideInInspector] public string EnemyName;
     public EnemyIDAssign EnemyType;
     public EnemyIDAssign EnemyMovement;
+    public Sprite EnemySprite;
     public int MaxHealth = 100;
     public int Health;
     public int Damage = 1;

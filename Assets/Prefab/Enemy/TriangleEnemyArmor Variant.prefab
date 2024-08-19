@@ -40,6 +40,10 @@ PrefabInstance:
       value: 275
       objectReference: {fileID: 0}
     - target: {fileID: 2957214932916236506, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      propertyPath: EnemySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d96a354801826624cb0c698b9cf8e6df, type: 3}
+    - target: {fileID: 2957214932916236506, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
       propertyPath: EnemyMovespeed
       value: 0.8
       objectReference: {fileID: 0}

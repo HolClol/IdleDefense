@@ -12,7 +12,7 @@ public class EnemyPrefabScriptableObject : ScriptableObject
         public float Timer; //Set to 0 if want to not decrease, 1 to increase normally
     }
     public List<LevelPrefabs> LevelPrefab;
-    public GameObject[] BossPrefab;
+    public List<GameObject> BossPrefab;
 }
 
 

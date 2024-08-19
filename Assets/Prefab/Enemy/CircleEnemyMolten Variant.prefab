@@ -43,6 +43,10 @@ PrefabInstance:
       propertyPath: Experience
       value: 300
       objectReference: {fileID: 0}
+    - target: {fileID: 4172520763231136018, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      propertyPath: EnemySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 30082503463c3654d9c9765a3835088c, type: 3}
     - target: {fileID: 4241021989831952018, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
       propertyPath: m_Color.b
       value: 0

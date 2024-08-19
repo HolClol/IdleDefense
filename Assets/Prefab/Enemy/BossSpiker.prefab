@@ -280,6 +280,7 @@ MonoBehaviour:
   EnemyName: The Spiker
   EnemyType: {fileID: 11400000, guid: d712451dfaa01e54d9d84ce6224b8bba, type: 2}
   EnemyMovement: {fileID: 11400000, guid: 4768041a4943e6e4ab00c8ff1d01bf28, type: 2}
+  EnemySprite: {fileID: 21300000, guid: d553ed7c54c928e44b9a5b5128c36058, type: 3}
   MaxHealth: 25000
   Health: 0
   Damage: 100

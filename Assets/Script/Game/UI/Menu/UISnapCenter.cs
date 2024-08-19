@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 public class UISnapCenter : MonoBehaviour
 {
-    public ScrollRect scrollRect;
-    public RectTransform contentPanel;
-    public float snapSpeed = 10f; // Speed at which it snaps to the nearest element
-    public float snapThreshold = 0.2f; // Threshold to consider snapping
+    public ScrollRect ScrollRect;
+    public RectTransform ContentPanel;
+    public float SnapSpeed = 10f; 
+    public float SnapThreshold = 0.2f; 
 
     private RectTransform[] contentElements;
     private Vector2[] elementPositions;
@@ -16,20 +16,19 @@ public class UISnapCenter : MonoBehaviour
 
     void Start()
     {
-        // Delay the position calculation until after the layout has been fully applied
         Invoke("CalculateElementPositions", 0.1f);
     }
 
     void CalculateElementPositions()
     {
         // Get only the direct children of the content panel
-        int childCount = contentPanel.childCount;
+        int childCount = ContentPanel.childCount;
         contentElements = new RectTransform[childCount];
         elementPositions = new Vector2[childCount];
 
         for (int i = 0; i < childCount; i++)
         {
-            contentElements[i] = contentPanel.GetChild(i) as RectTransform;
+            contentElements[i] = ContentPanel.GetChild(i) as RectTransform;
             // Calculate the positions based on the anchored positions
             elementPositions[i] = new Vector2(-contentElements[i].anchoredPosition.x + 250, -contentElements[i].anchoredPosition.y);
         }
@@ -38,10 +37,7 @@ public class UISnapCenter : MonoBehaviour
     void Update()
     {
         if (!isDragging)
-        {
-            // Smoothly move the content to the target position
-            contentPanel.anchoredPosition = Vector2.Lerp(contentPanel.anchoredPosition, targetPosition, snapSpeed * Time.deltaTime);
-        }
+            ContentPanel.anchoredPosition = Vector2.Lerp(ContentPanel.anchoredPosition, targetPosition, SnapSpeed * Time.deltaTime);
     }
 
     public void OnBeginDrag()
@@ -57,7 +53,7 @@ public class UISnapCenter : MonoBehaviour
         float closestDistance = float.MaxValue;
         for (int i = 0; i < elementPositions.Length; i++)
         {
-            float distance = Vector2.Distance(contentPanel.anchoredPosition, elementPositions[i]);
+            float distance = Vector2.Distance(ContentPanel.anchoredPosition, elementPositions[i]);
             if (distance < closestDistance)
             {
                 closestDistance = distance;
@@ -66,10 +62,9 @@ public class UISnapCenter : MonoBehaviour
             }
         }
 
-        // If within the snap threshold, snap to the nearest element
-        if (closestDistance < snapThreshold)
+        if (closestDistance < SnapThreshold)
         {
-            targetPosition = contentPanel.anchoredPosition;
+            targetPosition = ContentPanel.anchoredPosition;
             targetPosition.y = 0f;
 
         }

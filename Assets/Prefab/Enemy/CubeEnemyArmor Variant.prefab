@@ -87,6 +87,34 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1537852670157503703, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537852670157503703, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      propertyPath: m_SpriteTilingProperty.border.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537852670157503703, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      propertyPath: m_SpriteTilingProperty.border.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537852670157503703, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      propertyPath: m_SpriteTilingProperty.border.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537852670157503703, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      propertyPath: m_SpriteTilingProperty.border.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537852670157503703, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537852670157503703, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2832402760923136410, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: EnemyType
       value: 
@@ -100,9 +128,17 @@ PrefabInstance:
       value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 2832402760923136410, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      propertyPath: EnemySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ab6b0137f81576942a8cb056ed01db49, type: 3}
+    - target: {fileID: 2832402760923136410, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: EnemyMovespeed
       value: 0.075
       objectReference: {fileID: 0}
+    - target: {fileID: 4929148439200437284, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7482667652216324306, guid: 8b1e821b38f5f4c45a96010bc4fe4a5d, type: 3}
     - target: {fileID: 4929148439200437284, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: m_Color.b
       value: 0

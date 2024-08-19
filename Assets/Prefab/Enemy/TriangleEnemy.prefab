@@ -169,6 +169,7 @@ MonoBehaviour:
   EnemyName: 
   EnemyType: {fileID: 11400000, guid: 4768041a4943e6e4ab00c8ff1d01bf28, type: 2}
   EnemyMovement: {fileID: 11400000, guid: 01d5f0db81a710d40ab498029ef5a789, type: 2}
+  EnemySprite: {fileID: 21300000, guid: 2e3f4ed4e5540cc45b1108a4ce7909ad, type: 3}
   MaxHealth: 75
   Health: 0
   Damage: 10

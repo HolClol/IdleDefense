@@ -7,27 +7,27 @@ using UnityEngine.SceneManagement;
 public class EnemySpawnController : MonoBehaviour
 {
     [Header("Enemy Spawner Handler")]
-    [SerializeField] float SpawnRate = 1f;
     [SerializeField] EnemyPrefabScriptableObject enemyPrefabs;
     [SerializeField] GameObject _enemySpawnPoint;
     [SerializeField] GameObject _bossSpawnPoint;
-    [SerializeField] bool CanSpawn;
+    [SerializeField] float SpawnRate = 1f;
     [SerializeField] float DifficultySpikeTimer = 30; //This is serialized in case a stage has a different timer
     [SerializeField] int DifficultyLevel = 1;
+    [SerializeField] int BonusMulti = 0;
+    [SerializeField] bool CanSpawn;
     public UnityEvent BossCalling;
 
     private List<Transform> enemySpawnPos = new List<Transform>();
     private List<GameObject> actualEnemyPrefabs = new List<GameObject>();
     private Transform _enemySpawn;
     private GameObject _Boss;
-    private int HealthMulti = 0;
 
     // Stat buff for enemies \\ 
-    private float SpeedIncrease = 0;
 
     // Game Difficulty Manager \\
     private float Spawntimer;
     private float Timer;
+    private int MultipleSpawn = 1;
 
     // ======================================================
     // Start is called before the first frame update
@@ -60,9 +60,7 @@ public class EnemySpawnController : MonoBehaviour
             Timer -= Time.deltaTime;
     }
 
-    private void DifficultyIncrease() { //NOTE: CHANGE THESE DIFFICULTY NUMBERS ONCE MORE SCENES ARE LOADED INTO THE GAME
-        Scene currentScreen = SceneManager.GetActiveScene();
-        int buildIndex = currentScreen.buildIndex;
+    private void DifficultyIncrease() { 
         bool DecreaseSpawnTimer = true;
 
         // Every stage will have a different type of monsters and difficulty spike
@@ -70,18 +68,21 @@ public class EnemySpawnController : MonoBehaviour
         {
             actualEnemyPrefabs = enemyPrefabs.LevelPrefab[DifficultyLevel].EnemyPrefab;
 
+            // Put spawn rate to -1 if the spawn rate should not be decreased
             if (enemyPrefabs.LevelPrefab[DifficultyLevel].SpawnRate < 0f)
                 DecreaseSpawnTimer = false;
+            // Put spawn rate to higher than 0 to set the spawn rate 
             else if (enemyPrefabs.LevelPrefab[DifficultyLevel].SpawnRate > 0f)
                 SpawnRate = enemyPrefabs.LevelPrefab[DifficultyLevel].SpawnRate;
 
+            // Put timer higher than 0 to set the timer
             if (enemyPrefabs.LevelPrefab[DifficultyLevel].Timer > 0f)
                 DifficultySpikeTimer = enemyPrefabs.LevelPrefab[DifficultyLevel].Timer;
 
         }
         else if (DifficultyLevel == enemyPrefabs.LevelPrefab.Count) //Final stage
         {
-            SpawnRate = 0.5f; //Reset to default spawn time
+            SpawnRate = 0.8f; //Reset to default spawn time
             BossCalling.Invoke();
             StartCoroutine(SpawnBoss(0));
         }
@@ -94,20 +95,20 @@ public class EnemySpawnController : MonoBehaviour
         { //Cap difficulty timer
             DifficultySpikeTimer += 15;
             if (DifficultySpikeTimer > 90)
-            {
                 DifficultySpikeTimer = 90;
-            }
         }
 
         Timer = DifficultySpikeTimer;
         DifficultyLevel += 1;
+
         if (DifficultyLevel % 2 == 0)
         {
             IncreaseMulti(0);
+            MultipleSpawn = Mathf.Min(MultipleSpawn + 1, 5); //Cap is 5 enemies per spawn
         }
         else if (DifficultyLevel % 5 == 0)
         {
-            SpawnRate -= SpawnRate * 0.35f;
+            SpawnRate -= SpawnRate * 0.4f;
             SpawnRate = Mathf.Round(SpawnRate * 100f) / 100f;
             IncreaseMulti(0);
         }
@@ -123,17 +124,17 @@ public class EnemySpawnController : MonoBehaviour
         int randEnemy = Random.Range(0, actualEnemyPrefabs.Count);
         int randPos = Random.Range(0, enemySpawnPos.Count);
         if (CanSpawn) {
-            for (int i = 0; i < Random.Range(1,4); i++)
+            for (int i = 0; i < Random.Range(1,MultipleSpawn); i++)
             {
                 GameObject enemyToSpawn = actualEnemyPrefabs[randEnemy];
                 Transform enemyToSpawnPos = enemySpawnPos[randPos];
 
 
                 GameObject Enemy = Instantiate(enemyToSpawn, enemyToSpawnPos.position, Quaternion.identity, _enemySpawn);
-                Enemy.GetComponent<EnemyMain>().MaxHealth += (Enemy.GetComponent<EnemyMain>().MaxHealth * HealthMulti);
-                Enemy.GetComponent<EnemyMain>().Experience += (Enemy.GetComponent<EnemyMain>().Experience * HealthMulti);
+                Enemy.GetComponent<EnemyMain>().MaxHealth += (Enemy.GetComponent<EnemyMain>().MaxHealth * BonusMulti);
+                Enemy.GetComponent<EnemyMain>().Experience += (Enemy.GetComponent<EnemyMain>().Experience * BonusMulti);
                 // Enemy.GetComponent<EnemyBehaviourScript>().EnemyMovespeed += SpeedIncrease;
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.05f);
             }
 
         }
@@ -152,10 +153,7 @@ public class EnemySpawnController : MonoBehaviour
     public void IncreaseMulti(int ID) {
         switch (ID) {
             case 0:
-                HealthMulti += 1;
-            break;
-            case 1:
-                SpeedIncrease += 0.5f;
+                BonusMulti += 1;
             break;
         }
     }

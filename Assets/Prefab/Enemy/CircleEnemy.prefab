@@ -141,13 +141,15 @@ MonoBehaviour:
   EnemyName: 
   EnemyType: {fileID: 11400000, guid: 4768041a4943e6e4ab00c8ff1d01bf28, type: 2}
   EnemyMovement: {fileID: 11400000, guid: 8cfe5224360c4594bab9b210b343f8c3, type: 2}
+  EnemySprite: {fileID: 21300000, guid: d5e2794fdb68d2646a4241ef8d9691aa, type: 3}
   MaxHealth: 100
   Health: 0
   Damage: 5
   Experience: 50
-  EnemyMovespeed: 0.45
+  EnemyMovespeed: 0.4
   EnemyRotateSpeed: 25
   SkillCooldown: 0
+  DamageDealt: 0
   Dead: 0
   m_SpriteColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &7873883086220068331
