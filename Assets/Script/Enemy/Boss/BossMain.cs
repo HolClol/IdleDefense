@@ -26,10 +26,28 @@ public class BossMain : EnemyMain
 
     protected override void ReceiveDamage(int[] intinfo, float[] floatinfo)
     {
-        base.ReceiveDamage(intinfo, floatinfo);
-        StaleList.Add(intinfo[1]);
-        if (StaleList.Count > 10)
-            StaleList.RemoveAt(StaleList.Count - 1);
+        DamageDealt = intinfo[0];
+        float DamageKnockback = ((float)DamageDealt / 50) + floatinfo[0];
+        if (DamageKnockback > 30f)
+        {
+            DamageKnockback = 30f;
+        }
+        m_enemyMovement.SetDamageKnockback(DamageKnockback);
+
+        if (Health <= DamageDealt && !Dead)
+        {
+            m_enemyDeath.DeathCondition();
+        }
+        else
+        {
+            TakeDamage(intinfo[1]);
+            StartCoroutine(HurtPlay());
+            StaleList.Add(intinfo[1]);
+            if (StaleList.Count > 10)
+                StaleList.RemoveAt(StaleList.Count - 1);
+            if (floatinfo[1] > 0)
+                StartCoroutine(DamageCooldownPlay(intinfo[1], floatinfo[1]));
+        }
 
     }
 

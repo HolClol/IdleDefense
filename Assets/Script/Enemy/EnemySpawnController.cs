@@ -1,26 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 public class EnemySpawnController : MonoBehaviour
 {
+    [Header("Stage Info")]
+    [SerializeField] CurrentStage StageSO;
     [Header("Enemy Spawner Handler")]
-    [SerializeField] EnemyPrefabScriptableObject enemyPrefabs;
     [SerializeField] GameObject _enemySpawnPoint;
     [SerializeField] GameObject _bossSpawnPoint;
-    [SerializeField] float SpawnRate = 1f;
     [SerializeField] float DifficultySpikeTimer = 30; //This is serialized in case a stage has a different timer
-    [SerializeField] int DifficultyLevel = 1;
-    [SerializeField] int BonusMulti = 0;
+    [SerializeField] int DifficultyLevel = 1; 
     [SerializeField] bool CanSpawn;
+    [SerializeField] float SpawnRate = 1f;
     public UnityEvent BossCalling;
 
+    private EnemyPrefabScriptableObject enemyPrefabs;
     private List<Transform> enemySpawnPos = new List<Transform>();
     private List<GameObject> actualEnemyPrefabs = new List<GameObject>();
     private Transform _enemySpawn;
     private GameObject _Boss;
+    private int BonusMulti = 0;
 
     // Stat buff for enemies \\ 
 
@@ -30,14 +32,16 @@ public class EnemySpawnController : MonoBehaviour
     private int MultipleSpawn = 1;
 
     // ======================================================
-    // Start is called before the first frame update
+    // This exist for playtesting
     // ======================================================
     private void Start()
     {
+        enemyPrefabs = StageSO.Stage.StageEnemies;
         _enemySpawn = GameObject.Find("_Enemy").transform;
-        foreach (Transform child in _enemySpawnPoint.transform) {
+
+        foreach (Transform child in _enemySpawnPoint.transform)
             enemySpawnPos.Add(child);
-        }
+
         actualEnemyPrefabs = enemyPrefabs.LevelPrefab[0].EnemyPrefab;
         Timer = DifficultySpikeTimer;
     }
@@ -47,16 +51,14 @@ public class EnemySpawnController : MonoBehaviour
     // ======================================================
     private void Update()
     {
-        if (CanSpawn && Spawntimer <= 0) {
+        if (CanSpawn && Spawntimer <= 0)
             StartCoroutine(SpawnEnemy());
-        }
-        else 
+        else
             Spawntimer -= Time.deltaTime;
 
-        if (Timer <= 0) {
+        if (Timer <= 0)
             DifficultyIncrease();
-        }
-        else 
+        else
             Timer -= Time.deltaTime;
     }
 
@@ -150,6 +152,7 @@ public class EnemySpawnController : MonoBehaviour
         _Boss = Boss;
     }
 
+
     public void IncreaseMulti(int ID) {
         switch (ID) {
             case 0:
@@ -157,4 +160,5 @@ public class EnemySpawnController : MonoBehaviour
             break;
         }
     }
+
 }

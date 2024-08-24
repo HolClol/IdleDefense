@@ -12,34 +12,32 @@ public class EnemyDeathHandler : MonoBehaviour
     protected EnemyMain m_enemyState;
     protected Rigidbody2D m_Rb;
     protected SpriteRenderer m_spriteRenderer;
-    protected EnemyMovement m_enemyMovement;
 
     protected bool Moltened = false;
 
     protected virtual void Start()
     {
         m_enemyState = GetComponent<EnemyMain>();
-        m_enemyMovement = GetComponent<EnemyMovement>();
         m_Rb = GetComponent<Rigidbody2D>();
         m_spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public virtual void DeathCondition()
     {
-        if (m_enemyState.EnemyType.EnemyID == 2)
+        if (m_enemyState.EnemyType.EnemyID == 2 && !Moltened)
         {
 
             m_Rb.velocity = new Vector2(0, 0);
             m_enemyState.MaxHealth = m_enemyState.MaxHealth * 4;
             m_enemyState.Health += m_enemyState.MaxHealth;
+            m_enemyState.EnemyMovespeed = 0f;
             Moltened = true;
             m_spriteRenderer.color = Color.grey;
             m_enemyState.m_SpriteColor = Color.grey;
-            m_Rb.mass = 200;
             gameObject.name = "Molten";
 
             UpdateStat.Invoke(new int[] { 1, m_enemyState.Experience });
-            m_enemyMovement.enabled = false;
+            UpdateStat.Invoke(new int[] { 8, m_enemyState.MaxHealth/10, m_enemyState.Experience / 50 });
             Destroy(gameObject, 5);
         }
 
@@ -48,6 +46,7 @@ public class EnemyDeathHandler : MonoBehaviour
             if (!Moltened)
             {
                 UpdateStat.Invoke(new int[] { 1, m_enemyState.Experience });
+                UpdateStat.Invoke(new int[] { 8, m_enemyState.MaxHealth/10, m_enemyState.Experience / 50});
                 GameObject ClonedParticle = Instantiate(EnemyVFXPrefab.EffectPrefab[0], transform.position, transform.rotation, GameObject.Find("_Projectiles").transform);
             }
 

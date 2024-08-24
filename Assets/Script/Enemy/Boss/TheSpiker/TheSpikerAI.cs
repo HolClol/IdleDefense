@@ -20,7 +20,7 @@ public class TheSpikerAI : BossMain
         TimeBeforeFire = SkillCooldown;
         m_SpriteColor = _spriteRenderer.color;
         m_spriteRenderer = _spriteRenderer;
-        CameraChange.Invoke(new float[] { 20, 5 });
+        CameraChange.Invoke(new float[] { 24, 5 });
         UpdateBossUI[0].Invoke(new int[] { 0 });
         UpdateBossUI[1].Invoke(new int[] { Health, MaxHealth });
     }

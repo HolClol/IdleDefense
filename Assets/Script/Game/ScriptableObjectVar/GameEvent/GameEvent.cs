@@ -30,8 +30,18 @@ public class GameEvent : ScriptableObject
         for (int i = listeners.Count - 1; i >= 0; i--)
             if (listeners[i] is GameEventListenerFloat)
             {
-                GameEventListenerFloat gameEventListenerInt = listeners[i] as GameEventListenerFloat;
-                gameEventListenerInt.OnEventFloatRaised(floatstat);
+                GameEventListenerFloat gameEventListenerFloat = listeners[i] as GameEventListenerFloat;
+                gameEventListenerFloat.OnEventFloatRaised(floatstat);
+            }
+    }
+
+    public void Raise(string[] stringstat)
+    {
+        for (int i = listeners.Count - 1; i >= 0; i--)
+            if (listeners[i] is GameEventListenerString)
+            {
+                GameEventListenerString gameEventListenerString = listeners[i] as GameEventListenerString;
+                gameEventListenerString.OnEventStringRaised(stringstat);
             }
     }
 
@@ -40,8 +50,8 @@ public class GameEvent : ScriptableObject
         for (int i = listeners.Count - 1; i >= 0; i--)
             if (listeners[i] is GameEventListenerDamage)
             {
-                GameEventListenerDamage gameEventListenerInt = listeners[i] as GameEventListenerDamage;
-                gameEventListenerInt.OnEventDamageRaised(target, intstat, floatstat);
+                GameEventListenerDamage gameEventListenerDamage = listeners[i] as GameEventListenerDamage;
+                gameEventListenerDamage.OnEventDamageRaised(target, intstat, floatstat);
             }
     }
 

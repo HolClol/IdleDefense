@@ -17,5 +17,21 @@ MonoBehaviour:
     - {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
     SpawnRate: 0
     Timer: 0
+  - EnemyPrefab:
+    - {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+    SpawnRate: 0
+    Timer: 0
+  - EnemyPrefab:
+    - {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+    SpawnRate: 0
+    Timer: 0
+  - EnemyPrefab:
+    - {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+    SpawnRate: 0
+    Timer: 0
+  - EnemyPrefab:
+    - {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+    SpawnRate: 0
+    Timer: 0
   BossPrefab:
   - {fileID: 6947487980923986090, guid: 24bc79ad5117f9740abf7fb08789273b, type: 3}

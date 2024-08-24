@@ -11,7 +11,7 @@ public class SplitterController : AbilitiesController
 
     private float BulletLifetime = 0.4f;
     private int BulletNumb = 5;
-    private int Radius = 5;
+    private int Radius = 7;
     private int Bounce = 0;
     private int Repeat = 1;
 
@@ -172,7 +172,7 @@ public class SplitterController : AbilitiesController
                 break;
             case 1:
                 BulletLifetime = 0.7f;
-                Radius += 2;
+                Radius += 3;
                 clonedlineRenderer.GetComponent<SplitterLineRange>().IncreaseSize(8);
             break;
             case 2:

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -9,23 +10,23 @@ public class PlayerManager : MonoBehaviour
     public UnityEvent UpgradePopUp;
     public UnityEvent<int[]> UpdateDamage;
     public UnityEvent<int[]> UpdateUI;
+    public UnityEvent<int[]> EndScreenEvent;
 
     [Header("Stats")]
-    [SerializeField] int MaxHealth = 100;
-    [SerializeField] int EXPToLevelUp = 100;
+    private int MaxHealth = 10;
+    [SerializeField] int EXPToLevelUp = 250;
     [SerializeField] int Level = 1;
-    public int ExperienceValue, HealthValue, ShieldValue;
+    public int ExperienceValue, HealthValue, ShieldValue, EnemiesEliminated, PointsEarned, CoinsEarned;
 
     private int loop = 0;
     private bool Leveling;
-
     void Start()
     {
         Application.targetFrameRate = 60;
+        SceneManager.LoadSceneAsync("GameMenu", LoadSceneMode.Additive);
         HealthValue = MaxHealth;
         ExperienceValue = 0;
         ShieldValue = 0;
-        UpdateUI.Invoke(new int[] {1,  ExperienceValue, EXPToLevelUp });
     }
 
     // int[] {ID, updatevalue}
@@ -34,10 +35,15 @@ public class PlayerManager : MonoBehaviour
             case 0: // Health
                 HealthValue -= array[1];
                 UpdateUI.Invoke(new int[] { 0, HealthValue, MaxHealth });
+                if (HealthValue <= 0)
+                {
+                    EndScreenEvent.Invoke(new int[] { 0, EnemiesEliminated, CoinsEarned, PointsEarned });
+                }   
             break;
             case 1: // Experience
                 ExperienceValue += array[1];
-                if (ExperienceValue >= EXPToLevelUp) {
+                if (ExperienceValue >= EXPToLevelUp) 
+                {
                     LevelUp();
                 }
                 UpdateUI.Invoke(new int[] { 1, ExperienceValue, EXPToLevelUp });
@@ -57,6 +63,11 @@ public class PlayerManager : MonoBehaviour
                 }
                 UpdateUI.Invoke(new int[] { 0, HealthValue, MaxHealth });
             break;
+            case 8: //Add kill count and points
+                CoinsEarned += array[1];
+                PointsEarned += array[2];
+                EnemiesEliminated += 1;
+            break;
         }
     }
 
@@ -70,7 +81,7 @@ public class PlayerManager : MonoBehaviour
             loop += 1;
 
             float currentexp = (float)EXPToLevelUp;
-            float math = currentexp + (currentexp * 0.25f) + (currentexp * (templevel / currentexp) * 100);
+            float math = currentexp + (currentexp * 0.2f) + (currentexp * (templevel / currentexp) * 100);
             EXPToLevelUp = (int)math;
         }
         if (!Leveling)
@@ -94,6 +105,11 @@ public class PlayerManager : MonoBehaviour
         loop = 0;
         Leveling = false;
         
+    }
+
+    public void VictoryScreen()
+    {
+        EndScreenEvent.Invoke(new int[] { 1, EnemiesEliminated, CoinsEarned, PointsEarned });
     }
 
     public int GetStat(int ID) {

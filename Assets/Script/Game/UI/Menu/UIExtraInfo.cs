@@ -11,14 +11,11 @@ public class UIExtraInfo : MonoBehaviour
     public GameObject IconPrefab;
     public TMP_Text CoinsText;
     public TMP_Text PointsText;
+    public CurrentStage CurrentStage;
 
     private List<GameObject> tempUniqueEnemies = new List<GameObject>();
-    private StageInfo currentStage, tempCurrentStage;
+    private StageInfo tempCurrentStage;
 
-    public void SetCurrentStage(StageInfo stage)
-    {
-        currentStage = stage;
-    }
     private void SelectUnique(List<GameObject> enemyprefab)
     {
         //Create a list of unique objects to put on icon
@@ -36,21 +33,21 @@ public class UIExtraInfo : MonoBehaviour
 
     public void StageExtraInfo(BaseEventData eventData)
     {
-        if (currentStage != tempCurrentStage) //Prevent running if it's same stage
+        if (CurrentStage.Stage != tempCurrentStage) //Prevent running if it's same stage
         {
             tempUniqueEnemies.Clear();
             foreach (Transform child in IconPanel.transform)
             {
                 Destroy(child.gameObject);
             }
-            tempCurrentStage = currentStage;
-            for (int i = 0; i < currentStage.StageEnemies.LevelPrefab.Count; i++)
+            tempCurrentStage = CurrentStage.Stage;
+            for (int i = 0; i < CurrentStage.Stage.StageEnemies.LevelPrefab.Count; i++)
             {
-                SelectUnique(currentStage.StageEnemies.LevelPrefab[i].EnemyPrefab);
+                SelectUnique(CurrentStage.Stage.StageEnemies.LevelPrefab[i].EnemyPrefab);
             }
-            SelectUnique(currentStage.StageEnemies.BossPrefab);
-            CoinsText.text = "Coins: " + currentStage.StageReward.Coins.ToString();
-            PointsText.text = "Points: " + currentStage.StageReward.UserRankExp.ToString();
+            SelectUnique(CurrentStage.Stage.StageEnemies.BossPrefab);
+            CoinsText.text = "Coins: " + CurrentStage.Stage.StageReward.Coins.ToString();
+            PointsText.text = "Points: " + CurrentStage.Stage.StageReward.UserRankExp.ToString();
         }
 
 

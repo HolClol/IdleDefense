@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -10,14 +11,15 @@ public class UISelectStage : MonoBehaviour
 {
     public RectTransform ContentPanel;
     public TMP_Text StageText;
-    public UIExtraInfo UIInfo;
+    public CurrentStage CurrentStage;
+    public UnityEvent<int[]> ChangeScene;
 
     private GameObject[] ContentStageInfos;
-    private StageInfo currentStage;
 
     // Start is called before the first frame update
     void Start()
     {
+        CurrentStage.ResetStage();
         int childCount = ContentPanel.childCount;
         ContentStageInfos = new GameObject[childCount];
 
@@ -30,17 +32,16 @@ public class UISelectStage : MonoBehaviour
     public void StageSelected(BaseEventData eventData)
     {
         StageInfo tempStage = eventData.selectedObject.GetComponent<UIStageInfo>().StageInfo;
-        if (currentStage != tempStage) //Prevent running if it's same stage
+        if (CurrentStage.Stage != tempStage) //Prevent running if it's same stage
         {
-            currentStage = tempStage;
-            StageText.text = currentStage.StageName;
-            UIInfo.SetCurrentStage(currentStage);
+            CurrentStage.Stage = tempStage;
+            StageText.text = tempStage.StageName;
         }
         
     }
 
     public void StageConfirm(BaseEventData eventData)
     {
-        SceneManager.LoadScene(currentStage.name, LoadSceneMode.Single);
+        ChangeScene.Invoke(new int[] {1});
     }
 }

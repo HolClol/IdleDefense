@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   StageName: Level 1
+  StageScene: Stage1
   StageImage: {fileID: 0}
   StageEnemies: {fileID: 11400000, guid: ae13208cc6409194ba9f1fca72e5ac01, type: 2}
   StageReward:

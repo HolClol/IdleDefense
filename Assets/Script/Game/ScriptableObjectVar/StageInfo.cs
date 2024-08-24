@@ -14,6 +14,7 @@ public class StageInfo : ScriptableObject
     }
 
     public string StageName;
+    public string StageScene;
     public Image StageImage;
     public EnemyPrefabScriptableObject StageEnemies;
     public RewardsMultiplier StageReward;

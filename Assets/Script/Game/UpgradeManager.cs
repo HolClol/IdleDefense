@@ -5,15 +5,21 @@ using UnityEngine.Events;
 
 public class UpgradeManager : MonoBehaviour
 {
-    public GameObject MainPlayer;
+    
     public UpgradesScriptableObject UpgradesData;
     public UnityEvent<int[]> UpdateStat;
     public UnityEvent<int[]> UpdateDamage;
     public UnityEvent<int[]> SendPlayerUpgrade;
 
+    private GameObject MainPlayer;
     private List<int> CurrentIDUpgradeTable = new List<int>();
     private int RandomUpgradeIndex;
     private int Level;
+
+    private void Start()
+    {
+        MainPlayer = GameObject.Find("Player").gameObject;
+    }
 
     //Select a random upgrade in the table (This should run in the first info collect signal)
     private int UpgradeOptionRandom() {
