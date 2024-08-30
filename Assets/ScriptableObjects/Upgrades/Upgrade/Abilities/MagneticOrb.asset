@@ -18,8 +18,7 @@ MonoBehaviour:
   UpgradeName: Magnetic Field
   UpgradeDescription:
   - Create a magnetic orb field that rotates around the player for a duration, dealing
-    damage and knockback enemies.  Damage scales proportional to 50% of player's
-    base damage
+    damage and knockback enemies.
   - Increase orbs piercing by 1 and duration by 1s
   - Increase orbs size by 30% and duration by 1s
   - Increase knockback by 50% and damage by 25%

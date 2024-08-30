@@ -119,9 +119,6 @@ public class WeaponController : MonoBehaviour
                 FireRate -= 0.02f;
                 break;
             case 4:
-                DamageScaling += 0.3f;
-                break;
-            case 5:
                 if (NumbOfBullets == 1)
                 {
                     NumbOfBullets += 1;
@@ -136,7 +133,7 @@ public class WeaponController : MonoBehaviour
                 }
                 
                 break;
-            case 6:
+            case 5:
                 //Increase crit rate
                 break;
 

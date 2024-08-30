@@ -17,14 +17,12 @@ MonoBehaviour:
   DamageType: 1
   UpgradeName: Machine Gun
   UpgradeDescription:
-  - 
   - +10% Damage
   - +1 Bullet Piercing
-  - +30% Damage
   - +20% Firerate
   - +1 Bullet count and -10% Damage
   - +10% Critcal Rate
-  MaxLevel: 7
+  MaxLevel: 6
   ID: 0
   ElitePath:
   - EliteUpgradeName: Pain

@@ -8,6 +8,7 @@ public class UpgradeManager : MonoBehaviour
 {
     public UpgradesScriptableObject UpgradesData;
     public UnityEvent<int[]> UpdateStat;
+    public UnityEvent<int[]> UpdateLevelUI;
 
     private PlayerGameStat PlayerStat;
     private GameObject MainPlayer;
@@ -30,17 +31,21 @@ public class UpgradeManager : MonoBehaviour
     private int UpgradeOptionRandom() {
         int random = Random.Range(0, UpgradesData.UpgradeInfoTable.Count);
         int maxlevel = UpgradesData.UpgradeInfoTable[random].MaxLevel;
-        int index = CurrentIDUpgradeTable.Count;
-        Level = PlayerStat.GetUpgradeLevel(UpgradesData.UpgradeInfoTable[random].ID);
+        int realmaxlevel = Totalmaxlevel(random);
+        //int index = CurrentIDUpgradeTable.Count;
 
-        while (Level >= maxlevel)
+        Level = PlayerStat.GetUpgradeLevel(UpgradesData.UpgradeInfoTable[random].ID);
+        Elite = false;
+
+        while (Level >= realmaxlevel || CurrentIDUpgradeTable.Contains(random))
         {  
-            if (GuaranteeUpgrade && CurrentIDUpgradeTable.Count > 2)
-                random = ObtainedUpgrade[Random.Range(0, ObtainedUpgrade.Count - 1)];
+            if (GuaranteeUpgrade && CurrentIDUpgradeTable.Count == 3)
+                random = ObtainedUpgrade[Random.Range(0, ObtainedUpgrade.Count)];
             else
-                random = RerollOption(random);
+                random = Random.Range(0, UpgradesData.UpgradeInfoTable.Count);
 
             maxlevel = UpgradesData.UpgradeInfoTable[random].MaxLevel;
+            realmaxlevel = Totalmaxlevel(random);
             Level = PlayerStat.GetUpgradeLevel(UpgradesData.UpgradeInfoTable[random].ID);
         }
         
@@ -51,53 +56,38 @@ public class UpgradeManager : MonoBehaviour
 
         LevelSelect = Level;
         if (random == 0 && Level < maxlevel)
-            LevelSelect = Random.Range(1, maxlevel - 1);
+            LevelSelect = Random.Range(1, maxlevel);
         if (UpgradesData.UpgradeInfoTable[random].ElitePath.Length <= 0 || Level < maxlevel)
             return random;
 
         // Entering the Elite path domain
-        Elite = true;
-        ElitePath = Random.Range(0, UpgradesData.UpgradeInfoTable[random].ElitePath.Length - 1);
-        int elitelevel = maxlevel + UpgradesData.UpgradeInfoTable[random].ElitePath[ElitePath].MaxLevel;
-        while (Level >= elitelevel || Level >= maxlevel) // If elite maxed then reset
+        if (Level >= maxlevel && Level < realmaxlevel)
         {
-            // Repeat the process again
-            random = RerollOption(random);
-            maxlevel = UpgradesData.UpgradeInfoTable[random].MaxLevel;
-            Level = PlayerStat.GetUpgradeLevel(UpgradesData.UpgradeInfoTable[random].ID);
+            LevelSelect = Level;
+            Elite = true;
+            ElitePath = Random.Range(0, UpgradesData.UpgradeInfoTable[random].ElitePath.Length);
         }
-        LevelSelect = Level;
-        
         return random;
     }
-
-    private int RerollOption(int number) {
-        while (CurrentIDUpgradeTable.Contains(number))
-        {
-            int random = number;
-            int coinflip = 0;
-
-            do
-            {
-                coinflip = Random.Range(-random, UpgradesData.UpgradeInfoTable.Count - (random + 1));
-            } while (coinflip == 0);
-            random = random + coinflip;
-            number = random;
-        }
-        return number;
+    private int Totalmaxlevel(int number)
+    {
+        if (UpgradesData.UpgradeInfoTable[number].ElitePath.Length > 0)
+            return UpgradesData.UpgradeInfoTable[number].MaxLevel + UpgradesData.UpgradeInfoTable[number].ElitePath[0].MaxLevel;
+        else
+            return UpgradesData.UpgradeInfoTable[number].MaxLevel;
     }
 
     // Send the upgrade int informations to UI 
     public int[] UpgradeIntInfo() {
         RandomUpgradeIndex = UpgradeOptionRandom();
         int MaxLevel = UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].MaxLevel;
-        int[] InfoInt = new int[] {RandomUpgradeIndex, Level, MaxLevel};
+        int[] InfoInt = new int[] {RandomUpgradeIndex, Level, MaxLevel, Elite ? 1:0};
 
         if (Elite)
         {
             int OldMaxLevel = UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].MaxLevel;
             MaxLevel = UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].ElitePath[ElitePath].MaxLevel;
-            InfoInt = new int[] { RandomUpgradeIndex, Level - OldMaxLevel, MaxLevel };
+            InfoInt = new int[] { RandomUpgradeIndex, Level - OldMaxLevel, MaxLevel, Elite ? 1 : 0};
         }
         
         return InfoInt;
@@ -113,13 +103,12 @@ public class UpgradeManager : MonoBehaviour
 
         if (Elite)
         {
-            int OldMaxLevel = UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].ElitePath[ElitePath].MaxLevel;
             index = UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].ElitePath[ElitePath].UpgradeDescription.Length - 1;
             if (index >= LevelSelect)
             {
                 index = LevelSelect;
             }
-            InfoString = new string[] { UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].ElitePath[ElitePath].UpgradeName, UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].ElitePath[ElitePath].UpgradeDescription[index] };
+            InfoString = new string[] { UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].ElitePath[ElitePath].EliteUpgradeName, UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].ElitePath[ElitePath].UpgradeDescription[index] };
         }
 
         return InfoString;
@@ -130,6 +119,7 @@ public class UpgradeManager : MonoBehaviour
         CurrentIDUpgradeTable.Clear();
         int RealId = UpgradesData.UpgradeInfoTable[ID].ID;
         Level = PlayerStat.UpgradeAbility(RealId);
+        UpdateLevelUI.Invoke(new int[] { 1, RealId });
 
         string ScriptName = "";
         switch (RealId)

@@ -111,8 +111,11 @@ public class MagneticFieldController : AbilitiesController
                 Duration = 8f;
                 AbilitiesStat.Cooldown = Duration+5f;
                 for (int i = 0; i < NumbOfOrbs; i++) {
-                    GameObject ClonedOrb = ObjectsList[i];
-                    ClonedOrb.transform.localScale = ClonedOrb.transform.localScale * SizeBuff;
+                    if (ObjectsList.Count > 0)
+                    {
+                        GameObject ClonedOrb = ObjectsList[i];
+                        ClonedOrb.transform.localScale = ClonedOrb.transform.localScale * SizeBuff;
+                    }       
                 }
             break;
             case 3:

@@ -40,8 +40,10 @@ public class UIUpgradeManager : MonoBehaviour
                 UpgradeOptions[i].UpgradeOptionsName.text = UpgradeInfos[0] + " LV: " + (UpgradeID[1]).ToString() + " -> LV: " + (UpgradeID[1]+1).ToString();
             else if (UpgradeID[1] + 1 >= UpgradeID[2])
                 UpgradeOptions[i].UpgradeOptionsName.text = UpgradeInfos[0] + " LV: " + (UpgradeID[1]).ToString() + " -> MAX";
-            else if (UpgradeID[1] <= 0)
+            else if (UpgradeID[1] <= 0 && UpgradeID[3] == 0)
                 UpgradeOptions[i].UpgradeOptionsName.text = UpgradeInfos[0] + " NEW";
+            else if (UpgradeID[3] == 1)
+                UpgradeOptions[i].UpgradeOptionsName.text = UpgradeInfos[0] + " ELITE";
 
             UpgradeOptions[i].UpgradeOptionsDesc.text = UpgradeInfos[1];
         }
