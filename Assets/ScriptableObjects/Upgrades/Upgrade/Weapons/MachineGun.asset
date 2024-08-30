@@ -27,11 +27,21 @@ MonoBehaviour:
   MaxLevel: 7
   ID: 0
   ElitePath:
-  - EliteUpgradeName: 
-    UpgradeDescription: []
-    AlternateID: 0
+  - EliteUpgradeName: Pain
+    UpgradeDescription:
+    - Increase fire rate by 70% Knock back +0,5
+    - Increase bullet speed by 30%
+    - Increase fire rate by 20%
+    - Bullet piercing + 1
+    - Bullet +1
+    AlternateID: 1
     MaxLevel: 6
-  - EliteUpgradeName: 
-    UpgradeDescription: []
-    AlternateID: 0
+  - EliteUpgradeName: Pain 2
+    UpgradeDescription:
+    - 'Bullet now can bounce off screen  3 time  '
+    - Increase damage multiplier by 20%
+    - Increase fire rate by 20%
+    - Increase bullet speed by 30%
+    - Rage time + 2s
+    AlternateID: 2
     MaxLevel: 6

@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class PlayerGameStat : MonoBehaviour
 {
-    public UnityEvent<int[]> SendLevel;
-
     private PlayerController MainController;
     private void Start()
     {
@@ -34,40 +32,50 @@ public class PlayerGameStat : MonoBehaviour
     }
 
     // Check players upgrade
-    public void GetUpgradeLevel(int[] id)
+    public int GetUpgradeLevel(int id)
     {
-        switch (id[0]) //Type of call
+        int result = 0;
+        for (int i = 0; i < MainController.PlayerStats.Upgrades.Count; i++)
         {
-            case 0: //Asking for upgrade level call
-                int result = 0;
-                for (int i = 0; i < MainController.PlayerStats.Upgrades.Count; i++)
-                {
-                    if (id[1] == MainController.PlayerStats.Upgrades[i].UpgradeID)
-                    {
-                        result = MainController.PlayerStats.Upgrades[i].UpgradeLevel; //Looped
-                        break;
-                    }
-                }
-                SendLevel.Invoke(new int[] { result });
-                break;
-
-            case 1: //Sending the upgraded option
-                bool existed = false;
-                for (int i = 0; i < MainController.PlayerStats.Upgrades.Count; i++)
-                {
-                    if (id[1] == MainController.PlayerStats.Upgrades[i].UpgradeID)
-                    {
-                        existed = true;
-                        AdjustUpgrade(1, i, 0);
-                        SendLevel.Invoke(new int[] { MainController.PlayerStats.Upgrades[i].UpgradeLevel });
-                    }
-                }
-                if (!existed)
-                {
-                    AdjustUpgrade(0, id[1], 1);
-                }
-                break;
+            if (id == MainController.PlayerStats.Upgrades[i].UpgradeID)
+            {
+                result = MainController.PlayerStats.Upgrades[i].UpgradeLevel; //Looped
+                return result;
+            }
         }
-
+        return result;
     }
+
+    public int UpgradeAbility(int id)
+    {
+        bool existed = false;
+        int level = 0;
+        for (int i = 0; i < MainController.PlayerStats.Upgrades.Count; i++)
+        {
+            if (id == MainController.PlayerStats.Upgrades[i].UpgradeID)
+            {
+                existed = true;
+                AdjustUpgrade(1, i, 0);
+                level = MainController.PlayerStats.Upgrades[i].UpgradeLevel;
+                break;
+            }
+        }
+        if (!existed)
+        {
+            AdjustUpgrade(0, id, 1);
+        }
+        return level;
+    }
+
+    public void EliteUnlock(int id)
+    {
+        for (int i = 0; i < MainController.PlayerStats.Upgrades.Count; i++)
+        {
+            if (id == MainController.PlayerStats.Upgrades[i].UpgradeID)
+            {
+                
+            }
+        }
+    }
+
 }
