@@ -55,13 +55,16 @@ public class DamageCalculateManager : MonoBehaviour
         else { UpdateCooldown -= Time.deltaTime; }
     }
 
-    // Generally the array consist of follow: int[] {dmg, id}; float[] {knockback, debouncetime}
+    // Generally the array consist of follow: int[] {dmg, id, damagetype}; float[] {knockback, debouncetime}
     public void DamageCalculate(GameObject enemy, int[] intstat, float[] floatstat) {
         if (!enemy.GetComponent<EnemyMain>().GetDebounce(intstat, floatstat))
         {
             int Damage = enemy.GetComponent<EnemyMain>().DamageDealt;
-            GameObject damageDisplay = GetPooledObject(enemy.transform.position, Damage);
-            damageDisplay.transform.position = enemy.transform.position + new Vector3(0, 1, 0);
+            if (intstat[0] > 0)
+            {
+                GameObject damageDisplay = GetPooledObject(enemy.transform.position, Damage);
+                damageDisplay.transform.position = enemy.transform.position + new Vector3(0, 1, 0);
+            }
 
             if (AbilitiesDict.ContainsKey(intstat[1]))
             {

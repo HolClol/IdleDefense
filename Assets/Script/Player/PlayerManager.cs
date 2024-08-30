@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     public UnityEvent<int[]> UpdateDamage;
     public UnityEvent<int[]> UpdateUI;
     public UnityEvent<int[]> EndScreenEvent;
+    public UnityEvent SuddenPause;
 
     [Header("Stats")]
     private int MaxHealth = 10;
@@ -105,6 +106,11 @@ public class PlayerManager : MonoBehaviour
         loop = 0;
         Leveling = false;
         
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        SuddenPause.Invoke();
     }
 
     public void VictoryScreen()

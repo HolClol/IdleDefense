@@ -9,9 +9,13 @@ public class ScenePlayer : MonoBehaviour
     // All stats should be saved here
     public CurrentStage CurrentStage;
     public FloatVariable GameSpeed;
+    public bool MainObject;
 
     private void Start()
     {
+        if (!MainObject)
+            Destroy(gameObject);
+
         DontDestroyOnLoad(gameObject);
     }
 

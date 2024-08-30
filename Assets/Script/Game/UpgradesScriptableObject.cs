@@ -7,4 +7,5 @@ using UnityEngine;
 public class UpgradesScriptableObject : ScriptableObject 
 {
     public List<UpgradeSO> UpgradeInfoTable;
+    public List<UpgradeSO> ArtifactInfoTable;
 }

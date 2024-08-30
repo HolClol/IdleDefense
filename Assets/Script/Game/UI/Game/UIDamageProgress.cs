@@ -15,7 +15,7 @@ public class UIDamageProgress : MonoBehaviour
     public GameObject ContentPanel;
     public TMP_Text DamageText;
 
-    [SerializeField] private List<GameObject> AbilityPanels = new List<GameObject>();
+    private List<GameObject> AbilityPanels = new List<GameObject>();
     private List<UIDmgSection> AbilityPanelsScript = new List<UIDmgSection>();
     private int Length = 0;
 
@@ -32,9 +32,9 @@ public class UIDamageProgress : MonoBehaviour
 
                 for (int c = 0; c < UpgradeScriptableObject.UpgradeInfoTable.Count; c++)
                 {
-                    if (UpgradeScriptableObject.UpgradeInfoTable[c].Upgrade.ID == NewCloneID) 
+                    if (UpgradeScriptableObject.UpgradeInfoTable[c].ID == NewCloneID) 
                     {
-                        Clone.GetComponent<UIDmgSection>().UpdateName(UpgradeScriptableObject.UpgradeInfoTable[c].Upgrade.UpgradeName, NewCloneID);
+                        Clone.GetComponent<UIDmgSection>().UpdateName(UpgradeScriptableObject.UpgradeInfoTable[c].UpgradeName, NewCloneID);
                         AbilityPanelsScript.Add(Clone.GetComponent<UIDmgSection>());
                         break; 
                     }

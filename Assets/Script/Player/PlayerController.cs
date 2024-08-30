@@ -11,10 +11,12 @@ public class PlayerController : MonoBehaviour
     [System.Serializable] public class PlayerUpgradeStat {
         public int UpgradeID;
         public int UpgradeLevel;
+        public int ElitePath; // FUCK IT WE KEEP IT
 
-        public PlayerUpgradeStat(int id, int level) {
+        public PlayerUpgradeStat(int id, int level, int eliteid) {
             UpgradeID = id;
             UpgradeLevel = level;
+            ElitePath = eliteid;
         }
     }
     [System.Serializable] public class PlayerInGameStat {
@@ -33,7 +35,7 @@ public class PlayerController : MonoBehaviour
     public bool TouchPriority;
     public bool LockedIn;
 
-    public List<GameObject> EnemyInZone;
+    [HideInInspector] public List<GameObject> EnemyInZone;
 
     private Vector2 TouchPos;
     private Vector2 TargetPos;

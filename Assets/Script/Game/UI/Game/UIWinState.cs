@@ -23,8 +23,10 @@ public class UIWinState : MonoBehaviour
     public CurrentStage CurrentStage;
     public FloatVariable GameSpeed;
     public UnityEvent<int[]> CallScene;
+    public UnityEvent<int[]> SendCurrency;
 
     private int WinState = 0; //0 is lose, 1 is win
+    private int Coins, Points;
     
     // Display stats and your game state
     // Follow this format {0 = winstate, 1 = enemy count, 2 = coin count, 3 = point count}
@@ -38,23 +40,55 @@ public class UIWinState : MonoBehaviour
         else if (WinState == 1)
             TextLib.GameState.text = "VICTORY";
 
-        TextLib.EnemyCount.text = "Enemies Defeated: " + stat[1].ToString();
-        TextLib.CoinCount.text = "Coins Earned: " + stat[2].ToString();
-        TextLib.PointCount.text = "Points Earned: " + stat[3].ToString();
+        Coins = stat[2];
+        Points = stat[3];
+        float CoinMulti = CurrentStage.Stage.StageReward.CoinsMultiplier;
+        float PointMulti = CurrentStage.Stage.StageReward.UserRankExpMultiplier;
 
-        TextLib.StageInfo.text = "Stage Played: " + CurrentStage.Stage.StageName;
-        TextLib.CoinMulti.text = "Coin Bonus: " + CurrentStage.Stage.StageReward.CoinsMultiplier.ToString() + "x";
-        TextLib.PointMulti.text = "Point Bonus: " + CurrentStage.Stage.StageReward.UserRankExpMultiplier.ToString() + "x";
+        TextLib.EnemyCount.text = "Enemies Defeated: " + stat[1].ToString();
+        StartCoroutine(ShowRewards(false, 1f, 1f, 1f));
+
+        if (WinState == 1)
+        { 
+            StartCoroutine(ShowRewards(true, 2f, CoinMulti, PointMulti));
+        }
+            
+
+
+    }
+
+    private IEnumerator ShowRewards(bool victory, float timer, float coinmulti, float pointmulti)
+    {
+        yield return new WaitForSecondsRealtime(timer);
+        if (victory)
+        {
+            TextLib.StageInfo.gameObject.SetActive(true);
+            TextLib.CoinMulti.gameObject.SetActive(true);
+            TextLib.PointMulti.gameObject.SetActive(true);
+
+            TextLib.StageInfo.text = "Stage Played: " + CurrentStage.Stage.StageName;
+            TextLib.CoinMulti.text = "Coin Bonus: " + coinmulti.ToString() + "x";
+            TextLib.PointMulti.text = "Point Bonus: " + pointmulti.ToString() + "x";
+        }
+
+        Coins += (int)((float)Coins * (coinmulti - 1f));
+        Points += (int)((float)Points * (pointmulti - 1f));
+
+        TextLib.CoinCount.text = "Coins Earned: " + Coins.ToString();
+        TextLib.PointCount.text = "Points Earned: " + Points.ToString();
+        
     }
 
     //Replay the level or continue 
     public void ReplayOrContinue()
     {
+        SendCurrency.Invoke(new int[] { Coins, Points });
         CallScene.Invoke(new int[] {0});
     }
 
     public void Return()
     {
+        SendCurrency.Invoke(new int[] { Coins, Points });
         CallScene.Invoke(new int[] {2});
     }
 }
