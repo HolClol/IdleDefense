@@ -22,7 +22,28 @@ MonoBehaviour:
   - Missiles explode faster by 15%
   - Increase number of missiles by 2
   - Increase damage scaling by 20% and bigger explosion radius
-  - Increase damage scaling by 20% and bigger explosion radius
+  - Increase number of missiles by 3 and reduce ability cooldown by 2s
   MaxLevel: 6
   ID: 1
-  ElitePath: []
+  ElitePath:
+  - EliteUpgradeName: Missile Bombardment
+    UpgradeDescription:
+    - Now become a line of missiles bombardment, sending an airstrike torwards 3
+      random enemies and attack in a line
+    - Damage + 25%
+    - Explode radius + 30%
+    - Reduce ability cooldown by 30%
+    - 'Bombardment Zone : +1'
+    AlternateID: 1
+    MaxLevel: 5
+  - EliteUpgradeName: Nuke Missile
+    UpgradeDescription:
+    - 'Now deploy a huge bomb at a random targets, dealing massive AOE damage and
+      create a field that slow enemies down '
+    - Damage + 25%
+    - ' Slow effect : +30% and  Explode radius = +15%'
+    - 'Nuke Missile : +1 Damage : - 10%'
+    - After the first explosion, create a delayed explosion after 1s that deal 50%
+      total damage of Nuke missile and stunt all enemies in the radius.
+    AlternateID: 2
+    MaxLevel: 5

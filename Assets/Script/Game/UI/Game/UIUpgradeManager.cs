@@ -12,7 +12,8 @@ public class UIUpgradeManager : MonoBehaviour
         public TMP_Text UpgradeOptionsName;
         public TMP_Text UpgradeOptionsDesc;
         public TMP_Text UpgradeOptionsStar;
-        public int UpgradeOptionsID;
+        [HideInInspector] public int UpgradeOptionsID;
+        [HideInInspector] public int Elite;
     }
 
     [SerializeField] GameObject _upgradeManager;
@@ -35,6 +36,7 @@ public class UIUpgradeManager : MonoBehaviour
             int[] UpgradeID = _upgradeManagerScript.UpgradeIntInfo();
             string[] UpgradeInfos = _upgradeManagerScript.UpgradeStringInfo();
             UpgradeOptions[i].UpgradeOptionsID = UpgradeID[0];
+            UpgradeOptions[i].Elite = UpgradeID[3];
             //UpgradeOptions[i].UpgradeOptionsStar.text = UpgradeID[1].ToString();
             if (UpgradeID[1] > 0 && UpgradeID[1] + 1 < UpgradeID[2])
                 UpgradeOptions[i].UpgradeOptionsName.text = UpgradeInfos[0] + " LV: " + (UpgradeID[1]).ToString() + " -> LV: " + (UpgradeID[1]+1).ToString();
@@ -42,7 +44,7 @@ public class UIUpgradeManager : MonoBehaviour
                 UpgradeOptions[i].UpgradeOptionsName.text = UpgradeInfos[0] + " LV: " + (UpgradeID[1]).ToString() + " -> MAX";
             else if (UpgradeID[1] <= 0 && UpgradeID[3] == 0)
                 UpgradeOptions[i].UpgradeOptionsName.text = UpgradeInfos[0] + " NEW";
-            else if (UpgradeID[3] == 1)
+            else if (UpgradeID[3] > 0)
                 UpgradeOptions[i].UpgradeOptionsName.text = UpgradeInfos[0] + " ELITE";
 
             UpgradeOptions[i].UpgradeOptionsDesc.text = UpgradeInfos[1];
@@ -54,7 +56,9 @@ public class UIUpgradeManager : MonoBehaviour
         if (!Selected)
         {
             int parse = int.Parse(eventData.selectedObject.name);
-            _upgradeManagerScript.UpgradeOptionSelected(UpgradeOptions[parse].UpgradeOptionsID);
+            int ID = UpgradeOptions[parse].UpgradeOptionsID;
+            int Elite = UpgradeOptions[parse].Elite;
+            _upgradeManagerScript.UpgradeOptionSelected(ID, Elite);
             Selected = true;
             
         }

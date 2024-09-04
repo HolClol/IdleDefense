@@ -24,6 +24,7 @@ public class WeaponController : MonoBehaviour
     private float DamageScaling;
     private bool AnimationDisabled = false;
     private int WeaponUpgradeLevel = 0;
+    private int EliteID = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -107,7 +108,6 @@ public class WeaponController : MonoBehaviour
 
     public void CheckUpgrade(int upgradelevel) {
         WeaponUpgradeLevel = upgradelevel;
-        
         switch (WeaponUpgradeLevel) {
             case 1:
                 DamageScaling += 0.1f;
@@ -131,7 +131,7 @@ public class WeaponController : MonoBehaviour
                     NumbOfBullets += 1;
                     FiringPoint[0].SetActive(true);
                 }
-                
+                DamageScaling -= 0.1f;
                 break;
             case 5:
                 //Increase crit rate
@@ -140,6 +140,11 @@ public class WeaponController : MonoBehaviour
         }
 
         UpdateDamage(playerController.PlayerStats.BaseDamage);
+    }
+
+    public virtual void UnlockELite(int eliteid)
+    {
+        EliteID = eliteid;
     }
 
     public void UpdateDamage(int dmg) {

@@ -46,6 +46,19 @@ public class PlayerGameStat : MonoBehaviour
         return result;
     }
 
+    public int GetEliteID(int id)
+    {
+        int result = 0;
+        for (int i = 0; i < MainController.PlayerStats.Upgrades.Count; i++)
+        {
+            if (id == MainController.PlayerStats.Upgrades[i].UpgradeID)
+            {
+                return i;
+            }
+        }
+        return result;
+    }
+
     public int UpgradeAbility(int id)
     {
         bool existed = false;
@@ -67,15 +80,21 @@ public class PlayerGameStat : MonoBehaviour
         return level;
     }
 
-    public void EliteUnlock(int id)
+    public bool EliteUnlock(int id, int EliteID)
     {
         for (int i = 0; i < MainController.PlayerStats.Upgrades.Count; i++)
         {
             if (id == MainController.PlayerStats.Upgrades[i].UpgradeID)
             {
+                if (MainController.PlayerStats.Upgrades[i].ElitePath == 0 && EliteID != 0)
+                {
+                    MainController.PlayerStats.Upgrades[i].ElitePath = EliteID;
+                    return true;
+                }
                 
             }
+                
         }
+        return false;
     }
-
 }

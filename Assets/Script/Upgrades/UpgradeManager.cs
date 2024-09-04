@@ -14,10 +14,7 @@ public class UpgradeManager : MonoBehaviour
     private GameObject MainPlayer;
     private List<int> CurrentIDUpgradeTable = new List<int>();
     private List<int> ObtainedUpgrade = new List<int>();
-    private int RandomUpgradeIndex;
-    private int Level;
-    private int LevelSelect;
-    private int ElitePath;
+    private int RandomUpgradeIndex, Level, LevelSelect, EliteIndex;
     private bool GuaranteeUpgrade = false;
     private bool Elite = false;
     
@@ -36,6 +33,7 @@ public class UpgradeManager : MonoBehaviour
 
         Level = PlayerStat.GetUpgradeLevel(UpgradesData.UpgradeInfoTable[random].ID);
         Elite = false;
+        EliteIndex = 0;
 
         while (Level >= realmaxlevel || CurrentIDUpgradeTable.Contains(random))
         {  
@@ -54,19 +52,19 @@ public class UpgradeManager : MonoBehaviour
         if (ObtainedUpgrade.Contains(random) && GuaranteeUpgrade)
             GuaranteeUpgrade = false;
 
-        LevelSelect = Level;
         if (random == 0 && Level < maxlevel)
             LevelSelect = Random.Range(1, maxlevel);
         if (UpgradesData.UpgradeInfoTable[random].ElitePath.Length <= 0 || Level < maxlevel)
             return random;
 
         // Entering the Elite path domain
-        if (Level >= maxlevel && Level < realmaxlevel)
-        {
-            LevelSelect = Level;
-            Elite = true;
-            ElitePath = Random.Range(0, UpgradesData.UpgradeInfoTable[random].ElitePath.Length);
-        }
+        LevelSelect = Level;
+        Elite = true;
+        if (Level == maxlevel)
+            EliteIndex = Random.Range(0, UpgradesData.UpgradeInfoTable[random].ElitePath.Length);
+        else if (Level > maxlevel)
+            EliteIndex = PlayerStat.GetEliteID(UpgradesData.UpgradeInfoTable[random].ID);
+        
         return random;
     }
     private int Totalmaxlevel(int number)
@@ -77,17 +75,27 @@ public class UpgradeManager : MonoBehaviour
             return UpgradesData.UpgradeInfoTable[number].MaxLevel;
     }
 
+    private int LevelCheckScan(int id)
+    {
+        if (UpgradesData.UpgradeInfoTable[id].UpgradeType == UpgradeSO.UpgradeTypeEnum.Weapon)
+            return LevelSelect;
+        else
+            return Level;
+    }
+
     // Send the upgrade int informations to UI 
     public int[] UpgradeIntInfo() {
         RandomUpgradeIndex = UpgradeOptionRandom();
         int MaxLevel = UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].MaxLevel;
-        int[] InfoInt = new int[] {RandomUpgradeIndex, Level, MaxLevel, Elite ? 1:0};
+        int[] InfoInt = new int[] {RandomUpgradeIndex, Level, MaxLevel, EliteIndex};
 
         if (Elite)
         {
+            int EliteID = UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].ElitePath[EliteIndex].AlternateID;
             int OldMaxLevel = UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].MaxLevel;
-            MaxLevel = UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].ElitePath[ElitePath].MaxLevel;
-            InfoInt = new int[] { RandomUpgradeIndex, Level - OldMaxLevel, MaxLevel, Elite ? 1 : 0};
+            MaxLevel = UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].ElitePath[EliteIndex].MaxLevel;
+            
+            InfoInt = new int[] { RandomUpgradeIndex, Level - OldMaxLevel, MaxLevel, EliteID};
         }
         
         return InfoInt;
@@ -96,36 +104,41 @@ public class UpgradeManager : MonoBehaviour
     // Send the upgrade string informations to UI 
     public string[] UpgradeStringInfo() {
         int index = UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].UpgradeDescription.Length-1;
-        if (index >= LevelSelect) {
-            index = LevelSelect;
+        int level = LevelCheckScan(RandomUpgradeIndex);
+        if (index >= level) {
+            index = level;
         }
         string[] InfoString = new string[] {UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].UpgradeName, UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].UpgradeDescription[index]};
 
         if (Elite)
         {
-            index = UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].ElitePath[ElitePath].UpgradeDescription.Length - 1;
-            if (index >= LevelSelect)
+            index = UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].ElitePath[EliteIndex].UpgradeDescription.Length - 1;
+            int OldMaxLevel = UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].MaxLevel;
+            if (index + OldMaxLevel >= level)
             {
-                index = LevelSelect;
+                index = level - OldMaxLevel;
             }
-            InfoString = new string[] { UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].ElitePath[ElitePath].EliteUpgradeName, UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].ElitePath[ElitePath].UpgradeDescription[index] };
+            InfoString = new string[] { UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].ElitePath[EliteIndex].EliteUpgradeName, UpgradesData.UpgradeInfoTable[RandomUpgradeIndex].ElitePath[EliteIndex].UpgradeDescription[index] };
         }
 
         return InfoString;
     }
 
     // Receive back the selected upgrade from UI
-    public void UpgradeOptionSelected(int ID) {
+    public void UpgradeOptionSelected(int ID, int EliteID) {
         CurrentIDUpgradeTable.Clear();
         int RealId = UpgradesData.UpgradeInfoTable[ID].ID;
+        bool UnlockEliteIndex = PlayerStat.EliteUnlock(RealId, EliteID);
         Level = PlayerStat.UpgradeAbility(RealId);
-        UpdateLevelUI.Invoke(new int[] { 1, RealId });
+        UpdateLevelUI.Invoke(new int[] { 1, RealId });     
 
         string ScriptName = "";
         switch (RealId)
         { //Most upgrades does not need a special case and is calculated through the projectile handler itself
             case 0: //Weapon Upgrade
-                MainPlayer.transform.Find("AbilitiesHolder").GetComponent<WeaponController>().CheckUpgrade(LevelSelect-1);
+                MainPlayer.transform.Find("AbilitiesHolder").GetComponent<WeaponController>().CheckUpgrade(LevelSelect);
+                if (UnlockEliteIndex)
+                    MainPlayer.transform.Find("AbilitiesHolder").GetComponent<WeaponController>().UnlockELite(EliteID);
                 break;
             case 1:
                 ScriptName = "HomingMissilesController";
@@ -154,6 +167,8 @@ public class UpgradeManager : MonoBehaviour
         if (ScriptName != "")
         {
             ScriptComponent = MainPlayer.transform.Find("AbilitiesHolder").GetComponent(ScriptName) as AbilitiesController;
+            if (UnlockEliteIndex)
+                ScriptComponent.EliteUnlock(EliteID);
             switch (Level)
             {
                 case 0:

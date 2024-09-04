@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3d67168d7cf5c442b03b03aa55941ff, type: 3}
   m_Name: MachineGun
   m_EditorClassIdentifier: 
-  UpgradeType: 1
+  UpgradeType: 3
   WeaponType: 3
   DamageType: 1
   UpgradeName: Machine Gun
   UpgradeDescription:
+  - 
   - +10% Damage
   - +1 Bullet Piercing
   - +20% Firerate
