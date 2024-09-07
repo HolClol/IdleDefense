@@ -37,7 +37,7 @@ public class EnemyDeathHandler : MonoBehaviour
             gameObject.name = "Molten";
 
             UpdateStat.Invoke(new int[] { 1, m_enemyState.Experience });
-            UpdateStat.Invoke(new int[] { 8, m_enemyState.MaxHealth/10, m_enemyState.Experience / 50 });
+            UpdateStat.Invoke(new int[] { 8, m_enemyState.MaxHealth/50, m_enemyState.Experience / 100 });
             Destroy(gameObject, 5);
         }
 
@@ -46,7 +46,7 @@ public class EnemyDeathHandler : MonoBehaviour
             if (!Moltened)
             {
                 UpdateStat.Invoke(new int[] { 1, m_enemyState.Experience });
-                UpdateStat.Invoke(new int[] { 8, m_enemyState.MaxHealth/10, m_enemyState.Experience / 50});
+                UpdateStat.Invoke(new int[] { 8, m_enemyState.MaxHealth/50, m_enemyState.Experience / 100});
                 GameObject ClonedParticle = Instantiate(EnemyVFXPrefab.EffectPrefab[0], transform.position, transform.rotation, GameObject.Find("_Projectiles").transform);
             }
 

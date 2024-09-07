@@ -19,7 +19,7 @@ public class EnemySpawnController : MonoBehaviour
 
     private EnemyPrefabScriptableObject enemyPrefabs;
     private List<Transform> enemySpawnPos = new List<Transform>();
-    private List<GameObject> actualEnemyPrefabs = new List<GameObject>();
+    private List<EnemyEntity> actualEnemyPrefabs = new List<EnemyEntity>();
     private Transform _enemySpawn;
     private GameObject _Boss;
     private int BonusMulti = 0;
@@ -42,7 +42,7 @@ public class EnemySpawnController : MonoBehaviour
         foreach (Transform child in _enemySpawnPoint.transform)
             enemySpawnPos.Add(child);
 
-        actualEnemyPrefabs = enemyPrefabs.LevelPrefab[0].EnemyPrefab;
+        actualEnemyPrefabs = enemyPrefabs.LevelPrefab[0].EnemySpawn;
         Timer = DifficultySpikeTimer;
     }
 
@@ -68,7 +68,7 @@ public class EnemySpawnController : MonoBehaviour
         // Every stage will have a different type of monsters and difficulty spike
         if (DifficultyLevel < enemyPrefabs.LevelPrefab.Count)
         {
-            actualEnemyPrefabs = enemyPrefabs.LevelPrefab[DifficultyLevel].EnemyPrefab;
+            actualEnemyPrefabs = enemyPrefabs.LevelPrefab[DifficultyLevel].EnemySpawn;
 
             // Put spawn rate to -1 if the spawn rate should not be decreased
             if (enemyPrefabs.LevelPrefab[DifficultyLevel].SpawnRate < 0f)
@@ -119,26 +119,41 @@ public class EnemySpawnController : MonoBehaviour
 
     private IEnumerator SpawnEnemy()
     {
+        if (!CanSpawn) 
+            yield break;
+
         WaitForSeconds wait = new WaitForSeconds(SpawnRate);
         Spawntimer = SpawnRate;
         yield return wait;
-
-        int randEnemy = Random.Range(0, actualEnemyPrefabs.Count);
-        int randPos = Random.Range(0, enemySpawnPos.Count);
-        if (CanSpawn) {
-            for (int i = 0; i < Random.Range(1,MultipleSpawn); i++)
+         
+        for (int i = 0; i < Random.Range(1,MultipleSpawn); i++)
+        {
+            int randEnemy = Random.Range(0, actualEnemyPrefabs.Count);
+            int randPos = Random.Range(0, enemySpawnPos.Count);
+            bool successpawn = false;
+            while (!successpawn)
             {
-                GameObject enemyToSpawn = actualEnemyPrefabs[randEnemy];
-                Transform enemyToSpawnPos = enemySpawnPos[randPos];
+                int randomenemy = Random.Range(0, actualEnemyPrefabs.Count);
+                int spawnchance = actualEnemyPrefabs[randomenemy].SpawnChance;
 
+                if (spawnchance > Random.Range(0,20))
+                {
+                    randomenemy = Random.Range(0, actualEnemyPrefabs.Count);
+                    spawnchance = actualEnemyPrefabs[randomenemy].SpawnChance;
 
-                GameObject Enemy = Instantiate(enemyToSpawn, enemyToSpawnPos.position, Quaternion.identity, _enemySpawn);
-                Enemy.GetComponent<EnemyMain>().MaxHealth += (Enemy.GetComponent<EnemyMain>().MaxHealth * BonusMulti);
-                Enemy.GetComponent<EnemyMain>().Experience += (Enemy.GetComponent<EnemyMain>().Experience * BonusMulti);
-                // Enemy.GetComponent<EnemyBehaviourScript>().EnemyMovespeed += SpeedIncrease;
-                yield return new WaitForSeconds(0.05f);
+                    GameObject enemyToSpawn = actualEnemyPrefabs[randomenemy].EnemyPrefab;
+                    Transform enemyToSpawnPos = enemySpawnPos[randPos];
+
+                    GameObject Enemy = Instantiate(enemyToSpawn, enemyToSpawnPos.position, Quaternion.identity, _enemySpawn);
+                    Enemy.GetComponent<EnemyMain>().MaxHealth += (Enemy.GetComponent<EnemyMain>().MaxHealth * BonusMulti);
+                    Enemy.GetComponent<EnemyMain>().Experience += (Enemy.GetComponent<EnemyMain>().Experience * BonusMulti);
+                    // Enemy.GetComponent<EnemyBehaviourScript>().EnemyMovespeed += SpeedIncrease;
+                    successpawn = true;
+                    yield return new WaitForSeconds(0.05f);
+                }
+                
             }
-
+            
         }
     }
 

@@ -43,7 +43,12 @@ public class UIExtraInfo : MonoBehaviour
             tempCurrentStage = CurrentStage.Stage;
             for (int i = 0; i < CurrentStage.Stage.StageEnemies.LevelPrefab.Count; i++)
             {
-                SelectUnique(CurrentStage.Stage.StageEnemies.LevelPrefab[i].EnemyPrefab);
+                List<GameObject> enemytable = new List<GameObject>();
+                foreach (EnemyEntity enemyprefab in CurrentStage.Stage.StageEnemies.LevelPrefab[i].EnemySpawn)
+                {
+                    enemytable.Add(enemyprefab.EnemyPrefab);
+                }
+                SelectUnique(enemytable);
             }
             SelectUnique(CurrentStage.Stage.StageEnemies.BossPrefab);
             CoinsText.text = "Coins: " + CurrentStage.Stage.StageReward.Coins.ToString();

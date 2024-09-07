@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
     public UnityEvent SuddenPause;
 
     [Header("Stats")]
-    private int MaxHealth = 10;
+    private int MaxHealth = 100;
     [SerializeField] int EXPToLevelUp = 250;
     [SerializeField] int Level = 1;
     public int ExperienceValue, HealthValue, ShieldValue, EnemiesEliminated, PointsEarned, CoinsEarned;
@@ -82,7 +82,7 @@ public class PlayerManager : MonoBehaviour
             loop += 1;
 
             float currentexp = (float)EXPToLevelUp;
-            float math = currentexp + (currentexp * 0.2f) + (currentexp * (templevel / currentexp) * 100);
+            float math = currentexp + (currentexp * 0.1f) + (currentexp * (templevel / currentexp) * 50);
             EXPToLevelUp = (int)math;
         }
         if (!Leveling)

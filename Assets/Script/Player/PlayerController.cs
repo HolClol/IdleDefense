@@ -87,8 +87,8 @@ public class PlayerController : MonoBehaviour
                 TargetPos = TouchPos;
 
                 // Rotate to the target
-                float angle = Mathf.Atan2(TargetPos.y - transform.position.y, TargetPos.x - transform.position.x) * Mathf.Rad2Deg;
-                transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0, 0, angle), (PlayerStats.RotateSpeed) * Time.deltaTime);
+                float angle = Mathf.Atan2(TargetPos.y - transform.position.y, TargetPos.x - transform.position.x) * Mathf.Rad2Deg ;
+                transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0, 0, angle - 90f), (PlayerStats.RotateSpeed) * Time.deltaTime);
                 CrosshairTarget.transform.position = TargetPos;
             }
             else if (LockedIn && !TouchPriority) { //Nearest Enemy Target Auto
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
 
                 // Rotate to the target
                 float angle = Mathf.Atan2(CrosshairTarget.transform.position.y - transform.position.y, CrosshairTarget.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
-                transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0, 0, angle), (PlayerStats.RotateSpeed * 0.5f) * Time.deltaTime);
+                transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0, 0, angle - 90f), (PlayerStats.RotateSpeed * 0.5f) * Time.deltaTime);
                 CrosshairTarget.transform.position = Vector3.Lerp(CrosshairTarget.transform.position, TargetPos, (PlayerStats.RotateSpeed * 0.25f) * Time.deltaTime);
             }
 

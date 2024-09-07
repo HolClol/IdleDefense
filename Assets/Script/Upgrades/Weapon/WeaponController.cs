@@ -1,28 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
     [Header("Weapon Set Up")]
-    [SerializeField] GameObject[] FiringPoint;
+    [SerializeField] GameObject FiringPoint;
     [SerializeField] GameObject BulletPrefab;
     [SerializeField] IntVariable DamageType;
     [SerializeField] int NumbOfBullets = 1;
-    [SerializeField] int Damage;
+    [SerializeField] int Damage = 20;
     [SerializeField] int Piercing = 0;
     [SerializeField] float FireRate = 0.15f;
     [SerializeField] float AdditionalBulletSpeed = 0f;
+    [Range(0f, 1f)] [SerializeField] private float CritRate = 0.1f;
+    [SerializeField] private float CritDamage = 1f;
 
     private List<GameObject> BulletList = new List<GameObject>();
     private List<BulletController> BulletScriptList = new List<BulletController>();
-    private List<Animator> _animators = new List<Animator>();
+    private Animator _animator;
     private GameObject MainChar;    
     private PlayerController playerController;
 
     private float FireCooldown;
-    private float DamageScaling;
+    private float DamageScaling = 1.0f;
+    private float SpreadAngle = 15f;
     private bool AnimationDisabled = false;
+    private int BaseDamage;
     private int WeaponUpgradeLevel = 0;
     private int EliteID = 0;
 
@@ -31,8 +36,9 @@ public class WeaponController : MonoBehaviour
     {
         MainChar = GameObject.Find("Player");
         playerController = MainChar.GetComponent<PlayerController>();
-        for (int i = 0; i < FiringPoint.Length; i++) { _animators.Add(FiringPoint[i].GetComponent<Animator>()); }
+        _animator = FiringPoint.GetComponent<Animator>(); 
         DamageScaling -= 0.6f;
+        BaseDamage = Damage;
         CheckUpgrade(WeaponUpgradeLevel);
     }
 
@@ -51,33 +57,41 @@ public class WeaponController : MonoBehaviour
 
     private void DisableAnimator()
     {
-        for (int i = 0; i < _animators.Count; i++)
-        {
-            if (_animators[i].isActiveAndEnabled)
-                if (_animators[i].GetBool("Firing"))
-                    _animators[i].SetBool("Firing", false);
-            AnimationDisabled = true;
-        }
+        if (_animator.isActiveAndEnabled)
+            if (_animator.GetBool("Firing"))
+                _animator.SetBool("Firing", false);
+        AnimationDisabled = true;
     }
-    private void FireBullet(int repeat) {
-        if (repeat > 3) 
-            repeat = 3;
-        for (int i = 0; i < repeat; i++) {
-            int index = i;
-            if (repeat == 2) 
-                index += 1;
+    private void FireBullet(int repeat) 
+    {
+        if (_animator.isActiveAndEnabled)
+            if (!_animator.GetBool("Firing"))
+            {
+                AnimationDisabled = false;
+                _animator.SetBool("Firing", true);
+            }
+        if (repeat == 1)
+        {
+            GameObject ClonedBullet = GetPooledObject(FiringPoint.transform.position, FiringPoint.transform.rotation);
+            return;
+        }
 
-            if (_animators[i].isActiveAndEnabled)
-                if (!_animators[i].GetBool("Firing"))
-                {
-                    AnimationDisabled = false;
-                    _animators[i].SetBool("Firing", true);
-                }
-                    
-            GameObject ClonedBullet = GetPooledObject(FiringPoint[index].transform.position, FiringPoint[index].transform.rotation * Quaternion.Euler(0f, 0f, 90f));
+        // Spread bullets horizontally around the firePoint
+        float spreadWidth = 0.25f; // Distance between bullets on the horizontal axis
+        float halfBulletCount = (repeat - 1) / 2f; // Used for centering the spread
 
+        for (int i = 0; i < repeat; i++)
+        {
+            // Calculate the offset relative to the firePoint
+            float horizontalOffset = (i - halfBulletCount) * spreadWidth;
+
+            // Calculate the bullet's position (offset along the right axis of firePoint)
+            Vector3 bulletPosition = FiringPoint.transform.position + FiringPoint.transform.right * horizontalOffset;
+
+            GameObject ClonedBullet = GetPooledObject(bulletPosition, FiringPoint.transform.rotation /** Quaternion.Euler(0,0,90f)*/);
         }
         
+           
     }
 
     private GameObject GetPooledObject(Vector3 pos, Quaternion rotation)
@@ -119,18 +133,7 @@ public class WeaponController : MonoBehaviour
                 FireRate -= 0.02f;
                 break;
             case 4:
-                if (NumbOfBullets == 1)
-                {
-                    NumbOfBullets += 1;
-                    FiringPoint[0].SetActive(false);
-                    FiringPoint[1].SetActive(true);
-                    FiringPoint[2].SetActive(true);
-                }
-                else if (NumbOfBullets == 2)
-                {
-                    NumbOfBullets += 1;
-                    FiringPoint[0].SetActive(true);
-                }
+                NumbOfBullets += 1;
                 DamageScaling -= 0.1f;
                 break;
             case 5:
@@ -149,8 +152,7 @@ public class WeaponController : MonoBehaviour
 
     public void UpdateDamage(int dmg) {
         if (this.enabled) {
-            Damage = dmg;
-            Damage += (int)((float)(Damage) * DamageScaling);
+            Damage = BaseDamage + (int)((float)(Damage) * DamageScaling);
         }
     }
 }

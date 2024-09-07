@@ -4413,14 +4413,17 @@ MonoBehaviour:
     UpgradeOptionsDesc: {fileID: 233055213}
     UpgradeOptionsStar: {fileID: 504184607}
     UpgradeOptionsID: 0
+    Elite: 0
   - UpgradeOptionsName: {fileID: 1704160014}
     UpgradeOptionsDesc: {fileID: 973725753}
     UpgradeOptionsStar: {fileID: 537200074}
     UpgradeOptionsID: 0
+    Elite: 0
   - UpgradeOptionsName: {fileID: 996305299}
     UpgradeOptionsDesc: {fileID: 2109978242}
     UpgradeOptionsStar: {fileID: 1361817170}
     UpgradeOptionsID: 0
+    Elite: 0
 --- !u!95 &1013614530
 Animator:
   serializedVersion: 5

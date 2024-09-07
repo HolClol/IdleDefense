@@ -13,65 +13,145 @@ MonoBehaviour:
   m_Name: Level1Enemy
   m_EditorClassIdentifier: 
   LevelPrefab:
-  - EnemyPrefab:
-    - {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+  - EnemySpawn:
+    - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      SpawnChance: 20
+      SpawnCap: 0
     SpawnRate: 0
     Timer: 0
-  - EnemyPrefab:
-    - {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
-    - {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
-    - {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+    SpawnMax: 0
+    SpawnMin: 0
+  - EnemySpawn:
+    - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      SpawnChance: 10
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      SpawnChance: 15
+      SpawnCap: 0
     SpawnRate: 0
     Timer: 0
-  - EnemyPrefab:
-    - {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
-    - {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
-    - {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+    SpawnMax: 0
+    SpawnMin: 0
+  - EnemySpawn:
+    - EnemyPrefab: {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      SpawnChance: 20
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      SpawnChance: 5
+      SpawnCap: 0
     SpawnRate: 0
     Timer: 0
-  - EnemyPrefab:
-    - {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
-    - {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
-    - {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
-    - {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+    SpawnMax: 0
+    SpawnMin: 0
+  - EnemySpawn:
+    - EnemyPrefab: {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      SpawnChance: 15
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      SpawnChance: 10
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      SpawnChance: 10
+      SpawnCap: 0
     SpawnRate: 0
     Timer: 0
-  - EnemyPrefab:
-    - {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
-    - {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
-    - {fileID: 7653904480730112984, guid: e52b7a5acc7853244a212bbd1d9c14b3, type: 3}
+    SpawnMax: 0
+    SpawnMin: 0
+  - EnemySpawn:
+    - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      SpawnChance: 10
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 7653904480730112984, guid: e52b7a5acc7853244a212bbd1d9c14b3, type: 3}
+      SpawnChance: 10
+      SpawnCap: 0
     SpawnRate: 1.2
     Timer: 45
-  - EnemyPrefab:
-    - {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
-    - {fileID: 7653904480730112984, guid: e52b7a5acc7853244a212bbd1d9c14b3, type: 3}
-    - {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
-    - {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+    SpawnMax: 0
+    SpawnMin: 0
+  - EnemySpawn:
+    - EnemyPrefab: {fileID: 7653904480730112984, guid: e52b7a5acc7853244a212bbd1d9c14b3, type: 3}
+      SpawnChance: 12
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      SpawnChance: 6
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      SpawnChance: 10
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      SpawnChance: 10
+      SpawnCap: 0
     SpawnRate: 0.8
     Timer: 0
-  - EnemyPrefab:
-    - {fileID: 7653904480730112984, guid: e52b7a5acc7853244a212bbd1d9c14b3, type: 3}
-    - {fileID: 2196563476345590614, guid: 67e1a3f29623b7f459103148c1a47f70, type: 3}
-    - {fileID: 1099916991008075792, guid: ccbc867ba92bab54a8b6c3d5d0161e0a, type: 3}
-    - {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
-    - {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+    SpawnMax: 0
+    SpawnMin: 0
+  - EnemySpawn:
+    - EnemyPrefab: {fileID: 7653904480730112984, guid: e52b7a5acc7853244a212bbd1d9c14b3, type: 3}
+      SpawnChance: 10
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      SpawnChance: 15
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 1099916991008075792, guid: ccbc867ba92bab54a8b6c3d5d0161e0a, type: 3}
+      SpawnChance: 5
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      SpawnChance: 15
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 2196563476345590614, guid: 67e1a3f29623b7f459103148c1a47f70, type: 3}
+      SpawnChance: 5
+      SpawnCap: 0
     SpawnRate: 0
     Timer: 0
-  - EnemyPrefab:
-    - {fileID: 8543166477436165111, guid: bacd8b6b181095d4eae923b85c5efebc, type: 3}
-    - {fileID: 7653904480730112984, guid: e52b7a5acc7853244a212bbd1d9c14b3, type: 3}
-    - {fileID: 1099916991008075792, guid: ccbc867ba92bab54a8b6c3d5d0161e0a, type: 3}
-    - {fileID: 2196563476345590614, guid: 67e1a3f29623b7f459103148c1a47f70, type: 3}
+    SpawnMax: 0
+    SpawnMin: 0
+  - EnemySpawn:
+    - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      SpawnChance: 5
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 7653904480730112984, guid: e52b7a5acc7853244a212bbd1d9c14b3, type: 3}
+      SpawnChance: 10
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      SpawnChance: 15
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 2196563476345590614, guid: 67e1a3f29623b7f459103148c1a47f70, type: 3}
+      SpawnChance: 10
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      SpawnChance: 15
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 1099916991008075792, guid: ccbc867ba92bab54a8b6c3d5d0161e0a, type: 3}
+      SpawnChance: 10
+      SpawnCap: 0
     SpawnRate: 0
     Timer: 0
-  - EnemyPrefab:
-    - {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
-    - {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
-    - {fileID: 7653904480730112984, guid: e52b7a5acc7853244a212bbd1d9c14b3, type: 3}
-    - {fileID: 1099916991008075792, guid: ccbc867ba92bab54a8b6c3d5d0161e0a, type: 3}
-    - {fileID: 2196563476345590614, guid: 67e1a3f29623b7f459103148c1a47f70, type: 3}
-    - {fileID: 8543166477436165111, guid: bacd8b6b181095d4eae923b85c5efebc, type: 3}
+    SpawnMax: 0
+    SpawnMin: 0
+  - EnemySpawn:
+    - EnemyPrefab: {fileID: 7653904480730112984, guid: e52b7a5acc7853244a212bbd1d9c14b3, type: 3}
+      SpawnChance: 12
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 2196563476345590614, guid: 67e1a3f29623b7f459103148c1a47f70, type: 3}
+      SpawnChance: 12
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 1099916991008075792, guid: ccbc867ba92bab54a8b6c3d5d0161e0a, type: 3}
+      SpawnChance: 15
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      SpawnChance: 5
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+      SpawnChance: 5
+      SpawnCap: 0
+    - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      SpawnChance: 5
+      SpawnCap: 0
     SpawnRate: 0
     Timer: 0
+    SpawnMax: 0
+    SpawnMin: 0
   BossPrefab:
   - {fileID: 6947487980923986090, guid: 24bc79ad5117f9740abf7fb08789273b, type: 3}
+  StartingHPBonus: 0
+  StartingEXPBonus: 0

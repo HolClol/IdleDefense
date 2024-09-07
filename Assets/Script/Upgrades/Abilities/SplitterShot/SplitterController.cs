@@ -9,7 +9,7 @@ public class SplitterController : AbilitiesController
     [SerializeField] GameObject FiringPoint;
     [SerializeField] GameObject _lineRenderer;
 
-    private float BulletLifetime = 0.8f;
+    private float BulletLifetime = 0.65f;
     private int BulletNumb = 5;
     private int Radius = 7;
     private int Bounce = 0;

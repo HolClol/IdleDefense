@@ -11,6 +11,8 @@ public class AbilitiesController : MonoBehaviour
         public int EliteID;
         public float Cooldown;
         public float Knockback;
+        public float CritRate = 0.05f;
+        public float CritDamage = 1f;
         public IntVariable DamageType;
 
         public AbilitiesStatClass(int dmg, float cd, float kb, int id, int eliteID) {

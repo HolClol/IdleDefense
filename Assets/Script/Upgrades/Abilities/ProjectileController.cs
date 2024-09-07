@@ -13,6 +13,8 @@ public class ProjectileController : MonoBehaviour
     protected float Knockback;
     protected int Damage;
     protected int DamageType;
+    protected float CritRate = 0.05f;
+    protected float CritDamage = 1f;
     public int ID;
     // ======================================================
     // Start is called before the first frame update
