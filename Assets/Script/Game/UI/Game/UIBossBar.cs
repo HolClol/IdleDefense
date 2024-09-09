@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UIBossBar : MonoBehaviour
 {
-    [SerializeField] EnemyPrefabScriptableObject enemyPrefab;
+    [SerializeField] StageInfo.EnemyPrefab enemyPrefab;
     [SerializeField] Image m_HealthBar;
     [SerializeField] TMP_Text m_Text;
 

@@ -54,7 +54,9 @@ public class HomingMissilesController : AbilitiesController
         for (int i = 0; i < ObjectsList.Count; i++) {
             if (!ObjectsList[i].activeInHierarchy) {
                 ObjectsList[i].SetActive(true);
-                ObjectsScriptList[i].UpdateStat(new int[] {AbilitiesStat.Damage, AbilitiesStat.DamageType.Value }, new float[] {InternalExplode, AbilitiesStat.Knockback, AdditionalScale.x, AdditionalScale.y, AdditionalScale.z});
+                ObjectsScriptList[i].UpdateStat(
+                    new int[] {AbilitiesStat.Damage, AbilitiesStat.DamageType.Value }, 
+                    new float[] {InternalExplode, AbilitiesStat.Knockback, AdditionalScale.x, AdditionalScale.y, AdditionalScale.z, AbilitiesStat.CritRate, AbilitiesStat.CritDamage });
                 ObjectsScriptList[i].StartUp();
                 return ObjectsList[i];
             }
@@ -64,7 +66,9 @@ public class HomingMissilesController : AbilitiesController
         GameObject ObjectNew = Instantiate(AbilitiesStat.ObjectsPrefab[0], MainChar.transform.position, Quaternion.identity, GameObject.Find("_Projectiles").transform);
 
         ObjectNew.SetActive(true);
-        ObjectNew.GetComponent<ProjectileController>().UpdateStat(new int[] {AbilitiesStat.Damage, AbilitiesStat.DamageType.Value }, new float[] {InternalExplode, AbilitiesStat.Knockback, AdditionalScale.x, AdditionalScale.y, AdditionalScale.z});
+        ObjectNew.GetComponent<ProjectileController>().UpdateStat(
+            new int[] {AbilitiesStat.Damage, AbilitiesStat.DamageType.Value }, 
+            new float[] {InternalExplode, AbilitiesStat.Knockback, AdditionalScale.x, AdditionalScale.y, AdditionalScale.z, AbilitiesStat.CritRate, AbilitiesStat.CritDamage });
         ObjectNew.GetComponent<ProjectileController>().MainScript = this;
 
         ObjectsList.Add(ObjectNew);

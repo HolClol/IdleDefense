@@ -44,7 +44,7 @@ public class FieryEruptionController : AbilitiesController
         MainEruption.transform.position = CrosshairTarget.transform.position;
         MainEruption.SetActive(true);
         MainEruptionScript.StartUp();
-        MainEruptionScript.UpdateStat(new int[] {AbilitiesStat.Damage, AbilitiesStat.DamageType.Value }, new float[] {AbilitiesStat.Knockback, 2f, GroundDuration});
+        MainEruptionScript.UpdateStat(new int[] {AbilitiesStat.Damage, AbilitiesStat.DamageType.Value }, new float[] {AbilitiesStat.Knockback, 2f, GroundDuration, AbilitiesStat.CritRate, AbilitiesStat.CritDamage });
         StartCoroutine(FireMiniEruption());
     }
 
@@ -62,7 +62,7 @@ public class FieryEruptionController : AbilitiesController
                 ObjectsList[i].transform.position = MainEruption.transform.position + new Vector3(Random.Range(-3,3), Random.Range(-3,3), 0);
                 ObjectsList[i].SetActive(true);
                 ObjectsScriptList[i].StartUp();
-                ObjectsScriptList[i].UpdateStat(new int[] {AbilitiesStat.Damage/2, AbilitiesStat.DamageType.Value }, new float[] {AbilitiesStat.Knockback, 2f, GroundDuration});
+                ObjectsScriptList[i].UpdateStat(new int[] {AbilitiesStat.Damage/2, AbilitiesStat.DamageType.Value }, new float[] {AbilitiesStat.Knockback, 2f, GroundDuration, AbilitiesStat.CritRate, AbilitiesStat.CritDamage });
                 return ObjectsList[i];
             }
         }
@@ -72,7 +72,7 @@ public class FieryEruptionController : AbilitiesController
 
         ObjectNew.transform.localScale = ObjectNew.transform.localScale - DecreaseScale;
         ObjectNew.SetActive(true);
-        ObjectNew.GetComponent<ProjectileController>().UpdateStat(new int[] {AbilitiesStat.Damage/2, AbilitiesStat.DamageType.Value }, new float[] {AbilitiesStat.Knockback, 2f, GroundDuration});
+        ObjectNew.GetComponent<ProjectileController>().UpdateStat(new int[] {AbilitiesStat.Damage/2, AbilitiesStat.DamageType.Value }, new float[] {AbilitiesStat.Knockback, 2f, GroundDuration, AbilitiesStat.CritRate, AbilitiesStat.CritDamage });
         ObjectNew.GetComponent<ProjectileController>().MainScript = this;
 
         ObjectsList.Add(ObjectNew);

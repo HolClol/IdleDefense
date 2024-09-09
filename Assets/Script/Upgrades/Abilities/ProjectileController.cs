@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,8 +36,20 @@ public class ProjectileController : MonoBehaviour
 
     }
 
+    private int CritCalculate(int dmg, float cc, float cdmg)
+    {
+        if (Random.Range(0, 100) > 100 - (int)(cc * 100f))
+        {
+            dmg = dmg + (int)((float)dmg * cdmg);
+        }
+        return dmg;
+    }
     protected virtual void SendDamage(GameObject target, int[] intstat, float[] floatstat)
     {
+        int CritHit = CritCalculate(intstat[0], floatstat[2], floatstat[3]);
+        int Crit = CritHit != intstat[0] ? 1 : 0;
+        intstat[0] = CritHit;
+        intstat[3] = Crit;
         ResponseDamage.Invoke(target, intstat, floatstat);
     }
 

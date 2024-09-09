@@ -130,7 +130,9 @@ public class SplitterController : AbilitiesController
                 int Main = ObjectsScriptList[i].MainProjectile ? 0 : 1;
                 if (Main == prefabindex) {
                     ObjectsList[i].SetActive(true);
-                    ObjectsScriptList[i].UpdateStat(new int[] {AbilitiesStat.Damage, AbilitiesStat.DamageType.Value}, new float[] {AbilitiesStat.Knockback, BulletLifetime});
+                    ObjectsScriptList[i].UpdateStat(
+                        new int[] {AbilitiesStat.Damage, AbilitiesStat.DamageType.Value}, 
+                        new float[] {AbilitiesStat.Knockback, BulletLifetime, AbilitiesStat.CritRate, AbilitiesStat.CritDamage });
                     ObjectsScriptList[i].StartUp();
                     return ObjectsList[i];
                 }
@@ -142,7 +144,9 @@ public class SplitterController : AbilitiesController
         GameObject ObjectNew = Instantiate(AbilitiesStat.ObjectsPrefab[prefabindex], transform.position, Quaternion.identity, GameObject.Find("_Projectiles").transform);
 
         ObjectNew.SetActive(true);
-        ObjectNew.GetComponent<ProjectileController>().UpdateStat(new int[] {AbilitiesStat.Damage, AbilitiesStat.DamageType.Value}, new float[] {AbilitiesStat.Knockback, BulletLifetime});
+        ObjectNew.GetComponent<ProjectileController>().UpdateStat(
+            new int[] {AbilitiesStat.Damage, AbilitiesStat.DamageType.Value}, 
+            new float[] {AbilitiesStat.Knockback, BulletLifetime, AbilitiesStat.CritRate, AbilitiesStat.CritDamage });
         ObjectNew.GetComponent<ProjectileController>().MainScript = this;
 
         ObjectsList.Add(ObjectNew);

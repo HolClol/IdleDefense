@@ -78,7 +78,9 @@ public class MagneticFieldController : AbilitiesController
         for (int i = 0; i < ObjectsList.Count; i++) {
             if (!ObjectsList[i].activeInHierarchy) {
                 ObjectsList[i].SetActive(true);
-                ObjectsScriptList[i].UpdateStat(new int[] {AbilitiesStat.Damage, Piercing, MaxLevel ? 1 : 0, AbilitiesStat.DamageType.Value}, new float[] {AbilitiesStat.Knockback, Duration, OrbRecover});
+                ObjectsScriptList[i].UpdateStat(
+                    new int[] {AbilitiesStat.Damage, Piercing, MaxLevel ? 1 : 0, AbilitiesStat.DamageType.Value}, 
+                    new float[] {AbilitiesStat.Knockback, Duration, OrbRecover, AbilitiesStat.CritRate, AbilitiesStat.CritDamage });
                 ObjectsScriptList[i].StartUp();
                 return ObjectsList[i];
             }
@@ -89,7 +91,9 @@ public class MagneticFieldController : AbilitiesController
 
         ObjectNew.transform.localScale = ObjectNew.transform.localScale * SizeBuff;
         ObjectNew.SetActive(true);
-        ObjectNew.GetComponent<ProjectileController>().UpdateStat(new int[] {AbilitiesStat.Damage, Piercing, MaxLevel ? 1 : 0, AbilitiesStat.DamageType.Value }, new float[] {AbilitiesStat.Knockback, Duration, OrbRecover});
+        ObjectNew.GetComponent<ProjectileController>().UpdateStat(
+            new int[] {AbilitiesStat.Damage, Piercing, MaxLevel ? 1 : 0, AbilitiesStat.DamageType.Value }, 
+            new float[] {AbilitiesStat.Knockback, Duration, OrbRecover, AbilitiesStat.CritRate, AbilitiesStat.CritDamage });
         ObjectNew.GetComponent<ProjectileController>().MainScript = this;
 
         ObjectsList.Add(ObjectNew);
@@ -142,7 +146,9 @@ public class MagneticFieldController : AbilitiesController
             AbilitiesStat.Damage += (int)((float)(AbilitiesStat.Damage) * DamageScaling);
             for (int i = 0; i < ObjectsList.Count; i++) {
                 if (ObjectsList[i].activeInHierarchy) {
-                    ObjectsScriptList[i].UpdateStat(new int[] {AbilitiesStat.Damage, Piercing, MaxLevel ? 1 : 0, AbilitiesStat.DamageType.Value }, new float[] {AbilitiesStat.Knockback, Duration, OrbRecover});
+                    ObjectsScriptList[i].UpdateStat(
+                        new int[] {AbilitiesStat.Damage, Piercing, MaxLevel ? 1 : 0, AbilitiesStat.DamageType.Value }, 
+                        new float[] {AbilitiesStat.Knockback, Duration, OrbRecover, AbilitiesStat.CritRate, AbilitiesStat.CritDamage });
                 }
             }
         }

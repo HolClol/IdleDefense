@@ -15,7 +15,22 @@ MonoBehaviour:
   StageName: TestTest
   StageScene: Stage1
   StageImage: {fileID: 0}
-  StageEnemies: {fileID: 11400000, guid: 5cbfd2b7495fbf74fbf6be50438ef0ea, type: 2}
+  StageEnemies:
+    LevelPrefab:
+    - EnemySpawn: []
+      SpawnRate: 0
+      Timer: 0
+      SpawnMax: 0
+      SpawnMin: 0
+    - EnemySpawn: []
+      SpawnRate: 0
+      Timer: 0
+      SpawnMax: 0
+      SpawnMin: 0
+    BossPrefab:
+    - {fileID: 6947487980923986090, guid: 7872840fd829710459cac48d1032f992, type: 3}
+    StartingHPBonus: 0
+    StartingEXPBonus: 0
   StageReward:
     Coins: 200
     UserRankExp: 100

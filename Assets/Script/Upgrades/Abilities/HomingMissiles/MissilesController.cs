@@ -67,6 +67,8 @@ public class MissilesController : ProjectileController
         Delay = floatvalue[0];
         Knockback = floatvalue[1];
         ScaleValue = new Vector3 (floatvalue[2], floatvalue[3], floatvalue[4]);
+        CritRate = floatvalue[5];
+        CritDamage = floatvalue[6]; 
 
         gameObject.transform.localScale = OriginalScale + ScaleValue;
         OldScale = new Vector3(0.5f, 0.5f, 0.5f) + ScaleValue;
@@ -76,13 +78,13 @@ public class MissilesController : ProjectileController
 
     void OnTriggerEnter2D(Collider2D trigger) {
         if (trigger.gameObject.CompareTag("Enemy") && Fired) {
-            ResponseDamage.Invoke(trigger.gameObject, new int[] { Damage, ID, DamageType }, new float[] { 5f, 0.25f });
+            SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType, 0 }, new float[] {5f, 0.25f, CritRate, CritDamage });
         }  
     }
 
     void OnTriggerStay2D(Collider2D trigger) {
         if (trigger.gameObject.CompareTag("Enemy") && Fired) {
-            ResponseDamage.Invoke(trigger.gameObject, new int[] { Damage, ID, DamageType }, new float[] { 5f, 0.25f });
+            SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType, 0 }, new float[] { 5f, 0.25f, CritRate, CritDamage });
         }  
     }
 }

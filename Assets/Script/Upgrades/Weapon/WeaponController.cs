@@ -103,7 +103,7 @@ public class WeaponController : MonoBehaviour
                 BulletList[i].transform.position = pos;
                 BulletList[i].transform.rotation = rotation;
                 BulletList[i].SetActive(true);
-                BulletScriptList[i].UpdateStat(Damage, Piercing, AdditionalBulletSpeed);
+                BulletScriptList[i].UpdateStat(new int[] { Damage, Piercing }, new float[] { AdditionalBulletSpeed, CritRate, CritDamage });
                 BulletScriptList[i].StartUp();
                 return BulletList[i];
             }
@@ -113,7 +113,7 @@ public class WeaponController : MonoBehaviour
         GameObject BulletNew = Instantiate(BulletPrefab, pos, rotation, GameObject.Find("_Projectiles").transform);
 
         BulletNew.SetActive(true);
-        BulletNew.GetComponent<BulletController>().UpdateStat(Damage, Piercing, AdditionalBulletSpeed);
+        BulletNew.GetComponent<BulletController>().UpdateStat(new int[] { Damage, Piercing }, new float[] { AdditionalBulletSpeed, CritRate, CritDamage });
 
         BulletList.Add(BulletNew);
         BulletScriptList.Add(BulletNew.GetComponent<BulletController>());
@@ -137,7 +137,7 @@ public class WeaponController : MonoBehaviour
                 DamageScaling -= 0.1f;
                 break;
             case 5:
-                //Increase crit rate
+                CritRate += 0.1f;
                 break;
 
         }

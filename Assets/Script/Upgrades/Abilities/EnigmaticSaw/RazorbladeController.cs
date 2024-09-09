@@ -85,6 +85,8 @@ public class RazorbladeController : ProjectileController
         Knockback = floatvalue[0];
         Duration = floatvalue[1];
         DamageInterval = floatvalue[2];
+        CritRate = floatvalue[3];
+        CritDamage = floatvalue[4];
 
         ScaleValue = new Vector3(1, 1, 1) * floatvalue[3];
     }
@@ -95,13 +97,13 @@ public class RazorbladeController : ProjectileController
 
     void OnTriggerEnter2D(Collider2D trigger) {
         if (trigger.gameObject.CompareTag("Enemy")) {
-            ResponseDamage.Invoke(trigger.gameObject, new int[] { Damage, ID, DamageType }, new float[] { Knockback, DamageInterval });
+            SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType, 0 }, new float[] { Knockback, DamageInterval, CritRate, CritDamage });
         }  
     }
 
     void OnTriggerStay2D(Collider2D trigger) {
         if (trigger.gameObject.CompareTag("Enemy")) {
-            ResponseDamage.Invoke(trigger.gameObject, new int[] { Damage, ID, DamageType }, new float[] { Knockback, DamageInterval });
+            SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType, 0 }, new float[] { Knockback, DamageInterval, CritRate, CritDamage });
         }  
     }
 }

@@ -2,21 +2,76 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 using TMPro;
 
 public class DamageDisplay : MonoBehaviour
 {
+    
     public TextMeshPro damageText;
-    public Animator _animator;
+    private Vector3 targetPos = new Vector3(0,1,0);
+    private Tween moveTween, fadeTween, scaleTween, colorTween;
 
-    public void UpdateDisplay(int dmg) {
-        _animator.Play("MovingUp");
-        damageText.text = dmg.ToString();
-        StartCoroutine(Disable());
+    private void Awake()
+    {
+        DOTween.defaultAutoPlay = AutoPlay.None;
+        // Store the tweens in variables
+        moveTween = DOTween.To(() => transform.position, x => transform.position = x, targetPos + new Vector3(0, 2f, 0), 0.6f)
+            .SetAutoKill(false);
+        fadeTween = DOTween.ToAlpha(() => damageText.color, x => damageText.color = x, 0f, 0.4f)
+            .From(1f)
+            .SetDelay(0.3f)
+            .SetAutoKill(false);
+        scaleTween = DOTween.To(() => transform.localScale, x => transform.localScale = x, Vector3.zero, 0.4f)
+            .From(Vector3.one)
+            .SetDelay(0.4f)
+            .SetAutoKill(false);
+        colorTween = damageText.DOColor(Color.yellow, 0.2f)
+            .SetAutoKill(false);
     }
 
-    private IEnumerator Disable() {
-        yield return new WaitForSeconds(0.6f);
+    public void UpdateDisplay(int dmg, Vector3 pos, bool crit) {
+        targetPos = pos + new Vector3(0, 1f, 0);
+        ((Tweener)moveTween).ChangeStartValue(targetPos);
+
+        if (!crit)
+            SetDamageText(crit, dmg, Color.white, 6f, 0.6f, 0.4f, 0.4f);
+        else
+            SetDamageText(crit, dmg, Color.yellow, 8f, 1.2f, 1f, 1f);
+
+        // Replay the tweens 
+        moveTween.Restart();
+        fadeTween.Restart();
+        scaleTween.Restart();
+
+        StartCoroutine(Disable(crit));
+    }
+
+    void SetDamageText(bool crit, int dmg, Color textColor, float fontSize, float moveDuration, float fadeDuration, float scaleDuration)
+    {
+        damageText.color = textColor;
+        damageText.text = crit ? $"{dmg}!" : dmg.ToString();
+        damageText.fontSize = fontSize;
+
+        Vector3 moveEndValue = targetPos + new Vector3(0, 2, 0);
+        Color fadeEndColor = damageText.color; 
+        fadeEndColor.a = 0f;
+
+        UpdateTweenValues(moveEndValue, fadeEndColor, fadeDuration, scaleDuration, moveDuration);
+    }
+
+    void UpdateTweenValues(Vector3 moveEndValue, Color fadeEndColor, float fadeDuration, float scaleDuration, float moveDuration)
+    {
+        ((Tweener)moveTween).ChangeEndValue(moveEndValue, moveDuration);
+        ((Tweener)fadeTween).ChangeEndValue(fadeEndColor, fadeDuration);
+        ((Tweener)scaleTween).ChangeEndValue(Vector3.zero, scaleDuration);
+    }
+
+    private IEnumerator Disable(bool crit) {
+        if (crit)
+            yield return new WaitForSeconds(1.5f);
+        else
+            yield return new WaitForSeconds(0.8f);
         gameObject.SetActive(false);
     }
 }

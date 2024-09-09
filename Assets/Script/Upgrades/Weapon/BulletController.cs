@@ -4,20 +4,21 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class BulletController : MonoBehaviour
-{
-    [Range(10f,100f)]
-    public float ProjectileSpeed = 20f;
+{ 
     [Range(1f,5f)]
     public float ProjectileLifetime = 3f;
-    public int Damage = 20;
-    public int Piercing = 0;
-    public int DamageType = 1;
+    public int DamageType = 1; 
     public UnityEvent<GameObject, int[], float[]> ResponseDamage;
 
     [SerializeField] GameObject TrailChar;
     private Rigidbody2D Rb;
     private GameObject MainChar;
     private TrailRenderer _trailRenderer;
+    private int Damage = 20;
+    private int Piercing = 0;
+    [Range(0f, 1f)] private float CritRate = 0.1f;
+    private float CritDamage = 1f;
+    private float ProjectileSpeed = 20f;
 
     // ======================================================
     // Start is called before the first frame update
@@ -55,7 +56,7 @@ public class BulletController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D trigger) 
     {
         if (trigger.gameObject.CompareTag("Enemy")) {
-            ResponseDamage.Invoke(trigger.gameObject, new int[] { Damage, 0, DamageType }, new float[] { 0.25f, 0f });
+            SendDamage(trigger.gameObject, new int[] { Damage, 0, DamageType, 0 }, new float[] { 0.25f, 0f, CritRate, CritDamage });
             if (Piercing > 0) {
                 Piercing -= 1;
             }
@@ -65,11 +66,30 @@ public class BulletController : MonoBehaviour
         }      
         
     }
+    private int CritCalculate(int dmg, float cc, float cdmg)
+    {
+        if (Random.Range(0, 100) > 100 - (int)(cc * 100f))
+        {
+            dmg = dmg + (int)((float)dmg * cdmg);
+        }
+        return dmg;
+    }
 
-    public void UpdateStat(int dmg, int pierce, float speed) {
-        ProjectileSpeed = 15f + speed;
-        Damage = dmg;
-        Piercing = pierce;
+    protected virtual void SendDamage(GameObject target, int[] intstat, float[] floatstat)
+    {
+        int CritHit = CritCalculate(intstat[0], floatstat[2], floatstat[3]);
+        int Crit = CritHit != intstat[0] ? 1 : 0;
+        intstat[0] = CritHit;
+        intstat[3] = Crit;
+        ResponseDamage.Invoke(target, intstat, floatstat);
+    }
+
+    public void UpdateStat(int[] intstat, float[] floatstat) {
+        Damage = intstat[0];
+        Piercing = intstat[1];
+        ProjectileSpeed = 15f + floatstat[0];
+        CritRate = floatstat[1];
+        CritDamage = floatstat[2];
     }
 }
 

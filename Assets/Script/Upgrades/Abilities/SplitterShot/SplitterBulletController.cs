@@ -60,7 +60,7 @@ public class SplitterBulletController : ProjectileController
     private void OnTriggerEnter2D(Collider2D trigger) 
     {
         if (trigger.gameObject.CompareTag("Enemy")) {
-            ResponseDamage.Invoke(trigger.gameObject, new int[] { Damage, ID }, new float[] { 4f, 0f });
+            SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType, 0 }, new float[] { 4f, 0f, CritRate, CritDamage });
             if (MainProjectile) {
                 MainScript.TargetStruckSignal(this.gameObject);
             }
@@ -75,5 +75,7 @@ public class SplitterBulletController : ProjectileController
         Knockback = floatvalue[0];
         ProjectileLifetime = floatvalue[1];
         DamageType = intvalue[1];
+        CritRate = floatvalue[2];
+        CritDamage = floatvalue[3];
     }
 }

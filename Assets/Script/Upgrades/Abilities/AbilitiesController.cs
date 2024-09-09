@@ -11,7 +11,7 @@ public class AbilitiesController : MonoBehaviour
         public int EliteID;
         public float Cooldown;
         public float Knockback;
-        public float CritRate = 0.05f;
+        [Range(0f,1f)] public float CritRate = 0.05f;
         public float CritDamage = 1f;
         public IntVariable DamageType;
 

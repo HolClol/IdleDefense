@@ -44,7 +44,9 @@ public class EnigmaticSawController : AbilitiesController
             if (!ObjectsList[i].activeInHierarchy) {
                 ObjectsList[i].SetActive(true);
                 ObjectsList[i].transform.position = transform.position;
-                ObjectsScriptList[i].UpdateStat(new int[] {AbilitiesStat.Damage, AbilitiesStat.DamageType.Value }, new float[] { AbilitiesStat.Knockback, Duration, DamageInterval, AdditionalScale });
+                ObjectsScriptList[i].UpdateStat(
+                    new int[] {AbilitiesStat.Damage, AbilitiesStat.DamageType.Value }, 
+                    new float[] { AbilitiesStat.Knockback, Duration, DamageInterval, AdditionalScale, AbilitiesStat.CritRate, AbilitiesStat.CritDamage });
                 ObjectsScriptList[i].StartUp();
                 return ObjectsList[i];
             }
@@ -54,7 +56,9 @@ public class EnigmaticSawController : AbilitiesController
         GameObject ObjectNew = Instantiate(AbilitiesStat.ObjectsPrefab[0], MainChar.transform.position, Quaternion.identity, GameObject.Find("_Projectiles").transform);
 
         ObjectNew.SetActive(true);
-        ObjectNew.GetComponent<ProjectileController>().UpdateStat(new int[] {AbilitiesStat.Damage, AbilitiesStat.DamageType.Value }, new float[] {AbilitiesStat.Knockback, Duration, DamageInterval, AdditionalScale});
+        ObjectNew.GetComponent<ProjectileController>().UpdateStat(
+            new int[] {AbilitiesStat.Damage, AbilitiesStat.DamageType.Value }, 
+            new float[] {AbilitiesStat.Knockback, Duration, DamageInterval, AdditionalScale, AbilitiesStat.CritRate, AbilitiesStat.CritDamage });
         ObjectNew.GetComponent<ProjectileController>().MainScript = this;
 
         ObjectsList.Add(ObjectNew);

@@ -41,21 +41,23 @@ public class EruptionController : ProjectileController
         Knockback = floatvalue[0];
         Delay = floatvalue[1];
         groundDelay = floatvalue[2];
+        CritRate = floatvalue[3];
+        CritDamage = floatvalue[4];
     }
 
     private void OnTriggerEnter2D(Collider2D trigger) {
         if (trigger.gameObject.CompareTag("Enemy") && !BurningGround) {
-            ResponseDamage.Invoke(trigger.gameObject, new int[] { Damage, ID }, new float[] { Knockback, 0f });
+            SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType }, new float[] { Knockback, 0f, CritRate, CritDamage });
         }  
     }
     
     private void OnTriggerStay2D(Collider2D trigger) {
         if (trigger.gameObject.CompareTag("Enemy")) {
             if (BurningGround) {
-                ResponseDamage.Invoke(trigger.gameObject, new int[] { Damage / 2, ID, DamageType }, new float[] { Knockback / 10, 1f });
+                SendDamage(trigger.gameObject, new int[] { Damage / 2, ID, DamageType, 0 }, new float[] { Knockback / 10, 1f, CritRate, CritDamage });
             }
             else {
-                ResponseDamage.Invoke(trigger.gameObject, new int[] { Damage, ID, DamageType }, new float[] { Knockback, 1f });
+                SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType, 0 }, new float[] { Knockback, 1f, CritRate, CritDamage });
             }
             
         }  

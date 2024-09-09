@@ -55,15 +55,14 @@ public class DamageCalculateManager : MonoBehaviour
         else { UpdateCooldown -= Time.deltaTime; }
     }
 
-    // Generally the array consist of follow: int[] {dmg, id, damagetype}; float[] {knockback, debouncetime}
+    // Generally the array consist of follow: int[] {dmg, id, damagetype, crit?}; float[] {knockback, debouncetime}
     public void DamageCalculate(GameObject enemy, int[] intstat, float[] floatstat) {
         if (!enemy.GetComponent<EnemyMain>().GetDebounce(intstat, floatstat))
-        {
+        { 
             int Damage = enemy.GetComponent<EnemyMain>().DamageDealt;
             if (intstat[0] > 0)
             {
-                GameObject damageDisplay = GetPooledObject(enemy.transform.position, Damage);
-                damageDisplay.transform.position = enemy.transform.position + new Vector3(0, 1, 0);
+                GameObject damageDisplay = GetPooledObject(enemy.transform.position, Damage, intstat[3] == 1);
             }
 
             if (AbilitiesDict.ContainsKey(intstat[1]))
@@ -88,14 +87,14 @@ public class DamageCalculateManager : MonoBehaviour
                 AbilitiesDict[stat[1]].UpgradeLevel += 1;
     }
 
-    private GameObject GetPooledObject(Vector3 pos, int damage)
+    private GameObject GetPooledObject(Vector3 pos, int damage, bool crit)
     {
         for (int i = 0; i < PooledDisplay.Count; i++)
         {
             if (!PooledDisplay[i].activeInHierarchy)
             {
                 PooledDisplay[i].SetActive(true);
-                PooledDisplayScript[i].UpdateDisplay(damage);
+                PooledDisplayScript[i].UpdateDisplay(damage, pos, crit);
                 return PooledDisplay[i];
             }
         }
@@ -104,7 +103,7 @@ public class DamageCalculateManager : MonoBehaviour
         GameObject DisplayNew = Instantiate(_damageDisplayPrefab, pos, Quaternion.identity, GameObject.Find("_Effects").transform);
 
         DisplayNew.SetActive(true);
-        DisplayNew.GetComponent<DamageDisplay>().UpdateDisplay(damage);
+        DisplayNew.GetComponent<DamageDisplay>().UpdateDisplay(damage, pos, crit);
 
         PooledDisplay.Add(DisplayNew);
         PooledDisplayScript.Add(DisplayNew.GetComponent<DamageDisplay>());

@@ -2040,7 +2040,7 @@ MonoBehaviour:
     Cooldown: 10
     Knockback: 3
     CritRate: 0
-    CritDamage: 0
+    CritDamage: 1
     DamageType: {fileID: 11400000, guid: d1873d36cef10d64f83a2d0a7ce89edd, type: 2}
   RazorbladeNumbers: 1
 --- !u!114 &1086406782
@@ -2064,8 +2064,8 @@ MonoBehaviour:
     EliteID: 0
     Cooldown: 2
     Knockback: 4
-    CritRate: 0
-    CritDamage: 0
+    CritRate: 0.1
+    CritDamage: 1
     DamageType: {fileID: 11400000, guid: f3eae1e8df0180142be5f4acb41456cd, type: 2}
   FiringPoint: {fileID: 528720729}
   _lineRenderer: {fileID: 6865206563918388582, guid: 807839fb895e8de469f9e508e0441507, type: 3}
@@ -2090,7 +2090,7 @@ MonoBehaviour:
     Cooldown: 5
     Knockback: 3
     CritRate: 0
-    CritDamage: 0
+    CritDamage: 1
     DamageType: {fileID: 11400000, guid: 0db67e35bfd117041be780e841ef1635, type: 2}
   CrosshairTarget: {fileID: 516030767}
   AdditionalEruptions: 0
@@ -2116,7 +2116,7 @@ MonoBehaviour:
     Cooldown: 10
     Knockback: 6
     CritRate: 0
-    CritDamage: 0
+    CritDamage: 1
     DamageType: {fileID: 11400000, guid: 2ff78611441682243b8bb0c19d3fd3df, type: 2}
   NumbOfOrbs: 4
   Piercing: 1
@@ -2144,7 +2144,7 @@ MonoBehaviour:
     Cooldown: 5
     Knockback: 4
     CritRate: 0
-    CritDamage: 0
+    CritDamage: 1
     DamageType: {fileID: 11400000, guid: 0db67e35bfd117041be780e841ef1635, type: 2}
   MissileNumbers: 3
   InternalExplode: 1
@@ -2169,7 +2169,7 @@ MonoBehaviour:
   FireRate: 0.2
   AdditionalBulletSpeed: 0
   CritRate: 0.1
-  CritDamage: 1
+  CritDamage: 0.5
 --- !u!1 &1135027974
 GameObject:
   m_ObjectHideFlags: 0

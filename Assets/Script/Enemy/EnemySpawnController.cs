@@ -17,7 +17,7 @@ public class EnemySpawnController : MonoBehaviour
     [SerializeField] float SpawnRate = 1f;
     public UnityEvent BossCalling;
 
-    private EnemyPrefabScriptableObject enemyPrefabs;
+    private StageInfo.EnemyPrefab enemyPrefabs;
     private List<Transform> enemySpawnPos = new List<Transform>();
     private List<EnemyEntity> actualEnemyPrefabs = new List<EnemyEntity>();
     private Transform _enemySpawn;

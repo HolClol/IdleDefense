@@ -47,6 +47,8 @@ public class MagneticOrb : ProjectileController
         Knockback = floatvalue[0];
         ExistingTime = floatvalue[1];
         RecoverDuration = floatvalue[2];
+        CritRate = floatvalue[3];
+        CritDamage = floatvalue[4];
     }
 
     private void OnTriggerEnter2D(Collider2D trigger) {
@@ -60,7 +62,7 @@ public class MagneticOrb : ProjectileController
             else {
                 Piercing -= 1;
             }
-            ResponseDamage.Invoke(trigger.gameObject, new int[] { Damage, ID, DamageType }, new float[] { Knockback, 0f });
+            SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType, 0 }, new float[] { Knockback, 0f, CritRate, CritDamage });
             
         }
     }
