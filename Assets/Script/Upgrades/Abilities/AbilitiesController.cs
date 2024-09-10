@@ -4,27 +4,8 @@ using UnityEngine;
 
 public class AbilitiesController : MonoBehaviour
 {
-    [System.Serializable] public class AbilitiesStatClass {
-        public GameObject[] ObjectsPrefab;
-        public int Damage;
-        public int ID;
-        public int EliteID;
-        public float Cooldown;
-        public float Knockback;
-        [Range(0f,1f)] public float CritRate = 0.05f;
-        public float CritDamage = 1f;
-        public IntVariable DamageType;
-
-        public AbilitiesStatClass(int dmg, float cd, float kb, int id, int eliteID) {
-            Damage = dmg;
-            Cooldown = cd;
-            Knockback = kb;
-            ID = id;
-            EliteID = eliteID;
-        }
-    }
-    
-    public AbilitiesStatClass AbilitiesStat;
+    public AbilitiesSO AbilityData;
+    public AbilitiesSO.AbilitiesStatClass AbilitiesStat;
 
     protected float TimeBeforeFire;
     protected float DamageScaling = 0;
@@ -39,6 +20,8 @@ public class AbilitiesController : MonoBehaviour
     protected virtual void Start() {
         MainChar = GameObject.Find("Player");
         playerController = MainChar.GetComponent<PlayerController>();
+        AbilitiesStat = AbilityData.AbilitiesStat;
+
     }
 
     // If the projectile need to send on hit signal back to main script

@@ -9,11 +9,11 @@ public class SplitterController : AbilitiesController
     [SerializeField] GameObject FiringPoint;
     [SerializeField] GameObject _lineRenderer;
 
-    private float BulletLifetime = 0.65f;
-    private int BulletNumb = 5;
-    private int Radius = 7;
-    private int Bounce = 0;
-    private int Repeat = 1;
+    [SerializeField] float BulletLifetime = 0.65f;
+    [SerializeField] int BulletNumb = 5;
+    [SerializeField] int Radius = 7;
+    [SerializeField] int Bounce = 0;
+    [SerializeField] int Repeat = 1;
 
     private Vector3 TargetPos;
     private Transform Target;
@@ -26,10 +26,26 @@ public class SplitterController : AbilitiesController
         // Initialize the base start
         base.Start();
 
+        // Copy the data from the ScriptableObject
+        if (AbilityData.GetType().Equals(typeof(SplitterSO)))
+        {
+            SplitterSO BonusAbilityData = (SplitterSO)AbilityData;
+            BulletLifetime = BonusAbilityData.BulletLifetime;
+            BulletNumb = BonusAbilityData.BulletNumb;
+            Radius = BonusAbilityData.Radius;
+            Bounce = BonusAbilityData.Bounce;
+            Repeat = BonusAbilityData.Repeat;
+        }
+        else
+        {
+            Debug.LogError("Ability data not assigned!");
+        }
+
         TimeBeforeFire = AbilitiesStat.Cooldown;
         BaseDamage = AbilitiesStat.Damage;
         CheckUpgrade(WeaponUpgradeLevel);
         clonedlineRenderer = Instantiate(_lineRenderer, transform.position, Quaternion.identity);
+        clonedlineRenderer.GetComponent<SplitterLineRange>().IncreaseSize(Radius*8);
         DamageScaling = 0.6f;
     }
 
@@ -177,7 +193,7 @@ public class SplitterController : AbilitiesController
             case 1:
                 BulletLifetime = 1.2f;
                 Radius += 3;
-                clonedlineRenderer.GetComponent<SplitterLineRange>().IncreaseSize(8);
+                clonedlineRenderer.GetComponent<SplitterLineRange>().IncreaseSize(Radius);
             break;
             case 2:
                 DamageScaling = 0.25f;

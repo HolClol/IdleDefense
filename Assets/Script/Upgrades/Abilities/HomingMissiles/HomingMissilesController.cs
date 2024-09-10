@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HomingMissilesController : AbilitiesController
 {
-    [Header("Weapon Set Up")]
     [SerializeField] int MissileNumbers = 3;
     [SerializeField] float InternalExplode = 1f;
 
@@ -14,6 +13,19 @@ public class HomingMissilesController : AbilitiesController
     {
         // Initialize the base start
         base.Start();
+
+        // Copy the data from the ScriptableObject
+        if (AbilityData.GetType().Equals(typeof(MissilesSO)))
+        {
+            MissilesSO BonusAbilityData = (MissilesSO)AbilityData;
+            MissileNumbers = BonusAbilityData.MissileNumbers;
+            InternalExplode = BonusAbilityData.InternalExplode;
+            AdditionalScale = BonusAbilityData.AdditionalScale;
+        }
+        else
+        {
+            Debug.LogError("Ability data not assigned!");
+        }
 
         TimeBeforeFire = AbilitiesStat.Cooldown;
         BaseDamage = AbilitiesStat.Damage;

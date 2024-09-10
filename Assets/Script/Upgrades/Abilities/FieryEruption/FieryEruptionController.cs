@@ -6,11 +6,12 @@ public class FieryEruptionController : AbilitiesController
 {
     [Header("Weapon Set Up")]
     [SerializeField] GameObject CrosshairTarget;
-    [SerializeField] int AdditionalEruptions = 0;
-    [SerializeField] float GroundDuration = 0;
 
     private GameObject MainEruption;
     private ProjectileController MainEruptionScript;
+
+    [SerializeField] int AdditionalEruptions = 0;
+    [SerializeField] float GroundDuration = 0;
 
     private Vector3 DecreaseScale = new Vector3(0.6f, 0.6f, 0f);
     private Vector3 IncreaseScale = new Vector3(0f, 0f, 0f);
@@ -19,6 +20,20 @@ public class FieryEruptionController : AbilitiesController
     {
         // Initialize the base start
         base.Start();
+
+        // Copy the data from the ScriptableObject
+        if (AbilityData.GetType().Equals(typeof(EruptionSO)))
+        {
+            EruptionSO BonusAbilityData = (EruptionSO)AbilityData;
+            AdditionalEruptions = BonusAbilityData.AdditionalEruptions;
+            GroundDuration = BonusAbilityData.GroundDuration;
+            DecreaseScale = BonusAbilityData.DecreaseScale;
+            IncreaseScale = BonusAbilityData.IncreaseScale;
+        }
+        else
+        {
+            Debug.LogError("Ability data not assigned!");
+        }
 
         TimeBeforeFire = AbilitiesStat.Cooldown/4;
         BaseDamage = AbilitiesStat.Damage;

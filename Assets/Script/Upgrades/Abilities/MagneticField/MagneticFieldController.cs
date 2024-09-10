@@ -4,23 +4,39 @@ using UnityEngine;
 
 public class MagneticFieldController : AbilitiesController
 {
-    [Header("Weapon Set Up")]
     [SerializeField] int NumbOfOrbs = 4;
     [SerializeField] int Piercing = 0;
     [SerializeField] float Duration = 6f;
     [SerializeField] float OrbMoveSpeed;
     [SerializeField] float OrbRecover = 2f;
-    
+    [SerializeField] float SizeBuff = 1f;
+
     private float angle;
     private bool active = false;
     private bool MaxLevel = false;
     private bool LastOrb = false;
-    private float SizeBuff = 1f;
+    
     // Start is called before the first frame update
     protected override void Start() 
     {
         // Initialize the base start
         base.Start();
+
+        // Copy the data from the ScriptableObject
+        if (AbilityData.GetType().Equals(typeof(MagneticSO)))
+        {
+            MagneticSO BonusAbilityData = (MagneticSO)AbilityData;
+            NumbOfOrbs = BonusAbilityData.NumbOfOrbs;
+            Piercing = BonusAbilityData.Piercing;
+            Duration = BonusAbilityData.Duration;
+            OrbMoveSpeed = BonusAbilityData.OrbMoveSpeed;
+            OrbRecover = BonusAbilityData.OrbRecover;
+            SizeBuff = BonusAbilityData.SizeBuff;
+        }
+        else
+        {
+            Debug.LogError("Ability data not assigned!");
+        }
 
         TimeBeforeFire = AbilitiesStat.Cooldown/2;
         BaseDamage = AbilitiesStat.Damage;

@@ -4,17 +4,30 @@ using UnityEngine;
 
 public class EnigmaticSawController : AbilitiesController
 {
-    [Header("Weapon Set Up")]
     [SerializeField] int RazorbladeNumbers = 1;
+    [SerializeField] float AdditionalScale = 0f;
+    [SerializeField] float Duration = 5f;
+    [SerializeField] float DamageInterval = 0.6f;
 
-    private float AdditionalScale = 0f;
-    private float Duration = 5f;
-    private float DamageInterval = 0.6f;
     // Start is called before the first frame update
     protected override void Start()
     {
         // Initialize the base start
         base.Start();
+
+        // Copy the data from the ScriptableObject
+        if (AbilityData.GetType().Equals(typeof(EnigmaticSO)))
+        {
+            EnigmaticSO BonusAbilityData = (EnigmaticSO)AbilityData;
+            RazorbladeNumbers = BonusAbilityData.RazorbladeNumbers;
+            AdditionalScale = BonusAbilityData.AdditionalScale;
+            Duration = BonusAbilityData.Duration;
+            DamageInterval = BonusAbilityData.DamageInterval;
+        }
+        else
+        {
+            Debug.LogError("Ability data not assigned!");
+        }
 
         TimeBeforeFire = AbilitiesStat.Cooldown / 3;
         BaseDamage = AbilitiesStat.Damage;

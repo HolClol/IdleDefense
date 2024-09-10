@@ -2031,18 +2031,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12d40196a58989e47a7abe0dead4a239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityData: {fileID: 11400000, guid: 47e3cca908bb0914b911d0cba6de44d8, type: 2}
   AbilitiesStat:
-    ObjectsPrefab:
-    - {fileID: 220286102038309757, guid: d7ee0c45267802241b119b1a98ed0b28, type: 3}
-    Damage: 16
-    ID: 5
+    ObjectsPrefab: []
+    Damage: 0
+    ID: 0
     EliteID: 0
-    Cooldown: 10
-    Knockback: 3
+    Cooldown: 0
+    Knockback: 0
     CritRate: 0
-    CritDamage: 1
-    DamageType: {fileID: 11400000, guid: d1873d36cef10d64f83a2d0a7ce89edd, type: 2}
+    CritDamage: 0
+    DamageType: {fileID: 0}
   RazorbladeNumbers: 1
+  AdditionalScale: 0
+  Duration: 5
+  DamageInterval: 0.6
 --- !u!114 &1086406782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2055,20 +2058,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec6a8be11af64b40a848d8c05d52802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityData: {fileID: 11400000, guid: e31e78b4ebe7e91458e3dea4029dc09d, type: 2}
   AbilitiesStat:
-    ObjectsPrefab:
-    - {fileID: 3831713516410156794, guid: 888db1ba4a616304a9397238621216b3, type: 3}
-    - {fileID: 3025848403150153038, guid: 9214f1fc5919f724aabadfe0ce8184e9, type: 3}
-    Damage: 40
-    ID: 4
+    ObjectsPrefab: []
+    Damage: 0
+    ID: 0
     EliteID: 0
-    Cooldown: 2
-    Knockback: 4
-    CritRate: 0.1
-    CritDamage: 1
-    DamageType: {fileID: 11400000, guid: f3eae1e8df0180142be5f4acb41456cd, type: 2}
+    Cooldown: 0
+    Knockback: 0
+    CritRate: 0
+    CritDamage: 0
+    DamageType: {fileID: 0}
   FiringPoint: {fileID: 528720729}
   _lineRenderer: {fileID: 6865206563918388582, guid: 807839fb895e8de469f9e508e0441507, type: 3}
+  BulletLifetime: 0.65
+  BulletNumb: 5
+  Radius: 7
+  Bounce: 0
+  Repeat: 1
 --- !u!114 &1086406783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2081,17 +2088,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57aa22da6ffdc3e4c8bf753ad9531c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityData: {fileID: 11400000, guid: 9a37157e923a67d46bec79b1e3a6f7fe, type: 2}
   AbilitiesStat:
-    ObjectsPrefab:
-    - {fileID: 1211041536406801766, guid: b2359f9298ab3944db249ee9e58d4133, type: 3}
-    Damage: 50
-    ID: 2
+    ObjectsPrefab: []
+    Damage: 0
+    ID: 0
     EliteID: 0
-    Cooldown: 5
-    Knockback: 3
+    Cooldown: 0
+    Knockback: 0
     CritRate: 0
-    CritDamage: 1
-    DamageType: {fileID: 11400000, guid: 0db67e35bfd117041be780e841ef1635, type: 2}
+    CritDamage: 0
+    DamageType: {fileID: 0}
   CrosshairTarget: {fileID: 516030767}
   AdditionalEruptions: 0
   GroundDuration: 0
@@ -2107,22 +2114,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c43b32e5af32f4292c4dabccda4f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityData: {fileID: 11400000, guid: f653bb7f75f7df6459296693eada8510, type: 2}
   AbilitiesStat:
-    ObjectsPrefab:
-    - {fileID: 1325506101373253257, guid: 6c25c5328357f494c8172dd099de13cb, type: 3}
-    Damage: 30
-    ID: 3
+    ObjectsPrefab: []
+    Damage: 0
+    ID: 0
     EliteID: 0
-    Cooldown: 10
-    Knockback: 6
+    Cooldown: 0
+    Knockback: 0
     CritRate: 0
-    CritDamage: 1
-    DamageType: {fileID: 11400000, guid: 2ff78611441682243b8bb0c19d3fd3df, type: 2}
+    CritDamage: 0
+    DamageType: {fileID: 0}
   NumbOfOrbs: 4
-  Piercing: 1
-  Duration: 8
-  OrbMoveSpeed: 3
+  Piercing: 0
+  Duration: 6
+  OrbMoveSpeed: 0
   OrbRecover: 2
+  SizeBuff: 1
 --- !u!114 &1086406785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2135,17 +2143,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46d8360f99f5db42a50ef8579e92b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityData: {fileID: 11400000, guid: 059c3e53e2f95ab45865395624b1543b, type: 2}
   AbilitiesStat:
-    ObjectsPrefab:
-    - {fileID: 1632683087887185994, guid: 6a674ddee3553b6408a589f7cc8fc962, type: 3}
-    Damage: 30
-    ID: 1
+    ObjectsPrefab: []
+    Damage: 0
+    ID: 0
     EliteID: 0
-    Cooldown: 5
-    Knockback: 4
+    Cooldown: 0
+    Knockback: 0
     CritRate: 0
-    CritDamage: 1
-    DamageType: {fileID: 11400000, guid: 0db67e35bfd117041be780e841ef1635, type: 2}
+    CritDamage: 0
+    DamageType: {fileID: 0}
   MissileNumbers: 3
   InternalExplode: 1
 --- !u!114 &1086406786

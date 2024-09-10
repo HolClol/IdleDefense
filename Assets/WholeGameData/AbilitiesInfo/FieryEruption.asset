@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5c4d57029556d438064ab4aaf985b8, type: 3}
+  m_Name: FieryEruption
+  m_EditorClassIdentifier: 
+  AbilitiesStat:
+    ObjectsPrefab:
+    - {fileID: 1211041536406801766, guid: b2359f9298ab3944db249ee9e58d4133, type: 3}
+    Damage: 50
+    ID: 2
+    EliteID: 0
+    Cooldown: 5
+    Knockback: 3
+    CritRate: 0
+    CritDamage: 1
+    DamageType: {fileID: 11400000, guid: 0db67e35bfd117041be780e841ef1635, type: 2}
+  AdditionalEruptions: 0
+  GroundDuration: 0
+  DecreaseScale: {x: 0.6, y: 0.6, z: 0}
+  IncreaseScale: {x: 0, y: 0, z: 0}
