@@ -47,9 +47,10 @@ public class PlayerTargetDetection : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D trigger) {
-        if (trigger.gameObject.CompareTag("Enemy")) {
+        if (trigger.gameObject.CompareTag("Enemy") && !playerController.EnemyInZone.Contains(trigger.gameObject)) {
             playerController.EnemyInZone.RemoveAll(GameObject => GameObject == null);
             playerController.EnemyInZone.Add(trigger.gameObject);
+            
         }
                 
     }

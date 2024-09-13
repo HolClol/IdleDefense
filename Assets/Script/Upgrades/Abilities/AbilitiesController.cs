@@ -4,11 +4,24 @@ using UnityEngine;
 
 public class AbilitiesController : MonoBehaviour
 {
-    public AbilitiesSO AbilityData;
-    public AbilitiesSO.AbilitiesStatClass AbilitiesStat;
+    [System.Serializable] public class AbilitiesStatClass
+    {
+        public GameObject[] ObjectsPrefab;
+        public int Damage;
+        public int ID;
+        public int EliteID;
+        public float Cooldown;
+        public float Knockback;
+        public float DamageScaling = 0f;
+        [Range(0f, 1f)] public float CritRate = 0.05f;
+        public float CritDamage = 1f;
+        public IntVariable DamageType;
+    }
+
+    public AbilitiesSO AbilitySO;
+    [SerializeField] protected AbilitiesStatClass AbilitiesStat;
 
     protected float TimeBeforeFire;
-    protected float DamageScaling = 0;
     protected int WeaponUpgradeLevel = 0;
     protected int BaseDamage;
 
@@ -20,8 +33,28 @@ public class AbilitiesController : MonoBehaviour
     protected virtual void Start() {
         MainChar = GameObject.Find("Player");
         playerController = MainChar.GetComponent<PlayerController>();
-        AbilitiesStat = AbilityData.AbilitiesStat;
+        DeepCopyData();
+    }
 
+    protected virtual void DeepCopyData()
+    {
+        // Copy primitive types
+        AbilitiesStat.Damage = AbilitySO.AbilityData.Damage;
+        AbilitiesStat.ID = AbilitySO.AbilityData.ID;
+        AbilitiesStat.EliteID = AbilitySO.AbilityData.EliteID;
+        AbilitiesStat.Cooldown = AbilitySO.AbilityData.Cooldown;
+        AbilitiesStat.Knockback = AbilitySO.AbilityData.Knockback;
+        AbilitiesStat.DamageScaling = AbilitySO.AbilityData.DamageScaling;
+        AbilitiesStat.CritRate = AbilitySO.AbilityData.CritRate;
+        AbilitiesStat.CritDamage = AbilitySO.AbilityData.CritDamage;
+        AbilitiesStat.DamageType = AbilitySO.AbilityData.DamageType;
+
+        // Create a new array and copy its contents (deep copy for array)
+        AbilitiesStat.ObjectsPrefab = new GameObject[AbilitySO.AbilityData.ObjectsPrefab.Length];
+        for (int i = 0; i < AbilitySO.AbilityData.ObjectsPrefab.Length; i++)
+        {
+            AbilitiesStat.ObjectsPrefab[i] = AbilitySO.AbilityData.ObjectsPrefab[i];
+        }
     }
 
     // If the projectile need to send on hit signal back to main script
@@ -33,7 +66,7 @@ public class AbilitiesController : MonoBehaviour
     public virtual void UpdateDamage(int dmg) {
         if (this.enabled) {
             AbilitiesStat.Damage = BaseDamage + dmg;
-            AbilitiesStat.Damage += (int)((float)(AbilitiesStat.Damage) * DamageScaling);
+            AbilitiesStat.Damage += (int)((float)(AbilitiesStat.Damage) * AbilitiesStat.DamageScaling);
         }
         
     }

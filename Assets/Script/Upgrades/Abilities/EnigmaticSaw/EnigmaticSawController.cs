@@ -16,9 +16,9 @@ public class EnigmaticSawController : AbilitiesController
         base.Start();
 
         // Copy the data from the ScriptableObject
-        if (AbilityData.GetType().Equals(typeof(EnigmaticSO)))
+        if (AbilitySO.GetType().Equals(typeof(EnigmaticSO)))
         {
-            EnigmaticSO BonusAbilityData = (EnigmaticSO)AbilityData;
+            EnigmaticSO BonusAbilityData = (EnigmaticSO)AbilitySO;
             RazorbladeNumbers = BonusAbilityData.RazorbladeNumbers;
             AdditionalScale = BonusAbilityData.AdditionalScale;
             Duration = BonusAbilityData.Duration;
@@ -31,7 +31,6 @@ public class EnigmaticSawController : AbilitiesController
 
         TimeBeforeFire = AbilitiesStat.Cooldown / 3;
         BaseDamage = AbilitiesStat.Damage;
-        DamageScaling -= 0.6f;
         CheckUpgrade(WeaponUpgradeLevel);
     }
 
@@ -46,7 +45,8 @@ public class EnigmaticSawController : AbilitiesController
     }
 
     private void FireRazorblade() {
-        for (int i = 0; i < RazorbladeNumbers; i++) {
+        for (int i = 0; i < RazorbladeNumbers; i++) 
+        {
             GameObject ClonedBullet = GetPooledObject();
         }
         
@@ -88,7 +88,7 @@ public class EnigmaticSawController : AbilitiesController
 
         switch (WeaponUpgradeLevel) {
             case 1:
-                BaseDamage += 6;
+                BaseDamage += 4;
             break;
             case 2:
                 Duration += 2f;
@@ -103,17 +103,16 @@ public class EnigmaticSawController : AbilitiesController
             break;
             case 5:
                 RazorbladeNumbers = 3;
-                DamageScaling += 0.2f;
+                AbilitiesStat.DamageScaling += 0.2f;
             break;
         }
-        BaseDamage += 2;
         UpdateDamage(playerController.PlayerStats.BaseDamage);
     }
 
     public override void UpdateDamage(int dmg) {
         if (this.enabled) {
-            AbilitiesStat.Damage = BaseDamage + dmg;
-            AbilitiesStat.Damage += (int)((float)(AbilitiesStat.Damage) * DamageScaling);
+            AbilitiesStat.Damage = BaseDamage;
+            AbilitiesStat.Damage += (int)((float)(dmg) * AbilitiesStat.DamageScaling);
         }
         
     }

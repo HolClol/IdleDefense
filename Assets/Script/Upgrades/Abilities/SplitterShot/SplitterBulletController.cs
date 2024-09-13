@@ -42,6 +42,7 @@ public class SplitterBulletController : ProjectileController
     }
 
     public override void StartUp() {
+        base.StartUp();
         StartCoroutine(DestroyProjectile());
     }
 

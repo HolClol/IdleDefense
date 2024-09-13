@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     public bool TouchPriority;
     public bool LockedIn;
 
-    [HideInInspector] public List<GameObject> EnemyInZone;
+    public List<GameObject> EnemyInZone;
 
     private Vector2 TouchPos;
     private Vector2 TargetPos;

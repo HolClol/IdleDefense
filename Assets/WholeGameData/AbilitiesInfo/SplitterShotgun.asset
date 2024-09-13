@@ -12,20 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001e2c24b2f31654d962dde2c446af1f, type: 3}
   m_Name: SplitterShotgun
   m_EditorClassIdentifier: 
-  AbilitiesStat:
+  AbilityData:
     ObjectsPrefab:
     - {fileID: 3831713516410156794, guid: 888db1ba4a616304a9397238621216b3, type: 3}
     - {fileID: 3025848403150153038, guid: 9214f1fc5919f724aabadfe0ce8184e9, type: 3}
-    Damage: 40
+    Damage: 35
     ID: 4
     EliteID: 0
-    Cooldown: 2
-    Knockback: 4
+    Cooldown: 3
+    Knockback: 3
+    DamageScaling: 0.6
     CritRate: 0.1
     CritDamage: 1
     DamageType: {fileID: 11400000, guid: f3eae1e8df0180142be5f4acb41456cd, type: 2}
   BulletLifetime: 0.65
   BulletNumb: 5
-  Radius: 7
+  Radius: 6
   Bounce: 0
   Repeat: 1

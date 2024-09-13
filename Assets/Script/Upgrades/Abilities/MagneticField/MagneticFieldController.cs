@@ -23,9 +23,9 @@ public class MagneticFieldController : AbilitiesController
         base.Start();
 
         // Copy the data from the ScriptableObject
-        if (AbilityData.GetType().Equals(typeof(MagneticSO)))
+        if (AbilitySO.GetType().Equals(typeof(MagneticSO)))
         {
-            MagneticSO BonusAbilityData = (MagneticSO)AbilityData;
+            MagneticSO BonusAbilityData = (MagneticSO)AbilitySO;
             NumbOfOrbs = BonusAbilityData.NumbOfOrbs;
             Piercing = BonusAbilityData.Piercing;
             Duration = BonusAbilityData.Duration;
@@ -41,7 +41,6 @@ public class MagneticFieldController : AbilitiesController
         TimeBeforeFire = AbilitiesStat.Cooldown/2;
         BaseDamage = AbilitiesStat.Damage;
         CheckUpgrade(WeaponUpgradeLevel);
-        DamageScaling = 0.5f;
     }
 
     void FixedUpdate()
@@ -140,7 +139,7 @@ public class MagneticFieldController : AbilitiesController
             break;
             case 3:
                 AbilitiesStat.Knockback += AbilitiesStat.Knockback;
-                DamageScaling += 0.25f;
+                AbilitiesStat.DamageScaling += 0.25f;
             break;
             case 4:
                 Piercing += 2;
@@ -158,8 +157,8 @@ public class MagneticFieldController : AbilitiesController
 
     public override void UpdateDamage(int dmg) {
         if (this.enabled) {
-            AbilitiesStat.Damage = BaseDamage + dmg;
-            AbilitiesStat.Damage += (int)((float)(AbilitiesStat.Damage) * DamageScaling);
+            AbilitiesStat.Damage = BaseDamage;
+            AbilitiesStat.Damage += (int)((float)(dmg) * AbilitiesStat.DamageScaling);
             for (int i = 0; i < ObjectsList.Count; i++) {
                 if (ObjectsList[i].activeInHierarchy) {
                     ObjectsScriptList[i].UpdateStat(

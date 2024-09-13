@@ -19,6 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 292ce8e8c59339b4fbeb43a1a6af1187, type: 2}
   - {fileID: 11400000, guid: 1f65c0aa9ac486b43ad9080bac7be1c0, type: 2}
   - {fileID: 11400000, guid: 8b9a6f4d71487764fa00f747460b3419, type: 2}
+  - {fileID: 11400000, guid: 022b767919e517041ab203aa77640fcd, type: 2}
   ArtifactInfoTable:
   - {fileID: 11400000, guid: bcd09da984f38fa42883c23f179dbd05, type: 2}
   - {fileID: 11400000, guid: ef5d81652fc07b54ab21c8003b4412c3, type: 2}

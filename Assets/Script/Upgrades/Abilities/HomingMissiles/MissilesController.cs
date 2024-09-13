@@ -33,6 +33,7 @@ public class MissilesController : ProjectileController
     }
 
     private IEnumerator BlastOff() {
+        base.StartUp();
         yield return new WaitForSeconds(Delay);
         _crosshairscript.enabled = false;
         _spriteRenderer.color = Color.white;

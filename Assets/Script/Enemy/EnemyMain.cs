@@ -25,7 +25,6 @@ public class EnemyMain : MonoBehaviour, IDamageDisplay
     protected EnemyMovement m_enemyMovement;
     protected EnemyDeathHandler m_enemyDeath;
     protected SpriteRenderer m_spriteRenderer;
-    protected Dictionary<int, float> damageCooldowns = new Dictionary<int, float>();
     protected float CurrentCooldown;
 
     // ======================================================
@@ -63,15 +62,8 @@ public class EnemyMain : MonoBehaviour, IDamageDisplay
         Health -= DamageDealt;
     }
 
-    protected IEnumerator DamageCooldownPlay(int sourceID, float cooldown)
-    {
-        damageCooldowns[sourceID] = Time.time + cooldown;
-        yield return new WaitForSeconds(cooldown);
-        damageCooldowns.Remove(sourceID);
-    }
-
     // Generally the array consist of follow: int[] {dmg, id}; float[] {knockback, debouncetime}
-    protected virtual void ReceiveDamage(int[] intinfo, float[] floatinfo) {
+    public virtual int ReceiveDamage(int[] intinfo, float[] floatinfo) {
         DamageDealt = intinfo[0];
         float DamageKnockback = ((float)DamageDealt/50) + floatinfo[0];
         if (DamageKnockback > 30f) {
@@ -84,24 +76,9 @@ public class EnemyMain : MonoBehaviour, IDamageDisplay
         }
         else {
             TakeDamage(intinfo[1]);
-            StartCoroutine(HurtPlay());
-            if (floatinfo[1] > 0)
-                StartCoroutine(DamageCooldownPlay(intinfo[1], floatinfo[1]));
+            StartCoroutine(HurtPlay()); 
         }
-    }
-
-
-    // Deals damage to target if the debounce value is off
-    public bool GetDebounce(int[] intinfo, float[] floatinfo)
-    {
-        if (!damageCooldowns.ContainsKey(intinfo[1]) || Time.time >= damageCooldowns[intinfo[1]])
-        {
-            ReceiveDamage(intinfo, floatinfo);
-            return false;
-        }
-            
-        else return true;
-       
+        return DamageDealt;
     }
     
 }

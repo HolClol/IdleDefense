@@ -28,6 +28,7 @@ public class EruptionController : ProjectileController
     }
 
     public override void StartUp() {
+        base.StartUp();
         ParticleHandler.transform.localScale = transform.localScale * 0.3f;
         if (_particles != null) {
             _particles.Play();
@@ -47,7 +48,7 @@ public class EruptionController : ProjectileController
 
     private void OnTriggerEnter2D(Collider2D trigger) {
         if (trigger.gameObject.CompareTag("Enemy") && !BurningGround) {
-            SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType }, new float[] { Knockback, 0f, CritRate, CritDamage });
+            SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType, 0 }, new float[] { Knockback, 0f, CritRate, CritDamage });
         }  
     }
     

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class SplitterController : AbilitiesController
@@ -11,7 +10,7 @@ public class SplitterController : AbilitiesController
 
     [SerializeField] float BulletLifetime = 0.65f;
     [SerializeField] int BulletNumb = 5;
-    [SerializeField] int Radius = 7;
+    [SerializeField] int Radius = 6;
     [SerializeField] int Bounce = 0;
     [SerializeField] int Repeat = 1;
 
@@ -27,9 +26,9 @@ public class SplitterController : AbilitiesController
         base.Start();
 
         // Copy the data from the ScriptableObject
-        if (AbilityData.GetType().Equals(typeof(SplitterSO)))
+        if (AbilitySO.GetType().Equals(typeof(SplitterSO)))
         {
-            SplitterSO BonusAbilityData = (SplitterSO)AbilityData;
+            SplitterSO BonusAbilityData = (SplitterSO)AbilitySO;
             BulletLifetime = BonusAbilityData.BulletLifetime;
             BulletNumb = BonusAbilityData.BulletNumb;
             Radius = BonusAbilityData.Radius;
@@ -45,8 +44,7 @@ public class SplitterController : AbilitiesController
         BaseDamage = AbilitiesStat.Damage;
         CheckUpgrade(WeaponUpgradeLevel);
         clonedlineRenderer = Instantiate(_lineRenderer, transform.position, Quaternion.identity);
-        clonedlineRenderer.GetComponent<SplitterLineRange>().IncreaseSize(Radius*8);
-        DamageScaling = 0.6f;
+        clonedlineRenderer.GetComponent<SplitterLineRange>().IncreaseSize(Radius*10);
     }
 
     void FixedUpdate() {
@@ -91,39 +89,39 @@ public class SplitterController : AbilitiesController
         if (playerController.EnemyInZone.Count > 0) {
             foreach (GameObject selectFirstTarget in playerController.EnemyInZone)
             {
-                if (selectFirstTarget != null)
-                {
-                    float firstdistance = Vector2.Distance(transform.position, selectFirstTarget.transform.position);
-                    if (firstdistance < Radius)
-                    {
-                        TargetPos = selectFirstTarget.transform.position;
-                        Target = selectFirstTarget.transform;
+                if (selectFirstTarget == null)
+                    return false;
 
-                        inrange = true;
-                        break;
-                    }
+                float firstdistance = Vector2.Distance(transform.position, selectFirstTarget.transform.position);
+                if (firstdistance < Radius)
+                {
+                    TargetPos = selectFirstTarget.transform.position;
+                    Target = selectFirstTarget.transform;
+
+                    inrange = true;
+                    break;
                 }
-                
+
             }
 
             foreach (GameObject enemyTarget in playerController.EnemyInZone) {
-                if (enemyTarget != null) {
-                    float distance = Vector2.Distance(transform.position, enemyTarget.transform.position);
-                    float lastdistance = Vector2.Distance(transform.position, TargetPos);
+                if (enemyTarget == null) 
+                    return false;
 
-                    if (enemyTarget.name != "Molten") 
-                    {
-                        if (distance < Radius && distance < lastdistance)
-                        {
-                            TargetPos = enemyTarget.transform.position;
-                            Target = enemyTarget.transform;
+                float distance = Vector2.Distance(transform.position, enemyTarget.transform.position);
+                float lastdistance = Vector2.Distance(transform.position, TargetPos);
 
-                            inrange = true;
-                        }
-                    }   
-                    
+                if (enemyTarget.name == "Molten")
+                    return false;
+
+                if (distance < Radius && distance < lastdistance)
+                {
+                    TargetPos = enemyTarget.transform.position;
+                    Target = enemyTarget.transform;
+
+                    inrange = true;
                 }
-                
+
             }
         }
         return inrange;
@@ -196,7 +194,7 @@ public class SplitterController : AbilitiesController
                 clonedlineRenderer.GetComponent<SplitterLineRange>().IncreaseSize(Radius);
             break;
             case 2:
-                DamageScaling = 0.25f;
+                AbilitiesStat.DamageScaling = 0.25f;
                 AbilitiesStat.Knockback = 6f;
             break;
             case 3:
@@ -207,18 +205,18 @@ public class SplitterController : AbilitiesController
             break;
             case 5:
                 Bounce = 3;
-                DamageScaling = 0.5f;
+                AbilitiesStat.DamageScaling = 0.5f;
                 AbilitiesStat.Cooldown -= 1f;
                 break;
         }
-        BaseDamage += 5;
+        BaseDamage += 2;
         UpdateDamage(playerController.PlayerStats.BaseDamage);
     }
 
     public override void UpdateDamage(int dmg) {
         if (this.enabled) {
-            AbilitiesStat.Damage = BaseDamage + dmg/2;
-            AbilitiesStat.Damage += (int)((float)(AbilitiesStat.Damage) * DamageScaling);
+            AbilitiesStat.Damage = BaseDamage;
+            AbilitiesStat.Damage += (int)((float)(dmg) * AbilitiesStat.DamageScaling);
         }
         
     }

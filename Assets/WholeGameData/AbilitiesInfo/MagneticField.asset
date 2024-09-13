@@ -12,20 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a56d2424e0a551d4a8a47d8bff445d64, type: 3}
   m_Name: MagneticField
   m_EditorClassIdentifier: 
-  AbilitiesStat:
+  AbilityData:
     ObjectsPrefab:
     - {fileID: 1325506101373253257, guid: 6c25c5328357f494c8172dd099de13cb, type: 3}
-    Damage: 30
+    Damage: 25
     ID: 3
     EliteID: 0
-    Cooldown: 10
+    Cooldown: 8
     Knockback: 6
+    DamageScaling: 0.5
     CritRate: 0
     CritDamage: 1
     DamageType: {fileID: 11400000, guid: 2ff78611441682243b8bb0c19d3fd3df, type: 2}
   NumbOfOrbs: 4
   Piercing: 0
   Duration: 6
-  OrbMoveSpeed: 4
+  OrbMoveSpeed: 3
   OrbRecover: 2
   SizeBuff: 1

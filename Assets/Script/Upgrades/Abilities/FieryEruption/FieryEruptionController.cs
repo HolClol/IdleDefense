@@ -22,9 +22,9 @@ public class FieryEruptionController : AbilitiesController
         base.Start();
 
         // Copy the data from the ScriptableObject
-        if (AbilityData.GetType().Equals(typeof(EruptionSO)))
+        if (AbilitySO.GetType().Equals(typeof(EruptionSO)))
         {
-            EruptionSO BonusAbilityData = (EruptionSO)AbilityData;
+            EruptionSO BonusAbilityData = (EruptionSO)AbilitySO;
             AdditionalEruptions = BonusAbilityData.AdditionalEruptions;
             GroundDuration = BonusAbilityData.GroundDuration;
             DecreaseScale = BonusAbilityData.DecreaseScale;
@@ -37,7 +37,6 @@ public class FieryEruptionController : AbilitiesController
 
         TimeBeforeFire = AbilitiesStat.Cooldown/4;
         BaseDamage = AbilitiesStat.Damage;
-        DamageScaling += 0.2f;
         CheckUpgrade(WeaponUpgradeLevel);
 
         MainEruption = Instantiate(AbilitiesStat.ObjectsPrefab[0], CrosshairTarget.transform.position, Quaternion.identity, GameObject.Find("_Projectiles").transform);
@@ -100,7 +99,7 @@ public class FieryEruptionController : AbilitiesController
 
         switch (WeaponUpgradeLevel) {
             case 1:
-                DamageScaling += 0.2f;
+                AbilitiesStat.DamageScaling += 0.2f;
                 IncreaseScale = IncreaseScale + new Vector3(1f, 1f, 1f);
                 MainEruption.transform.localScale = MainEruption.transform.localScale + IncreaseScale;
                 for (int i = 0; i < AdditionalEruptions; i++)
@@ -118,7 +117,7 @@ public class FieryEruptionController : AbilitiesController
                     GameObject MiniEruption = GetPooledObject(0);
                     MiniEruption.transform.localScale = MiniEruption.transform.localScale + IncreaseScale;
                 }
-                DamageScaling += 0.2f;
+                AbilitiesStat.DamageScaling += 0.2f;
             break;
             case 4:
                 AdditionalEruptions += 1;
@@ -136,8 +135,8 @@ public class FieryEruptionController : AbilitiesController
 
     public override void UpdateDamage(int dmg) {
         if (this.enabled) {
-            AbilitiesStat.Damage = BaseDamage + dmg;
-            AbilitiesStat.Damage += (int)((float)(AbilitiesStat.Damage) * DamageScaling);
+            AbilitiesStat.Damage = BaseDamage;
+            AbilitiesStat.Damage += (int)((float)(dmg) * AbilitiesStat.DamageScaling);
         }
         
     }

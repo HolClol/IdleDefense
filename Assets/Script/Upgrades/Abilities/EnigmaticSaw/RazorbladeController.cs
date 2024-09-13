@@ -27,24 +27,26 @@ public class RazorbladeController : ProjectileController
     }
 
     protected override void FixedUpdate() {
-        if (Fired) {
-            if (Targets.Count > 0) {
-                if (Vector3.Distance(transform.position, TargetPos) < 0.5f || _TempTarget == null || !Targets.Contains(_TempTarget))
-                {
-                    TargetNumber = Random.Range(0, Targets.Count);
-                    _TempTarget = Targets[TargetNumber];
-                    if (Targets[TargetNumber] != null)
-                    {
-                        TargetPos = Targets[TargetNumber].transform.position;
-                    }
-                    
-                }
+        if (!Fired)
+            return;
 
-                RotateToTarget(TargetPos);
+        Move(20f);
+        if (Targets.Count <= 0)
+            return; 
 
+        if (Vector3.Distance(transform.position, TargetPos) < 0.5f || _TempTarget == null || !Targets.Contains(_TempTarget))
+        {
+            TargetNumber = Random.Range(0, Targets.Count);
+            _TempTarget = Targets[TargetNumber];
+            if (Targets[TargetNumber] != null)
+            {
+                TargetPos = Targets[TargetNumber].transform.position;
             }
-            Move(20f);
+                    
         }
+
+        RotateToTarget(TargetPos);
+    
     }
 
     void LateUpdate() {
@@ -76,6 +78,7 @@ public class RazorbladeController : ProjectileController
     }
 
     public override void StartUp() {
+        base.StartUp();
         StartCoroutine(BlastOff());
     }
 

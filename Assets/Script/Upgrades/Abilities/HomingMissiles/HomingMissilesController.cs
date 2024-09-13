@@ -15,9 +15,9 @@ public class HomingMissilesController : AbilitiesController
         base.Start();
 
         // Copy the data from the ScriptableObject
-        if (AbilityData.GetType().Equals(typeof(MissilesSO)))
+        if (AbilitySO.GetType().Equals(typeof(MissilesSO)))
         {
-            MissilesSO BonusAbilityData = (MissilesSO)AbilityData;
+            MissilesSO BonusAbilityData = (MissilesSO)AbilitySO;
             MissileNumbers = BonusAbilityData.MissileNumbers;
             InternalExplode = BonusAbilityData.InternalExplode;
             AdditionalScale = BonusAbilityData.AdditionalScale;
@@ -30,7 +30,6 @@ public class HomingMissilesController : AbilitiesController
         TimeBeforeFire = AbilitiesStat.Cooldown;
         BaseDamage = AbilitiesStat.Damage;
         CheckUpgrade(WeaponUpgradeLevel);
-        DamageScaling = -0.6f;
     }
 
     void FixedUpdate() {
@@ -94,7 +93,7 @@ public class HomingMissilesController : AbilitiesController
         switch (WeaponUpgradeLevel) {
             case 1:
                 AbilitiesStat.Cooldown -= 1f;
-                DamageScaling += 0.2f;
+                AbilitiesStat.DamageScaling += 0.2f;
                 break;
             case 2:
                 InternalExplode -= 0.15f;
@@ -103,7 +102,7 @@ public class HomingMissilesController : AbilitiesController
                 MissileNumbers += 2;
             break;
             case 4:
-                DamageScaling += 0.2f;
+                AbilitiesStat.DamageScaling += 0.2f;
                 AdditionalScale += new Vector3(2, 2, 2);
             break;
             case 5:
@@ -111,14 +110,13 @@ public class HomingMissilesController : AbilitiesController
                 MissileNumbers += 3;
             break;
         }
-        BaseDamage += 5;
         UpdateDamage(playerController.PlayerStats.BaseDamage);
     }
 
     public override void UpdateDamage(int dmg) {
         if (this.enabled) {
-            AbilitiesStat.Damage = BaseDamage + dmg;
-            AbilitiesStat.Damage += (int)((float)(AbilitiesStat.Damage) * DamageScaling);
+            AbilitiesStat.Damage = BaseDamage;
+            AbilitiesStat.Damage += (int)((float)(dmg) * AbilitiesStat.DamageScaling);
         }
         
     }

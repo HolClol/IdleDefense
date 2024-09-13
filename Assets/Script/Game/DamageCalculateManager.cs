@@ -57,27 +57,25 @@ public class DamageCalculateManager : MonoBehaviour
 
     // Generally the array consist of follow: int[] {dmg, id, damagetype, crit?}; float[] {knockback, debouncetime}
     public void DamageCalculate(GameObject enemy, int[] intstat, float[] floatstat) {
-        if (!enemy.GetComponent<EnemyMain>().GetDebounce(intstat, floatstat))
-        { 
-            int Damage = enemy.GetComponent<EnemyMain>().DamageDealt;
-            if (intstat[0] > 0)
-            {
-                GameObject damageDisplay = GetPooledObject(enemy.transform.position, Damage, intstat[3] == 1);
-            }
 
-            if (AbilitiesDict.ContainsKey(intstat[1]))
-            {
-                AbilitiesDict[intstat[1]].Damage += intstat[0];
-            }   
-            else
-            {
-                AbilitiesDict[intstat[1]] = new AbilitiesStat(1, intstat[0]);
-                UpgradesInfo.AbilitiesStat.Add(new GameUpgradeInfo.AbilitiesInfo(intstat[1], 1, intstat[0]));
-            }
-                
+        int Damage = enemy.GetComponent<EnemyMain>().ReceiveDamage(intstat, floatstat);
+        if (intstat[0] > 0)
+        {
+            GameObject damageDisplay = GetPooledObject(enemy.transform.position, Damage, intstat[3] == 1);
+        }
 
-            TotalDamage += intstat[0];
-        }  
+        if (AbilitiesDict.ContainsKey(intstat[1]))
+        {
+            AbilitiesDict[intstat[1]].Damage += intstat[0];
+        }
+        else
+        {
+            AbilitiesDict[intstat[1]] = new AbilitiesStat(1, intstat[0]);
+            UpgradesInfo.AbilitiesStat.Add(new GameUpgradeInfo.AbilitiesInfo(intstat[1], 1, intstat[0]));
+        }
+
+
+        TotalDamage += intstat[0];
     }
 
     public void ReceiveUpgrade(int[] stat)

@@ -155,6 +155,9 @@ public class UpgradeManager : MonoBehaviour
             case 5:
                 ScriptName = "EnigmaticSawController";
                 break;
+            case 6:
+                ScriptName = "LancerBeamController";
+                break;
             case 20:
                 UpdateStat.Invoke(new int[] { 3, 20 });
                 break;

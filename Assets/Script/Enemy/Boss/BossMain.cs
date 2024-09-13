@@ -24,7 +24,7 @@ public class BossMain : EnemyMain
         Health -= DamageDealt;
      }
 
-    protected override void ReceiveDamage(int[] intinfo, float[] floatinfo)
+    public override int ReceiveDamage(int[] intinfo, float[] floatinfo)
     {
         DamageDealt = intinfo[0];
         float DamageKnockback = ((float)DamageDealt / 50) + floatinfo[0];
@@ -45,10 +45,8 @@ public class BossMain : EnemyMain
             StaleList.Add(intinfo[1]);
             if (StaleList.Count > 10)
                 StaleList.RemoveAt(StaleList.Count - 1);
-            if (floatinfo[1] > 0)
-                StartCoroutine(DamageCooldownPlay(intinfo[1], floatinfo[1]));
         }
-
+        return DamageDealt;
     }
 
 }

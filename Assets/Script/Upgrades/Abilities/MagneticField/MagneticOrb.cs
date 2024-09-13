@@ -32,6 +32,7 @@ public class MagneticOrb : ProjectileController
     }
 
     public override void StartUp() {
+        base.StartUp();
         StartCoroutine(Recover(0f));
         if (!Maxed) {
             StartCoroutine(DisableObject(ExistingTime));

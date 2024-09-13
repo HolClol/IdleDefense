@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a5c4d57029556d438064ab4aaf985b8, type: 3}
   m_Name: FieryEruption
   m_EditorClassIdentifier: 
-  AbilitiesStat:
+  AbilityData:
     ObjectsPrefab:
     - {fileID: 1211041536406801766, guid: b2359f9298ab3944db249ee9e58d4133, type: 3}
     Damage: 50
     ID: 2
     EliteID: 0
     Cooldown: 5
-    Knockback: 3
+    Knockback: 5
+    DamageScaling: 1.2
     CritRate: 0
     CritDamage: 1
     DamageType: {fileID: 11400000, guid: 0db67e35bfd117041be780e841ef1635, type: 2}
