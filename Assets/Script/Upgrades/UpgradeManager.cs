@@ -136,9 +136,9 @@ public class UpgradeManager : MonoBehaviour
         switch (RealId)
         { //Most upgrades does not need a special case and is calculated through the projectile handler itself
             case 0: //Weapon Upgrade
-                MainPlayer.transform.Find("AbilitiesHolder").GetComponent<WeaponController>().CheckUpgrade(LevelSelect);
                 if (UnlockEliteIndex)
                     MainPlayer.transform.Find("AbilitiesHolder").GetComponent<WeaponController>().UnlockELite(EliteID);
+                MainPlayer.transform.Find("AbilitiesHolder").GetComponent<WeaponController>().CheckUpgrade(LevelSelect);
                 break;
             case 1:
                 ScriptName = "HomingMissilesController";

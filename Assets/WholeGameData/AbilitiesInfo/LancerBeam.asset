@@ -15,6 +15,7 @@ MonoBehaviour:
   AbilityData:
     ObjectsPrefab:
     - {fileID: 6345353859011526784, guid: b6e6023113e5af24db9a614f9a94e466, type: 3}
+    - {fileID: 5415591520501843128, guid: 0828008e49c2a6f4c9c818f3eaefa5ea, type: 3}
     Damage: 10
     ID: 6
     EliteID: 0
@@ -29,3 +30,4 @@ MonoBehaviour:
   Radius: 12
   BeamCount: 1
   Piercing: 0
+  FractionBeam: 3

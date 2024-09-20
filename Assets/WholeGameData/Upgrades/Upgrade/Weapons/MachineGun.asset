@@ -26,7 +26,7 @@ MonoBehaviour:
   MaxLevel: 6
   ID: 0
   ElitePath:
-  - EliteUpgradeName: Pain
+  - EliteUpgradeName: Overclocked Fire
     UpgradeDescription:
     - Increase fire rate by 70% Knock back +0,5
     - Increase bullet speed by 30%
@@ -35,7 +35,7 @@ MonoBehaviour:
     - Bullet +1
     AlternateID: 1
     MaxLevel: 6
-  - EliteUpgradeName: Pain 2
+  - EliteUpgradeName: Nano Bullets
     UpgradeDescription:
     - 'Bullet now can bounce off screen  3 time  '
     - Increase damage multiplier by 20%

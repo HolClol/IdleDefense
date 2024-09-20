@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -12,6 +13,9 @@ public class WeaponController : MonoBehaviour
     [SerializeField] int NumbOfBullets = 1;
     [SerializeField] int Damage = 20;
     [SerializeField] int Piercing = 0;
+    [SerializeField] int Bounce = 3;
+    [SerializeField] float RageTime = 5f;
+    [SerializeField] float Lifetime = 1.5f;
     [SerializeField] float FireRate = 0.15f;
     [SerializeField] float AdditionalBulletSpeed = 0f;
     [Range(0f, 1f)] [SerializeField] private float CritRate = 0.1f;
@@ -103,7 +107,7 @@ public class WeaponController : MonoBehaviour
                 BulletList[i].transform.position = pos;
                 BulletList[i].transform.rotation = rotation;
                 BulletList[i].SetActive(true);
-                BulletScriptList[i].UpdateStat(new int[] { Damage, Piercing }, new float[] { AdditionalBulletSpeed, CritRate, CritDamage });
+                BulletScriptList[i].UpdateStat(new int[] { Damage, Piercing, Bounce }, new float[] { AdditionalBulletSpeed, CritRate, CritDamage, Lifetime});
                 BulletScriptList[i].StartUp();
                 return BulletList[i];
             }
@@ -113,7 +117,7 @@ public class WeaponController : MonoBehaviour
         GameObject BulletNew = Instantiate(BulletPrefab, pos, rotation, GameObject.Find("_Projectiles").transform);
 
         BulletNew.SetActive(true);
-        BulletNew.GetComponent<BulletController>().UpdateStat(new int[] { Damage, Piercing }, new float[] { AdditionalBulletSpeed, CritRate, CritDamage });
+        BulletNew.GetComponent<BulletController>().UpdateStat(new int[] { Damage, Piercing, Bounce }, new float[] { AdditionalBulletSpeed, CritRate, CritDamage, Lifetime });
 
         BulletList.Add(BulletNew);
         BulletScriptList.Add(BulletNew.GetComponent<BulletController>());
@@ -139,10 +143,56 @@ public class WeaponController : MonoBehaviour
             case 5:
                 CritRate += 0.1f;
                 break;
-
+            #region ELITE UPGRADE
+            case 6:
+                if (EliteID == 1)
+                {
+                    FireRate -= FireRate * 0.7f;
+                }    
+                else if (EliteID == 2)
+                {
+                    Lifetime += 1.5f;
+                    Bounce += 3;
+                }     
+                break;
+            case 7:
+                if (EliteID == 1)
+                    AdditionalBulletSpeed += 8f;
+                else if (EliteID == 2)
+                    DamageScaling += 0.2f;
+                break;
+            case 8:
+                FireRate -= FireRate * 0.2f;
+                break;
+            case 9:
+                if (EliteID == 1)
+                    Piercing += 1;
+                else if (EliteID == 2)
+                    AdditionalBulletSpeed += 5f;
+                break;
+            case 10:
+                if (EliteID == 1)
+                    NumbOfBullets += 1;
+                else if (EliteID == 2)
+                    RageTime += 2f;
+                break;
+            #endregion
         }
 
         UpdateDamage(playerController.PlayerStats.BaseDamage);
+    }
+    private IEnumerator RagePower()
+    {
+        Debug.Log("Rage activated");
+        CritRate += 0.2f;
+        DamageScaling += 0.1f;
+        yield return new WaitForSeconds(RageTime);
+        CritRate -= 0.2f;
+        DamageScaling -= 0.1f;
+    }
+    public void RageActivate()
+    {
+        StartCoroutine(RagePower());
     }
 
     public virtual void UnlockELite(int eliteid)

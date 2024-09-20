@@ -32,6 +32,34 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3830184994728737616, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      propertyPath: UpdateStat.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830184994728737616, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      propertyPath: UpdateStat.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: e09cb86794959894c918895ce5d9ee15, type: 2}
+    - target: {fileID: 3830184994728737616, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      propertyPath: UpdateStat.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830184994728737616, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      propertyPath: UpdateStat.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Raise
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830184994728737616, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      propertyPath: UpdateStat.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: GameEvent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830184994728737616, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      propertyPath: UpdateStat.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172520763231136018, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      propertyPath: EnemyID
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4172520763231136018, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
       propertyPath: EnemyType
       value: 

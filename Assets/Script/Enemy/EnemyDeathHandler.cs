@@ -8,6 +8,7 @@ public class EnemyDeathHandler : MonoBehaviour
 {
     public EnemyEffectScriptableObject EnemyVFXPrefab;
     public UnityEvent<int[]> UpdateStat;
+    public UnityEvent<int[]> DecreaseCap;
 
     protected EnemyMain m_enemyState;
     protected Rigidbody2D m_Rb;
@@ -38,6 +39,7 @@ public class EnemyDeathHandler : MonoBehaviour
 
             UpdateStat.Invoke(new int[] { 1, m_enemyState.Experience });
             UpdateStat.Invoke(new int[] { 8, m_enemyState.MaxHealth/50, m_enemyState.Experience / 100 });
+            DecreaseCap.Invoke(new int[] { m_enemyState.EnemyID });
             Destroy(gameObject, 5);
         }
 
@@ -47,6 +49,7 @@ public class EnemyDeathHandler : MonoBehaviour
             {
                 UpdateStat.Invoke(new int[] { 1, m_enemyState.Experience });
                 UpdateStat.Invoke(new int[] { 8, m_enemyState.MaxHealth/50, m_enemyState.Experience / 100});
+                DecreaseCap.Invoke(new int[] { m_enemyState.EnemyID });
                 GameObject ClonedParticle = Instantiate(EnemyVFXPrefab.EffectPrefab[0], transform.position, transform.rotation, GameObject.Find("_Projectiles").transform);
             }
 

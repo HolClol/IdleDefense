@@ -53,7 +53,7 @@ public class PlayerGameStat : MonoBehaviour
         {
             if (id == MainController.PlayerStats.Upgrades[i].UpgradeID)
             {
-                return i;
+                return MainController.PlayerStats.Upgrades[i].ElitePath - 1;
             }
         }
         return result;

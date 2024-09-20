@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3077155336640137192}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BeamPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 5181664968991599424}
   - component: {fileID: 349505705950739661}
   - component: {fileID: 4158642017084356878}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LancerBeamLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,6 +149,7 @@ MonoBehaviour:
         m_CallState: 2
   ID: 6
   _TempTarget: {fileID: 0}
+  FractionBeamPrefab: {fileID: 5415591520501843128, guid: 0828008e49c2a6f4c9c818f3eaefa5ea, type: 3}
   FirePoint: {fileID: 3077155336640137192}
   LaserPointer: {fileID: 4158642017084356878}
 --- !u!120 &4158642017084356878

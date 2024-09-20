@@ -12,12 +12,14 @@ public class PlayerManager : MonoBehaviour
     public UnityEvent<int[]> UpdateUI;
     public UnityEvent<int[]> EndScreenEvent;
     public UnityEvent SuddenPause;
+    public UnityEvent RageActivate;
 
     [Header("Stats")]
     private int MaxHealth = 100;
+    private int MaxRage = 100;
     [SerializeField] int EXPToLevelUp = 250;
     [SerializeField] int Level = 1;
-    public int ExperienceValue, HealthValue, ShieldValue, EnemiesEliminated, PointsEarned, CoinsEarned;
+    public int ExperienceValue, HealthValue, ShieldValue, RageValue, EnemiesEliminated, PointsEarned, CoinsEarned;
 
     private int loop = 0;
     private bool Leveling;
@@ -69,6 +71,14 @@ public class PlayerManager : MonoBehaviour
                 PointsEarned += array[2];
                 EnemiesEliminated += 1;
             break;
+            case 9: //Add rage
+                RageValue += array[1];
+                if (RageValue >= MaxRage)
+                {
+                    RageActivate.Invoke();
+                    RageValue = 0;
+                }
+                break;
         }
     }
 

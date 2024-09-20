@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class BulletController : MonoBehaviour
 { 
-    [Range(1f,5f)]
-    public float ProjectileLifetime = 3f;
     public int DamageType = 1; 
     public UnityEvent<GameObject, int[], float[]> ResponseDamage;
 
@@ -16,9 +14,12 @@ public class BulletController : MonoBehaviour
     private TrailRenderer _trailRenderer;
     private int Damage = 20;
     private int Piercing = 0;
+    private int Bounce = 0;
     [Range(0f, 1f)] private float CritRate = 0.1f;
     private float CritDamage = 1f;
-    private float ProjectileSpeed = 20f;
+    private float ProjectileSpeed = 30f;
+    [Range(1f, 5f)]
+    private float ProjectileLifetime = 1.5f;
 
     // ======================================================
     // Start is called before the first frame update
@@ -63,7 +64,17 @@ public class BulletController : MonoBehaviour
             else {
                 gameObject.SetActive(false);
             }
-        }      
+        }
+        else if (trigger.gameObject.GetComponent<EdgeCollider2D>() && Bounce > 0)
+        {
+            var firstContact = trigger.gameObject.GetComponent<Collider2D>().ClosestPoint(transform.position);
+            Vector2 normal = (transform.position - new Vector3(firstContact.x, firstContact.y)).normalized;
+            Vector2 newVelocity = Vector2.Reflect(transform.up.normalized, normal);
+
+            transform.up = newVelocity;
+            Bounce -= 1;
+
+        }
         
     }
     private int CritCalculate(int dmg, float cc, float cdmg)
@@ -87,9 +98,12 @@ public class BulletController : MonoBehaviour
     public void UpdateStat(int[] intstat, float[] floatstat) {
         Damage = intstat[0];
         Piercing = intstat[1];
+        Bounce = intstat[2];
         ProjectileSpeed = 15f + floatstat[0];
         CritRate = floatstat[1];
         CritDamage = floatstat[2];
+        ProjectileLifetime = floatstat[3];
+        
     }
 }
 

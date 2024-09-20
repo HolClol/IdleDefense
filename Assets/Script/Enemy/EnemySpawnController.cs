@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,9 +21,10 @@ public class EnemySpawnController : MonoBehaviour
     private StageInfo.EnemyPrefab enemyPrefabs;
     private List<Transform> enemySpawnPos = new List<Transform>();
     private List<EnemyEntity> actualEnemyPrefabs = new List<EnemyEntity>();
+    private Dictionary<int, int> enemyCapMechanic = new Dictionary<int, int>();
     private Transform _enemySpawn;
     private GameObject _Boss;
-    private int BonusMulti = 0;
+    private float BonusMulti = 0;
 
     // Stat buff for enemies \\ 
 
@@ -115,6 +117,7 @@ public class EnemySpawnController : MonoBehaviour
             IncreaseMulti(0);
         }
 
+        enemyCapMechanic.Clear();
     }
 
     private IEnumerator SpawnEnemy()
@@ -130,28 +133,30 @@ public class EnemySpawnController : MonoBehaviour
         {
             int randEnemy = Random.Range(0, actualEnemyPrefabs.Count);
             int randPos = Random.Range(0, enemySpawnPos.Count);
-            bool successpawn = false;
-            while (!successpawn)
+
+            int spawnchance = actualEnemyPrefabs[randEnemy].SpawnChance;
+
+            GameObject enemyToSpawn = actualEnemyPrefabs[randEnemy].EnemyPrefab;
+            Transform enemyToSpawnPos = enemySpawnPos[randPos];
+
+            if (spawnchance > Random.Range(0,100))
             {
-                int randomenemy = Random.Range(0, actualEnemyPrefabs.Count);
-                int spawnchance = actualEnemyPrefabs[randomenemy].SpawnChance;
-
-                if (spawnchance > Random.Range(0,20))
-                {
-                    randomenemy = Random.Range(0, actualEnemyPrefabs.Count);
-                    spawnchance = actualEnemyPrefabs[randomenemy].SpawnChance;
-
-                    GameObject enemyToSpawn = actualEnemyPrefabs[randomenemy].EnemyPrefab;
-                    Transform enemyToSpawnPos = enemySpawnPos[randPos];
-
-                    GameObject Enemy = Instantiate(enemyToSpawn, enemyToSpawnPos.position, Quaternion.identity, _enemySpawn);
-                    Enemy.GetComponent<EnemyMain>().MaxHealth += (Enemy.GetComponent<EnemyMain>().MaxHealth * BonusMulti);
-                    Enemy.GetComponent<EnemyMain>().Experience += (Enemy.GetComponent<EnemyMain>().Experience * BonusMulti);
-                    // Enemy.GetComponent<EnemyBehaviourScript>().EnemyMovespeed += SpeedIncrease;
-                    successpawn = true;
-                    yield return new WaitForSeconds(0.05f);
-                }
+                int id = enemyToSpawn.GetComponent<EnemyMain>().EnemyID;
+                if (enemyCapMechanic.ContainsKey(id) && enemyCapMechanic[id] >= actualEnemyPrefabs[randEnemy].SpawnCap && actualEnemyPrefabs[randEnemy].SpawnCap > 0)
+                    yield break;
                 
+                if (enemyCapMechanic.ContainsKey(id))
+                    enemyCapMechanic[id] += 1;
+                else
+                    enemyCapMechanic[id] = 0;
+
+                GameObject Enemy = Instantiate(enemyToSpawn, enemyToSpawnPos.position, Quaternion.identity, _enemySpawn);
+                Enemy.GetComponent<EnemyMain>().MaxHealth += (int)(Enemy.GetComponent<EnemyMain>().MaxHealth * BonusMulti);
+                Enemy.GetComponent<EnemyMain>().Experience += (int)(Enemy.GetComponent<EnemyMain>().Experience * BonusMulti);
+                
+                // Enemy.GetComponent<EnemyBehaviourScript>().EnemyMovespeed += SpeedIncrease;
+
+                yield return new WaitForSeconds(0.05f);
             }
             
         }
@@ -165,6 +170,13 @@ public class EnemySpawnController : MonoBehaviour
         yield return new WaitForSeconds(6f);
         GameObject Boss = Instantiate(bossToSpawn, bossToSpawnPos.position, Quaternion.identity, _enemySpawn);
         _Boss = Boss;
+    }
+
+    public void DecreaseEnemyCap(int[] info)
+    {
+        if (enemyCapMechanic.ContainsKey(info[0]))
+            enemyCapMechanic[info[0]] -= 1;
+            
     }
 
 

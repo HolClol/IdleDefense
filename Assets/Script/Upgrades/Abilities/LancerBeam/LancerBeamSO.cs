@@ -11,4 +11,5 @@ public class LancerBeamSO : AbilitiesSO
     public int Radius = 12;
     public int BeamCount = 1;
     public int Piercing = 0;
+    public int FractionBeam = 3;
 }

@@ -9,22 +9,31 @@ public class BeamController : ProjectileController
     [SerializeField] private GameObject _TempTarget;
     [SerializeField] private Transform FirePoint;
     [SerializeField] private LineRenderer LaserPointer;
+    [HideInInspector] public List<GameObject> FractionBeam = new List<GameObject>();
+    private List<BeamController> FractionBeamScript = new List<BeamController>();
     private List<GameObject> Targets = new List<GameObject> { };
+    private GameObject IgnoreMain;
 
     private Vector3 TargetPos = new Vector3(0f, 0f, 0f);
+    private Vector3 MainTarget;
     private LayerMask enemyLayer;
 
     private float LaserDistance = 12f;
     private float Duration = 4f;
     private float DamageInterval = 0.5f;
+    private int FractionBeamCount = 3;
     private int TargetNumber;
     private int Piercing = 0;
+    private bool FractionUnlocked = false;
+    private bool SetUpFractions = false;
     private bool Fired = false;
     // Start is called before the first frame update
     protected override void Start()
     {
         enemyLayer = LayerMask.GetMask("Enemy");
-        StartUp();
+        if (!MainProjectile)
+            LaserDistance = LaserDistance / 3;
+        StartUp();  
     }
 
     protected override void FixedUpdate()
@@ -41,25 +50,55 @@ public class BeamController : ProjectileController
             TargetPos = _TempTarget.transform.position;
             RotateToTarget(TargetPos);
 
-            if (IsFacingTarget(TargetPos) && Vector3.Distance(transform.position, TargetPos) <= LaserDistance + 1)
-                ShootLaser();   
+            if (IsFacingTarget(TargetPos) && Vector3.Distance(transform.position, TargetPos) <= LaserDistance)
+            {
+                ShootLaser();
+                if (MainProjectile && FractionUnlocked)
+                    UpdatePosition();
+            }
+                
             else
+            {
                 StartCoroutine(ResetBeam());
+                if (MainProjectile && FractionUnlocked)
+                    foreach (var fraction in FractionBeam)
+                        fraction.SetActive(false);
+                        
+            }
+                
         }   
 
     }
 
     private void FindTarget()
     {
-        if (_TempTarget == null || !Targets.Contains(_TempTarget) || Vector3.Distance(transform.position, TargetPos) > LaserDistance)
-        { 
-            TargetNumber = Random.Range(0, Targets.Count);
-            if (Targets[TargetNumber] != null)
+        while (_TempTarget == null || !Targets.Contains(_TempTarget) || Vector3.Distance(transform.position, TargetPos) > LaserDistance)
+        {
+            do
             {
-                _TempTarget = Targets[TargetNumber];
-                TargetPos = Targets[TargetNumber].transform.position;
+                TargetNumber = Random.Range(0, Targets.Count);
             }
+            while (Targets[TargetNumber] == null || (Targets[TargetNumber] == IgnoreMain && !MainProjectile));
+
+            _TempTarget = Targets[TargetNumber];
+            TargetPos = Targets[TargetNumber].transform.position;
+                
+            if (MainProjectile && FractionUnlocked)
+            {
+                IgnoreMain = Targets[TargetNumber];
+                MainTarget = Targets[TargetNumber].transform.position;
+            }
+                     
         }
+    }
+
+    private void UpdatePosition()
+    {
+        for (int i = 0; i < FractionBeam.Count; i++)
+        {
+            FractionBeam[i].transform.position = MainTarget;
+            FractionBeamScript[i].SetMainTarget(MainTarget, IgnoreMain);     
+        }      
     }
 
     private void ShootLaser()
@@ -76,16 +115,32 @@ public class BeamController : ProjectileController
         if (index > Piercing)
             index = Piercing;
 
+        if (!MainProjectile && _hit[index].collider != null && _hit[index].collider.gameObject == IgnoreMain)
+            index = _hit.Length - 1;
+
         if (_hit[index].collider != null) // Main Target
         {
             Draw2DRay(FirePoint.position, _hit[index].point);
+
+            if (MainProjectile && FractionUnlocked)
+            {  
+                IgnoreMain = _hit[index].collider.gameObject;
+                MainTarget = IgnoreMain.transform.position;
+            }
+                
             for (int i = 0; i < index + 1; i++)
             {
                 if (_hit[i].collider != null) // Check other targets within the raycast
                     if (_hit[i].collider.gameObject.CompareTag("Enemy"))
+                    {
+                        if (_hit[i].collider.gameObject == IgnoreMain && !MainProjectile)
+                            continue;
+
                         SendDamage(_hit[i].collider.gameObject,
                         new int[] { Damage, ID, DamageType, 0 },
                         new float[] { Knockback, DamageInterval, CritRate, CritDamage });
+                    }
+                        
             }
 
         }
@@ -114,7 +169,7 @@ public class BeamController : ProjectileController
         float angle = Mathf.Atan2(Target_direction.y, Target_direction.x) * Mathf.Rad2Deg;
 
         Quaternion q = Quaternion.Euler(new Vector3(0, 0, angle));
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, q, 1f);
+        transform.localRotation = q;
     }
 
     private IEnumerator ResetBeam()
@@ -127,13 +182,30 @@ public class BeamController : ProjectileController
 
     private IEnumerator ActivateBeam()
     {
-        Fired = true;
-        TargetNumber = 0;
-        _TempTarget = null;
+        Fired = true;          
+        if (MainProjectile && FractionUnlocked && !SetUpFractions)
+        {
+            for (int i = 0; i < FractionBeam.Count; i++)
+            {
+                FractionBeamScript.Add(FractionBeam[i].GetComponent<BeamController>());
+            }
+            SetUpFractions = true;
+        }
         yield return new WaitForSeconds(Duration);
+        gameObject.SetActive(false);    
+    }
+
+    public void OnDisable()
+    {
         Fired = false;
         Draw2DRay(new Vector3(0, 0, 0), new Vector3(0, 0, 0));
-        gameObject.SetActive(false);
+        TargetNumber = 0;
+        TargetPos = new Vector3(0, 0, 0);
+        _TempTarget = null;
+
+        if (MainProjectile && FractionUnlocked)
+            foreach (var fraction in FractionBeam)
+                fraction.SetActive(false);
     }
 
     public override void StartUp()
@@ -147,6 +219,8 @@ public class BeamController : ProjectileController
         Damage = intvalue[0];
         DamageType = intvalue[1];
         Piercing = intvalue[2];
+        FractionUnlocked = intvalue[3] == 1 ? true : false;
+        FractionBeamCount = intvalue[4];
         Knockback = floatvalue[0];
         Duration = floatvalue[1];
         DamageInterval = floatvalue[2];
@@ -157,5 +231,11 @@ public class BeamController : ProjectileController
     public void GetPooledTargets(List<GameObject> EnemyPool)
     {
         Targets = EnemyPool;
+    }
+
+    public void SetMainTarget(Vector3 target, GameObject maintarget)
+    {
+        MainTarget = target;
+        IgnoreMain = maintarget;
     }
 }

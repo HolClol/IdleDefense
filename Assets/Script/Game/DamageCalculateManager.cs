@@ -24,10 +24,12 @@ public class DamageCalculateManager : MonoBehaviour
 
     public GameUpgradeInfo UpgradesInfo;
     public GameObject _damageDisplayPrefab;
+    public UnityEvent<int[]> IncreaseRage;
 
     private Dictionary<int, AbilitiesStat> AbilitiesDict = new Dictionary<int, AbilitiesStat>();
     private float UpdateCooldown = 0f;
     private int TotalDamage = 0;
+    private bool RageBlock = false;
 
     private List<GameObject> PooledDisplay = new List<GameObject>();
     private List<DamageDisplay> PooledDisplayScript = new List<DamageDisplay>();
@@ -74,8 +76,22 @@ public class DamageCalculateManager : MonoBehaviour
             UpgradesInfo.AbilitiesStat.Add(new GameUpgradeInfo.AbilitiesInfo(intstat[1], 1, intstat[0]));
         }
 
+        if (!RageBlock)
+        {
+            int Rage = Mathf.Max(Damage / 100, 1);
+            StartCoroutine(RageReset(Rage));
+        }
+
 
         TotalDamage += intstat[0];
+    }
+
+    private IEnumerator RageReset(int rage)
+    {
+        RageBlock = true;
+        IncreaseRage.Invoke(new int[] { 9, rage });
+        yield return new WaitForSeconds(0.1f);
+        RageBlock = false;
     }
 
     public void ReceiveUpgrade(int[] stat)

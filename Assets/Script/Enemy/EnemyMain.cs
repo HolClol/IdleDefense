@@ -14,6 +14,7 @@ public class EnemyMain : MonoBehaviour, IDamageDisplay
     public int Health;
     public int Damage = 1;
     public int Experience = 10;
+    public int EnemyID;
     public float EnemyMovespeed;
     public float EnemyRotateSpeed;
     public float SkillCooldown;

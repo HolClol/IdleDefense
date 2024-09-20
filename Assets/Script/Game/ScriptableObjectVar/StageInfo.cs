@@ -6,10 +6,10 @@ using UnityEngine.UI;
 [System.Serializable] public class EnemyEntity
 {
     public GameObject EnemyPrefab;
-    [Range(1, 20)] public int SpawnChance = 10;
+    [Range(1, 100)] public int SpawnChance = 50;
     public int SpawnCap;
-    public int BonusHealthMulti = 0;
-    public int BonusExpMulti = 0;
+    public float BonusHealthMulti = 0;
+    public float BonusExpMulti = 0;
 }
 
 [CreateAssetMenu(fileName = "StageInfo", menuName = "ScriptableObjects/Game/StageInfo")]
@@ -35,8 +35,8 @@ public class StageInfo : ScriptableObject
     {
         public List<LevelPrefabs> LevelPrefab;
         public List<GameObject> BossPrefab;
-        public int StartingHPBonus;
-        public int StartingEXPBonus;
+        public float StartingHPBonus;
+        public float StartingEXPBonus;
     }
 
     public string StageName;

@@ -27,4 +27,22 @@ MonoBehaviour:
   - Lancer Beam now pierce throught 3 enemies
   MaxLevel: 6
   ID: 6
-  ElitePath: []
+  ElitePath:
+  - EliteUpgradeName: After Burn
+    UpgradeDescription:
+    - 'Each lancer beam leave a trait of light that deal 70% of it''s damage  '
+    - Damage +25%
+    - Beam size +20%
+    - Reduce ability cooldown by 30%
+    - Piercing +2
+    AlternateID: 1
+    MaxLevel: 6
+  - EliteUpgradeName: Refraction Beam
+    UpgradeDescription:
+    - Each lancer beam can fracture hitting other enemies upon impact
+    - Damage +25%
+    - Fraction beam +1
+    - 15% Chance to apply Cold
+    - Piercing +1
+    AlternateID: 2
+    MaxLevel: 6

@@ -6173,7 +6173,212 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd870d097a15bab448fd0b6a1fbfe500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 11400000, guid: ae13208cc6409194ba9f1fca72e5ac01, type: 2}
+  enemyPrefab:
+    LevelPrefab:
+    - EnemySpawn:
+      - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+        SpawnChance: 70
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      SpawnRate: 0
+      Timer: 0
+      SpawnMax: 0
+      SpawnMin: 0
+    - EnemySpawn:
+      - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+        SpawnChance: 100
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+        SpawnChance: 65
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      SpawnRate: 0
+      Timer: 0
+      SpawnMax: 0
+      SpawnMin: 0
+    - EnemySpawn:
+      - EnemyPrefab: {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+        SpawnChance: 90
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+        SpawnChance: 80
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      SpawnRate: 0
+      Timer: 0
+      SpawnMax: 0
+      SpawnMin: 0
+    - EnemySpawn:
+      - EnemyPrefab: {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+        SpawnChance: 60
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+        SpawnChance: 70
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+        SpawnChance: 90
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      SpawnRate: 0
+      Timer: 0
+      SpawnMax: 0
+      SpawnMin: 0
+    - EnemySpawn:
+      - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+        SpawnChance: 90
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 7653904480730112984, guid: e52b7a5acc7853244a212bbd1d9c14b3, type: 3}
+        SpawnChance: 50
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      SpawnRate: 1.2
+      Timer: 45
+      SpawnMax: 0
+      SpawnMin: 0
+    - EnemySpawn:
+      - EnemyPrefab: {fileID: 7653904480730112984, guid: e52b7a5acc7853244a212bbd1d9c14b3, type: 3}
+        SpawnChance: 60
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+        SpawnChance: 70
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+        SpawnChance: 80
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+        SpawnChance: 70
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      SpawnRate: 0.8
+      Timer: 0
+      SpawnMax: 0
+      SpawnMin: 0
+    - EnemySpawn:
+      - EnemyPrefab: {fileID: 7653904480730112984, guid: e52b7a5acc7853244a212bbd1d9c14b3, type: 3}
+        SpawnChance: 60
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+        SpawnChance: 70
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 1099916991008075792, guid: ccbc867ba92bab54a8b6c3d5d0161e0a, type: 3}
+        SpawnChance: 50
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+        SpawnChance: 70
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 2196563476345590614, guid: 67e1a3f29623b7f459103148c1a47f70, type: 3}
+        SpawnChance: 60
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      SpawnRate: 0
+      Timer: 0
+      SpawnMax: 0
+      SpawnMin: 0
+    - EnemySpawn:
+      - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+        SpawnChance: 50
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 7653904480730112984, guid: e52b7a5acc7853244a212bbd1d9c14b3, type: 3}
+        SpawnChance: 50
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+        SpawnChance: 65
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 2196563476345590614, guid: 67e1a3f29623b7f459103148c1a47f70, type: 3}
+        SpawnChance: 40
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+        SpawnChance: 70
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 1099916991008075792, guid: ccbc867ba92bab54a8b6c3d5d0161e0a, type: 3}
+        SpawnChance: 55
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      SpawnRate: 0
+      Timer: 0
+      SpawnMax: 0
+      SpawnMin: 0
+    - EnemySpawn:
+      - EnemyPrefab: {fileID: 7653904480730112984, guid: e52b7a5acc7853244a212bbd1d9c14b3, type: 3}
+        SpawnChance: 80
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 2196563476345590614, guid: 67e1a3f29623b7f459103148c1a47f70, type: 3}
+        SpawnChance: 60
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 1099916991008075792, guid: ccbc867ba92bab54a8b6c3d5d0161e0a, type: 3}
+        SpawnChance: 70
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+        SpawnChance: 50
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
+        SpawnChance: 50
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+        SpawnChance: 50
+        SpawnCap: 0
+        BonusHealthMulti: 0
+        BonusExpMulti: 0
+      SpawnRate: 0
+      Timer: 0
+      SpawnMax: 0
+      SpawnMin: 0
+    BossPrefab:
+    - {fileID: 6947487980923986090, guid: 24bc79ad5117f9740abf7fb08789273b, type: 3}
+    StartingHPBonus: 0
+    StartingEXPBonus: 0
   m_HealthBar: {fileID: 77072846}
   m_Text: {fileID: 953058205}
 --- !u!224 &1509432519

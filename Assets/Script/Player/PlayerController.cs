@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     public List<GameObject> EnemyInZone;
 
     private Vector2 TouchPos;
-    private Vector2 TargetPos;
+    private Vector2 TargetPos = new Vector2(0, 0);
     private bool MouseInteracting;
 
     // ======================================================
@@ -92,7 +92,6 @@ public class PlayerController : MonoBehaviour
                 CrosshairTarget.transform.position = TargetPos;
             }
             else if (LockedIn && !TouchPriority) { //Nearest Enemy Target Auto
-                EnemyInZone.RemoveAll(GameObject => GameObject == null);
                 TargetPos = EnemyInZone[0].transform.position;
                 AutoTargetNearestEnemy();
 

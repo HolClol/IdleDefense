@@ -10,29 +10,38 @@ public class DamageDisplay : MonoBehaviour
     
     public TextMeshPro damageText;
     private Vector3 targetPos = new Vector3(0,1,0);
-    private Tween moveTween, fadeTween, scaleTween, colorTween;
+    private Tween moveTween, fadeTween, scaleTween/*, colorTween*/;
 
     private void Awake()
     {
+        DOTween.Init(true, true, LogBehaviour.Verbose).SetCapacity(500, 50);
         DOTween.defaultAutoPlay = AutoPlay.None;
         // Store the tweens in variables
         moveTween = DOTween.To(() => transform.position, x => transform.position = x, targetPos + new Vector3(0, 2f, 0), 0.6f)
-            .SetAutoKill(false);
+            .SetAutoKill(false)
+            .Pause();
         fadeTween = DOTween.ToAlpha(() => damageText.color, x => damageText.color = x, 0f, 0.4f)
             .From(1f)
             .SetDelay(0.3f)
-            .SetAutoKill(false);
+            .SetAutoKill(false)
+            .Pause();
         scaleTween = DOTween.To(() => transform.localScale, x => transform.localScale = x, Vector3.zero, 0.4f)
             .From(Vector3.one)
             .SetDelay(0.4f)
-            .SetAutoKill(false);
-        colorTween = damageText.DOColor(Color.yellow, 0.2f)
-            .SetAutoKill(false);
+            .SetAutoKill(false)
+            .Pause();
+        /*colorTween = damageText.DOColor(Color.yellow, 0.2f)
+            .SetAutoKill(false);*/
     }
 
     public void UpdateDisplay(int dmg, Vector3 pos, bool crit) {
+
+        moveTween.Rewind();
+        fadeTween.Rewind();
+        scaleTween.Rewind();
+
         targetPos = pos + new Vector3(0, 1f, 0);
-        ((Tweener)moveTween).ChangeStartValue(targetPos);
+        ((Tweener)moveTween).ChangeStartValue(targetPos, -1f);
 
         if (!crit)
             SetDamageText(crit, dmg, Color.white, 6f, 0.6f, 0.4f, 0.4f);
@@ -40,14 +49,24 @@ public class DamageDisplay : MonoBehaviour
             SetDamageText(crit, dmg, Color.yellow, 8f, 1.2f, 1f, 1f);
 
         // Replay the tweens 
-        moveTween.Restart();
-        fadeTween.Restart();
-        scaleTween.Restart();
+        ResetAndRestartTween(moveTween);
+        ResetAndRestartTween(fadeTween);
+        ResetAndRestartTween(scaleTween);
 
         StartCoroutine(Disable(crit));
     }
 
-    void SetDamageText(bool crit, int dmg, Color textColor, float fontSize, float moveDuration, float fadeDuration, float scaleDuration)
+    void ResetAndRestartTween(Tween tween)
+    {
+        if (tween.IsComplete())
+        {
+            tween.Rewind();  // Rewind to reset the tween fully
+        }
+
+        tween.Restart();  // Restart the tween after rewinding
+    }
+
+    private void SetDamageText(bool crit, int dmg, Color textColor, float fontSize, float moveDuration, float fadeDuration, float scaleDuration)
     {
         damageText.color = textColor;
         damageText.text = crit ? $"{dmg}!" : dmg.ToString();
@@ -60,11 +79,11 @@ public class DamageDisplay : MonoBehaviour
         UpdateTweenValues(moveEndValue, fadeEndColor, fadeDuration, scaleDuration, moveDuration);
     }
 
-    void UpdateTweenValues(Vector3 moveEndValue, Color fadeEndColor, float fadeDuration, float scaleDuration, float moveDuration)
+    private void UpdateTweenValues(Vector3 moveEndValue, Color fadeEndColor, float fadeDuration, float scaleDuration, float moveDuration)
     {
-        ((Tweener)moveTween).ChangeEndValue(moveEndValue, moveDuration);
-        ((Tweener)fadeTween).ChangeEndValue(fadeEndColor, fadeDuration);
-        ((Tweener)scaleTween).ChangeEndValue(Vector3.zero, scaleDuration);
+        ((Tweener)moveTween).ChangeEndValue(moveEndValue, moveDuration, true);
+        ((Tweener)fadeTween).ChangeEndValue(fadeEndColor, fadeDuration, true);
+        ((Tweener)scaleTween).ChangeEndValue(Vector3.zero, scaleDuration, true);
     }
 
     private IEnumerator Disable(bool crit) {
