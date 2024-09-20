@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BeamController : ProjectileController
@@ -21,19 +19,21 @@ public class BeamController : ProjectileController
     private float LaserDistance = 12f;
     private float Duration = 4f;
     private float DamageInterval = 0.5f;
-    private int FractionBeamCount = 3;
+    private float StartWidth, EndWidth;
     private int TargetNumber;
     private int Piercing = 0;
+    private bool Fired = false;
     private bool FractionUnlocked = false;
     private bool SetUpFractions = false;
-    private bool Fired = false;
-    // Start is called before the first frame update
-    protected override void Start()
+    private bool BurnAfterUnlocked = false;
+
+    private void Awake()
     {
         enemyLayer = LayerMask.GetMask("Enemy");
+        StartWidth = LaserPointer.startWidth;
+        EndWidth = LaserPointer.endWidth;
         if (!MainProjectile)
             LaserDistance = LaserDistance / 3;
-        StartUp();  
     }
 
     protected override void FixedUpdate()
@@ -74,6 +74,7 @@ public class BeamController : ProjectileController
     {
         while (_TempTarget == null || !Targets.Contains(_TempTarget) || Vector3.Distance(transform.position, TargetPos) > LaserDistance)
         {
+            if (Targets.Count <= 0) break;
             do
             {
                 TargetNumber = Random.Range(0, Targets.Count);
@@ -197,15 +198,18 @@ public class BeamController : ProjectileController
 
     public void OnDisable()
     {
+        if (MainProjectile && FractionUnlocked)
+            foreach (var fraction in FractionBeam)
+                fraction.SetActive(false);
+        else if (MainProjectile && BurnAfterUnlocked && _TempTarget != null)
+            MainScript.TargetStruckSignal(_TempTarget);
+
         Fired = false;
         Draw2DRay(new Vector3(0, 0, 0), new Vector3(0, 0, 0));
         TargetNumber = 0;
         TargetPos = new Vector3(0, 0, 0);
         _TempTarget = null;
-
-        if (MainProjectile && FractionUnlocked)
-            foreach (var fraction in FractionBeam)
-                fraction.SetActive(false);
+       
     }
 
     public override void StartUp()
@@ -219,13 +223,19 @@ public class BeamController : ProjectileController
         Damage = intvalue[0];
         DamageType = intvalue[1];
         Piercing = intvalue[2];
-        FractionUnlocked = intvalue[3] == 1 ? true : false;
-        FractionBeamCount = intvalue[4];
+        if (!FractionUnlocked && !BurnAfterUnlocked) { 
+            FractionUnlocked = intvalue[3] == 1 ? true : false;
+            BurnAfterUnlocked = intvalue[4] == 1 ? true : false;
+        }
         Knockback = floatvalue[0];
         Duration = floatvalue[1];
         DamageInterval = floatvalue[2];
         CritRate = floatvalue[3];
         CritDamage = floatvalue[4];
+
+        if (LaserPointer.startWidth != StartWidth + floatvalue[5])
+            LaserPointer.widthCurve = AnimationCurve.Linear(0f, StartWidth + floatvalue[5], 1f, EndWidth + floatvalue[5]);
+
     }
 
     public void GetPooledTargets(List<GameObject> EnemyPool)

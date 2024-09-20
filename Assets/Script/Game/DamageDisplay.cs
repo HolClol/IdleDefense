@@ -14,8 +14,6 @@ public class DamageDisplay : MonoBehaviour
 
     private void Awake()
     {
-        DOTween.Init(true, true, LogBehaviour.Verbose).SetCapacity(500, 50);
-        DOTween.defaultAutoPlay = AutoPlay.None;
         // Store the tweens in variables
         moveTween = DOTween.To(() => transform.position, x => transform.position = x, targetPos + new Vector3(0, 2f, 0), 0.6f)
             .SetAutoKill(false)
@@ -49,14 +47,14 @@ public class DamageDisplay : MonoBehaviour
             SetDamageText(crit, dmg, Color.yellow, 8f, 1.2f, 1f, 1f);
 
         // Replay the tweens 
-        ResetAndRestartTween(moveTween);
-        ResetAndRestartTween(fadeTween);
-        ResetAndRestartTween(scaleTween);
+        moveTween.Restart();
+        fadeTween.Restart();
+        scaleTween.Restart();
 
         StartCoroutine(Disable(crit));
     }
 
-    void ResetAndRestartTween(Tween tween)
+    private void ResetAndRestartTween(Tween tween)
     {
         if (tween.IsComplete())
         {

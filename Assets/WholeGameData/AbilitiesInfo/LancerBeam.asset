@@ -16,6 +16,7 @@ MonoBehaviour:
     ObjectsPrefab:
     - {fileID: 6345353859011526784, guid: b6e6023113e5af24db9a614f9a94e466, type: 3}
     - {fileID: 5415591520501843128, guid: 0828008e49c2a6f4c9c818f3eaefa5ea, type: 3}
+    - {fileID: 8963165111416858736, guid: 35e391aa06be12945b7af98876901e20, type: 3}
     Damage: 10
     ID: 6
     EliteID: 0

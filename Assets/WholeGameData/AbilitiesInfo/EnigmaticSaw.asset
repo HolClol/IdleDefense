@@ -15,7 +15,7 @@ MonoBehaviour:
   AbilityData:
     ObjectsPrefab:
     - {fileID: 220286102038309757, guid: d7ee0c45267802241b119b1a98ed0b28, type: 3}
-    Damage: 10
+    Damage: 12
     ID: 5
     EliteID: 0
     Cooldown: 8

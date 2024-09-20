@@ -16,16 +16,16 @@ MonoBehaviour:
     ObjectsPrefab:
     - {fileID: 3831713516410156794, guid: 888db1ba4a616304a9397238621216b3, type: 3}
     - {fileID: 3025848403150153038, guid: 9214f1fc5919f724aabadfe0ce8184e9, type: 3}
-    Damage: 25
+    Damage: 15
     ID: 4
     EliteID: 0
-    Cooldown: 3
+    Cooldown: 4
     Knockback: 3
     DamageScaling: 0.6
     CritRate: 0.1
     CritDamage: 1
     DamageType: {fileID: 11400000, guid: f3eae1e8df0180142be5f4acb41456cd, type: 2}
-  BulletLifetime: 0.65
+  BulletLifetime: 0.3
   BulletNumb: 5
   Radius: 6
   Bounce: 0

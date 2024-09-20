@@ -34,11 +34,11 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: ed012595e66d25b4690091d3196d1651, type: 2}
     - target: {fileID: 2957214932916236506, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
       propertyPath: MaxHealth
-      value: 175
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 2957214932916236506, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
       propertyPath: Experience
-      value: 350
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2957214932916236506, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
       propertyPath: EnemySprite

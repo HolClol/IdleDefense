@@ -32,8 +32,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.6, y: 9.29, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -170,9 +170,9 @@ MonoBehaviour:
   MaxHealth: 100
   Health: 0
   Damage: 5
-  Experience: 50
-  EnemyID: 1
-  EnemyMovespeed: 0.4
+  Experience: 1
+  EnemyID: 0
+  EnemyMovespeed: 0.25
   EnemyRotateSpeed: 25
   SkillCooldown: 0
   DamageDealt: 0

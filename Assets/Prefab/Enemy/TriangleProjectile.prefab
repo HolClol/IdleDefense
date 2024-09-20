@@ -181,9 +181,9 @@ MonoBehaviour:
   EnemyType: {fileID: 11400000, guid: d712451dfaa01e54d9d84ce6224b8bba, type: 2}
   EnemyMovement: {fileID: 11400000, guid: 4768041a4943e6e4ab00c8ff1d01bf28, type: 2}
   EnemySprite: {fileID: 0}
-  MaxHealth: 200
+  MaxHealth: 500
   Health: 0
-  Damage: 1
+  Damage: 10
   Experience: 0
   EnemyID: 129
   EnemyMovespeed: 1

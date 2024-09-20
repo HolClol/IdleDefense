@@ -32,8 +32,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.6, y: 9.29, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delay: 0
-  ZigzagMovement: 5
+  ZigzagMovement: 2
   BurstMultiplier: 8
 --- !u!114 &2957214932916236506
 MonoBehaviour:
@@ -196,12 +196,12 @@ MonoBehaviour:
   EnemyType: {fileID: 11400000, guid: 4768041a4943e6e4ab00c8ff1d01bf28, type: 2}
   EnemyMovement: {fileID: 11400000, guid: 01d5f0db81a710d40ab498029ef5a789, type: 2}
   EnemySprite: {fileID: 21300000, guid: 2e3f4ed4e5540cc45b1108a4ce7909ad, type: 3}
-  MaxHealth: 75
+  MaxHealth: 120
   Health: 0
-  Damage: 10
-  Experience: 75
+  Damage: 20
+  Experience: 1
   EnemyID: 3
-  EnemyMovespeed: 1
+  EnemyMovespeed: 0.5
   EnemyRotateSpeed: 25
   SkillCooldown: 0
   DamageDealt: 0

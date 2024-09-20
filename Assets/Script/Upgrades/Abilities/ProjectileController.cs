@@ -21,7 +21,7 @@ public class ProjectileController : MonoBehaviour
     // ======================================================
     protected virtual void Start()
     {
-
+        StartUp();
     }
 
     public virtual void StartUp() 

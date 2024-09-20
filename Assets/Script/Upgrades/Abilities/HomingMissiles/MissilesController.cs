@@ -71,10 +71,14 @@ public class MissilesController : ProjectileController
         CritRate = floatvalue[5];
         CritDamage = floatvalue[6]; 
 
-        gameObject.transform.localScale = OriginalScale + ScaleValue;
-        OldScale = new Vector3(0.5f, 0.5f, 0.5f) + ScaleValue;
-        TargetScale = new Vector3(3.5f, 3.5f, 3.5f) + ScaleValue;
-        LerpScale = Vector3.LerpUnclamped(OldScale, TargetScale, 0);
+        if (gameObject.transform.localScale != OriginalScale + ScaleValue)
+        {
+            gameObject.transform.localScale = OriginalScale + ScaleValue;
+            OldScale = new Vector3(0.5f, 0.5f, 0.5f) + ScaleValue;
+            TargetScale = new Vector3(3.5f, 3.5f, 3.5f) + ScaleValue;
+            LerpScale = Vector3.LerpUnclamped(OldScale, TargetScale, 0);
+        }
+        
     }
 
     void OnTriggerEnter2D(Collider2D trigger) {
@@ -82,7 +86,6 @@ public class MissilesController : ProjectileController
             SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType, 0 }, new float[] {5f, 0.25f, CritRate, CritDamage });
         }  
     }
-
     void OnTriggerStay2D(Collider2D trigger) {
         if (trigger.gameObject.CompareTag("Enemy") && Fired) {
             SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType, 0 }, new float[] { 5f, 0.25f, CritRate, CritDamage });

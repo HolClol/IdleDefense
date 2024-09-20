@@ -42,11 +42,11 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: ed012595e66d25b4690091d3196d1651, type: 2}
     - target: {fileID: 4172520763231136018, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
       propertyPath: MaxHealth
-      value: 200
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 4172520763231136018, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
       propertyPath: Experience
-      value: 300
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4172520763231136018, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
       propertyPath: EnemySprite
@@ -78,11 +78,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896157835602499668, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7896157835602499668, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7896157835602499668, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -123,6 +123,10 @@ PrefabInstance:
     - target: {fileID: 7896157835602499668, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896157835602499668, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

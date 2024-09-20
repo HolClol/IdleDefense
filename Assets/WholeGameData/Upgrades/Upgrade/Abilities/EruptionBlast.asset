@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: EruptionBlast
   m_EditorClassIdentifier: 
   UpgradeType: 1
-  WeaponType: 0
-  DamageType: 0
+  WeaponType: 2
+  DamageType: 4
   UpgradeName: Eruption Blast
   UpgradeDescription:
   - 'Create an eruption on targeted location that deals massive AOE damage. '

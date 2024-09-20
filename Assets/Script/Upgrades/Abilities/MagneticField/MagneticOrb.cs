@@ -42,7 +42,7 @@ public class MagneticOrb : ProjectileController
     public override void UpdateStat(int[] intvalue, float[] floatvalue) {
         Damage = intvalue[0];
         Piercing = intvalue[1];
-        if (intvalue[2] == 1)
+        if (intvalue[2] == 1 && !Maxed)
             Maxed = true;
         DamageType = intvalue[3];
         Knockback = floatvalue[0];
@@ -54,17 +54,8 @@ public class MagneticOrb : ProjectileController
 
     private void OnTriggerEnter2D(Collider2D trigger) {
         if (trigger.gameObject.CompareTag("Enemy") && !Recovering) {
-            if (Piercing <= 0) {
-                Recovering = true;
-                _spriteColor.a = 0.3f;
-                _spriteRenderer.color = _spriteColor;
-                StartCoroutine(Recover(RecoverDuration));
-            }
-            else {
-                Piercing -= 1;
-            }
             SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType, 0 }, new float[] { Knockback, 0f, CritRate, CritDamage });
-            
+  
         }
     }
 }

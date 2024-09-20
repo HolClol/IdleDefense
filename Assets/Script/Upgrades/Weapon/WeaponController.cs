@@ -183,7 +183,6 @@ public class WeaponController : MonoBehaviour
     }
     private IEnumerator RagePower()
     {
-        Debug.Log("Rage activated");
         CritRate += 0.2f;
         DamageScaling += 0.1f;
         yield return new WaitForSeconds(RageTime);

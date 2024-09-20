@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SplitterShot
   m_EditorClassIdentifier: 
   UpgradeType: 1
-  WeaponType: 0
-  DamageType: 0
+  WeaponType: 3
+  DamageType: 1
   UpgradeName: Splitter Shotgun
   UpgradeDescription:
   - Deploy a smaller turret that deals shotgun damage to enemies once within proximity

@@ -1,4 +1,3 @@
-using DG.Tweening.Core.Easing;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,13 +10,15 @@ public class LancerBeamController : AbilitiesController
 
     [SerializeField] float BeamLifetime = 4f;
     [SerializeField] float DamageInterval = 0.5f;
+    [SerializeField] float SizeIncrease = 0f;
     [SerializeField] int Radius = 12;
     [SerializeField] int BeamCount = 1;
     [SerializeField] int Piercing = 1;
     [SerializeField] int FractionBeam = 3;
 
     private bool TargetSpotted;
-    private bool FractionUnlocked = true;
+    private bool FractionUnlocked = false;
+    private bool BurnAfterUnlocked = true;
     private GameObject clonedlineRenderer;
 
     // Start is called before the first frame update
@@ -68,9 +69,7 @@ public class LancerBeamController : AbilitiesController
     {
         for (int i = 0; i < BeamCount; i++)
         {
-            GameObject ClonedBeam = GetPooledObject(0);
-            
-
+            GameObject ClonedBeam = GetPooledObject(0, new Vector3(0,0,0));
         }
 
     }
@@ -80,7 +79,7 @@ public class LancerBeamController : AbilitiesController
         List<GameObject> FractionBeamList = new List<GameObject> { };
         for (int y = 0; y < FractionBeam; y++)
         {
-            GameObject ClonedFractionBeam = GetPooledObject(1);
+            GameObject ClonedFractionBeam = GetPooledObject(1, new Vector3(0,0,0));
             FractionBeamList.Add(ClonedFractionBeam);
         }
         return FractionBeamList;
@@ -108,22 +107,24 @@ public class LancerBeamController : AbilitiesController
 
     }
 
-    private GameObject GetPooledObject(int prefabindex)
+    private GameObject GetPooledObject(int prefabindex, Vector3 pos)
     {
         for (int i = 0; i < ObjectsList.Count; i++)
         {
             if (!ObjectsList[i].activeInHierarchy)
             {
                 int Main = ObjectsScriptList[i].MainProjectile ? 0 : 1;
-                if (Main == prefabindex)
+                if (Main == prefabindex || (prefabindex == 2 && ObjectsScriptList[i] is BurningBeamController))
                 {
                     ObjectsList[i].SetActive(true);
                     ObjectsScriptList[i].UpdateStat(
-                        new int[] { AbilitiesStat.Damage, AbilitiesStat.DamageType.Value, Piercing, FractionUnlocked ? 1 : 0, FractionBeam },
-                        new float[] { AbilitiesStat.Knockback, BeamLifetime, DamageInterval, AbilitiesStat.CritRate, AbilitiesStat.CritDamage });
+                        new int[] { AbilitiesStat.Damage, AbilitiesStat.DamageType.Value, Piercing, FractionUnlocked ? 1 : 0, BurnAfterUnlocked ? 1 : 0 },
+                        new float[] { AbilitiesStat.Knockback, BeamLifetime, DamageInterval, AbilitiesStat.CritRate, AbilitiesStat.CritDamage, SizeIncrease });
                     ObjectsScriptList[i].StartUp();
                     if (Main == 0 && FractionUnlocked && ObjectsScriptList[i] is BeamController mainBeam)
                         mainBeam.FractionBeam = GetFractionBeam();
+                    else if (Main == 0 && BurnAfterUnlocked && ObjectsScriptList[i] is BurningBeamController burnBeam)
+                        burnBeam.SetPosition(pos);
                     return ObjectsList[i];
                 }
             }
@@ -134,8 +135,8 @@ public class LancerBeamController : AbilitiesController
 
         ObjectNew.SetActive(true);
         ObjectNew.GetComponent<ProjectileController>().UpdateStat(
-            new int[] { AbilitiesStat.Damage, AbilitiesStat.DamageType.Value, Piercing, FractionUnlocked ? 1 : 0, FractionBeam },
-            new float[] { AbilitiesStat.Knockback, BeamLifetime, DamageInterval, AbilitiesStat.CritRate, AbilitiesStat.CritDamage });
+            new int[] { AbilitiesStat.Damage, AbilitiesStat.DamageType.Value, Piercing, FractionUnlocked ? 1 : 0, BurnAfterUnlocked ? 1:0 },
+            new float[] { AbilitiesStat.Knockback, BeamLifetime, DamageInterval, AbilitiesStat.CritRate, AbilitiesStat.CritDamage, SizeIncrease });
         ObjectNew.GetComponent<ProjectileController>().MainScript = this;
 
         ObjectsList.Add(ObjectNew);
@@ -145,9 +146,26 @@ public class LancerBeamController : AbilitiesController
             derivedInstance.GetPooledTargets(playerController.EnemyInZone);
             if (derivedInstance.MainProjectile == true && FractionUnlocked)
                 derivedInstance.FractionBeam = GetFractionBeam();
-        }  
+        }
+        else if (ObjectNew.GetComponent<ProjectileController>() is BurningBeamController elitederivedInstance)
+        {
+            elitederivedInstance.SetPosition(pos);
+        }
         return ObjectNew;
     }
+
+    private IEnumerator FireAfterBurner(Vector3 pos, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        GetPooledObject(2, pos);
+    }
+
+    public override void TargetStruckSignal(GameObject TaggedObject)
+    {
+        if (TaggedObject == null) return;
+        StartCoroutine(FireAfterBurner(TaggedObject.transform.position, 0.25f));
+    }
+
 
     public override void CheckUpgrade(int upgradelevel)
     {
@@ -173,33 +191,28 @@ public class LancerBeamController : AbilitiesController
             #region ELITE UPGRADE
             case 6:
                 if (AbilitiesStat.EliteID == 1)
-                {
-                    //Not yet
-                }
+                    BurnAfterUnlocked = true;
                 else if (AbilitiesStat.EliteID == 2)
                     FractionUnlocked = true;
                 break;
             case 7:
-                if (AbilitiesStat.EliteID == 1)
-                { }
-                else if (AbilitiesStat.EliteID == 2)
-                    AbilitiesStat.DamageScaling += 0.25f;
+                AbilitiesStat.DamageScaling += 0.25f;
                 break;
             case 8:
                 if (AbilitiesStat.EliteID == 1)
-                { }
+                    SizeIncrease = 0.2f;
                 else if (AbilitiesStat.EliteID == 2)
                     FractionBeam += 1;
                 break;
             case 9:
-                /*if (AbilitiesStat.EliteID == 1)
-                    Piercing += 1;
-                else if (AbilitiesStat.EliteID == 2)
-                    AdditionalBulletSpeed += 5f;*/
+                if (AbilitiesStat.EliteID == 1)
+                    AbilitiesStat.Cooldown -= AbilitiesStat.Cooldown * 0.3f;
+                /*else if (AbilitiesStat.EliteID == 2)
+                    Apply debuff;*/
                 break;
             case 10:
                 if (AbilitiesStat.EliteID == 1)
-                { }
+                    Piercing += 2;
                 else if (AbilitiesStat.EliteID == 2)
                     Piercing += 1;
                 break;

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: MagneticOrb
   m_EditorClassIdentifier: 
   UpgradeType: 1
-  WeaponType: 0
-  DamageType: 0
+  WeaponType: 1
+  DamageType: 3
   UpgradeName: Magnetic Field
   UpgradeDescription:
   - Create a magnetic orb field that rotates around the player for a duration, dealing

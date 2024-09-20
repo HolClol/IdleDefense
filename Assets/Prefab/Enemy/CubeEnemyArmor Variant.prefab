@@ -25,12 +25,16 @@ PrefabInstance:
       value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 2014570052, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      propertyPath: BurstCooldown
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2014570052, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: EnemyVFXPrefab
       value: 
       objectReference: {fileID: 11400000, guid: 9ec06d1c733419b418c4bd9170261bb4, type: 2}
     - target: {fileID: 2014570052, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: BurstMultiplier
-      value: 40
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1380406969235032802, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: m_RootOrder
@@ -38,11 +42,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1380406969235032802, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.1
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 1380406969235032802, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1380406969235032802, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 1380406969235032802, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: m_LocalPosition.x
@@ -83,6 +91,10 @@ PrefabInstance:
     - target: {fileID: 1380406969235032802, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1380406969235032802, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1537852670157503703, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: m_IsTrigger
@@ -130,7 +142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2832402760923136410, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: Experience
-      value: 600
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2832402760923136410, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: EnemySprite
@@ -138,7 +150,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: ab6b0137f81576942a8cb056ed01db49, type: 3}
     - target: {fileID: 2832402760923136410, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: EnemyMovespeed
-      value: 0.075
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4929148439200437284, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: m_Sprite

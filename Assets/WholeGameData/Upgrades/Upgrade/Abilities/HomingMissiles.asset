@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: HomingMissiles
   m_EditorClassIdentifier: 
   UpgradeType: 1
-  WeaponType: 0
-  DamageType: 0
+  WeaponType: 2
+  DamageType: 4
   UpgradeName: Homing Missiles
   UpgradeDescription:
   - Fire homing missiles that deals AOE damage at 3 random targets.

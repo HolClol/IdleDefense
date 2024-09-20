@@ -310,7 +310,7 @@ MonoBehaviour:
   MaxHealth: 25000
   Health: 0
   Damage: 100
-  Experience: 100000
+  Experience: 10
   EnemyID: 8000
   EnemyMovespeed: 0.8
   EnemyRotateSpeed: 25

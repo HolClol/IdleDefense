@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -25,7 +26,9 @@ public class PlayerManager : MonoBehaviour
     private bool Leveling;
     void Start()
     {
-        Application.targetFrameRate = 60;
+        DOTween.Init(true, true, LogBehaviour.Verbose).SetCapacity(500, 50);
+        DOTween.defaultAutoPlay = AutoPlay.None;
+        Application.targetFrameRate = 30;
         SceneManager.LoadSceneAsync("GameMenu", LoadSceneMode.Additive);
         HealthValue = MaxHealth;
         ExperienceValue = 0;
@@ -92,7 +95,7 @@ public class PlayerManager : MonoBehaviour
             loop += 1;
 
             float currentexp = (float)EXPToLevelUp;
-            float math = currentexp + (currentexp * 0.1f) + (currentexp * (templevel / currentexp) * 50);
+            float math = currentexp + 2 * Mathf.Pow(templevel,0.9f);
             EXPToLevelUp = (int)math;
         }
         if (!Leveling)

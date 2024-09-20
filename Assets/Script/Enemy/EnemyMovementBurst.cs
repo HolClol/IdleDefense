@@ -21,7 +21,7 @@ public class EnemyMovementBurst : EnemyMovement
     private IEnumerator BurstMovement(float multi, int repeat, float deltaTime) {
         for (int i = 0; i < repeat; i++) {
             Move(MainEnemyController.EnemyMovespeed *multi);
-            yield return new WaitForSeconds(deltaTime);
+            yield return new WaitForSeconds(0);
         }
 
         CurrentCooldown = BurstCooldown;
