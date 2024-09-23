@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -29,7 +27,7 @@ public class WeaponController : MonoBehaviour
 
     private float FireCooldown;
     private float DamageScaling = 1.0f;
-    private float SpreadAngle = 15f;
+    //private float SpreadAngle = 15f;
     private bool AnimationDisabled = false;
     private int BaseDamage;
     private int WeaponUpgradeLevel = 0;
