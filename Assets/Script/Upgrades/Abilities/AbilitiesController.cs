@@ -1,21 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AbilitiesController : MonoBehaviour
 {
-    [System.Serializable] public class AbilitiesStatClass
+    [System.Serializable] public class BaseStat
     {
-        public GameObject[] ObjectsPrefab;
         public int Damage;
-        public int ID;
-        public int EliteID;
         public float Cooldown;
         public float Knockback;
         public float DamageScaling = 0f;
         [Range(0f, 1f)] public float CritRate = 0.05f;
         public float CritDamage = 1f;
         public IntVariable DamageType;
+    }
+    [System.Serializable] public class AbilitiesStatClass
+    {
+        public GameObject[] ObjectsPrefab;
+        public int ID;
+        public int EliteID;
+        public BaseStat Stats;
     }
 
     public AbilitiesSO AbilitySO;
@@ -39,15 +44,15 @@ public class AbilitiesController : MonoBehaviour
     protected virtual void DeepCopyData()
     {
         // Copy primitive types
-        AbilitiesStat.Damage = AbilitySO.AbilityData.Damage;
         AbilitiesStat.ID = AbilitySO.AbilityData.ID;
         AbilitiesStat.EliteID = AbilitySO.AbilityData.EliteID;
-        AbilitiesStat.Cooldown = AbilitySO.AbilityData.Cooldown;
-        AbilitiesStat.Knockback = AbilitySO.AbilityData.Knockback;
-        AbilitiesStat.DamageScaling = AbilitySO.AbilityData.DamageScaling;
-        AbilitiesStat.CritRate = AbilitySO.AbilityData.CritRate;
-        AbilitiesStat.CritDamage = AbilitySO.AbilityData.CritDamage;
-        AbilitiesStat.DamageType = AbilitySO.AbilityData.DamageType;
+        AbilitiesStat.Stats.Damage = AbilitySO.AbilityData.Stats.Damage;
+        AbilitiesStat.Stats.Cooldown = AbilitySO.AbilityData.Stats.Cooldown;
+        AbilitiesStat.Stats.Knockback = AbilitySO.AbilityData.Stats.Knockback;
+        AbilitiesStat.Stats.DamageScaling = AbilitySO.AbilityData.Stats.DamageScaling;
+        AbilitiesStat.Stats.CritRate = AbilitySO.AbilityData.Stats.CritRate;
+        AbilitiesStat.Stats.CritDamage = AbilitySO.AbilityData.Stats.CritDamage;
+        AbilitiesStat.Stats.DamageType = AbilitySO.AbilityData.Stats.DamageType;
 
         // Create a new array and copy its contents (deep copy for array)
         AbilitiesStat.ObjectsPrefab = new GameObject[AbilitySO.AbilityData.ObjectsPrefab.Length];
@@ -57,22 +62,30 @@ public class AbilitiesController : MonoBehaviour
         }
     }
 
+    protected virtual void IncreaseStats(int upgradelevel) 
+    {
+    }
+
+
     // If the projectile need to send on hit signal back to main script
-    public virtual void TargetStruckSignal(GameObject TaggedObject) {
+    public virtual void TargetStruckSignal(GameObject[] TaggedObject) 
+    {
 
     }
 
     // Update damage, created cause some weapons scale differently from others
-    public virtual void UpdateDamage(int dmg) {
+    public virtual void UpdateDamage(int dmg) 
+    {
         if (this.enabled) {
-            AbilitiesStat.Damage = BaseDamage + dmg;
-            AbilitiesStat.Damage += (int)((float)(AbilitiesStat.Damage) * AbilitiesStat.DamageScaling);
+            AbilitiesStat.Stats.Damage = BaseDamage + dmg;
+            AbilitiesStat.Stats.Damage += (int)((float)(AbilitiesStat.Stats.Damage) * AbilitiesStat.Stats.DamageScaling);
         }
         
     }
 
     // Upgrade all available weapons
-    public virtual void CheckUpgrade(int upgradelevel) {
+    public virtual void CheckUpgrade(int upgradelevel) 
+    {
         WeaponUpgradeLevel = upgradelevel;
     }
 

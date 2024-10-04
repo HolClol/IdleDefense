@@ -26,6 +26,7 @@ public class BeamController : ProjectileController
     private bool FractionUnlocked = false;
     private bool SetUpFractions = false;
     private bool BurnAfterUnlocked = false;
+    private bool PickTarget = false;
 
     private void Awake()
     {
@@ -72,9 +73,10 @@ public class BeamController : ProjectileController
 
     private void FindTarget()
     {
-        while (_TempTarget == null || !Targets.Contains(_TempTarget) || Vector3.Distance(transform.position, TargetPos) > LaserDistance)
+        if (PickTarget) return;
+        if (_TempTarget == null || !Targets.Contains(_TempTarget) || Vector3.Distance(transform.position, TargetPos) > LaserDistance)
         {
-            if (Targets.Count <= 0) break;
+            PickTarget = true;
             do
             {
                 TargetNumber = Random.Range(0, Targets.Count);
@@ -83,20 +85,25 @@ public class BeamController : ProjectileController
 
             _TempTarget = Targets[TargetNumber];
             TargetPos = Targets[TargetNumber].transform.position;
-                
+
             if (MainProjectile && FractionUnlocked)
             {
                 IgnoreMain = Targets[TargetNumber];
                 MainTarget = Targets[TargetNumber].transform.position;
             }
-                     
-        }
+            PickTarget = false;
+        }   
+        
     }
 
     private void UpdatePosition()
     {
         for (int i = 0; i < FractionBeam.Count; i++)
         {
+            if (!FractionBeam[i].activeInHierarchy)
+            {
+                FractionBeam[i].SetActive(true);
+            }
             FractionBeam[i].transform.position = MainTarget;
             FractionBeamScript[i].SetMainTarget(MainTarget, IgnoreMain);     
         }      
@@ -113,12 +120,10 @@ public class BeamController : ProjectileController
 
         // Find how many targets are within the raycast and maximum amount it can pierce
         int index = _hit.Length - 1;
+
         if (index > Piercing)
             index = Piercing;
-
-        if (!MainProjectile && _hit[index].collider != null && _hit[index].collider.gameObject == IgnoreMain)
-            index = _hit.Length - 1;
-
+ 
         if (_hit[index].collider != null) // Main Target
         {
             Draw2DRay(FirePoint.position, _hit[index].point);
@@ -183,7 +188,7 @@ public class BeamController : ProjectileController
 
     private IEnumerator ActivateBeam()
     {
-        Fired = true;          
+        Fired = true;
         if (MainProjectile && FractionUnlocked && !SetUpFractions)
         {
             for (int i = 0; i < FractionBeam.Count; i++)
@@ -202,7 +207,7 @@ public class BeamController : ProjectileController
             foreach (var fraction in FractionBeam)
                 fraction.SetActive(false);
         else if (MainProjectile && BurnAfterUnlocked && _TempTarget != null)
-            MainScript.TargetStruckSignal(_TempTarget);
+            MainScript.TargetStruckSignal(new GameObject[] { _TempTarget });
 
         Fired = false;
         Draw2DRay(new Vector3(0, 0, 0), new Vector3(0, 0, 0));

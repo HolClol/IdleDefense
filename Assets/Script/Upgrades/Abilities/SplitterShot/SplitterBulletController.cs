@@ -8,6 +8,7 @@ public class SplitterBulletController : ProjectileController
     private Rigidbody2D Rb;
     private Animator _animator;
     private TrailRenderer _trailRenderer;
+    private GameObject IgnoreMain;
 
     private float ProjectileSpeed = 20f;
     private float ProjectileLifetime = 0.4f;
@@ -60,10 +61,10 @@ public class SplitterBulletController : ProjectileController
 
     private void OnTriggerEnter2D(Collider2D trigger) 
     {
-        if (trigger.gameObject.CompareTag("Enemy")) {
+        if (trigger.gameObject.CompareTag("Enemy") && trigger.gameObject != IgnoreMain) {
             SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType, 0 }, new float[] { 4f, 0f, CritRate, CritDamage });
             if (MainProjectile) {
-                MainScript.TargetStruckSignal(this.gameObject);
+                MainScript.TargetStruckSignal(new GameObject[] { trigger.gameObject, gameObject });
             }
             Tagged = true;
             _animator.Play("Disappear");
@@ -78,5 +79,10 @@ public class SplitterBulletController : ProjectileController
         DamageType = intvalue[1];
         CritRate = floatvalue[2];
         CritDamage = floatvalue[3];
+    }
+
+    public void SetMain(GameObject enemy)
+    {
+        IgnoreMain = enemy;
     }
 }

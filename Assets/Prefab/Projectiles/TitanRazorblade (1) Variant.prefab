@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2671470305737323932
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1648427645222196994, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648427645222196994, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648427645222196994, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794643939717843790, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794643939717843790, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794643939717843790, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: ShapeModule.m_Position.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794643939717843790, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794643939717843790, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: ShapeModule.m_Position.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794643939717843790, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794643939717843790, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794643939717843790, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794643939717843790, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794643939717843790, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5057672864743827235, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: Speed
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5057672864743827235, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: MainProjectile
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5057672864743827235, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: ResponseDamage.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5057672864743827235, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: ResponseDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 1692d7c5b439c184d83c31d1e0448544, type: 2}
+    - target: {fileID: 5057672864743827235, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: ResponseDamage.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5057672864743827235, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: ResponseDamage.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Raise
+      objectReference: {fileID: 0}
+    - target: {fileID: 5057672864743827235, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: ResponseDamage.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameEvent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5057672864743827235, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: ResponseDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868384016684189409, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: m_Name
+      value: TitanRazorblade (1) Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868384016684189409, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a119d6fa67293084caaa36751cb9b0b0, type: 3}

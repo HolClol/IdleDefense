@@ -53,10 +53,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1973925425034330730, guid: 888db1ba4a616304a9397238621216b3, type: 3}
-      propertyPath: ID
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1973925425034330730, guid: 888db1ba4a616304a9397238621216b3, type: 3}
       propertyPath: MainBullet
       value: 0
       objectReference: {fileID: 0}

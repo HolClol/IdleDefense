@@ -9,6 +9,7 @@ public class RazorbladeController : ProjectileController
     [SerializeField] private GameObject _TempTarget;
     private Rigidbody2D Rb;
     private List<GameObject> Targets = new List<GameObject> {};
+    private GameObject MainPlayer;
 
     private Vector3 ScaleValue = new Vector3(0f, 0f, 0f);
     private Vector3 TargetPos = new Vector3(0f, 0f, 0f);
@@ -16,12 +17,16 @@ public class RazorbladeController : ProjectileController
 
     private float Duration;
     private float DamageInterval;
+    private float Speed;
     private int TargetNumber;
+    private int HotBlade = 0;
     private bool Fired = false;
+    
     // Start is called before the first frame update
     protected override void Start()
     {
         OriginalScale = gameObject.transform.localScale;
+        MainPlayer = GameObject.Find("Player");
         Rb = GetComponent<Rigidbody2D>();
         StartUp();
     }
@@ -30,10 +35,22 @@ public class RazorbladeController : ProjectileController
         if (!Fired)
             return;
 
-        Move(20f);
-        if (Targets.Count <= 0)
-            return; 
+        Move(Speed);
+        if (Targets.Count > 0)
+        {
+            CheckTarget();
+            RotateToTarget(TargetPos);
+        }
+    }
 
+    void LateUpdate() {
+        if (Fired) {
+            gameObject.transform.localScale = OriginalScale + ScaleValue;
+        }
+    }
+
+    private void CheckTarget()
+    {
         if (Vector3.Distance(transform.position, TargetPos) < 0.5f || _TempTarget == null || !Targets.Contains(_TempTarget))
         {
             TargetNumber = Random.Range(0, Targets.Count);
@@ -42,16 +59,7 @@ public class RazorbladeController : ProjectileController
             {
                 TargetPos = Targets[TargetNumber].transform.position;
             }
-                    
-        }
 
-        RotateToTarget(TargetPos);
-    
-    }
-
-    void LateUpdate() {
-        if (Fired) {
-            gameObject.transform.localScale = OriginalScale + ScaleValue;
         }
     }
 
@@ -65,7 +73,7 @@ public class RazorbladeController : ProjectileController
         float angle = Mathf.Atan2(Target_direction.y , Target_direction.x) * Mathf.Rad2Deg - 90f;
 
         Quaternion q = Quaternion.Euler(new Vector3(0, 0, angle));
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, q, 0.2f);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, q, 0.25f);
     }
 
     private IEnumerator BlastOff() {
@@ -74,6 +82,20 @@ public class RazorbladeController : ProjectileController
         Fired = true;
         yield return new WaitForSeconds(Duration);
         Fired = false;
+
+        //Manual recall for hotblades final upgrade
+        if (HotBlade == 1)
+        {
+            float time = 0;
+            do
+            {
+                RotateToTarget(MainPlayer.transform.position);
+                Move(Speed);
+                time += Time.deltaTime;
+                yield return new WaitForSeconds(Time.fixedDeltaTime);
+            } while (Vector2.Distance(transform.position, MainPlayer.transform.position) >= 1f && time <= 3f);
+        }
+        
         gameObject.SetActive(false);
     }
 
@@ -85,11 +107,13 @@ public class RazorbladeController : ProjectileController
     public override void UpdateStat(int[] intvalue, float[] floatvalue) {
         Damage = intvalue[0];
         DamageType = intvalue[1];
+        HotBlade = intvalue[2];
         Knockback = floatvalue[0];
         Duration = floatvalue[1];
         DamageInterval = floatvalue[2];
-        CritRate = floatvalue[3];
-        CritDamage = floatvalue[4];
+        Speed = floatvalue[4];
+        CritRate = floatvalue[5];
+        CritDamage = floatvalue[6];
 
         ScaleValue = new Vector3(1, 1, 1) * floatvalue[3];
     }

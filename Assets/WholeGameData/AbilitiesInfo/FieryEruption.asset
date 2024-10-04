@@ -15,16 +15,80 @@ MonoBehaviour:
   AbilityData:
     ObjectsPrefab:
     - {fileID: 1211041536406801766, guid: b2359f9298ab3944db249ee9e58d4133, type: 3}
-    Damage: 50
     ID: 2
     EliteID: 0
-    Cooldown: 8
-    Knockback: 5
-    DamageScaling: 1.2
-    CritRate: 0
-    CritDamage: 1
-    DamageType: {fileID: 11400000, guid: 0db67e35bfd117041be780e841ef1635, type: 2}
+    Stats:
+      Damage: 50
+      Cooldown: 5
+      Knockback: 5
+      DamageScaling: 1.2
+      CritRate: 0
+      CritDamage: 1
+      DamageType: {fileID: 11400000, guid: 0db67e35bfd117041be780e841ef1635, type: 2}
   AdditionalEruptions: 0
   GroundDuration: 0
   DecreaseScale: {x: 0.6, y: 0.6, z: 0}
   IncreaseScale: {x: 0, y: 0, z: 0}
+  NormalUpgrade:
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0.2
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    AdditionalEruptions: 0
+    GroundDuration: 0
+    DecreaseScale: {x: 0, y: 0, z: 0}
+    IncreaseScale: {x: 1, y: 1, z: 1}
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    AdditionalEruptions: 1
+    GroundDuration: 0
+    DecreaseScale: {x: 0, y: 0, z: 0}
+    IncreaseScale: {x: 0, y: 0, z: 0}
+  - LevelUp:
+      Damage: 0
+      Cooldown: 10
+      Knockback: 0
+      DamageScaling: 0.2
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    AdditionalEruptions: 0
+    GroundDuration: 0
+    DecreaseScale: {x: 0, y: 0, z: 0}
+    IncreaseScale: {x: 0, y: 0, z: 0}
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    AdditionalEruptions: 1
+    GroundDuration: 2
+    DecreaseScale: {x: 0, y: 0, z: 0}
+    IncreaseScale: {x: 0, y: 0, z: 0}
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    AdditionalEruptions: 2
+    GroundDuration: 3
+    DecreaseScale: {x: 0, y: 0, z: 0}
+    IncreaseScale: {x: 0, y: 0, z: 0}
+  ElitePath1Upgrade: []
+  ElitePath2Upgrade: []

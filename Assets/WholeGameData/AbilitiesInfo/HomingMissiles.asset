@@ -15,15 +15,74 @@ MonoBehaviour:
   AbilityData:
     ObjectsPrefab:
     - {fileID: 1632683087887185994, guid: 6a674ddee3553b6408a589f7cc8fc962, type: 3}
-    Damage: 20
     ID: 1
     EliteID: 0
-    Cooldown: 8
-    Knockback: 4
-    DamageScaling: 0.4
-    CritRate: 0
-    CritDamage: 1
-    DamageType: {fileID: 11400000, guid: 0db67e35bfd117041be780e841ef1635, type: 2}
+    Stats:
+      Damage: 20
+      Cooldown: 4
+      Knockback: 4
+      DamageScaling: 0.4
+      CritRate: 0
+      CritDamage: 1
+      DamageType: {fileID: 11400000, guid: 0db67e35bfd117041be780e841ef1635, type: 2}
   MissileNumbers: 3
-  InternalExplode: 1.5
+  InternalExplode: 1
   AdditionalScale: {x: 0, y: 0, z: 0}
+  NormalUpgrade:
+  - LevelUp:
+      Damage: 0
+      Cooldown: 12.5
+      Knockback: 0
+      DamageScaling: 0.2
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    MissileNumbers: 0
+    InternalExplode: 0
+    AdditionalScale: {x: 0, y: 0, z: 0}
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    MissileNumbers: 0
+    InternalExplode: -0.15
+    AdditionalScale: {x: 0, y: 0, z: 0}
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    MissileNumbers: 2
+    InternalExplode: 0
+    AdditionalScale: {x: 0, y: 0, z: 0}
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0.2
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    MissileNumbers: 0
+    InternalExplode: 0
+    AdditionalScale: {x: 2, y: 2, z: 2}
+  - LevelUp:
+      Damage: 0
+      Cooldown: 20
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    MissileNumbers: 3
+    InternalExplode: 0
+    AdditionalScale: {x: 0, y: 0, z: 0}
+  ElitePath1Upgrade: []
+  ElitePath2Upgrade: []
