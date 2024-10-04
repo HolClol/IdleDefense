@@ -17,18 +17,248 @@ MonoBehaviour:
     - {fileID: 6345353859011526784, guid: b6e6023113e5af24db9a614f9a94e466, type: 3}
     - {fileID: 5415591520501843128, guid: 0828008e49c2a6f4c9c818f3eaefa5ea, type: 3}
     - {fileID: 8963165111416858736, guid: 35e391aa06be12945b7af98876901e20, type: 3}
-    Damage: 10
     ID: 6
     EliteID: 0
-    Cooldown: 8
-    Knockback: 1
-    DamageScaling: 0.1
-    CritRate: 0
-    CritDamage: 1
-    DamageType: {fileID: 11400000, guid: 2ff78611441682243b8bb0c19d3fd3df, type: 2}
+    Stats:
+      Damage: 10
+      Cooldown: 4
+      Knockback: 1
+      DamageScaling: 0.1
+      CritRate: 0
+      CritDamage: 1
+      DamageType: {fileID: 11400000, guid: 2ff78611441682243b8bb0c19d3fd3df, type: 2}
   BeamLifetime: 4
   DamageInterval: 0.5
+  SizeIncrease: 0
   Radius: 12
   BeamCount: 1
   Piercing: 0
   FractionBeam: 3
+  NormalUpgrade:
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0.2
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    BeamLifetime: 0
+    DamageInterval: 0
+    SizeIncrease: 0
+    Radius: 0
+    BeamCount: 0
+    Piercing: 0
+    FractionBeam: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    BeamLifetime: 0
+    DamageInterval: 0
+    SizeIncrease: 0
+    Radius: 0
+    BeamCount: 1
+    Piercing: 0
+    FractionBeam: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    BeamLifetime: 0
+    DamageInterval: 0
+    SizeIncrease: 0
+    Radius: 0
+    BeamCount: 2
+    Piercing: 0
+    FractionBeam: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    BeamLifetime: 0
+    DamageInterval: 0
+    SizeIncrease: 0
+    Radius: 0
+    BeamCount: 0
+    Piercing: 0
+    FractionBeam: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    BeamLifetime: 0
+    DamageInterval: 0
+    SizeIncrease: 0
+    Radius: 0
+    BeamCount: 0
+    Piercing: 4
+    FractionBeam: 0
+  ElitePath1Upgrade:
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    BeamLifetime: 0
+    DamageInterval: 0
+    SizeIncrease: 0
+    Radius: 0
+    BeamCount: 0
+    Piercing: 0
+    FractionBeam: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0.25
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    BeamLifetime: 0
+    DamageInterval: 0
+    SizeIncrease: 0
+    Radius: 0
+    BeamCount: 0
+    Piercing: 0
+    FractionBeam: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    BeamLifetime: 0
+    DamageInterval: 0
+    SizeIncrease: 0.2
+    Radius: 0
+    BeamCount: 0
+    Piercing: 0
+    FractionBeam: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 30
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    BeamLifetime: 0
+    DamageInterval: 0
+    SizeIncrease: 0
+    Radius: 0
+    BeamCount: 0
+    Piercing: 0
+    FractionBeam: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    BeamLifetime: 0
+    DamageInterval: 0
+    SizeIncrease: 0
+    Radius: 0
+    BeamCount: 0
+    Piercing: 2
+    FractionBeam: 0
+  ElitePath2Upgrade:
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    BeamLifetime: 0
+    DamageInterval: 0
+    SizeIncrease: 0
+    Radius: 0
+    BeamCount: 0
+    Piercing: 0
+    FractionBeam: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0.25
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    BeamLifetime: 0
+    DamageInterval: 0
+    SizeIncrease: 0
+    Radius: 0
+    BeamCount: 0
+    Piercing: 0
+    FractionBeam: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    BeamLifetime: 0
+    DamageInterval: 0
+    SizeIncrease: 0
+    Radius: 0
+    BeamCount: 0
+    Piercing: 0
+    FractionBeam: 1
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    BeamLifetime: 0
+    DamageInterval: 0
+    SizeIncrease: 0
+    Radius: 0
+    BeamCount: 0
+    Piercing: 0
+    FractionBeam: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    BeamLifetime: 0
+    DamageInterval: 0
+    SizeIncrease: 0
+    Radius: 0
+    BeamCount: 0
+    Piercing: 1
+    FractionBeam: 0

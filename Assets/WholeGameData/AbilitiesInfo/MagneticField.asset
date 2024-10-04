@@ -15,18 +15,249 @@ MonoBehaviour:
   AbilityData:
     ObjectsPrefab:
     - {fileID: 1325506101373253257, guid: 6c25c5328357f494c8172dd099de13cb, type: 3}
-    Damage: 15
+    - {fileID: 8907513050118861113, guid: fa5dd184405e48543bda8f295a329601, type: 3}
     ID: 3
     EliteID: 0
-    Cooldown: 8
-    Knockback: 6
-    DamageScaling: 0.5
-    CritRate: 0
-    CritDamage: 1
-    DamageType: {fileID: 11400000, guid: 2ff78611441682243b8bb0c19d3fd3df, type: 2}
+    Stats:
+      Damage: 15
+      Cooldown: 4
+      Knockback: 6
+      DamageScaling: 0.5
+      CritRate: 0
+      CritDamage: 1
+      DamageType: {fileID: 11400000, guid: 2ff78611441682243b8bb0c19d3fd3df, type: 2}
   NumbOfOrbs: 4
+  NumbOfMini: 3
   Piercing: 0
   Duration: 6
   OrbMoveSpeed: 2.5
   OrbRecover: 2
   SizeBuff: 1
+  NormalUpgrade:
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    NumbOfOrbs: 0
+    NumbOfMini: 3
+    Piercing: 1
+    Duration: 6
+    OrbMoveSpeed: 0
+    OrbRecover: 0
+    SizeBuff: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: -30
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    NumbOfOrbs: 0
+    NumbOfMini: 3
+    Piercing: 1
+    Duration: 2
+    OrbMoveSpeed: 0
+    OrbRecover: 0
+    SizeBuff: 0.25
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0.25
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    NumbOfOrbs: 0
+    NumbOfMini: 3
+    Piercing: 0
+    Duration: 0
+    OrbMoveSpeed: 0
+    OrbRecover: 0
+    SizeBuff: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    NumbOfOrbs: 2
+    NumbOfMini: 3
+    Piercing: 2
+    Duration: 0
+    OrbMoveSpeed: -1.5
+    OrbRecover: 0
+    SizeBuff: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    NumbOfOrbs: 0
+    NumbOfMini: 3
+    Piercing: 0
+    Duration: 0
+    OrbMoveSpeed: 0
+    OrbRecover: 0
+    SizeBuff: 0
+  ElitePath1Upgrade:
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    NumbOfOrbs: 0
+    NumbOfMini: 0
+    Piercing: 0
+    Duration: 0
+    OrbMoveSpeed: 0
+    OrbRecover: 0
+    SizeBuff: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0.25
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    NumbOfOrbs: 0
+    NumbOfMini: 0
+    Piercing: 0
+    Duration: 0
+    OrbMoveSpeed: 0
+    OrbRecover: 0
+    SizeBuff: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    NumbOfOrbs: 0
+    NumbOfMini: 0
+    Piercing: 0
+    Duration: 0
+    OrbMoveSpeed: 1
+    OrbRecover: 0
+    SizeBuff: 0.2
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    NumbOfOrbs: 0
+    NumbOfMini: 0
+    Piercing: 0
+    Duration: 0
+    OrbMoveSpeed: 0.5
+    OrbRecover: 0
+    SizeBuff: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    NumbOfOrbs: 1
+    NumbOfMini: 0
+    Piercing: 0
+    Duration: 0
+    OrbMoveSpeed: -0.5
+    OrbRecover: 0
+    SizeBuff: 0
+  ElitePath2Upgrade:
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    NumbOfOrbs: 0
+    NumbOfMini: 0
+    Piercing: 0
+    Duration: 0
+    OrbMoveSpeed: 0
+    OrbRecover: 0
+    SizeBuff: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0.25
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    NumbOfOrbs: 0
+    NumbOfMini: 0
+    Piercing: 0
+    Duration: 0
+    OrbMoveSpeed: 0
+    OrbRecover: 0
+    SizeBuff: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    NumbOfOrbs: 0
+    NumbOfMini: 0
+    Piercing: 0
+    Duration: 0
+    OrbMoveSpeed: 0.5
+    OrbRecover: 0
+    SizeBuff: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    NumbOfOrbs: 0
+    NumbOfMini: 0
+    Piercing: 0
+    Duration: 0
+    OrbMoveSpeed: 0
+    OrbRecover: 0
+    SizeBuff: 0
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    NumbOfOrbs: 0
+    NumbOfMini: 3
+    Piercing: 0
+    Duration: 0
+    OrbMoveSpeed: -1
+    OrbRecover: 0
+    SizeBuff: 0

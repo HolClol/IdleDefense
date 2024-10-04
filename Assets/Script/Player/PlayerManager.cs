@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour
     {
         DOTween.Init(true, true, LogBehaviour.Verbose).SetCapacity(500, 50);
         DOTween.defaultAutoPlay = AutoPlay.None;
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = 60;
         SceneManager.LoadSceneAsync("GameMenu", LoadSceneMode.Additive);
         HealthValue = MaxHealth;
         ExperienceValue = 0;

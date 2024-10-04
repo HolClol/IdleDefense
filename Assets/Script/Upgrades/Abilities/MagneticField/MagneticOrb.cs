@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class MagneticOrb : ProjectileController
 {
@@ -11,6 +12,7 @@ public class MagneticOrb : ProjectileController
     private float RecoverDuration = 2f;
     private bool Recovering = false;
     private bool Maxed = false;
+    
 
     protected override void Start() {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -19,7 +21,7 @@ public class MagneticOrb : ProjectileController
         StartUp();
     }
 
-    private IEnumerator Recover(float timer) {
+    private IEnumerator Recover(float timer) { 
         yield return new WaitForSeconds(timer);
         Recovering = false;
         _spriteColor.a = 1f;
@@ -39,6 +41,20 @@ public class MagneticOrb : ProjectileController
         }
     }
 
+    public void Explode()
+    {
+        foreach (GameObject enemyTarget in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            if (enemyTarget.name == "Molten")
+                return;
+
+            float distance = Vector2.Distance(transform.position, enemyTarget.transform.position);
+            if (distance < 3f)
+                SendDamage(enemyTarget, new int[] { Damage, ID, DamageType, 0 }, new float[] { Knockback, 0f, CritRate, CritDamage });
+
+        }
+    }
+
     public override void UpdateStat(int[] intvalue, float[] floatvalue) {
         Damage = intvalue[0];
         Piercing = intvalue[1];
@@ -50,12 +66,14 @@ public class MagneticOrb : ProjectileController
         RecoverDuration = floatvalue[2];
         CritRate = floatvalue[3];
         CritDamage = floatvalue[4];
+
+        if (!MainProjectile)
+            Knockback = 0;
     }
 
     private void OnTriggerEnter2D(Collider2D trigger) {
         if (trigger.gameObject.CompareTag("Enemy") && !Recovering) {
             SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType, 0 }, new float[] { Knockback, 0f, CritRate, CritDamage });
-  
         }
     }
 }

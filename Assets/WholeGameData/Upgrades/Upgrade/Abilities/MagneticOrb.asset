@@ -26,4 +26,22 @@ MonoBehaviour:
   - Orbs now remain infinite
   MaxLevel: 6
   ID: 3
-  ElitePath: []
+  ElitePath:
+  - EliteUpgradeName: Overload
+    UpgradeDescription:
+    - ' Magnetic Orb explode deal splash damage after 3 loop '
+    - Blast damage +25%
+    - Orb size +20%
+    - Orb Speed +20%
+    - Orb +1
+    AlternateID: 1
+    MaxLevel: 6
+  - EliteUpgradeName: Extra Protection
+    UpgradeDescription:
+    - 'Create 3 extra mini orb '
+    - Mini orb damage +25%
+    - Mini orb speed +20%
+    - 'Damage dealt to the same target per hit increase by  2% '
+    - Mini orb +3
+    AlternateID: 2
+    MaxLevel: 6

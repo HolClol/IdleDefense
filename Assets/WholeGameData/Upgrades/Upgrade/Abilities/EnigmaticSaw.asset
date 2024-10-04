@@ -25,4 +25,22 @@ MonoBehaviour:
   - Now cast 3 razorblades and increase damage scaling by 25%
   MaxLevel: 6
   ID: 5
-  ElitePath: []
+  ElitePath:
+  - EliteUpgradeName: Hot Blade
+    UpgradeDescription:
+    - 'Saw blades now have 10% to burn enemies '
+    - Saws blade +1
+    - Saws duration +1
+    - Burn chance +10%
+    - Saws blade can now draw back to tower before disappear
+    AlternateID: 1
+    MaxLevel: 6
+  - EliteUpgradeName: Titan Blade
+    UpgradeDescription:
+    - Combine all enigmatic Saws into a Giant Saw that deal massive damage
+    - Damage scaling +20%
+    - 'Saw Blade : +1'
+    - Reduce ability cooldown by 20%
+    - Damage scaling +30%
+    AlternateID: 2
+    MaxLevel: 6

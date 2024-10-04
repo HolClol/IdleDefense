@@ -6,6 +6,7 @@ public class SplitterController : AbilitiesController
 {
     [Header("Weapon Set Up")]
     [SerializeField] GameObject FiringPoint;
+    [SerializeField] GameObject ChargedFiringPoint;
     [SerializeField] GameObject _lineRenderer;
 
     [SerializeField] float BulletLifetime = 0.65f;
@@ -16,8 +17,10 @@ public class SplitterController : AbilitiesController
 
     private Vector3 TargetPos;
     private Transform Target;
-    private bool TargetSpotted;
     private GameObject clonedlineRenderer;
+    private SplitterSO BonusAbilityData;
+    private float ChargedCooldown;
+    private bool TargetSpotted, AutoFire, ChargedBlast;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -28,7 +31,7 @@ public class SplitterController : AbilitiesController
         // Copy the data from the ScriptableObject
         if (AbilitySO.GetType().Equals(typeof(SplitterSO)))
         {
-            SplitterSO BonusAbilityData = (SplitterSO)AbilitySO;
+            BonusAbilityData = (SplitterSO)AbilitySO;
             BulletLifetime = BonusAbilityData.BulletLifetime;
             BulletNumb = BonusAbilityData.BulletNumb;
             Radius = BonusAbilityData.Radius;
@@ -40,8 +43,9 @@ public class SplitterController : AbilitiesController
             Debug.LogError("Ability data not assigned!");
         }
 
-        TimeBeforeFire = AbilitiesStat.Cooldown;
-        BaseDamage = AbilitiesStat.Damage;
+        ChargedCooldown = AbilitiesStat.Stats.Cooldown;
+        TimeBeforeFire = AbilitiesStat.Stats.Cooldown;
+        BaseDamage = AbilitiesStat.Stats.Damage;
         CheckUpgrade(WeaponUpgradeLevel);
         clonedlineRenderer = Instantiate(_lineRenderer, transform.position, Quaternion.identity);
         clonedlineRenderer.GetComponent<SplitterLineRange>().IncreaseSize(Radius*10);
@@ -52,7 +56,7 @@ public class SplitterController : AbilitiesController
             if (IsFacingTarget(Target.transform))
             {
                 StartCoroutine(FireBullet());
-                TimeBeforeFire = AbilitiesStat.Cooldown;
+                TimeBeforeFire = AbilitiesStat.Stats.Cooldown;
             }
             
         }
@@ -73,7 +77,7 @@ public class SplitterController : AbilitiesController
                 if (Angle > 60) {
                     Angle = 60;
                 }
-                GameObject ClonedBullet = GetPooledObject(0);
+                GameObject ClonedBullet = GetPooledObject(0, null);
                 Vector3 RandomPos = new Vector3(0, 0, Random.Range(-Angle, Angle));
                 ClonedBullet.transform.position = transform.position;
                 ClonedBullet.transform.rotation = FiringPoint.transform.rotation * Quaternion.Euler(0,0,-90) * Quaternion.Euler(RandomPos);
@@ -138,15 +142,17 @@ public class SplitterController : AbilitiesController
         return angle < 5f;
     }
 
-    private GameObject GetPooledObject(int prefabindex) {
+    private GameObject GetPooledObject(int prefabindex, GameObject main) {
         for (int i = 0; i < ObjectsList.Count; i++) {
             if (!ObjectsList[i].activeInHierarchy) {
                 int Main = ObjectsScriptList[i].MainProjectile ? 0 : 1;
                 if (Main == prefabindex) {
                     ObjectsList[i].SetActive(true);
                     ObjectsScriptList[i].UpdateStat(
-                        new int[] {AbilitiesStat.Damage, AbilitiesStat.DamageType.Value}, 
-                        new float[] {AbilitiesStat.Knockback, BulletLifetime, AbilitiesStat.CritRate, AbilitiesStat.CritDamage });
+                        new int[] {AbilitiesStat.Stats.Damage, AbilitiesStat.Stats.DamageType.Value}, 
+                        new float[] {AbilitiesStat.Stats.Knockback, BulletLifetime, AbilitiesStat.Stats.CritRate, AbilitiesStat.Stats.CritDamage });
+                    if (Main == 1 && ObjectsScriptList[i] is SplitterBulletController bouncingBullet)
+                        bouncingBullet.SetMain(main);
                     ObjectsScriptList[i].StartUp();
                     return ObjectsList[i];
                 }
@@ -159,43 +165,87 @@ public class SplitterController : AbilitiesController
 
         ObjectNew.SetActive(true);
         ObjectNew.GetComponent<ProjectileController>().UpdateStat(
-            new int[] {AbilitiesStat.Damage, AbilitiesStat.DamageType.Value}, 
-            new float[] {AbilitiesStat.Knockback, BulletLifetime, AbilitiesStat.CritRate, AbilitiesStat.CritDamage });
+            new int[] {AbilitiesStat.Stats.Damage, AbilitiesStat.Stats.DamageType.Value}, 
+            new float[] {AbilitiesStat.Stats.Knockback, BulletLifetime, AbilitiesStat.Stats.CritRate, AbilitiesStat.Stats.CritDamage });
         ObjectNew.GetComponent<ProjectileController>().MainScript = this;
 
         ObjectsList.Add(ObjectNew);
         ObjectsScriptList.Add(ObjectNew.GetComponent<ProjectileController>());
+        if (ObjectNew.GetComponent<ProjectileController>() is SplitterBulletController bounceBullet && !ObjectNew.GetComponent<SplitterBulletController>().MainProjectile)
+            bounceBullet.SetMain(main);
         return ObjectNew;
     }
 
-    public override void TargetStruckSignal(GameObject TaggedObject) {
+    protected override void IncreaseStats(int upgradelevel)
+    {
+        int index = upgradelevel - 1;
+        if (AbilitiesStat.EliteID != 0)
+            index -= 5;
+        if (index < 0) return;
+        SplitterSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
+        if (AbilitiesStat.EliteID == 1)
+            UpgradeTable = BonusAbilityData.ElitePath1Upgrade;
+        else if (AbilitiesStat.EliteID == 2)
+            UpgradeTable = BonusAbilityData.ElitePath2Upgrade;
+
+        var BaseStats = UpgradeTable[index].LevelUp;
+        var SpecialStats = UpgradeTable[index];
+
+        // Check base stats
+        if (BaseStats.Damage != 0)
+            AbilitiesStat.Stats.Damage += BaseStats.Damage;
+        if (BaseStats.Cooldown != 0)
+            AbilitiesStat.Stats.Cooldown -= AbilitiesStat.Stats.Cooldown * (BaseStats.Cooldown / 100);
+        if (BaseStats.Knockback != 0)
+            AbilitiesStat.Stats.Knockback += BaseStats.Knockback;
+        if (BaseStats.DamageScaling != 0)
+            AbilitiesStat.Stats.DamageScaling += BaseStats.DamageScaling;
+        if (BaseStats.CritRate != 0)
+            AbilitiesStat.Stats.CritRate += BaseStats.CritRate;
+        if (BaseStats.CritDamage != 0)
+            AbilitiesStat.Stats.CritDamage += BaseStats.CritDamage;
+
+        // Check special stats
+        if (SpecialStats.BulletLifetime != 0)
+            BulletLifetime += SpecialStats.BulletLifetime;
+        if (SpecialStats.BulletNumb != 0)
+            BulletNumb += SpecialStats.BulletNumb;
+        if (SpecialStats.Radius != 0)
+            Radius += SpecialStats.Radius;
+        if (SpecialStats.Bounce != 0)
+            Bounce += SpecialStats.Bounce;
+        if (SpecialStats.Repeat != 0)
+            Repeat += SpecialStats.Repeat;
+    }
+
+    public override void TargetStruckSignal(GameObject[] TaggedObject) {
         for (int i = 0; i < Bounce; i++) {
             float Angle = (i*8);
             if (Angle > 45) {
                 Angle = 45;
             }
-            GameObject ClonedBullet = GetPooledObject(1);
+            GameObject ClonedBullet = GetPooledObject(1, TaggedObject[0]);
             Vector3 RandomPos = new Vector3(0, 0, Random.Range(-Angle, Angle));
-            ClonedBullet.transform.position = TaggedObject.transform.position;
-            ClonedBullet.transform.rotation = TaggedObject.transform.rotation * Quaternion.Euler(RandomPos);
+            ClonedBullet.transform.position = TaggedObject[0].transform.position;
+            ClonedBullet.transform.rotation = TaggedObject[1].transform.rotation * Quaternion.Euler(RandomPos);
         }
     }
 
     public override void CheckUpgrade(int upgradelevel) {
         WeaponUpgradeLevel = upgradelevel;
-
+        IncreaseStats(WeaponUpgradeLevel);
         switch (WeaponUpgradeLevel) {
             case 0:
                 FiringPoint.SetActive(true);
                 break;
             case 1:
-                BulletLifetime = 1.2f;
-                Radius += 3;
+                /*BulletLifetime = 1.2f;
+                Radius += 3;*/
                 clonedlineRenderer.GetComponent<SplitterLineRange>().IncreaseSize(Radius);
-            break;
-            case 2:
-                AbilitiesStat.DamageScaling = 0.25f;
-                AbilitiesStat.Knockback = 6f;
+                break;
+            /*case 2:
+                AbilitiesStat.Stats.DamageScaling = 0.25f;
+                AbilitiesStat.Stats.Knockback = 6f;
             break;
             case 3:
                 Bounce = 2;
@@ -205,8 +255,17 @@ public class SplitterController : AbilitiesController
             break;
             case 5:
                 Bounce = 3;
-                AbilitiesStat.DamageScaling = 0.5f;
-                AbilitiesStat.Cooldown -= 1f;
+                AbilitiesStat.Stats.DamageScaling = 0.5f;
+                AbilitiesStat.Stats.Cooldown -= 1f;
+                break;*/
+            case 6:
+                if (AbilitiesStat.EliteID == 1)
+                     ChargedBlast = true;
+                else if (AbilitiesStat.EliteID == 2)
+                {
+                    AutoFire = true;
+                    clonedlineRenderer.GetComponent<SplitterLineRange>().IncreaseSize(-2);
+                }
                 break;
         }
         BaseDamage += 2;
@@ -215,8 +274,8 @@ public class SplitterController : AbilitiesController
 
     public override void UpdateDamage(int dmg) {
         if (this.enabled) {
-            AbilitiesStat.Damage = BaseDamage;
-            AbilitiesStat.Damage += (int)((float)(dmg) * AbilitiesStat.DamageScaling);
+            AbilitiesStat.Stats.Damage = BaseDamage;
+            AbilitiesStat.Stats.Damage += (int)((float)(dmg) * AbilitiesStat.Stats.DamageScaling);
         }
         
     }
