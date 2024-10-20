@@ -62,8 +62,10 @@ public class AbilitiesController : MonoBehaviour
         }
     }
 
+    // For the GD cause I don't understand why they need it either
     protected virtual void IncreaseStats(int upgradelevel) 
     {
+        
     }
 
 

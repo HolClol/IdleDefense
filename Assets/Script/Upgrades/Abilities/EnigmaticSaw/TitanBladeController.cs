@@ -17,7 +17,7 @@ public class TitanBladeController : ProjectileController
     private float DamageInterval;
     private bool Fired = false;
     // Start is called before the first frame update
-    protected override void Start()
+    protected override void Awake()
     {
         OriginalScale = gameObject.transform.localScale;
         _TempTarget = GameObject.Find("Player");

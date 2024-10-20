@@ -9,6 +9,8 @@ public class HomingMissilesController : AbilitiesController
 
     private Vector3 AdditionalScale = new Vector3(0f, 0f, 0f);
     private MissilesSO BonusAbilityData;
+    private bool RocketBarrage, AtomicNuke;
+    private int RocketID = 1;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -38,7 +40,8 @@ public class HomingMissilesController : AbilitiesController
             StartCoroutine(FireMissiles());
             TimeBeforeFire = AbilitiesStat.Stats.Cooldown;
         }
-        else {
+        else if (TimeBeforeFire > 0)
+        {
             TimeBeforeFire -= Time.deltaTime;
         }
     }
@@ -49,7 +52,7 @@ public class HomingMissilesController : AbilitiesController
             if (playerController.EnemyInZone.Count > 0)
             {
                 Transform SpawnLocation = playerController.EnemyInZone[Random.Range(0, playerController.EnemyInZone.Count - 1)].transform;
-                GameObject ClonedBullet = GetPooledObject();
+                GameObject ClonedBullet = GetPooledObject(RocketID);
                 ClonedBullet.transform.position = SpawnLocation.position;
                 yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
             }
@@ -62,26 +65,32 @@ public class HomingMissilesController : AbilitiesController
         
     }
 
-    private GameObject GetPooledObject() {
+    private GameObject GetPooledObject(int prefabindex) {
         for (int i = 0; i < ObjectsList.Count; i++) {
             if (!ObjectsList[i].activeInHierarchy) {
-                ObjectsList[i].SetActive(true);
-                ObjectsScriptList[i].UpdateStat(
-                    new int[] {AbilitiesStat.Stats.Damage, AbilitiesStat.Stats.DamageType.Value }, 
-                    new float[] {InternalExplode, AbilitiesStat.Stats.Knockback, AdditionalScale.x, AdditionalScale.y, AdditionalScale.z, AbilitiesStat.Stats.CritRate, AbilitiesStat.Stats.CritDamage });
-                ObjectsScriptList[i].StartUp();
-                return ObjectsList[i];
+                if (ObjectsScriptList[i].Index == prefabindex)
+                {
+                    ObjectsList[i].SetActive(true);
+                    ObjectsScriptList[i].UpdateStat(
+                        new int[] { AbilitiesStat.Stats.Damage, AbilitiesStat.Stats.DamageType.Value },
+                        new float[] { InternalExplode, AbilitiesStat.Stats.Knockback, AdditionalScale.x, AdditionalScale.y, AdditionalScale.z, AbilitiesStat.Stats.CritRate, AbilitiesStat.Stats.CritDamage });
+                    ObjectsScriptList[i].StartUp();
+                    return ObjectsList[i];
+                }
+                
             }
         }
 
         // Optionally expand pool if needed
-        GameObject ObjectNew = Instantiate(AbilitiesStat.ObjectsPrefab[0], MainChar.transform.position, Quaternion.identity, GameObject.Find("_Projectiles").transform);
+        GameObject ObjectNew = Instantiate(AbilitiesStat.ObjectsPrefab[prefabindex], MainChar.transform.position, Quaternion.identity, GameObject.Find("_Projectiles").transform);
 
         ObjectNew.SetActive(true);
         ObjectNew.GetComponent<ProjectileController>().UpdateStat(
             new int[] {AbilitiesStat.Stats.Damage, AbilitiesStat.Stats.DamageType.Value }, 
             new float[] {InternalExplode, AbilitiesStat.Stats.Knockback, AdditionalScale.x, AdditionalScale.y, AdditionalScale.z, AbilitiesStat.Stats.CritRate, AbilitiesStat.Stats.CritDamage });
         ObjectNew.GetComponent<ProjectileController>().MainScript = this;
+        ObjectNew.GetComponent<ProjectileController>().Index = prefabindex;
+        ObjectNew.GetComponent<ProjectileController>().StartUp();
 
         ObjectsList.Add(ObjectNew);
         ObjectsScriptList.Add(ObjectNew.GetComponent<ProjectileController>());
@@ -127,29 +136,33 @@ public class HomingMissilesController : AbilitiesController
 
     }
 
+    public override void TargetStruckSignal(GameObject[] TaggedObject)
+    {
+        // Spawn seperate explosion for the missiles
+        GameObject Explode = GetPooledObject(2);
+        Explode.transform.position = TaggedObject[0].transform.position;
+    }
+
     public override void CheckUpgrade(int upgradelevel) {
         WeaponUpgradeLevel = upgradelevel;
         IncreaseStats(WeaponUpgradeLevel);
-        /*switch (WeaponUpgradeLevel) {
-            case 1:
-                AbilitiesStat.Stats.Cooldown -= 1f;
-                AbilitiesStat.Stats.DamageScaling += 0.2f;
-                break;
-            case 2:
-                InternalExplode -= 0.15f;
-            break;
-            case 3:
-                MissileNumbers += 2;
-            break;
-            case 4:
-                AbilitiesStat.Stats.DamageScaling += 0.2f;
-                AdditionalScale += new Vector3(2, 2, 2);
-            break;
-            case 5:
-                AbilitiesStat.Stats.Cooldown -= 1.5f;
-                MissileNumbers += 3;
-            break;
-        }*/
+        switch (WeaponUpgradeLevel) {
+            case 6:
+                //Clear everything to bring in the new projetiles (Yes this means the currently old fired ones will dissappear)
+                ObjectsList.Clear();
+                ObjectsScriptList.Clear();
+                if (AbilitiesStat.EliteID == 1)
+                {
+                    RocketBarrage = true;
+                    RocketID = 1;
+                }
+                else if (AbilitiesStat.EliteID == 2)
+                {
+                    AtomicNuke = true;
+                    RocketID = 2;
+                }
+                break;     
+        }
         UpdateDamage(playerController.PlayerStats.BaseDamage);
     }
 

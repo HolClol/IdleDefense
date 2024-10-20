@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-
 public class MagneticOrb : ProjectileController
 {
     private SpriteRenderer _spriteRenderer;
@@ -12,13 +10,11 @@ public class MagneticOrb : ProjectileController
     private float RecoverDuration = 2f;
     private bool Recovering = false;
     private bool Maxed = false;
-    
 
-    protected override void Start() {
+    protected override void Awake() { 
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteColor = _spriteRenderer.color;
         Knockback = 6f;
-        StartUp();
     }
 
     private IEnumerator Recover(float timer) { 

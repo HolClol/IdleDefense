@@ -5,6 +5,7 @@ using UnityEngine;
 public class SplitterBulletController : ProjectileController
 {  
     [SerializeField] GameObject TrailChar;
+    [SerializeField] bool ChargedShot = false;
     private Rigidbody2D Rb;
     private Animator _animator;
     private TrailRenderer _trailRenderer;
@@ -17,25 +18,27 @@ public class SplitterBulletController : ProjectileController
     // ======================================================
     // Start is called before the first frame update
     // ======================================================
-    protected override void Start()
+    protected override void Awake()
     {
         //transform.localScale += new Vector3(0, (ProjectileSpeed*0.8f)/100f, 0);
         Rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _trailRenderer = TrailChar.GetComponent<TrailRenderer>();
         Damage = 20;
-
-        StartUp();
     }
 
     private IEnumerator DestroyProjectile() {
         Tagged = false;
         yield return new WaitForSeconds(ProjectileLifetime*0.4f);
+        
 
         if (!Tagged) {
             _animator.Play("Disappear");
             Tagged = true;
+            if (ChargedShot)
+                MainScript.TargetStruckSignal(new GameObject[] { gameObject, gameObject });
         }
+        
 
         yield return new WaitForSeconds(ProjectileLifetime*0.6f);
         gameObject.SetActive(false);
@@ -44,6 +47,7 @@ public class SplitterBulletController : ProjectileController
 
     public override void StartUp() {
         base.StartUp();
+        _animator.Play("Idle");
         StartCoroutine(DestroyProjectile());
     }
 

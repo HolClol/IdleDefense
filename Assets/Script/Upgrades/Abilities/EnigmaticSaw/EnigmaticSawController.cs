@@ -44,7 +44,7 @@ public class EnigmaticSawController : AbilitiesController
             FireRazorblade();
             TimeBeforeFire = AbilitiesStat.Stats.Cooldown + Duration;
         }
-        else {
+        else if (TimeBeforeFire > 0) {
             TimeBeforeFire -= Time.deltaTime;
         }
     }
@@ -63,27 +63,32 @@ public class EnigmaticSawController : AbilitiesController
         }
     }
 
-    private GameObject GetPooledObject(int index) {
+    private GameObject GetPooledObject(int prefabindex) {
         for (int i = 0; i < ObjectsList.Count; i++) {
             if (!ObjectsList[i].activeInHierarchy) {
-                ObjectsList[i].SetActive(true);
-                ObjectsList[i].transform.position = transform.position;
-                ObjectsScriptList[i].UpdateStat(
-                    new int[] {AbilitiesStat.Stats.Damage, AbilitiesStat.Stats.DamageType.Value, (HotBlade && MaxHotBlade) ? 1 : 0 }, 
-                    new float[] { AbilitiesStat.Stats.Knockback, Duration, DamageInterval, AdditionalScale, Speed, AbilitiesStat.Stats.CritRate, AbilitiesStat.Stats.CritDamage });
-                ObjectsScriptList[i].StartUp();
-                return ObjectsList[i];
+                if (ObjectsScriptList[i].Index == prefabindex)
+                {
+                    ObjectsList[i].SetActive(true);
+                    ObjectsList[i].transform.position = transform.position;
+                    ObjectsScriptList[i].UpdateStat(
+                        new int[] { AbilitiesStat.Stats.Damage, AbilitiesStat.Stats.DamageType.Value, (HotBlade && MaxHotBlade) ? 1 : 0 },
+                        new float[] { AbilitiesStat.Stats.Knockback, Duration, DamageInterval, AdditionalScale, Speed, AbilitiesStat.Stats.CritRate, AbilitiesStat.Stats.CritDamage });
+                    ObjectsScriptList[i].StartUp();
+                    return ObjectsList[i];
+                }     
             }
         }
 
         // Optionally expand pool if needed
-        GameObject ObjectNew = Instantiate(AbilitiesStat.ObjectsPrefab[index], MainChar.transform.position, Quaternion.identity, GameObject.Find("_Projectiles").transform);
+        GameObject ObjectNew = Instantiate(AbilitiesStat.ObjectsPrefab[prefabindex], MainChar.transform.position, Quaternion.identity, GameObject.Find("_Projectiles").transform);
 
         ObjectNew.SetActive(true);
         ObjectNew.GetComponent<ProjectileController>().UpdateStat(
             new int[] {AbilitiesStat.Stats.Damage, AbilitiesStat.Stats.DamageType.Value, (HotBlade && MaxHotBlade) ? 1 : 0 }, 
             new float[] {AbilitiesStat.Stats.Knockback, Duration, DamageInterval, AdditionalScale, Speed, AbilitiesStat.Stats.CritRate, AbilitiesStat.Stats.CritDamage });
         ObjectNew.GetComponent<ProjectileController>().MainScript = this;
+        ObjectNew.GetComponent<ProjectileController>().Index = prefabindex;
+        ObjectNew.GetComponent<ProjectileController>().StartUp();
 
         ObjectsList.Add(ObjectNew);
         ObjectsScriptList.Add(ObjectNew.GetComponent<ProjectileController>());

@@ -28,7 +28,7 @@ public class BeamController : ProjectileController
     private bool BurnAfterUnlocked = false;
     private bool PickTarget = false;
 
-    private void Awake()
+    protected override void Awake()
     {
         enemyLayer = LayerMask.GetMask("Enemy");
         StartWidth = LaserPointer.startWidth;

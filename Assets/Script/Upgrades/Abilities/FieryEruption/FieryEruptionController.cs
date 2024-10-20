@@ -50,7 +50,8 @@ public class FieryEruptionController : AbilitiesController
             FireEruption();
             TimeBeforeFire = AbilitiesStat.Stats.Cooldown;
         }
-        else {
+        else if (TimeBeforeFire > 0)
+        {
             TimeBeforeFire -= Time.deltaTime;
         }
     }
@@ -76,8 +77,8 @@ public class FieryEruptionController : AbilitiesController
             if (!ObjectsList[i].activeInHierarchy) {
                 ObjectsList[i].transform.position = MainEruption.transform.position + new Vector3(Random.Range(-3,3), Random.Range(-3,3), 0);
                 ObjectsList[i].SetActive(true);
-                ObjectsScriptList[i].StartUp();
-                ObjectsScriptList[i].UpdateStat(new int[] {AbilitiesStat.Stats.Damage /2, AbilitiesStat.Stats.DamageType.Value }, new float[] {AbilitiesStat.Stats.Knockback, 2f, GroundDuration, AbilitiesStat.Stats.CritRate, AbilitiesStat.Stats.CritDamage });
+                ObjectsScriptList[i].UpdateStat(new int[] { AbilitiesStat.Stats.Damage / 2, AbilitiesStat.Stats.DamageType.Value }, new float[] { AbilitiesStat.Stats.Knockback, 2f, GroundDuration, AbilitiesStat.Stats.CritRate, AbilitiesStat.Stats.CritDamage });
+                ObjectsScriptList[i].StartUp();       
                 return ObjectsList[i];
             }
         }
@@ -89,6 +90,8 @@ public class FieryEruptionController : AbilitiesController
         ObjectNew.SetActive(true);
         ObjectNew.GetComponent<ProjectileController>().UpdateStat(new int[] {AbilitiesStat.Stats.Damage /2, AbilitiesStat.Stats.DamageType.Value }, new float[] {AbilitiesStat.Stats.Knockback, 2f, GroundDuration, AbilitiesStat.Stats.CritRate, AbilitiesStat.Stats.CritDamage });
         ObjectNew.GetComponent<ProjectileController>().MainScript = this;
+        ObjectNew.GetComponent<ProjectileController>().Index = prefabindex;
+        ObjectNew.GetComponent<ProjectileController>().StartUp();
 
         ObjectsList.Add(ObjectNew);
         ObjectsScriptList.Add(ObjectNew.GetComponent<ProjectileController>());

@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainScript: {fileID: 0}
-  MainProjectile: 0
+  MainProjectile: 1
   ResponseDamage:
     m_PersistentCalls:
       m_Calls:
@@ -154,9 +154,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   ID: 1
+  Index: 0
   _crosshairscript: {fileID: 6286373558576240783}
   MainPlayer: {fileID: 0}
-  Missile: {fileID: 2879464538954618604}
+  Missile:
+  - {fileID: 2879464538954618604}
+  Curve: 1
 --- !u!95 &3530332342685402459
 Animator:
   serializedVersion: 5

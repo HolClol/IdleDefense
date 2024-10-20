@@ -19,7 +19,7 @@ public class BurningBeamController : ProjectileController
     private bool Fired = false;
     private Tween fadeTween;
 
-    private void Awake()
+    protected override void Awake()
     {
         enemyLayer = LayerMask.GetMask("Enemy");
         StartWidth = LaserPointer.startWidth;

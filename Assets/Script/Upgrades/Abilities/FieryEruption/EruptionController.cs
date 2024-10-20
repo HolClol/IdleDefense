@@ -12,7 +12,7 @@ public class EruptionController : ProjectileController
     private float groundDelay = 0f;
     private bool BurningGround = false;
     
-    protected override void Start()
+    protected override void Awake()
     {   
         _particles = ParticleHandler.GetComponent<ParticleSystem>();
         StartUp();

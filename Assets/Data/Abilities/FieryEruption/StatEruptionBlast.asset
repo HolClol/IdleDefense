@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d67168d7cf5c442b03b03aa55941ff, type: 3}
+  m_Name: StatEruptionBlast
+  m_EditorClassIdentifier: 
+  UpgradeType: 1
+  WeaponType: 2
+  DamageType: 4
+  UpgradeName: Eruption Blast
+  UpgradeDescription:
+  - 'Create an eruption on targeted location that deals massive AOE damage. '
+  - 'Increase damage scaling and explosion radius by 20% '
+  - Create an additional smaller eruption nearby that deals 50% of the main eruption
+  - Decrease ability cooldowna and damage by 20%, smaller eruptions now scales by
+    80% of the main eruption
+  - Now cast 2 smaller eruptions and each eruptions leave a burning ground that deals
+    damage for 2s
+  - Now cast 4 smaller eruptions and increase burning ground duration to 5s
+  MaxLevel: 6
+  ID: 2
+  ElitePath: []

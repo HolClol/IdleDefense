@@ -50,7 +50,8 @@ public class WeaponController : MonoBehaviour
             FireBullet(NumbOfBullets);
             FireCooldown = FireRate;
         }
-        else {
+        else if (FireCooldown > 0)
+        {
             FireCooldown -= Time.deltaTime;
             if (!AnimationDisabled)
                 DisableAnimator();
@@ -90,7 +91,7 @@ public class WeaponController : MonoBehaviour
             // Calculate the bullet's position (offset along the right axis of firePoint)
             Vector3 bulletPosition = FiringPoint.transform.position + FiringPoint.transform.right * horizontalOffset;
 
-            GameObject ClonedBullet = GetPooledObject(bulletPosition, FiringPoint.transform.rotation /** Quaternion.Euler(0,0,90f)*/);
+            GameObject ClonedBullet = GetPooledObject(bulletPosition, FiringPoint.transform.rotation * Quaternion.Euler(0,0,0));
         }
         
            

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class MagneticFieldController : AbilitiesController
@@ -19,6 +18,7 @@ public class MagneticFieldController : AbilitiesController
     private int TotalSpin = 0;
     private float angle;
     private float dist = 2f;
+    private float MiniOrbSpeed;
     private bool active, MaxLevel, LastOrb, Overload, Protection;
     
     // Start is called before the first frame update
@@ -39,6 +39,7 @@ public class MagneticFieldController : AbilitiesController
             OrbRecover = BonusAbilityData.OrbRecover;
             SizeBuff = BonusAbilityData.SizeBuff;
             TotalOrbs = NumbOfOrbs;
+            MiniOrbSpeed = OrbMoveSpeed;
         }
         else
         {
@@ -57,7 +58,8 @@ public class MagneticFieldController : AbilitiesController
             FireOrb(active);
             TimeBeforeFire = AbilitiesStat.Stats.Cooldown + Duration;
         }
-        else {
+        else if (TimeBeforeFire > 0)
+        {
             TimeBeforeFire -= Time.deltaTime;
             if (ObjectsList.Count > 0) {
                 FireOrb(active);
@@ -104,9 +106,9 @@ public class MagneticFieldController : AbilitiesController
         float radians;
         if (abs == -1)
         {
-            angle += OrbMoveSpeed * 0.25f;
+            angle += MiniOrbSpeed * 0.25f;
             orbindex -= NumbOfOrbs;
-            space -= 1f;
+            space -= 2f;
             radians = -angle * Mathf.Deg2Rad;  
         }
         else
@@ -126,14 +128,13 @@ public class MagneticFieldController : AbilitiesController
             TotalSpin += 1;
     }
 
-    private GameObject GetPooledObject(int index) {
+    private GameObject GetPooledObject(int prefabindex) {
         if (MaxLevel) {
             LastOrb = true;
         }
         for (int i = 0; i < ObjectsList.Count; i++) {
             if (!ObjectsList[i].activeInHierarchy) {
-                int Main = ObjectsScriptList[i].MainProjectile ? 0 : 1;
-                if (Main == index)
+                if (ObjectsScriptList[i].Index == prefabindex)
                 {
                     ObjectsList[i].SetActive(true);
                     ObjectsScriptList[i].UpdateStat(
@@ -146,7 +147,7 @@ public class MagneticFieldController : AbilitiesController
         }
 
         // Optionally expand pool if needed
-        GameObject ObjectNew = Instantiate(AbilitiesStat.ObjectsPrefab[index], MainChar.transform.position, Quaternion.identity, GameObject.Find("_Projectiles").transform);
+        GameObject ObjectNew = Instantiate(AbilitiesStat.ObjectsPrefab[prefabindex], MainChar.transform.position, Quaternion.identity, GameObject.Find("_Projectiles").transform);
 
         ObjectNew.transform.localScale = ObjectNew.transform.localScale * SizeBuff;
         ObjectNew.SetActive(true);
@@ -154,6 +155,8 @@ public class MagneticFieldController : AbilitiesController
             new int[] {AbilitiesStat.Stats.Damage, Piercing, MaxLevel ? 1 : 0, AbilitiesStat.Stats.DamageType.Value }, 
             new float[] {AbilitiesStat.Stats.Knockback, Duration, OrbRecover, AbilitiesStat.Stats.CritRate, AbilitiesStat.Stats.CritDamage });
         ObjectNew.GetComponent<ProjectileController>().MainScript = this;
+        ObjectNew.GetComponent<ProjectileController>().Index = prefabindex;
+        ObjectNew.GetComponent<ProjectileController>().StartUp();
 
         ObjectsList.Add(ObjectNew);
         ObjectsScriptList.Add(ObjectNew.GetComponent<ProjectileController>());
@@ -163,6 +166,8 @@ public class MagneticFieldController : AbilitiesController
     protected override void IncreaseStats(int upgradelevel)
     {
         int index = upgradelevel - 1;
+        if (AbilitiesStat.EliteID != 0)
+            index -= 5;
         if (index < 0) return;
         MagneticSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
         if (AbilitiesStat.EliteID == 1)
@@ -172,6 +177,7 @@ public class MagneticFieldController : AbilitiesController
 
         var BaseStats = UpgradeTable[index].LevelUp;
         var SpecialStats = UpgradeTable[index];
+
         // Check base stats
         if (BaseStats.Damage != 0)
             AbilitiesStat.Stats.Damage += BaseStats.Damage;
@@ -217,21 +223,28 @@ public class MagneticFieldController : AbilitiesController
                     }       
                 }
             break;
+            case 4:
+                for (int i = 0; i < NumbOfOrbs - TotalOrbs; i++)
+                    if (ObjectsList.Count > 0)
+                    {
+                        GameObject ClonedOrb = GetPooledObject(0);
+                    }
+                TotalOrbs = NumbOfOrbs;
+                dist += 1;
+                break;
             case 5:
                 MaxLevel = true;
-            break;
+                break;
             case 6:
                 if (AbilitiesStat.EliteID == 1)
                     Overload = true;
                 else if (AbilitiesStat.EliteID == 2)
                 {
                     for (int i = 0; i < NumbOfMini; i++)
-                    {
                         if (ObjectsList.Count > 0)
                         {
                             GameObject ClonedOrb = GetPooledObject(1);
                         }
-                    }
                     Protection = true;
                     TotalOrbs = NumbOfOrbs + NumbOfMini;
                     dist += 0.5f;
@@ -247,6 +260,8 @@ public class MagneticFieldController : AbilitiesController
                             ClonedOrb.transform.localScale = ClonedOrb.transform.localScale * SizeBuff;
                         }
                 }
+                else if (AbilitiesStat.EliteID == 2)
+                    MiniOrbSpeed += (MiniOrbSpeed * 0.2f);
                 break;
             case 10:
                 int index = 0;

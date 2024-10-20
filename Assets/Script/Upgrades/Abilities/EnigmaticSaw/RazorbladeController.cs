@@ -21,14 +21,13 @@ public class RazorbladeController : ProjectileController
     private int TargetNumber;
     private int HotBlade = 0;
     private bool Fired = false;
-    
+
     // Start is called before the first frame update
-    protected override void Start()
+    protected override void Awake()
     {
         OriginalScale = gameObject.transform.localScale;
         MainPlayer = GameObject.Find("Player");
         Rb = GetComponent<Rigidbody2D>();
-        StartUp();
     }
 
     protected override void FixedUpdate() {

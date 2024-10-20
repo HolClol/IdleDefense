@@ -16,12 +16,13 @@ public class ProjectileController : MonoBehaviour
     protected float CritRate = 0.05f;
     protected float CritDamage = 1f;
     public int ID;
+    public int Index;
     // ======================================================
     // Start is called before the first frame update
     // ======================================================
-    protected virtual void Start()
+    protected virtual void Awake()
     {
-        StartUp();
+
     }
 
     public virtual void StartUp() 

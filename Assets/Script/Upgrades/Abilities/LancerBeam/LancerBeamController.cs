@@ -57,7 +57,7 @@ public class LancerBeamController : AbilitiesController
             TimeBeforeFire = AbilitiesStat.Stats.Cooldown + BeamLifetime;
             FireBeam();
         }
-        else
+        else if (TimeBeforeFire > 0)
         {
             TimeBeforeFire -= Time.deltaTime;
         }
@@ -101,8 +101,6 @@ public class LancerBeamController : AbilitiesController
                     return true;
             }
         }
-
-        
         return inrange;
 
     }
@@ -114,7 +112,7 @@ public class LancerBeamController : AbilitiesController
             if (!ObjectsList[i].activeInHierarchy)
             {
                 int Main = ObjectsScriptList[i].MainProjectile ? 0 : 1;
-                if (Main == prefabindex || (prefabindex == 2 && ObjectsScriptList[i] is BurningBeamController))
+                if (ObjectsScriptList[i].Index == prefabindex)
                 {
                     ObjectsList[i].SetActive(true);
                     ObjectsScriptList[i].UpdateStat(
@@ -127,6 +125,7 @@ public class LancerBeamController : AbilitiesController
                     ObjectsScriptList[i].StartUp();
                     return ObjectsList[i];
                 }
+                
             }
         }
 
@@ -138,6 +137,8 @@ public class LancerBeamController : AbilitiesController
             new int[] { AbilitiesStat.Stats.Damage, AbilitiesStat.Stats.DamageType.Value, Piercing, FractionUnlocked ? 1 : 0, BurnAfterUnlocked ? 1:0 },
             new float[] { AbilitiesStat.Stats.Knockback, BeamLifetime, DamageInterval, AbilitiesStat.Stats.CritRate, AbilitiesStat.Stats.CritDamage, SizeIncrease });
         ObjectNew.GetComponent<ProjectileController>().MainScript = this;
+        ObjectNew.GetComponent<ProjectileController>().Index = prefabindex;
+        ObjectNew.GetComponent<ProjectileController>().StartUp();
 
         ObjectsList.Add(ObjectNew);
         ObjectsScriptList.Add(ObjectNew.GetComponent<ProjectileController>());

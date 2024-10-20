@@ -12,7 +12,6 @@ public class SplitterSO : AbilitiesSO
         public int BulletNumb = 5;
         public int Radius = 7;
         public int Bounce = 0;
-        public int Repeat = 1;
     }
 
     [Header("Weapon Set Up")]
@@ -20,7 +19,6 @@ public class SplitterSO : AbilitiesSO
     public int BulletNumb = 5;
     public int Radius = 7;
     public int Bounce = 0;
-    public int Repeat = 1;
 
     [Header("Weapon Upgrade Path")]
     [Tooltip("All the stats inside are additional(Except cooldown), so just set 2 or -2 ")]
