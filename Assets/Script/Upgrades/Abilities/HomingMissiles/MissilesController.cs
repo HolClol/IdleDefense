@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class MissilesController : ProjectileController
 {
-    [SerializeField] Crosshair _crosshairscript;
-    [SerializeField] GameObject MainPlayer;
-    [SerializeField] GameObject[] Missile;
-    [SerializeField] bool Curve = false;
+    [SerializeField] protected Crosshair _crosshairscript;
+    [SerializeField] protected GameObject MainPlayer;
+    [SerializeField] protected GameObject[] Missile;
+    [SerializeField] protected bool Curve = false;
  
-    private Animator _animator;
-    private SpriteRenderer _spriteRenderer;
-    private CircleCollider2D _collider;
-    private Vector3 OldScale, TargetScale, LerpScale, OriginalScale;
-    private Vector3 ScaleValue = new Vector3(0f, 0f, 0f);
-    private List<float> Curves = new List<float> { };
-    private float Delay;
-    private float startTime;
-    private bool Fired = false;
+    protected Animator _animator;
+    protected SpriteRenderer _spriteRenderer;
+    protected CircleCollider2D _collider;
+    protected Vector3 OldScale, TargetScale, LerpScale, OriginalScale;
+    protected Vector3 ScaleValue = new Vector3(0f, 0f, 0f);
+    protected List<float> Curves = new List<float> { };
+    protected float Delay;
+    protected float startTime;
+    protected bool Fired = false;
     // Start is called before the first frame update
     protected override void Awake()
     {
@@ -27,16 +27,16 @@ public class MissilesController : ProjectileController
         OriginalScale = gameObject.transform.localScale;
     }
 
-    void LateUpdate() {
+    protected void LateUpdate() {
         if (Fired) {
             _collider.radius = 0.5f;
-            LerpScale = Vector3.LerpUnclamped(OldScale, TargetScale, Time.deltaTime * 8f);
+            LerpScale = Vector3.LerpUnclamped(OldScale, TargetScale, Time.deltaTime * 5f);
             OldScale = LerpScale;
             gameObject.transform.localScale = LerpScale;
         }
     }
 
-    private void FireMissile(GameObject missile, float time, float curve)
+    protected void FireMissile(GameObject missile, float time, float curve)
     {
         Vector3 center = (Vector3.zero + transform.position) * 0.5f;
         center -= new Vector3(0, curve, 0);
@@ -57,7 +57,7 @@ public class MissilesController : ProjectileController
         missile.transform.position = newPos + center;
     }
 
-    private IEnumerator BlastOff() {
+    protected virtual IEnumerator BlastOff() {
         yield return new WaitForSeconds(1f);
         startTime = Time.time;
 
@@ -71,7 +71,7 @@ public class MissilesController : ProjectileController
 
             Curves.Add(curve);
             StartCoroutine(Tracking(m, curve));
-            yield return new WaitForSeconds(Random.Range(0.05f, 0.01f));
+            yield return new WaitForSeconds(Random.Range(0.05f, 0.1f));
         }
 
         while (Curves.Count > 0) yield return new WaitForSeconds(0.1f);
@@ -102,7 +102,7 @@ public class MissilesController : ProjectileController
         gameObject.SetActive(false);
     }
 
-    private IEnumerator Tracking(GameObject m, float curve)
+    protected virtual IEnumerator Tracking(GameObject m, float curve)
     {
         float time = 0;
         while (Vector2.Distance(m.transform.position, transform.position) > 0.5f && time <= 3f)
@@ -116,7 +116,7 @@ public class MissilesController : ProjectileController
         MainScript.TargetStruckSignal(new GameObject[] { m });
     }
 
-    public override void StartUp() {
+    protected override void OnEnable() {
         base.StartUp();
         OldScale = new Vector3(0.5f, 0.5f, 0.5f) + ScaleValue;
         TargetScale = new Vector3(3.5f, 3.5f, 3.5f) + ScaleValue;
@@ -146,14 +146,14 @@ public class MissilesController : ProjectileController
         
     }
 
-    void OnTriggerEnter2D(Collider2D trigger) {
+    protected void OnTriggerEnter2D(Collider2D trigger) {
         if (trigger.gameObject.CompareTag("Enemy") && Fired) {
-            SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType, 0 }, new float[] {5f, 0.25f, CritRate, CritDamage });
+            SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType, 0 }, new float[] {5f, 0.2f, CritRate, CritDamage });
         }  
     }
-    void OnTriggerStay2D(Collider2D trigger) {
+    protected void OnTriggerStay2D(Collider2D trigger) {
         if (trigger.gameObject.CompareTag("Enemy") && Fired) {
-            SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType, 0 }, new float[] { 5f, 0.25f, CritRate, CritDamage });
+            SendDamage(trigger.gameObject, new int[] { Damage, ID, DamageType, 0 }, new float[] { 5f, 0.2f, CritRate, CritDamage });
         }  
     }
 }

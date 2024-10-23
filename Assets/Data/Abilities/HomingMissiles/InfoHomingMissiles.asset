@@ -17,6 +17,8 @@ MonoBehaviour:
     - {fileID: 1632683087887185994, guid: 6a674ddee3553b6408a589f7cc8fc962, type: 3}
     - {fileID: 855999733314007169, guid: c399b737d7f8a484896edd75b87dd568, type: 3}
     - {fileID: 2687186283925321738, guid: b1db03d8bd2cd8c4496e972f20f281f0, type: 3}
+    - {fileID: 1943070170528264758, guid: a42154ab3fd0e9c4dbb4adb94ebc288e, type: 3}
+    - {fileID: 5105991385670857609, guid: 053ecf8bc5ad37641936a8f20016477b, type: 3}
     ID: 1
     EliteID: 0
     Stats:
@@ -83,8 +85,118 @@ MonoBehaviour:
       CritRate: 0
       CritDamage: 0
       DamageType: {fileID: 0}
-    MissileNumbers: 3
+    MissileNumbers: 0
     InternalExplode: 0
     AdditionalScale: {x: 0, y: 0, z: 0}
-  ElitePath1Upgrade: []
-  ElitePath2Upgrade: []
+  ElitePath1Upgrade:
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: -0.15
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    MissileNumbers: 0
+    InternalExplode: 0
+    AdditionalScale: {x: 0, y: 0, z: 0}
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0.25
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    MissileNumbers: 0
+    InternalExplode: 0
+    AdditionalScale: {x: 0, y: 0, z: 0}
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    MissileNumbers: 0
+    InternalExplode: 0
+    AdditionalScale: {x: 2, y: 2, z: 2}
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 30
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    MissileNumbers: 0
+    InternalExplode: 0
+    AdditionalScale: {x: 0, y: 0, z: 0}
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    MissileNumbers: 1
+    InternalExplode: 0
+    AdditionalScale: {x: 0, y: 0, z: 0}
+  ElitePath2Upgrade:
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0.5
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    MissileNumbers: -4
+    InternalExplode: 0
+    AdditionalScale: {x: 1.5, y: 1.5, z: 1.5}
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0.25
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    MissileNumbers: 0
+    InternalExplode: 0
+    AdditionalScale: {x: 0, y: 0, z: 0}
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    MissileNumbers: 0
+    InternalExplode: 0
+    AdditionalScale: {x: 1, y: 1, z: 1}
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: -0.1
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    MissileNumbers: 1
+    InternalExplode: 0
+    AdditionalScale: {x: 0, y: 0, z: 0}
+  - LevelUp:
+      Damage: 0
+      Cooldown: 0
+      Knockback: 0
+      DamageScaling: 0
+      CritRate: 0
+      CritDamage: 0
+      DamageType: {fileID: 0}
+    MissileNumbers: 0
+    InternalExplode: 0
+    AdditionalScale: {x: 0, y: 0, z: 0}

@@ -10,7 +10,7 @@ public class HomingMissilesController : AbilitiesController
     private Vector3 AdditionalScale = new Vector3(0f, 0f, 0f);
     private MissilesSO BonusAbilityData;
     private bool RocketBarrage, AtomicNuke;
-    private int RocketID = 1;
+    private int RocketID = 0;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -74,7 +74,6 @@ public class HomingMissilesController : AbilitiesController
                     ObjectsScriptList[i].UpdateStat(
                         new int[] { AbilitiesStat.Stats.Damage, AbilitiesStat.Stats.DamageType.Value },
                         new float[] { InternalExplode, AbilitiesStat.Stats.Knockback, AdditionalScale.x, AdditionalScale.y, AdditionalScale.z, AbilitiesStat.Stats.CritRate, AbilitiesStat.Stats.CritDamage });
-                    ObjectsScriptList[i].StartUp();
                     return ObjectsList[i];
                 }
                 
@@ -90,7 +89,6 @@ public class HomingMissilesController : AbilitiesController
             new float[] {InternalExplode, AbilitiesStat.Stats.Knockback, AdditionalScale.x, AdditionalScale.y, AdditionalScale.z, AbilitiesStat.Stats.CritRate, AbilitiesStat.Stats.CritDamage });
         ObjectNew.GetComponent<ProjectileController>().MainScript = this;
         ObjectNew.GetComponent<ProjectileController>().Index = prefabindex;
-        ObjectNew.GetComponent<ProjectileController>().StartUp();
 
         ObjectsList.Add(ObjectNew);
         ObjectsScriptList.Add(ObjectNew.GetComponent<ProjectileController>());
@@ -139,8 +137,17 @@ public class HomingMissilesController : AbilitiesController
     public override void TargetStruckSignal(GameObject[] TaggedObject)
     {
         // Spawn seperate explosion for the missiles
-        GameObject Explode = GetPooledObject(2);
-        Explode.transform.position = TaggedObject[0].transform.position;
+        GameObject Explode = null;
+        if (RocketBarrage)
+            Explode = GetPooledObject(2);
+        else if (AtomicNuke)
+            Explode = GetPooledObject(4);
+
+        if (Explode != null)
+        {
+            Explode.transform.position = TaggedObject[0].transform.position;
+        }
+            
     }
 
     public override void CheckUpgrade(int upgradelevel) {
@@ -159,7 +166,7 @@ public class HomingMissilesController : AbilitiesController
                 else if (AbilitiesStat.EliteID == 2)
                 {
                     AtomicNuke = true;
-                    RocketID = 2;
+                    RocketID = 3;
                 }
                 break;     
         }

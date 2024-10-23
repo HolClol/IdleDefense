@@ -29,7 +29,8 @@ public class MagneticOrb : ProjectileController
         gameObject.SetActive(false);
     }
 
-    public override void StartUp() {
+    protected override void OnEnable()
+    {
         base.StartUp();
         StartCoroutine(Recover(0f));
         if (!Maxed) {

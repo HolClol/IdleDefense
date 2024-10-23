@@ -217,7 +217,7 @@ public class BeamController : ProjectileController
        
     }
 
-    public override void StartUp()
+    protected override void OnEnable()
     {
         base.StartUp();
         StartCoroutine(ActivateBeam());

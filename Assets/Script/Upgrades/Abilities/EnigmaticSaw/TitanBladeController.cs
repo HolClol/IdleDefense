@@ -58,7 +58,7 @@ public class TitanBladeController : ProjectileController
         gameObject.SetActive(false);
     }
 
-    public override void StartUp()
+    protected override void OnEnable()
     {
         base.StartUp();
         StartCoroutine(BlastOff());

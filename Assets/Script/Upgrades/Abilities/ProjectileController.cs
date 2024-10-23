@@ -25,6 +25,11 @@ public class ProjectileController : MonoBehaviour
 
     }
 
+    protected virtual void OnEnable()
+    {
+        damageCooldowns.Clear();
+    }
+
     public virtual void StartUp() 
     {
         damageCooldowns.Clear();

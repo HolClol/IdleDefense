@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [CreateAssetMenu(fileName = "AbilityStat", menuName = "ScriptableObjects/Abilities/AbilityStat", order = 1)]
 public class AbilitiesSO : ScriptableObject
 {

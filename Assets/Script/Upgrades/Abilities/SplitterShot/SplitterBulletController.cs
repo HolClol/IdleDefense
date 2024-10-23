@@ -45,7 +45,8 @@ public class SplitterBulletController : ProjectileController
         _trailRenderer.Clear();
     }
 
-    public override void StartUp() {
+    protected override void OnEnable()
+    {
         base.StartUp();
         _animator.Play("Idle");
         StartCoroutine(DestroyProjectile());

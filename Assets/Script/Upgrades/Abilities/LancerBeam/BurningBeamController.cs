@@ -110,7 +110,7 @@ public class BurningBeamController : ProjectileController
         TargetPos = new Vector3(0, 0, 0);
     }
 
-    public override void StartUp()
+    protected override void OnEnable()
     {
         base.StartUp();
         StartCoroutine(ActivateBeam());
