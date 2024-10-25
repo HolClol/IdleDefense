@@ -23,4 +23,7 @@ public class MissilesSO : AbilitiesSO
     public EnhanceUpgrade[] NormalUpgrade;
     public EnhanceUpgrade[] ElitePath1Upgrade;
     public EnhanceUpgrade[] ElitePath2Upgrade;
+    public UpgradeVariables[] BaseUpgrade;
+    public UpgradeVariables[] Elite1Upgrade;
+    public UpgradeVariables[] Elite2Upgrade;
 }

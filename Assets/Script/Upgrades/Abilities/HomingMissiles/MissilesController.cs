@@ -113,7 +113,10 @@ public class MissilesController : ProjectileController
         }
         Curves.Remove(curve);
         Fired = true;
-        MainScript.TargetStruckSignal(new GameObject[] { m });
+        if (!MainProjectile)
+        {
+            MainScript.TargetStruckSignal(new GameObject[] { m });
+        }  
     }
 
     protected override void OnEnable() {

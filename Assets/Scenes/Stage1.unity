@@ -2763,7 +2763,7 @@ MonoBehaviour:
   _bossSpawnPoint: {fileID: 1341381597}
   DifficultySpikeTimer: 15
   DifficultyLevel: 1
-  CanSpawn: 0
+  CanSpawn: 1
   SpawnRate: 1
   BossCalling:
     m_PersistentCalls:

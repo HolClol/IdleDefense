@@ -36,7 +36,7 @@ public enum StatVariables
     OrbRecover,
 }
 
-[CreateAssetMenu(fileName = "UpgradeTable", menuName = "ScriptableObjects/Abilities/UpgradeTable", order = 1)]
+[CreateAssetMenu(fileName = "UpgradeTable", menuName = "ScriptableObjects/Upgrades/UpgradeTable", order = 1)]
 public class UpgradeVariables : ScriptableObject
 {
     [System.Serializable] public class UpgradeStat

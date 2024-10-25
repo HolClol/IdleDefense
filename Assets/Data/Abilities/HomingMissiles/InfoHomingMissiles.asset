@@ -200,3 +200,7 @@ MonoBehaviour:
     MissileNumbers: 0
     InternalExplode: 0
     AdditionalScale: {x: 0, y: 0, z: 0}
+  BaseUpgrade:
+  - {fileID: 11400000, guid: f60970006421a5e45be4a7ca464459fb, type: 2}
+  Elite1Upgrade: []
+  Elite2Upgrade: []
