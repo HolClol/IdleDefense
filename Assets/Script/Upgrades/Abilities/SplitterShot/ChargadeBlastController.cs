@@ -167,7 +167,7 @@ public class ChargadeBlastController : AbilitiesController
         if (AbilitiesStat.EliteID != 0)
             index -= 5;
         if (index < 0) return;
-        SplitterSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
+        /*SplitterSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
         if (AbilitiesStat.EliteID == 1)
             UpgradeTable = BonusAbilityData.ElitePath1Upgrade;
         else if (AbilitiesStat.EliteID == 2)
@@ -196,7 +196,7 @@ public class ChargadeBlastController : AbilitiesController
         if (SpecialStats.BulletNumb != 0)
             BulletNumb += SpecialStats.BulletNumb;
         if (SpecialStats.Bounce != 0)
-            Bounce += SpecialStats.Bounce;
+            Bounce += SpecialStats.Bounce;*/
     }
 
     public override void TargetStruckSignal(GameObject[] TaggedObject)

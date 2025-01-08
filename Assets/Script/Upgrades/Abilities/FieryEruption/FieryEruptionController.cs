@@ -104,7 +104,7 @@ public class FieryEruptionController : AbilitiesController
         if (AbilitiesStat.EliteID != 0)
             index -= 5;
         if (index < 0) return;
-        EruptionSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
+        /*EruptionSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
         if (AbilitiesStat.EliteID == 1)
             UpgradeTable = BonusAbilityData.ElitePath1Upgrade;
         else if (AbilitiesStat.EliteID == 2)
@@ -135,7 +135,7 @@ public class FieryEruptionController : AbilitiesController
         if (!SpecialStats.DecreaseScale.Equals(new Vector3(0, 0, 0)))
             DecreaseScale += SpecialStats.DecreaseScale;
         if (!SpecialStats.IncreaseScale.Equals(new Vector3(0, 0, 0)))
-            IncreaseScale += SpecialStats.IncreaseScale;
+            IncreaseScale += SpecialStats.IncreaseScale;*/
 
     }
 

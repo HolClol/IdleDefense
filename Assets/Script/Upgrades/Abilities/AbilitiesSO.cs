@@ -16,10 +16,6 @@ public class AbilitiesSO : ScriptableObject
         public float CritDamage = 0f;
         public IntVariable DamageType;
     }
-    [System.Serializable] public class NormalEnhanceUpgrade
-    {
-        public BaseStat LevelUp;
-    }
     [System.Serializable] public class AbilitiesStatClass
     {
         public GameObject[] ObjectsPrefab;
@@ -29,4 +25,10 @@ public class AbilitiesSO : ScriptableObject
     }
 
     public AbilitiesStatClass AbilityData;
+
+    [Header("Weapon Upgrade Path")]
+    [Tooltip("All the stats inside are additional(Except cooldown), so just set 2 or -2 ")]
+    public UpgradeVariables[] NormalUpgrade;
+    public UpgradeVariables[] ElitePath1Upgrade;
+    public UpgradeVariables[] ElitePath2Upgrade;
 }

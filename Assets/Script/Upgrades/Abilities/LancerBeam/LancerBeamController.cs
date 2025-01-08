@@ -167,7 +167,7 @@ public class LancerBeamController : AbilitiesController
         if (AbilitiesStat.EliteID != 0)
             index -= 5;
         if (index < 0) return;
-        LancerBeamSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
+        /*LancerBeamSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
         if (AbilitiesStat.EliteID == 1)
             UpgradeTable = BonusAbilityData.ElitePath1Upgrade;
         else if (AbilitiesStat.EliteID == 2)
@@ -204,7 +204,7 @@ public class LancerBeamController : AbilitiesController
         if (SpecialStats.Piercing != 0)
             Piercing += SpecialStats.Piercing;
         if (SpecialStats.FractionBeam != 0)
-            FractionBeam += SpecialStats.FractionBeam;
+            FractionBeam += SpecialStats.FractionBeam;*/
 
     }
 

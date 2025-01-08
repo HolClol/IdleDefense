@@ -169,7 +169,7 @@ public class MagneticFieldController : AbilitiesController
         if (AbilitiesStat.EliteID != 0)
             index -= 5;
         if (index < 0) return;
-        MagneticSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
+        /*MagneticSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
         if (AbilitiesStat.EliteID == 1)
             UpgradeTable = BonusAbilityData.ElitePath1Upgrade;
         else if (AbilitiesStat.EliteID == 2)
@@ -206,7 +206,7 @@ public class MagneticFieldController : AbilitiesController
         if (SpecialStats.OrbRecover != 0)
             OrbRecover += SpecialStats.OrbRecover;
         if (SpecialStats.SizeBuff != 0)
-            SizeBuff += SpecialStats.SizeBuff;
+            SizeBuff += SpecialStats.SizeBuff;*/
 
     }
 

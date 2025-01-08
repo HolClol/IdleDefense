@@ -101,7 +101,7 @@ public class HomingMissilesController : AbilitiesController
         if (AbilitiesStat.EliteID != 0)
             index -= 5;
         if (index < 0) return;
-        MissilesSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
+        /*MissilesSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
         if (AbilitiesStat.EliteID == 1)
             UpgradeTable = BonusAbilityData.ElitePath1Upgrade;
         else if (AbilitiesStat.EliteID == 2)
@@ -130,7 +130,7 @@ public class HomingMissilesController : AbilitiesController
         if (SpecialStats.InternalExplode != 0)
             InternalExplode += SpecialStats.InternalExplode;
         if (!SpecialStats.AdditionalScale.Equals(new Vector3(0f, 0f, 0f)))
-            AdditionalScale += SpecialStats.AdditionalScale;
+            AdditionalScale += SpecialStats.AdditionalScale;*/
 
     }
 

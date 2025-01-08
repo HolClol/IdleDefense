@@ -105,7 +105,7 @@ public class EnigmaticSawController : AbilitiesController
         if (AbilitiesStat.EliteID != 0)
             index -= 5;
         if (index < 0) return;
-        EnigmaticSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
+        /*EnigmaticSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
         if (AbilitiesStat.EliteID == 1)
             UpgradeTable = BonusAbilityData.ElitePath1Upgrade;
         else if (AbilitiesStat.EliteID == 2)
@@ -138,7 +138,7 @@ public class EnigmaticSawController : AbilitiesController
         if (SpecialStats.DamageInterval != 0)
             DamageInterval += SpecialStats.DamageInterval;
         if (SpecialStats.Speed != 0)
-           Speed += SpecialStats.Speed;
+           Speed += SpecialStats.Speed;*/
 
     }
 

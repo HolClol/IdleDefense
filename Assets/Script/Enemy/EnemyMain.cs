@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EnemyMain : MonoBehaviour, IDamageDisplay
+public class EnemyMain : MonoBehaviour
 {
     [Header("Enemy Settings")]
     [HideInInspector] public string EnemyName;
