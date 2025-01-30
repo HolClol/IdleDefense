@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MagneticFieldController : AbilitiesController
@@ -57,13 +58,19 @@ public class MagneticFieldController : AbilitiesController
             active = false;
             FireOrb(active);
             TimeBeforeFire = AbilitiesStat.Stats.Cooldown + Duration;
+            if (MaxLevel)
+            {
+                LastOrb = true;
+            }
         }
         else if (TimeBeforeFire > 0)
         {
             TimeBeforeFire -= Time.deltaTime;
-            if (ObjectsList.Count > 0) {
-                FireOrb(active);
-            }
+        }
+
+        if (ObjectsList.Count > 0)
+        {
+            FireOrb(active);
         }
     }
 
@@ -71,7 +78,7 @@ public class MagneticFieldController : AbilitiesController
         if (!activate) {
             for (int i = 0; i < TotalOrbs; i++) {
                 int index = 0;
-                if (Protection && i > TotalOrbs - NumbOfMini - 1)
+                if (Protection && (i > TotalOrbs - NumbOfMini - 1))
                     index = 1;
                 GameObject ClonedOrb = GetPooledObject(index);
             }
@@ -129,9 +136,6 @@ public class MagneticFieldController : AbilitiesController
     }
 
     private GameObject GetPooledObject(int prefabindex) {
-        if (MaxLevel) {
-            LastOrb = true;
-        }
         for (int i = 0; i < ObjectsList.Count; i++) {
             if (!ObjectsList[i].activeInHierarchy) {
                 if (ObjectsScriptList[i].Index == prefabindex)
@@ -150,13 +154,13 @@ public class MagneticFieldController : AbilitiesController
         GameObject ObjectNew = Instantiate(AbilitiesStat.ObjectsPrefab[prefabindex], MainChar.transform.position, Quaternion.identity, GameObject.Find("_Projectiles").transform);
 
         ObjectNew.transform.localScale = ObjectNew.transform.localScale * SizeBuff;
-        ObjectNew.SetActive(true);
         ObjectNew.GetComponent<ProjectileController>().UpdateStat(
-            new int[] {AbilitiesStat.Stats.Damage, Piercing, MaxLevel ? 1 : 0, AbilitiesStat.Stats.DamageType.Value }, 
-            new float[] {AbilitiesStat.Stats.Knockback, Duration, OrbRecover, AbilitiesStat.Stats.CritRate, AbilitiesStat.Stats.CritDamage });
+            new int[] { AbilitiesStat.Stats.Damage, Piercing, MaxLevel ? 1 : 0, AbilitiesStat.Stats.DamageType.Value },
+            new float[] { AbilitiesStat.Stats.Knockback, Duration, OrbRecover, AbilitiesStat.Stats.CritRate, AbilitiesStat.Stats.CritDamage });
         ObjectNew.GetComponent<ProjectileController>().MainScript = this;
         ObjectNew.GetComponent<ProjectileController>().Index = prefabindex;
         ObjectNew.GetComponent<ProjectileController>().StartUp();
+        ObjectNew.SetActive(true);  
 
         ObjectsList.Add(ObjectNew);
         ObjectsScriptList.Add(ObjectNew.GetComponent<ProjectileController>());
@@ -234,20 +238,28 @@ public class MagneticFieldController : AbilitiesController
                 break;
             case 5:
                 MaxLevel = true;
+                // If magnetic orbs already existed in the field, make that as the last one
+                if (ObjectsList.Count > 0 && ObjectsList[0].activeInHierarchy)
+                {
+                    LastOrb = true;
+                }
                 break;
             case 6:
                 if (AbilitiesStat.EliteID == 1)
                     Overload = true;
                 else if (AbilitiesStat.EliteID == 2)
                 {
-                    for (int i = 0; i < NumbOfMini; i++)
-                        if (ObjectsList.Count > 0)
-                        {
-                            GameObject ClonedOrb = GetPooledObject(1);
-                        }
+                    //Just cheat by destroying all existing orbs and create a new one
+                    foreach (GameObject obj in ObjectsList)
+                    {
+                        Destroy(obj);
+                    }
+                    ObjectsList.Clear();
+                    ObjectsScriptList.Clear();
                     Protection = true;
                     TotalOrbs = NumbOfOrbs + NumbOfMini;
                     dist += 0.5f;
+                    LastOrb = false;
                 }
                 break;
             case 7:
@@ -264,20 +276,22 @@ public class MagneticFieldController : AbilitiesController
                     MiniOrbSpeed += (MiniOrbSpeed * 0.2f);
                 break;
             case 10:
-                int index = 0;
                 int spawnorb = 0;
+
                 if (AbilitiesStat.EliteID == 1)
                     spawnorb = 1;         
                 else if (AbilitiesStat.EliteID == 2)
-                {
                     spawnorb = 3;
-                    index = 1;
-                }
-                for (int i = 0; i < spawnorb; i++)
+
+                foreach (GameObject obj in ObjectsList)
                 {
-                    GameObject ClonedOrb = GetPooledObject(index);
+                    Destroy(obj);
                 }
+
+                ObjectsList.Clear();
+                ObjectsScriptList.Clear();
                 TotalOrbs += spawnorb;
+                LastOrb = false;
                 break;
         }
         UpdateDamage(playerController.PlayerStats.BaseDamage);

@@ -9,16 +9,4 @@ public class MissilesSO : AbilitiesSO
     public int MissileNumbers = 3;
     public float InternalExplode = 1f;
     public Vector3 AdditionalScale = new Vector3(0f, 0f, 0f);
-<<<<<<< Updated upstream
-
-    [Header("Weapon Upgrade Path")]
-    [Tooltip("All the stats inside are additional(Except cooldown), so just set 2 or -2 ")]
-    public EnhanceUpgrade[] NormalUpgrade;
-    public EnhanceUpgrade[] ElitePath1Upgrade;
-    public EnhanceUpgrade[] ElitePath2Upgrade;
-    public UpgradeVariables[] BaseUpgrade;
-    public UpgradeVariables[] Elite1Upgrade;
-    public UpgradeVariables[] Elite2Upgrade;
-=======
->>>>>>> Stashed changes
 }

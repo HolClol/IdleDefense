@@ -14,7 +14,7 @@ public class EnemyMovementBurst : EnemyMovement
         }
         else {
             Move(MainEnemyController.EnemyMovespeed);
-            CurrentCooldown -= deltaTime; 
+            CurrentCooldown -= deltaTime;
         }
     }
 
