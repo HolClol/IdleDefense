@@ -12,6 +12,11 @@ public class UIMenuOption : MonoBehaviour
     private bool FastForwardOn =  false;
     private bool Paused = false;
 
+    private void Start()
+    {
+        GameSpeed.Value = 1.0f;
+    }
+
     public void FastForward() {
         if (Time.timeScale > 0) {
             if (!FastForwardOn) {
