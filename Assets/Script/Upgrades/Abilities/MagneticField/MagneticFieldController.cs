@@ -173,44 +173,45 @@ public class MagneticFieldController : AbilitiesController
         if (AbilitiesStat.EliteID != 0)
             index -= 5;
         if (index < 0) return;
-        /*MagneticSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
+
+        base.IncreaseStats(upgradelevel);
+
+        UpgradeVariables[] UpgradeTable = BonusAbilityData.NormalUpgrade;
         if (AbilitiesStat.EliteID == 1)
             UpgradeTable = BonusAbilityData.ElitePath1Upgrade;
         else if (AbilitiesStat.EliteID == 2)
             UpgradeTable = BonusAbilityData.ElitePath2Upgrade;
 
-        var BaseStats = UpgradeTable[index].LevelUp;
-        var SpecialStats = UpgradeTable[index];
-
-        // Check base stats
-        if (BaseStats.Damage != 0)
-            AbilitiesStat.Stats.Damage += BaseStats.Damage;
-        if (BaseStats.Cooldown != 0)
-            AbilitiesStat.Stats.Cooldown -= AbilitiesStat.Stats.Cooldown*(BaseStats.Cooldown / 100);
-        if (BaseStats.Knockback != 0)
-            AbilitiesStat.Stats.Knockback += BaseStats.Knockback;
-        if (BaseStats.DamageScaling != 0)
-            AbilitiesStat.Stats.DamageScaling += BaseStats.DamageScaling;
-        if (BaseStats.CritRate != 0)
-            AbilitiesStat.Stats.CritRate += BaseStats.CritRate;
-        if (BaseStats.CritDamage != 0)
-            AbilitiesStat.Stats.CritDamage += BaseStats.CritDamage;
+        var SpecialStats = UpgradeTable[index].UpgradeTable;
 
         // Check special stats
-        if (SpecialStats.NumbOfOrbs != 0) 
-            NumbOfOrbs += SpecialStats.NumbOfOrbs;
-        if (SpecialStats.NumbOfMini != 0)
-            NumbOfMini += SpecialStats.NumbOfMini;
-        if (SpecialStats.Piercing != 0)
-            Piercing += SpecialStats.Piercing;
-        if (SpecialStats.Duration != 0)
-            Duration += SpecialStats.Duration;
-        if (SpecialStats.OrbMoveSpeed != 0)
-            OrbMoveSpeed += SpecialStats.OrbMoveSpeed;
-        if (SpecialStats.OrbRecover != 0)
-            OrbRecover += SpecialStats.OrbRecover;
-        if (SpecialStats.SizeBuff != 0)
-            SizeBuff += SpecialStats.SizeBuff;*/
+        foreach (var stat in SpecialStats)
+        {
+            switch (stat.Stat)
+            {
+                case StatVariables.NumbOfOrbs:
+                    NumbOfOrbs += (int)stat.Value;
+                    break;
+                case StatVariables.NumbOfMini:
+                    NumbOfOrbs += (int)stat.Value;
+                    break;
+                case StatVariables.Duration:
+                    Duration += stat.Value;
+                    break;
+                case StatVariables.Piercing:
+                    Piercing += (int)stat.Value;
+                    break;
+                case StatVariables.OrbMoveSpeed:
+                    OrbMoveSpeed += stat.Value;
+                    break;
+                case StatVariables.OrbRecover:
+                    OrbRecover += stat.Value;
+                    break;
+                case StatVariables.Scale:
+                    SizeBuff += stat.Value;
+                    break;
+            }
+        }
 
     }
 

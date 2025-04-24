@@ -104,38 +104,36 @@ public class FieryEruptionController : AbilitiesController
         if (AbilitiesStat.EliteID != 0)
             index -= 5;
         if (index < 0) return;
-        /*EruptionSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
+
+        base.IncreaseStats(upgradelevel);
+
+        UpgradeVariables[] UpgradeTable = BonusAbilityData.NormalUpgrade;
         if (AbilitiesStat.EliteID == 1)
             UpgradeTable = BonusAbilityData.ElitePath1Upgrade;
         else if (AbilitiesStat.EliteID == 2)
             UpgradeTable = BonusAbilityData.ElitePath2Upgrade;
 
-        var BaseStats = UpgradeTable[index].LevelUp;
-        var SpecialStats = UpgradeTable[index];
-
-        // Check base stats
-        if (BaseStats.Damage != 0)
-            AbilitiesStat.Stats.Damage += BaseStats.Damage;
-        if (BaseStats.Cooldown != 0)
-            AbilitiesStat.Stats.Cooldown -= AbilitiesStat.Stats.Cooldown * (BaseStats.Cooldown / 100);
-        if (BaseStats.Knockback != 0)
-            AbilitiesStat.Stats.Knockback += BaseStats.Knockback;
-        if (BaseStats.DamageScaling != 0)
-            AbilitiesStat.Stats.DamageScaling += BaseStats.DamageScaling;
-        if (BaseStats.CritRate != 0)
-            AbilitiesStat.Stats.CritRate += BaseStats.CritRate;
-        if (BaseStats.CritDamage != 0)
-            AbilitiesStat.Stats.CritDamage += BaseStats.CritDamage;
+        var SpecialStats = UpgradeTable[index].UpgradeTable;
 
         // Check special stats
-        if (SpecialStats.AdditionalEruptions != 0)
-            AdditionalEruptions += SpecialStats.AdditionalEruptions;
-        if (SpecialStats.GroundDuration != 0)
-            GroundDuration += SpecialStats.GroundDuration;
-        if (!SpecialStats.DecreaseScale.Equals(new Vector3(0, 0, 0)))
-            DecreaseScale += SpecialStats.DecreaseScale;
-        if (!SpecialStats.IncreaseScale.Equals(new Vector3(0, 0, 0)))
-            IncreaseScale += SpecialStats.IncreaseScale;*/
+        foreach (var stat in SpecialStats)
+        {
+            switch (stat.Stat)
+            {
+                case StatVariables.AdditionalEruptions:
+                    AdditionalEruptions += (int)stat.Value;
+                    break;
+                case StatVariables.GroundDuration:
+                    GroundDuration += stat.Value;
+                    break;
+                case StatVariables.DecreaseScale:
+                    DecreaseScale += new Vector3(stat.Value, stat.Value, 0f);
+                    break;
+                case StatVariables.IncreaseScale:
+                    IncreaseScale += new Vector3(stat.Value, stat.Value, 0f);
+                    break;
+            }
+        }
 
     }
 

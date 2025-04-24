@@ -28,9 +28,24 @@ MonoBehaviour:
       CritRate: 0
       CritDamage: 0.5
       DamageType: {fileID: 11400000, guid: f3eae1e8df0180142be5f4acb41456cd, type: 2}
-  NormalUpgrade: []
-  ElitePath1Upgrade: []
-  ElitePath2Upgrade: []
+  NormalUpgrade:
+  - {fileID: 11400000, guid: 8f5e5565034fffe48b08166e52b2fb00, type: 2}
+  - {fileID: 11400000, guid: 09d5d50922f2ed840853f388ff654245, type: 2}
+  - {fileID: 11400000, guid: 38f3131fd32ccf740b8bb670ee3705e1, type: 2}
+  - {fileID: 11400000, guid: 29e38c01178f8cd4186a2c6b5a349e75, type: 2}
+  - {fileID: 11400000, guid: 8e0b8798cf00c3f4ba95f17437edc47f, type: 2}
+  ElitePath1Upgrade:
+  - {fileID: 11400000, guid: 8aeeb4e9ddd5dff41947342baf805445, type: 2}
+  - {fileID: 11400000, guid: 637ff2cbb4c05504e84f7794c2d93238, type: 2}
+  - {fileID: 11400000, guid: 9ef80ce0d57972e4f9f05de26731958c, type: 2}
+  - {fileID: 11400000, guid: 05afd9b4559c33b48b8459eaabd60f9a, type: 2}
+  - {fileID: 11400000, guid: 500c5a77d57619d4d8735139e12f6004, type: 2}
+  ElitePath2Upgrade:
+  - {fileID: 11400000, guid: c318a788b06f5be47b51e45457043387, type: 2}
+  - {fileID: 11400000, guid: f735efee5ec8f6f4bb21ff37f887879f, type: 2}
+  - {fileID: 11400000, guid: 701b01f0b170173449f23efd8b850ecd, type: 2}
+  - {fileID: 11400000, guid: e388c136c6ba4e64ab1799f105ff856e, type: 2}
+  - {fileID: 11400000, guid: 4e7fca499ae6e6b4297de7623f9d90cf, type: 2}
   RazorbladeNumbers: 1
   AdditionalScale: 0
   Duration: 5
