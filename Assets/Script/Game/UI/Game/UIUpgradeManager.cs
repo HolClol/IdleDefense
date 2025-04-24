@@ -31,20 +31,35 @@ public class UIUpgradeManager : MonoBehaviour
         _upgradeManagerScript = _upgradeManager.GetComponent<UpgradeManager>();  
     }
 
-    private IEnumerator RerollFunction()
+    private void SuccessReroll()
     {
+        _animator.Play("UpgradeOutro");
         _upgradeManagerScript.ResetTable();
-        AdsManager.instance.ShowInters();
-        yield return new WaitForSecondsRealtime(1f);
-        UpgradePlay();
+        StartCoroutine(DelayedRun());
     }
 
+    private IEnumerator DelayedRun()
+    {
+        yield return new WaitForSecondsRealtime(0.75f);
+        UpgradePlay();
+    }
+    private void FailedReroll()
+    {
+
+    }
+
+    // Upgrade selection
     public void UpgradePlay() {
         _animator.Play("UpgradeIntro");
         Selected = false;
-        LastTimeScale = Time.timeScale;
         Time.timeScale = 0.0f;
-        GameSpeed.Value = 0.0f;
+        if (GameSpeed.Value > 0)
+        {
+            LastTimeScale = GameSpeed.Value;
+            GameSpeed.Value = 0;
+        }
+
+        // Change all three tabs into selected upgrades
         for (int i = 0; i < UpgradeOptions.Count; i++) {
             int[] UpgradeID = _upgradeManagerScript.UpgradeIntInfo();
             string[] UpgradeInfos = _upgradeManagerScript.UpgradeStringInfo();
@@ -75,7 +90,7 @@ public class UIUpgradeManager : MonoBehaviour
             Selected = true;
             
         }
-        Time.timeScale = 1.0f;
+        Time.timeScale = LastTimeScale;
         GameSpeed.Value = Time.timeScale;
     }
 
@@ -83,8 +98,7 @@ public class UIUpgradeManager : MonoBehaviour
     {
         if (!Selected)
         {
-            
-            StartCoroutine(RerollFunction());
+            AdsManager.instance.OnShowRewardVideo(SuccessReroll, FailedReroll);
         }
     }
 

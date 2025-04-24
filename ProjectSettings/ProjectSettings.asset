@@ -163,7 +163,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.DefaultCompany.IdleDefense
-    Standalone: com.DefaultCompany.2DProject
+    Standalone: com.DefaultCompany.IdleDefense
   buildNumber:
     Standalone: 0
     VisionOS: 0

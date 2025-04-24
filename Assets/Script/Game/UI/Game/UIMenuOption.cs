@@ -18,19 +18,19 @@ public class UIMenuOption : MonoBehaviour
     }
 
     public void FastForward() {
-        if (Time.timeScale > 0) {
-            if (!FastForwardOn) {
-                FastForwardOn = true;
-                _FastForwardText.text = ">>";
-                GameSpeed.Value = 1.5f;
-                Time.timeScale = GameSpeed.Value;
-            }
-            else {
-                FastForwardOn = false;
-                _FastForwardText.text = ">";
-                GameSpeed.Value = 1f;
-                Time.timeScale = GameSpeed.Value;
-            }
+        if (Time.timeScale <= 0)
+            return;
+        if (!FastForwardOn) {
+            FastForwardOn = true;
+            _FastForwardText.text = ">>";
+            GameSpeed.Value = 1.5f;
+            Time.timeScale = GameSpeed.Value;
+        }
+        else {
+            FastForwardOn = false;
+            _FastForwardText.text = ">";
+            GameSpeed.Value = 1f;
+            Time.timeScale = GameSpeed.Value;
         }
     }
 
