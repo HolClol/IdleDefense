@@ -65,7 +65,44 @@ public class AbilitiesController : MonoBehaviour
     // For the GD cause I don't understand why they need it either
     protected virtual void IncreaseStats(int upgradelevel) 
     {
-        
+
+        int index = upgradelevel - 1;
+        if (AbilitiesStat.EliteID != 0)
+            index -= 5;
+        if (index < 0) return;
+        UpgradeVariables[] UpgradeTable = AbilitySO.NormalUpgrade;
+        if (AbilitiesStat.EliteID == 1)
+            UpgradeTable = AbilitySO.ElitePath1Upgrade;
+        else if (AbilitiesStat.EliteID == 2)
+            UpgradeTable = AbilitySO.ElitePath2Upgrade;
+
+        var BaseStats = UpgradeTable[index].UpgradeTable;
+
+        // Check base stats
+        foreach (var stat in BaseStats)
+        {
+            switch (stat.Stat)
+            {
+                case StatVariables.Damage:
+                    AbilitiesStat.Stats.Damage += (int)stat.Value;
+                    break;
+                case StatVariables.Cooldown:
+                    AbilitiesStat.Stats.Cooldown -= AbilitiesStat.Stats.Cooldown * (stat.Value / 100);
+                    break;
+                case StatVariables.Knockback:
+                    AbilitiesStat.Stats.Knockback += stat.Value;
+                    break;
+                case StatVariables.DamageScaling:
+                    AbilitiesStat.Stats.DamageScaling += stat.Value;
+                    break;
+                case StatVariables.CritRate:
+                    AbilitiesStat.Stats.CritRate += stat.Value;
+                    break;
+                case StatVariables.CritDamage:
+                    AbilitiesStat.Stats.CritDamage += stat.Value;
+                    break;
+            }
+        }
     }
 
 

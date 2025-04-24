@@ -27,190 +27,25 @@ MonoBehaviour:
       CritRate: 0.1
       CritDamage: 1
       DamageType: {fileID: 11400000, guid: f3eae1e8df0180142be5f4acb41456cd, type: 2}
+  NormalUpgrade:
+  - {fileID: 11400000, guid: a2b7970a020e4bb48919a2f8cd2e4912, type: 2}
+  - {fileID: 11400000, guid: 9b7909f0de9e96f4fae8d4319eb0d5cd, type: 2}
+  - {fileID: 11400000, guid: e612848b17313214382c6aac71c06d3a, type: 2}
+  - {fileID: 11400000, guid: 0dec6e45b5e9c954b812ef93892e7827, type: 2}
+  - {fileID: 11400000, guid: f931b4756390d4f41a9040c2ead80b6b, type: 2}
+  ElitePath1Upgrade:
+  - {fileID: 11400000, guid: fa649809301098d409c5804664f0728f, type: 2}
+  - {fileID: 11400000, guid: 7538759b4ad06704d8841178b96d659a, type: 2}
+  - {fileID: 11400000, guid: c9ea2dc931dfdcf428e9e28db3a178bc, type: 2}
+  - {fileID: 11400000, guid: 3f7db44b4cab25047a17a1875b1d9cbe, type: 2}
+  - {fileID: 11400000, guid: 498d5e8dbcd4bf342a478527d7f91103, type: 2}
+  ElitePath2Upgrade:
+  - {fileID: 11400000, guid: 167c92066c8333044a7eb8daac88e625, type: 2}
+  - {fileID: 11400000, guid: 69b224167edd66e4a92a7c45f4b2708b, type: 2}
+  - {fileID: 11400000, guid: 24bf2c07afb550d498eeda1d9c27233e, type: 2}
+  - {fileID: 11400000, guid: 8fc55345c94c67c43b5b7008f482090a, type: 2}
+  - {fileID: 11400000, guid: 47b68c0e5a49c8343842a604f5d614d4, type: 2}
   BulletLifetime: 0.65
   BulletNumb: 5
   Radius: 6
   Bounce: 0
-  NormalUpgrade:
-  - LevelUp:
-      Damage: 0
-      Cooldown: 0
-      Knockback: 0
-      DamageScaling: 0
-      CritRate: 0
-      CritDamage: 0
-      DamageType: {fileID: 0}
-    BulletLifetime: 0.25
-    BulletNumb: 0
-    Radius: 3
-    Bounce: 0
-  - LevelUp:
-      Damage: 0
-      Cooldown: 0
-      Knockback: 3
-      DamageScaling: 0.25
-      CritRate: 0
-      CritDamage: 0
-      DamageType: {fileID: 0}
-    BulletLifetime: 0
-    BulletNumb: 0
-    Radius: 0
-    Bounce: 0
-  - LevelUp:
-      Damage: 0
-      Cooldown: 0
-      Knockback: 0
-      DamageScaling: 0
-      CritRate: 0
-      CritDamage: 0
-      DamageType: {fileID: 0}
-    BulletLifetime: 0
-    BulletNumb: 0
-    Radius: 0
-    Bounce: 2
-  - LevelUp:
-      Damage: 0
-      Cooldown: 0
-      Knockback: 0
-      DamageScaling: 0
-      CritRate: 0
-      CritDamage: 0
-      DamageType: {fileID: 0}
-    BulletLifetime: 0
-    BulletNumb: 3
-    Radius: 0
-    Bounce: 0
-  - LevelUp:
-      Damage: 0
-      Cooldown: 20
-      Knockback: 0
-      DamageScaling: 0.25
-      CritRate: 0
-      CritDamage: 0
-      DamageType: {fileID: 0}
-    BulletLifetime: 0
-    BulletNumb: 0
-    Radius: 0
-    Bounce: 1
-  ElitePath1Upgrade:
-  - LevelUp:
-      Damage: 0
-      Cooldown: 0
-      Knockback: 0
-      DamageScaling: 0
-      CritRate: 0
-      CritDamage: 0
-      DamageType: {fileID: 0}
-    BulletLifetime: 0
-    BulletNumb: 0
-    Radius: 0
-    Bounce: 0
-  - LevelUp:
-      Damage: 0
-      Cooldown: 0
-      Knockback: 0
-      DamageScaling: 0.25
-      CritRate: 0
-      CritDamage: 0
-      DamageType: {fileID: 0}
-    BulletLifetime: 0
-    BulletNumb: 0
-    Radius: 0
-    Bounce: 0
-  - LevelUp:
-      Damage: 0
-      Cooldown: 0
-      Knockback: 0
-      DamageScaling: 0
-      CritRate: 0
-      CritDamage: 0
-      DamageType: {fileID: 0}
-    BulletLifetime: 0
-    BulletNumb: 0
-    Radius: 0
-    Bounce: 0
-  - LevelUp:
-      Damage: 0
-      Cooldown: 20
-      Knockback: 0
-      DamageScaling: 0
-      CritRate: 0
-      CritDamage: 0
-      DamageType: {fileID: 0}
-    BulletLifetime: 0
-    BulletNumb: 0
-    Radius: 0
-    Bounce: 0
-  - LevelUp:
-      Damage: 0
-      Cooldown: 0
-      Knockback: 0
-      DamageScaling: 0
-      CritRate: 0
-      CritDamage: 0
-      DamageType: {fileID: 0}
-    BulletLifetime: 0
-    BulletNumb: 0
-    Radius: 0
-    Bounce: 0
-  ElitePath2Upgrade:
-  - LevelUp:
-      Damage: 0
-      Cooldown: 90
-      Knockback: 0
-      DamageScaling: 0
-      CritRate: 0
-      CritDamage: 0
-      DamageType: {fileID: 0}
-    BulletLifetime: 0
-    BulletNumb: 1
-    Radius: -2
-    Bounce: 0
-  - LevelUp:
-      Damage: 0
-      Cooldown: 0
-      Knockback: 0
-      DamageScaling: 0.2
-      CritRate: 0
-      CritDamage: 0
-      DamageType: {fileID: 0}
-    BulletLifetime: 0
-    BulletNumb: 0
-    Radius: 0
-    Bounce: 0
-  - LevelUp:
-      Damage: 0
-      Cooldown: 0
-      Knockback: 0
-      DamageScaling: 0
-      CritRate: 0
-      CritDamage: 0
-      DamageType: {fileID: 0}
-    BulletLifetime: 0
-    BulletNumb: 1
-    Radius: 0
-    Bounce: 0
-  - LevelUp:
-      Damage: 0
-      Cooldown: 0
-      Knockback: 3
-      DamageScaling: 0
-      CritRate: 0
-      CritDamage: 0
-      DamageType: {fileID: 0}
-    BulletLifetime: 0
-    BulletNumb: 0
-    Radius: 0
-    Bounce: 0
-  - LevelUp:
-      Damage: 0
-      Cooldown: 0
-      Knockback: 0
-      DamageScaling: 0
-      CritRate: 0
-      CritDamage: 0
-      DamageType: {fileID: 0}
-    BulletLifetime: 0
-    BulletNumb: 0
-    Radius: 0
-    Bounce: 0

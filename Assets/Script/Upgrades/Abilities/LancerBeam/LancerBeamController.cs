@@ -167,45 +167,45 @@ public class LancerBeamController : AbilitiesController
         if (AbilitiesStat.EliteID != 0)
             index -= 5;
         if (index < 0) return;
-        LancerBeamSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
+
+        base.IncreaseStats(upgradelevel);
+
+        UpgradeVariables[] UpgradeTable = BonusAbilityData.NormalUpgrade;
         if (AbilitiesStat.EliteID == 1)
             UpgradeTable = BonusAbilityData.ElitePath1Upgrade;
         else if (AbilitiesStat.EliteID == 2)
-            UpgradeTable = BonusAbilityData.ElitePath2Upgrade;   
+            UpgradeTable = BonusAbilityData.ElitePath2Upgrade;
 
-        var BaseStats = UpgradeTable[index].LevelUp;
-        var SpecialStats = UpgradeTable[index];
-
-        // Check base stats
-        if (BaseStats.Damage != 0)
-            AbilitiesStat.Stats.Damage += BaseStats.Damage;
-        if (BaseStats.Cooldown != 0)
-            AbilitiesStat.Stats.Cooldown -= AbilitiesStat.Stats.Cooldown * (BaseStats.Cooldown / 100);
-        if (BaseStats.Knockback != 0)
-            AbilitiesStat.Stats.Knockback += BaseStats.Knockback;
-        if (BaseStats.DamageScaling != 0)
-            AbilitiesStat.Stats.DamageScaling += BaseStats.DamageScaling;
-        if (BaseStats.CritRate != 0)
-            AbilitiesStat.Stats.CritRate += BaseStats.CritRate;
-        if (BaseStats.CritDamage != 0)
-            AbilitiesStat.Stats.CritDamage += BaseStats.CritDamage;
+        var SpecialStats = UpgradeTable[index].UpgradeTable;
 
         // Check special stats
-        if (SpecialStats.BeamLifetime != 0)
-            BeamLifetime += SpecialStats.BeamLifetime;
-        if (SpecialStats.DamageInterval != 0)
-            DamageInterval += SpecialStats.DamageInterval;
-        if (SpecialStats.SizeIncrease != 0)
-            SizeIncrease += SpecialStats.SizeIncrease;
-        if (SpecialStats.Radius != 0)
-            Radius += SpecialStats.Radius;
-        if (SpecialStats.BeamCount != 0)
-            BeamCount += SpecialStats.BeamCount;
-        if (SpecialStats.Piercing != 0)
-            Piercing += SpecialStats.Piercing;
-        if (SpecialStats.FractionBeam != 0)
-            FractionBeam += SpecialStats.FractionBeam;
-
+        foreach (var stat in SpecialStats)
+        {
+            switch (stat.Stat)
+            {
+                case StatVariables.BeamLifetime:
+                    BeamLifetime += (int)stat.Value;
+                    break;
+                case StatVariables.DamageInterval:
+                    DamageInterval += stat.Value;
+                    break;
+                case StatVariables.Scale:
+                    SizeIncrease += stat.Value;
+                    break;
+                case StatVariables.Radius:
+                    Radius += (int)stat.Value;
+                    break;
+                case StatVariables.BeamCount:
+                    BeamCount += (int)stat.Value;
+                    break;
+                case StatVariables.Piercing:
+                    Piercing += (int)stat.Value;
+                    break;
+                case StatVariables.FractionBeam:
+                    FractionBeam += (int)stat.Value;
+                    break;
+            }
+        }
     }
 
     public override void TargetStruckSignal(GameObject[] TaggedObject)

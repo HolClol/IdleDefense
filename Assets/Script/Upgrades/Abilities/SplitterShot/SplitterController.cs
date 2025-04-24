@@ -193,38 +193,37 @@ public class SplitterController : AbilitiesController
         if (AbilitiesStat.EliteID != 0)
             index -= 5;
         if (index < 0) return;
-        SplitterSO.EnhanceUpgrade[] UpgradeTable = BonusAbilityData.NormalUpgrade;
+
+        base.IncreaseStats(upgradelevel);
+
+        UpgradeVariables[] UpgradeTable = BonusAbilityData.NormalUpgrade;
         if (AbilitiesStat.EliteID == 1)
             UpgradeTable = BonusAbilityData.ElitePath1Upgrade;
         else if (AbilitiesStat.EliteID == 2)
             UpgradeTable = BonusAbilityData.ElitePath2Upgrade;
 
-        var BaseStats = UpgradeTable[index].LevelUp;
-        var SpecialStats = UpgradeTable[index];
-
-        // Check base stats
-        if (BaseStats.Damage != 0)
-            AbilitiesStat.Stats.Damage += BaseStats.Damage;
-        if (BaseStats.Cooldown != 0)
-            AbilitiesStat.Stats.Cooldown -= AbilitiesStat.Stats.Cooldown * (BaseStats.Cooldown / 100);
-        if (BaseStats.Knockback != 0)
-            AbilitiesStat.Stats.Knockback += BaseStats.Knockback;
-        if (BaseStats.DamageScaling != 0)
-            AbilitiesStat.Stats.DamageScaling += BaseStats.DamageScaling;
-        if (BaseStats.CritRate != 0)
-            AbilitiesStat.Stats.CritRate += BaseStats.CritRate;
-        if (BaseStats.CritDamage != 0)
-            AbilitiesStat.Stats.CritDamage += BaseStats.CritDamage;
+        var SpecialStats = UpgradeTable[index].UpgradeTable;
 
         // Check special stats
-        if (SpecialStats.BulletLifetime != 0)
-            BulletLifetime += SpecialStats.BulletLifetime;
-        if (SpecialStats.BulletNumb != 0)
-            BulletNumb += SpecialStats.BulletNumb;
-        if (SpecialStats.Radius != 0)
-            Radius += SpecialStats.Radius;
-        if (SpecialStats.Bounce != 0)
-            Bounce += SpecialStats.Bounce;
+        foreach (var stat in SpecialStats)
+        {
+            switch (stat.Stat)
+            {
+                case StatVariables.BulletLifetime:
+                    BulletLifetime += stat.Value;
+                    break;
+                case StatVariables.BulletNumb:
+                    BulletNumb += (int)stat.Value;
+                    break;
+                case StatVariables.Bounce:
+                    Bounce += (int)stat.Value;
+                    break;
+                case StatVariables.Radius:
+                    Radius += (int)stat.Value;
+                    break;
+            }
+        }
+
     }
 
     public override void TargetStruckSignal(GameObject[] TaggedObject) {
@@ -252,21 +251,7 @@ public class SplitterController : AbilitiesController
                 Radius += 3;*/
                 clonedlineRenderer.GetComponent<SplitterLineRange>().IncreaseSize(Radius);
                 break;
-            /*case 2:
-                AbilitiesStat.Stats.DamageScaling = 0.25f;
-                AbilitiesStat.Stats.Knockback = 6f;
-            break;
-            case 3:
-                Bounce = 2;
-            break;
-            case 4:
-                BulletNumb = 8;
-            break;
-            case 5:
-                Bounce = 3;
-                AbilitiesStat.Stats.DamageScaling = 0.5f;
-                AbilitiesStat.Stats.Cooldown -= 1f;
-                break;*/
+
             case 6:
                 if (AbilitiesStat.EliteID == 1)
                 {

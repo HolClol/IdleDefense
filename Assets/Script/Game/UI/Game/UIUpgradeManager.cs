@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.Advertisements;
 
 public class UIUpgradeManager : MonoBehaviour
 {
@@ -20,18 +21,45 @@ public class UIUpgradeManager : MonoBehaviour
     [SerializeField] FloatVariable GameSpeed;
     [SerializeField] List<UpgradePanels> UpgradeOptions;
     private UpgradeManager _upgradeManagerScript;
+    private Animator _animator;
+    private bool Rerolled = false;
     private float LastTimeScale;
     private bool Selected;
 
     private void Start() {
+        _animator = GetComponent<Animator>();
         _upgradeManagerScript = _upgradeManager.GetComponent<UpgradeManager>();  
     }
 
+    private void SuccessReroll()
+    {
+        _animator.Play("UpgradeOutro");
+        _upgradeManagerScript.ResetTable();
+        StartCoroutine(DelayedRun());
+    }
+
+    private IEnumerator DelayedRun()
+    {
+        yield return new WaitForSecondsRealtime(0.75f);
+        UpgradePlay();
+    }
+    private void FailedReroll()
+    {
+
+    }
+
+    // Upgrade selection
     public void UpgradePlay() {
+        _animator.Play("UpgradeIntro");
         Selected = false;
-        LastTimeScale = Time.timeScale;
         Time.timeScale = 0.0f;
-        GameSpeed.Value = 0.0f;
+        if (GameSpeed.Value > 0)
+        {
+            LastTimeScale = GameSpeed.Value;
+            GameSpeed.Value = 0;
+        }
+
+        // Change all three tabs into selected upgrades
         for (int i = 0; i < UpgradeOptions.Count; i++) {
             int[] UpgradeID = _upgradeManagerScript.UpgradeIntInfo();
             string[] UpgradeInfos = _upgradeManagerScript.UpgradeStringInfo();
@@ -64,6 +92,14 @@ public class UIUpgradeManager : MonoBehaviour
         }
         Time.timeScale = LastTimeScale;
         GameSpeed.Value = Time.timeScale;
+    }
+
+    public void Reroll(BaseEventData eventData)
+    {
+        if (!Selected)
+        {
+            AdsManager.instance.OnShowRewardVideo(SuccessReroll, FailedReroll);
+        }
     }
 
 }

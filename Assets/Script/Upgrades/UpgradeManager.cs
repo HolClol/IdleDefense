@@ -123,9 +123,15 @@ public class UpgradeManager : MonoBehaviour
         return InfoString;
     }
 
+    // Reset the table from public
+    public void ResetTable()
+    {
+        CurrentIDUpgradeTable.Clear();
+    }
+
     // Receive back the selected upgrade from UI
     public void UpgradeOptionSelected(int ID, int EliteID) {
-        CurrentIDUpgradeTable.Clear();
+        ResetTable();
         int RealId = UpgradesData.UpgradeInfoTable[ID].ID;
         bool UnlockEliteIndex = PlayerStat.EliteUnlock(RealId, EliteID);
         Level = PlayerStat.UpgradeAbility(RealId);

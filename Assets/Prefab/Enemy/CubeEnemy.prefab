@@ -174,8 +174,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delay: 0
-  BurstCooldown: 10000
-  BurstMultiplier: 0
+  BurstCooldown: 10
+  BurstMultiplier: 10
   BurstRepeat: 15
 --- !u!114 &2832402760923136410
 MonoBehaviour:

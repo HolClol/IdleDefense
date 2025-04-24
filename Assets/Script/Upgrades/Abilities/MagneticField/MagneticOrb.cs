@@ -26,7 +26,8 @@ public class MagneticOrb : ProjectileController
 
     private IEnumerator DisableObject(float timer) {
         yield return new WaitForSeconds(timer);
-        gameObject.SetActive(false);
+        if (!Maxed)
+            gameObject.SetActive(false);
     }
 
     protected override void OnEnable()
@@ -55,7 +56,7 @@ public class MagneticOrb : ProjectileController
     public override void UpdateStat(int[] intvalue, float[] floatvalue) {
         Damage = intvalue[0];
         Piercing = intvalue[1];
-        if (intvalue[2] == 1 && !Maxed)
+        if (intvalue[2] == 1 & !Maxed)
             Maxed = true;
         DamageType = intvalue[3];
         Knockback = floatvalue[0];

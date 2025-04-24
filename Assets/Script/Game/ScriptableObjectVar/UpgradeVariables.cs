@@ -28,15 +28,32 @@ public enum StatVariables
     BulletLifetime,
     BulletNumb,
     // Enigmatic Saw \\
+    RazorbladeCount,
     Speed,
     // Magnetic Field \\
     NumbOfOrbs,
     NumbOfMini,
     OrbMoveSpeed,
     OrbRecover,
+    // Ground Eruption
+    AdditionalEruptions,
+    GroundDuration,
+    DecreaseScale,
+    IncreaseScale,
 }
 
-[CreateAssetMenu(fileName = "UpgradeTable", menuName = "ScriptableObjects/Abilities/UpgradeTable", order = 1)]
+public enum AbilityProfile
+{
+    Base,
+    EngimaticSaw,
+    HomingMissiles,
+    MagneticField,
+    LancerBeam,
+    SplitterShotgun,
+    FieryEruption,
+}
+
+[CreateAssetMenu(fileName = "UpgradeTable", menuName = "ScriptableObjects/Upgrades/UpgradeTable", order = 1)]
 public class UpgradeVariables : ScriptableObject
 {
     [System.Serializable] public class UpgradeStat
@@ -45,5 +62,6 @@ public class UpgradeVariables : ScriptableObject
         public float Value;
     }
 
+    public AbilityProfile AbilityProfile;
     public UpgradeStat[] UpgradeTable;
 }

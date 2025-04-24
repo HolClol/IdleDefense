@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public interface IDamageDisplay
-{
-
-}
-
 public class DamageCalculateManager : MonoBehaviour
 {
     [System.Serializable] public class AbilitiesStat
