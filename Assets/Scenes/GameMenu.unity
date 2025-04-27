@@ -746,7 +746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593f4646dc3d2c24ea0b5ee09edbdecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpgradesData: {fileID: 11400000, guid: b204bde02ab4e2348a17b148517b97fb, type: 2}
+  UpgradesData: {fileID: 11400000, guid: d9c0810356405ec4abe6edab0ce49bce, type: 2}
   UpdateStat:
     m_PersistentCalls:
       m_Calls:

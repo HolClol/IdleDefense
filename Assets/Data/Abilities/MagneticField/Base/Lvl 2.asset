@@ -15,6 +15,6 @@ MonoBehaviour:
   AbilityProfile: 3
   UpgradeTable:
   - Stat: 10
-    Value: 3
+    Value: 1.5
   - Stat: 8
     Value: 1
