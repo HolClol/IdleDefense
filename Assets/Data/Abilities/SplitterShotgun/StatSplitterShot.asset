@@ -19,13 +19,11 @@ MonoBehaviour:
   UpgradeDescription:
   - Deploy a smaller turret that deals shotgun damage to enemies once within proximity
     range.
-  - Increase proximity range by 25%
-  - Increase damage scaling by 25% and knockback by 40%
-  - Successfully hit bullets will now bounce 2 additional bullets behind enemies,
-    dealing damage to enemies behind
-  - Increase number of shotguns blast to 8
-  - Increase damage scaling by 50%, now bounce 3 bullets and decrease ability cooldown
-    by 20%
+  - Bullet + 3
+  - Increase damage + 25% and  knockback by 40%
+  - Critical Rate +25%
+  - Bullet + 5
+  - Damage +50% and bullet can bounce 3 times
   MaxLevel: 6
   ID: 4
   ElitePath:

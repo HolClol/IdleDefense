@@ -18,11 +18,11 @@ MonoBehaviour:
   UpgradeName: Homing Missiles
   UpgradeDescription:
   - Fire homing missiles that deals AOE damage at 3 random targets.
-  - Decrease ability cooldown by 1s and increase damage scaling by 20%
-  - Missiles explode faster by 15%
-  - Increase number of missiles by 2
-  - Increase damage scaling by 20% and bigger explosion radius
-  - Increase number of missiles by 3 and reduce ability cooldown by 2s
+  - Damage +20%
+  - Explode radius + 1
+  - Missile + 2
+  - 'Cooldown reduce by 1s '
+  - Damage + 10% and 20% chances to cause shock for 5 second
   MaxLevel: 6
   ID: 1
   ElitePath:

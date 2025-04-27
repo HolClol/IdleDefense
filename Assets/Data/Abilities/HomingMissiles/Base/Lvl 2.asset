@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityProfile: 2
   UpgradeTable:
-  - Stat: 12
-    Value: -0.15
+  - Stat: 10
+    Value: 1.5
