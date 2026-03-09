@@ -16,6 +16,7 @@ public class DamageCalculateManager : MonoBehaviour
             Damage = damage;
         }
     }
+    public static DamageCalculateManager Instance;
 
     public GameUpgradeInfo UpgradesInfo;
     public GameObject _damageDisplayPrefab;
@@ -28,6 +29,11 @@ public class DamageCalculateManager : MonoBehaviour
 
     private List<GameObject> PooledDisplay = new List<GameObject>();
     private List<DamageDisplay> PooledDisplayScript = new List<DamageDisplay>();
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
