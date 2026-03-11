@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class BulletController : MonoBehaviour
 { 
     public int DamageType = 1; 
-    public UnityEvent<GameObject, int[], float[]> ResponseDamage;
 
     [SerializeField] GameObject TrailChar;
     private Rigidbody2D Rb;
@@ -92,7 +91,7 @@ public class BulletController : MonoBehaviour
         int Crit = CritHit != intstat[0] ? 1 : 0;
         intstat[0] = CritHit;
         intstat[3] = Crit;
-        ResponseDamage.Invoke(target, intstat, floatstat);
+        DamageCalculateManager.Instance.DamageCalculate(target, intstat, floatstat);
     }
 
     public void UpdateStat(int[] intstat, float[] floatstat) {

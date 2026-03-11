@@ -7,7 +7,6 @@ public class ProjectileController : MonoBehaviour
 {
     [HideInInspector] public AbilitiesController MainScript;
     public bool MainProjectile;
-    public UnityEvent<GameObject, int[], float[]> ResponseDamage;
 
     protected Dictionary<GameObject, float> damageCooldowns = new Dictionary<GameObject, float>();
     protected float Knockback;
@@ -66,7 +65,7 @@ public class ProjectileController : MonoBehaviour
             int Crit = CritHit != intstat[0] ? 1 : 0;
             intstat[0] = CritHit;
             intstat[3] = Crit;
-            ResponseDamage.Invoke(target, intstat, floatstat);
+            DamageCalculateManager.Instance.DamageCalculate(target, intstat, floatstat);
             StartCoroutine(DamageCooldownPlay(target, floatstat[1]));
         }
             
