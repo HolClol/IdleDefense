@@ -813,7 +813,7 @@ GameObject:
   - component: {fileID: 444369458}
   - component: {fileID: 444369459}
   m_Layer: 0
-  m_Name: M_PlayerManager
+  m_Name: PlayerManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2023,7 +2023,7 @@ GameObject:
   - component: {fileID: 825236930}
   - component: {fileID: 825236933}
   m_Layer: 0
-  m_Name: M_DamageManager
+  m_Name: DamageManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2381,7 +2381,7 @@ GameObject:
   - component: {fileID: 1200141406}
   - component: {fileID: 1200141405}
   m_Layer: 0
-  m_Name: M_EnemyManager
+  m_Name: EnemyManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2676,7 +2676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1443648695}
   m_Layer: 0
-  m_Name: M_MainManagers
+  m_Name: MainManagers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

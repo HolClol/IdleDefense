@@ -11,16 +11,20 @@ public class UpgradeManager : MonoBehaviour
 
     private PlayerGameStat PlayerStat;
     private GameObject MainPlayer;
+    private AbilitiesManager _abilitiesHolder;
+    private WeaponController _weaponHolder;
     private List<int> CurrentIDUpgradeTable = new List<int>();
     private List<int> ObtainedUpgrade = new List<int>();
     private int RandomUpgradeIndex, Level, LevelSelect, EliteIndex;
-    private bool GuaranteeUpgrade = false;
-    private bool Elite = false;
+    private bool GuaranteeUpgrade;
+    private bool Elite;
     
     private void Start()
     {
         MainPlayer = GameObject.Find("Player").gameObject;
         PlayerStat = MainPlayer.GetComponent<PlayerGameStat>();
+        _abilitiesHolder = MainPlayer.GetComponentInChildren<AbilitiesManager>();
+        _weaponHolder = MainPlayer.GetComponentInChildren<WeaponController>();
     }
 
     //Select a random upgrade in the table (This should run in the first info collect signal)
@@ -130,38 +134,38 @@ public class UpgradeManager : MonoBehaviour
     }
 
     // Receive back the selected upgrade from UI
-    public void UpgradeOptionSelected(int ID, int EliteID) {
+    public void UpgradeOptionSelected(int ID, int eliteID) {
         ResetTable();
-        int RealId = UpgradesData.UpgradeInfoTable[ID].ID;
-        bool UnlockEliteIndex = PlayerStat.EliteUnlock(RealId, EliteID);
-        Level = PlayerStat.UpgradeAbility(RealId);
-        UpdateLevelUI.Invoke(new int[] { 1, RealId });     
-
-        string ScriptName = "";
-        switch (RealId)
+        int realID = UpgradesData.UpgradeInfoTable[ID].ID;
+        bool unlockEliteIndex = PlayerStat.EliteUnlock(realID, eliteID);
+        bool isAbility = false;
+        var abilityHolder = MainPlayer.transform.Find("AbilitiesHolder");
+        Level = PlayerStat.UpgradeAbility(realID);
+        UpdateLevelUI.Invoke(new int[] { 1, realID });     
+        
+        #region ID assign NOTE
+        /*
+            ID = 1 => HomingMissiles
+            ID = 2 => FieryEruption
+            ID = 3 => MagneticField
+            ID = 4 => SplitterShotgun
+            ID = 5 => EnigmaticSaw
+            ID = 6 => LancerBeam
+        */
+        #endregion
+        
+        // 1-19 is assumed to be all abilities
+        if (realID > 0 && realID < 20)
+        {
+            isAbility = true;
+        }
+        
+        switch (realID)
         { //Most upgrades does not need a special case and is calculated through the projectile handler itself
             case 0: //Weapon Upgrade
-                if (UnlockEliteIndex)
-                    MainPlayer.transform.Find("AbilitiesHolder").GetComponent<WeaponController>().UnlockELite(EliteID);
-                MainPlayer.transform.Find("AbilitiesHolder").GetComponent<WeaponController>().CheckUpgrade(LevelSelect);
-                break;
-            case 1:
-                ScriptName = "HomingMissilesController";
-                break;
-            case 2:
-                ScriptName = "FieryEruptionController";
-                break;
-            case 3:
-                ScriptName = "MagneticFieldController";
-                break;
-            case 4:
-                ScriptName = "SplitterController";
-                break;
-            case 5:
-                ScriptName = "EnigmaticSawController";
-                break;
-            case 6:
-                ScriptName = "LancerBeamController";
+                if (unlockEliteIndex)
+                    _weaponHolder.UnlockELite(eliteID);
+                _weaponHolder.CheckUpgrade(LevelSelect);
                 break;
             case 20:
                 UpdateStat.Invoke(new int[] { 3, 20 });
@@ -170,20 +174,18 @@ public class UpgradeManager : MonoBehaviour
                 PlayerStat.UpdateDamage(new int[] { 5 });
                 break;
         }
-
-        AbilitiesController ScriptComponent;
-        if (ScriptName != "")
+        
+        if (isAbility)
         {
-            ScriptComponent = MainPlayer.transform.Find("AbilitiesHolder").GetComponent(ScriptName) as AbilitiesController;
-            if (UnlockEliteIndex)
-                ScriptComponent.EliteUnlock(EliteID);
+            if (unlockEliteIndex)
+                _abilitiesHolder.UnlockElite(realID, eliteID);
             switch (Level)
             {
                 case 0:
-                    ScriptComponent.enabled = true;
+                    _abilitiesHolder.ActivateAbility(realID);
                     break;
                 default:
-                    ScriptComponent.CheckUpgrade(Level - 1); //Real upgrade value is smaller by 1
+                    _abilitiesHolder.UpgradeAbility(realID, Level - 1); //Real upgrade value is smaller by 1
                     break;
             }
         }
