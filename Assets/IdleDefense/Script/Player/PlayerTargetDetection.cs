@@ -47,7 +47,7 @@ public class PlayerTargetDetection : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D trigger) {
-        if (trigger.gameObject.CompareTag("Enemy") && !playerController.EnemyInZone.Contains(trigger.gameObject)) {
+        if (trigger.gameObject.GetComponentInChildren<I_Damagable>() != null && !playerController.EnemyInZone.Contains(trigger.gameObject)) {
             playerController.EnemyInZone.RemoveAll(GameObject => GameObject == null);
             playerController.EnemyInZone.Add(trigger.gameObject);
             
@@ -56,7 +56,7 @@ public class PlayerTargetDetection : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D trigger) {
-        if (trigger.gameObject.CompareTag("Enemy")) {
+        if (trigger.gameObject.GetComponentInChildren<I_Damagable>() != null) {
             playerController.EnemyInZone.RemoveAll(GameObject => GameObject == null);
             playerController.EnemyInZone.Remove(trigger.gameObject);
         }

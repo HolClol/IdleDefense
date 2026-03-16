@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EnemyMain : MonoBehaviour
+public class EnemyMain : MonoBehaviour, I_Damagable
 {
     [Header("Enemy Settings")]
     [HideInInspector] public string EnemyName;
@@ -35,10 +35,10 @@ public class EnemyMain : MonoBehaviour
     {
         m_enemyDeath = GetComponent<EnemyDeathHandler>();
         m_enemyMovement = GetComponent<EnemyMovement>();
-        m_spriteRenderer = GetComponent<SpriteRenderer>();
+        m_spriteRenderer = transform.parent.GetComponentInChildren<SpriteRenderer>();
         m_SpriteColor = m_spriteRenderer.color;
         Health = MaxHealth;
-        EnemyName = gameObject.name;
+        EnemyName = transform.parent.name;
     }
 
     protected virtual IEnumerator HurtPlay() {

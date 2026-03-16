@@ -11,11 +11,31 @@ public class AbilitiesManager : MonoBehaviour
     public FieryEruptionController FieryEruptionController;
     public MagneticFieldController MagneticFieldController;
     public SplitterController SplitterController;
+    
+    private List<AbilitiesController> AbilitiesList = new List<AbilitiesController>();
+
+    private void Start()
+    {
+        AbilitiesList.Add(EnigmaticSawController);
+        AbilitiesList.Add(LancerBeamController);
+        AbilitiesList.Add(HomingMissilesController);
+        AbilitiesList.Add(FieryEruptionController);
+        AbilitiesList.Add(MagneticFieldController);
+        AbilitiesList.Add(SplitterController);
+    }
+
+    public void UpdateDamage(int dmg)
+    {
+        foreach (AbilitiesController ability in AbilitiesList)
+        {
+            ability.UpdateDamage(dmg);
+        }
+    }
 
     public void ActivateAbility(int abilityid)
     {
         AbilitiesController abilityController = getAbilityController(abilityid);
-        abilityController.enabled = true;
+        abilityController.gameObject.SetActive(true);
     }
 
     public void UpgradeAbility(int abilityid, int level)

@@ -136,9 +136,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.7254902
       objectReference: {fileID: 0}
+    - target: {fileID: 5092714214718485917, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      propertyPath: EnemySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 386ad4a2238b92b4a8dc0098ad4c2b25, type: 3}
     - target: {fileID: 7791449681480683818, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
       propertyPath: m_Name
       value: CubeEnemyMolten Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8633982630847409137, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8633982630847409137, guid: dc2bf9bde369b554298c1aba4e691b33, type: 3}
+      propertyPath: m_Color.g
+      value: 0.59607846
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

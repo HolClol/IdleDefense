@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5219670946529330705
+--- !u!1 &2417483130255784569
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3992166145972510169}
-  - component: {fileID: 6929051109327946527}
-  - component: {fileID: 4414424869239919779}
-  - component: {fileID: 956896687242064635}
-  - component: {fileID: 2035451952}
-  - component: {fileID: 2957214932916236506}
-  - component: {fileID: 7766810266046959208}
+  - component: {fileID: 1940276189771282945}
+  - component: {fileID: 5073353794589344601}
   m_Layer: 6
-  m_Name: TriangleEnemy
-  m_TagString: Enemy
+  m_Name: Visual
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3992166145972510169
+--- !u!4 &1940276189771282945
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5219670946529330705}
+  m_GameObject: {fileID: 2417483130255784569}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.6, y: 9.29, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 3992166145972510169}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6929051109327946527
+--- !u!212 &5073353794589344601
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5219670946529330705}
+  m_GameObject: {fileID: 2417483130255784569}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -57,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,20 +70,174 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -429169369
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 572c403463ddc07458e4c630921f901f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ef1b87d3de99f6247aadd88c1b2ab3d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2475551752480258358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7989333646712374692}
+  - component: {fileID: 8419714090855356894}
+  - component: {fileID: 5827051607533899412}
+  - component: {fileID: 1120652108040103819}
+  m_Layer: 6
+  m_Name: Component
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7989333646712374692
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2475551752480258358}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3992166145972510169}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8419714090855356894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2475551752480258358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae1cfa981054a514880022a681d20fd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Delay: 0
+  ZigzagMovement: 2
+  BurstMultiplier: 8
+--- !u!114 &5827051607533899412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2475551752480258358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c658fa5237432cf4fb8cc462a5e10dfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyName: 
+  EnemyType: {fileID: 11400000, guid: 4768041a4943e6e4ab00c8ff1d01bf28, type: 2}
+  EnemyMovement: {fileID: 11400000, guid: 01d5f0db81a710d40ab498029ef5a789, type: 2}
+  EnemySprite: {fileID: 21300000, guid: 834bd78f530ba364d985beb3dedbec8e, type: 3}
+  MaxHealth: 120
+  Health: 0
+  Damage: 20
+  Experience: 1
+  EnemyID: 3
+  EnemyMovespeed: 0.5
+  EnemyRotateSpeed: 25
+  SkillCooldown: 0
+  DamageDealt: 0
+  Dead: 0
+  m_SpriteColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &1120652108040103819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2475551752480258358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d464d8f929e18d47b3496f8663bc857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyVFXPrefab: {fileID: 11400000, guid: ed614eaf0ac6c154693e9ce50060f374, type: 2}
+  UpdateStat:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: e09cb86794959894c918895ce5d9ee15, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  DecreaseCap:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 24f995fc0777e5b4a92380972034924d, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &5219670946529330705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3992166145972510169}
+  - component: {fileID: 4414424869239919779}
+  - component: {fileID: 956896687242064635}
+  m_Layer: 6
+  m_Name: TriangleEnemy
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3992166145972510169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219670946529330705}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.6, y: 9.29, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 7989333646712374692}
+  - {fileID: 1940276189771282945}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &4414424869239919779
 Rigidbody2D:
   serializedVersion: 4
@@ -160,93 +309,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.47189617, y: -0.469584}
-      - {x: -0.5, y: -0.5}
-      - {x: 0.5, y: -0.5}
-      - {x: 0.008182049, y: 0.35948086}
+    - - {x: -0.5320749, y: -0.34120226}
+      - {x: -0.63640547, y: -0.49197674}
+      - {x: 0.6685004, y: -0.49197674}
+      - {x: 0.01620531, y: 0.50391006}
   m_UseDelaunayMesh: 0
---- !u!114 &2035451952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5219670946529330705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae1cfa981054a514880022a681d20fd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Delay: 0
-  ZigzagMovement: 2
-  BurstMultiplier: 8
---- !u!114 &2957214932916236506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5219670946529330705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c658fa5237432cf4fb8cc462a5e10dfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyName: 
-  EnemyType: {fileID: 11400000, guid: 4768041a4943e6e4ab00c8ff1d01bf28, type: 2}
-  EnemyMovement: {fileID: 11400000, guid: 01d5f0db81a710d40ab498029ef5a789, type: 2}
-  EnemySprite: {fileID: 21300000, guid: 2e3f4ed4e5540cc45b1108a4ce7909ad, type: 3}
-  MaxHealth: 120
-  Health: 0
-  Damage: 20
-  Experience: 1
-  EnemyID: 3
-  EnemyMovespeed: 0.5
-  EnemyRotateSpeed: 25
-  SkillCooldown: 0
-  DamageDealt: 0
-  Dead: 0
-  m_SpriteColor: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &7766810266046959208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5219670946529330705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d464d8f929e18d47b3496f8663bc857, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyVFXPrefab: {fileID: 11400000, guid: ed614eaf0ac6c154693e9ce50060f374, type: 2}
-  UpdateStat:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: e09cb86794959894c918895ce5d9ee15, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  DecreaseCap:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 24f995fc0777e5b4a92380972034924d, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

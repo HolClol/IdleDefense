@@ -139,7 +139,7 @@ public class EnemySpawnController : MonoBehaviour
 
             if (spawnchance > Random.Range(0,100))
             {
-                int id = enemyToSpawn.GetComponent<EnemyMain>().EnemyID;
+                int id = enemyToSpawn.GetComponentInChildren<EnemyMain>().EnemyID;
                 if (enemyCapMechanic.ContainsKey(id) && enemyCapMechanic[id] >= actualEnemyPrefabs[randEnemy].SpawnCap && actualEnemyPrefabs[randEnemy].SpawnCap > 0)
                     yield break;
                 
@@ -149,8 +149,9 @@ public class EnemySpawnController : MonoBehaviour
                     enemyCapMechanic[id] = 0;
 
                 GameObject Enemy = Instantiate(enemyToSpawn, enemyToSpawnPos.position, Quaternion.identity, _enemySpawn);
-                Enemy.GetComponent<EnemyMain>().MaxHealth += (int)(Enemy.GetComponent<EnemyMain>().MaxHealth * BonusMulti);
-                Enemy.GetComponent<EnemyMain>().Experience += (int)(Enemy.GetComponent<EnemyMain>().Experience * BonusMulti);
+                var enemyMain = Enemy.GetComponentInChildren<EnemyMain>();
+                enemyMain.MaxHealth += (int)(enemyMain.MaxHealth * BonusMulti);
+                enemyMain.Experience += (int)(enemyMain.Experience * BonusMulti);
                 
                 // Enemy.GetComponent<EnemyBehaviourScript>().EnemyMovespeed += SpeedIncrease;
 

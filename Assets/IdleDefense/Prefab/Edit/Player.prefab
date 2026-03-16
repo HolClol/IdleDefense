@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1229250660181763024
 Transform:
   m_ObjectHideFlags: 0
@@ -39,7 +39,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119649750446091836}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d46d8360f99f5db42a50ef8579e92b05, type: 3}
   m_Name: 
@@ -88,6 +88,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4372520888210551303}
   - {fileID: 4354891446938489803}
   - {fileID: 1695397949462626961}
   m_Father: {fileID: 4187943480000948256}
@@ -108,7 +109,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &76812982707889168
 Transform:
   m_ObjectHideFlags: 0
@@ -131,7 +132,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689349450933951009}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea315aa96070d634ab2688483c6ffaef, type: 3}
   m_Name: 
@@ -205,7 +206,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4802059402415427507}
+      - m_Target: {fileID: 4341831606922092685}
         m_TargetAssemblyTypeName: WeaponController, Assembly-CSharp
         m_MethodName: RageActivate
         m_Mode: 1
@@ -482,7 +483,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2458965911307004163
 Transform:
   m_ObjectHideFlags: 0
@@ -505,7 +506,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1270004282609639754}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aec6a8be11af64b40a848d8c05d52802, type: 3}
   m_Name: 
@@ -539,7 +540,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4354891446938489803}
-  - component: {fileID: 4802059402415427507}
   - component: {fileID: 2871072398590868119}
   m_Layer: 3
   m_Name: AbilitiesHolder
@@ -569,31 +569,6 @@ Transform:
   - {fileID: 2458965911307004163}
   m_Father: {fileID: 704541622957442708}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4802059402415427507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2393728526302374488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fd432f24ea1a0a4196b14b778da69cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FiringPoint: {fileID: 8550349475331082464}
-  BulletPrefab: {fileID: 7954232495425273913, guid: b29ae5373d7c8cd4fa2d1c68046e3ca7, type: 3}
-  DamageType: {fileID: 11400000, guid: f3eae1e8df0180142be5f4acb41456cd, type: 2}
-  NumbOfBullets: 1
-  Damage: 20
-  Piercing: 0
-  Bounce: 0
-  RageTime: 5
-  Lifetime: 1.5
-  FireRate: 0.3
-  AdditionalBulletSpeed: 0
-  CritRate: 0.1
-  CritDamage: 0.5
 --- !u!114 &2871072398590868119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,7 +603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &156443568758800412
 Transform:
   m_ObjectHideFlags: 0
@@ -651,7 +626,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2659398803755136305}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12d40196a58989e47a7abe0dead4a239, type: 3}
   m_Name: 
@@ -674,6 +649,63 @@ MonoBehaviour:
   Duration: 5
   DamageInterval: 0.6
   Speed: 20
+--- !u!1 &3022103689227366035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4372520888210551303}
+  - component: {fileID: 4341831606922092685}
+  m_Layer: 3
+  m_Name: WeaponHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4372520888210551303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3022103689227366035}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 704541622957442708}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4341831606922092685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3022103689227366035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd432f24ea1a0a4196b14b778da69cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FiringPoint: {fileID: 8550349475331082464}
+  BulletPrefab: {fileID: 7954232495425273913, guid: b29ae5373d7c8cd4fa2d1c68046e3ca7, type: 3}
+  DamageType: {fileID: 11400000, guid: f3eae1e8df0180142be5f4acb41456cd, type: 2}
+  NumbOfBullets: 1
+  Damage: 20
+  Piercing: 0
+  Bounce: 0
+  RageTime: 5
+  Lifetime: 1.5
+  FireRate: 0.3
+  AdditionalBulletSpeed: 0
+  CritRate: 0.1
+  CritDamage: 0.5
 --- !u!1 &3163765571971205558
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,7 +722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2442927494545924636
 Transform:
   m_ObjectHideFlags: 0
@@ -713,7 +745,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3163765571971205558}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57aa22da6ffdc3e4c8bf753ad9531c23, type: 3}
   m_Name: 
@@ -750,7 +782,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5559870650023652025
 Transform:
   m_ObjectHideFlags: 0
@@ -773,7 +805,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4539446123664994671}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04c43b32e5af32f4292c4dabccda4f81, type: 3}
   m_Name: 

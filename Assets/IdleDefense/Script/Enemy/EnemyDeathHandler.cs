@@ -19,8 +19,8 @@ public class EnemyDeathHandler : MonoBehaviour
     protected virtual void Start()
     {
         m_enemyState = GetComponent<EnemyMain>();
-        m_Rb = GetComponent<Rigidbody2D>();
-        m_spriteRenderer = GetComponent<SpriteRenderer>();
+        m_Rb = GetComponentInParent<Rigidbody2D>();
+        m_spriteRenderer = transform.parent.GetComponentInChildren<SpriteRenderer>();
     }
 
     public virtual void DeathCondition()
@@ -53,7 +53,7 @@ public class EnemyDeathHandler : MonoBehaviour
                 GameObject ClonedParticle = Instantiate(EnemyVFXPrefab.EffectPrefab[0], transform.position, transform.rotation, GameObject.Find("_Projectiles").transform);
             }
 
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
             m_enemyState.Dead = true;
         }
 

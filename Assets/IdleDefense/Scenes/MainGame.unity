@@ -2020,7 +2020,6 @@ GameObject:
   m_Component:
   - component: {fileID: 825236932}
   - component: {fileID: 825236931}
-  - component: {fileID: 825236930}
   - component: {fileID: 825236933}
   m_Layer: 0
   m_Name: DamageManager
@@ -2029,34 +2028,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &825236930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 825236929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5d8273fdeb1aa0458041abced19baea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 1692d7c5b439c184d83c31d1e0448544, type: 2}
-  ResponseDamage:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 825236931}
-        m_TargetAssemblyTypeName: DamageCalculateManager, Assembly-CSharp
-        m_MethodName: DamageCalculate
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &825236931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3597,6 +3568,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1270004282609639754, guid: cd677d311dc483c4ba32e3064df38484, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2498866934819719244, guid: cd677d311dc483c4ba32e3064df38484, type: 3}
       propertyPath: CrosshairTarget
       value: 
@@ -3645,6 +3620,18 @@ PrefabInstance:
       propertyPath: CrosshairTarget
       value: 
       objectReference: {fileID: 516030767}
+    - target: {fileID: 6340956459390033055, guid: cd677d311dc483c4ba32e3064df38484, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6340956459390033055, guid: cd677d311dc483c4ba32e3064df38484, type: 3}
+      propertyPath: FiringPoint
+      value: 
+      objectReference: {fileID: 763178978}
+    - target: {fileID: 6340956459390033055, guid: cd677d311dc483c4ba32e3064df38484, type: 3}
+      propertyPath: ChargedFiringPoint
+      value: 
+      objectReference: {fileID: 264044902}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

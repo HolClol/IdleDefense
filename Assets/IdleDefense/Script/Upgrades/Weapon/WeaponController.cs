@@ -123,7 +123,7 @@ public class WeaponController : MonoBehaviour
         return BulletNew;
     }
 
-    public void CheckUpgrade(int upgradelevel) {
+    public virtual void CheckUpgrade(int upgradelevel) {
         WeaponUpgradeLevel = upgradelevel;
         switch (WeaponUpgradeLevel) {
             case 1:

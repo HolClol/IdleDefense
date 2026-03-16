@@ -55,7 +55,7 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D trigger) 
     {
-        if (trigger.gameObject.CompareTag("Enemy")) {
+        if (trigger.gameObject.GetComponentInChildren<I_Damagable>() != null) {
             SendDamage(trigger.gameObject, new int[] { Damage, 0, DamageType, 0 }, new float[] { 0.25f, 0f, CritRate, CritDamage });
             if (Piercing > 0) {
                 Piercing -= 1;

@@ -59,9 +59,11 @@ public class DamageCalculateManager : MonoBehaviour
     }
 
     // Generally the array consist of follow: int[] {dmg, id, damagetype, crit?}; float[] {knockback, debouncetime}
-    public void DamageCalculate(GameObject enemy, int[] intstat, float[] floatstat) {
+    public void DamageCalculate(GameObject enemy, int[] intstat, float[] floatstat)
+    {
 
-        int Damage = enemy.GetComponent<EnemyMain>().ReceiveDamage(intstat, floatstat);
+        var enemyMain = enemy.GetComponentInChildren<I_Damagable>();
+        int Damage = enemyMain.ReceiveDamage(intstat, floatstat);
         if (intstat[0] > 0)
         {
             GameObject damageDisplay = GetPooledObject(enemy.transform.position, Damage, intstat[3] == 1);
