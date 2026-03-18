@@ -6,47 +6,36 @@ using UnityEngine.UI;
 
 public class UIBossBar : MonoBehaviour
 {
-    [SerializeField] StageInfo.EnemyPrefab enemyPrefab;
     [SerializeField] Image m_HealthBar;
     [SerializeField] TMP_Text m_Text;
-
-    private Animator m_Animator;
+    
     private int TransitionLoop;
+    private int maxHP;
     private bool Tweening;
-
-    private void Start()
+    
+    public void HealthChange(int currentHP)
     {
-        m_Animator = GetComponent<Animator>();
-        m_Animator.Play("BossIntroBar");
-    }
-
-    public void UpdateName(int[] value)
-    {
-        m_Text.text = enemyPrefab.BossPrefab[value[0]].gameObject.GetComponent<EnemyMain>().EnemyName;
-    }
-    public void HealthChange(int[] value)
-    {
-        if (value[0] > 0)
+        if (currentHP > 0)
         {
-            HealthChange(value[0], value[1]);
+            m_HealthBar.fillAmount = (float)currentHP / (float)maxHP;
         }
         else
         {
-            m_Animator.Play("BossOutroBar");
-            Invoke("Disable", 1);
+            Invoke("Disable", 1); // Terrible method, change in the future
         }
             
     }
 
-    private void Disable()
+    public void SetMaxHP(int maxhp)
+    {
+        maxHP = maxhp;
+    }
+
+    public void Disable()
     {
         gameObject.SetActive(false);
     }
-
-    private void HealthChange(int health, int maxhealth)
-    {
-        m_HealthBar.fillAmount = (float)health / (float)maxhealth; ;
-    }
+    
 
     private IEnumerator UpdateHealthBar(int health, int maxhealth)
     {

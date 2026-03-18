@@ -7,7 +7,6 @@ public class BossMain : EnemyMain
 {
     [Header("Events")]
     public UnityEvent<float[]> CameraChange;
-    public UnityEvent<int[]>[] UpdateBossUI;
 
     protected List<int> StaleList = new List<int>();
 

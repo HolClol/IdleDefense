@@ -6,23 +6,28 @@ public class TheSpikerAI : BossMain
 {
     [SerializeField] SpriteRenderer _spriteRenderer;
     [SerializeField] GameObject _projectile;
-
+    [SerializeField] GameObject _uiPanel;
+    
+    private UIBossBar _uiBossBar;
     private float TimeBeforeFire;
     private int FireRepeat = 1;
     private float angle, offsetangle;
 
     protected override void Start()
     {
+        _uiBossBar = _uiPanel.GetComponent<UIBossBar>();
         m_enemyDeath = GetComponent<EnemyDeathHandler>();
         m_enemyMovement = GetComponent<EnemyMovement>();
+        
         EnemyName = gameObject.name;
         Health = MaxHealth;
         TimeBeforeFire = SkillCooldown;
         m_SpriteColor = _spriteRenderer.color;
         m_spriteRenderer = _spriteRenderer;
+        
         CameraChange.Invoke(new float[] { 24, 5 });
-        UpdateBossUI[0].Invoke(new int[] { 0 });
-        UpdateBossUI[1].Invoke(new int[] { Health, MaxHealth });
+        _uiPanel.SetActive(true);
+        _uiBossBar.SetMaxHP(MaxHealth);
     }
     private void Update()
     {
@@ -44,8 +49,8 @@ public class TheSpikerAI : BossMain
         m_spriteRenderer.color = Color.red;
         Color tempColorLerped = m_SpriteColor;
         m_enemyMovement.SetHurt(true);
+        _uiBossBar.HealthChange(Health);
         float lerp = 0f;
-        UpdateBossUI[1].Invoke(new int[] { Health, MaxHealth });
 
         while (lerp < 1f)
         {
