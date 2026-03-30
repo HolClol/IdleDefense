@@ -3,37 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class UIBossBar : MonoBehaviour
 {
-    [SerializeField] Image m_HealthBar;
-    [SerializeField] TMP_Text m_Text;
+    [SerializeField] private Image m_HealthBar;
+    [SerializeField] private TMP_Text m_Text;
     
+    private RectTransform _rectTransform;
     private int TransitionLoop;
     private int maxHP;
     private bool Tweening;
+
+    private void Awake()
+    {
+        _rectTransform = GetComponent<RectTransform>();
+    }
+    
     
     public void HealthChange(int currentHP)
     {
-        if (currentHP > 0)
-        {
-            m_HealthBar.fillAmount = (float)currentHP / (float)maxHP;
-        }
-        else
-        {
-            Invoke("Disable", 1); // Terrible method, change in the future
-        }
-            
+        m_HealthBar.fillAmount = (float)currentHP / (float)maxHP;
     }
 
     public void SetMaxHP(int maxhp)
     {
+        _rectTransform.DOAnchorPosY(-700f, 1f);
         maxHP = maxhp;
     }
 
-    public void Disable()
+    public void PlayDeath() 
     {
-        gameObject.SetActive(false);
+        _rectTransform.DOAnchorPosY(-1300f, 1f);
     }
     
 

@@ -7,7 +7,7 @@ public class TheSpikerAI : BossMain
     [SerializeField] SpriteRenderer _spriteRenderer;
     [SerializeField] GameObject _projectile;
     [SerializeField] GameObject _uiPanel;
-    
+
     private UIBossBar _uiBossBar;
     private float TimeBeforeFire;
     private int FireRepeat = 1;
@@ -29,6 +29,13 @@ public class TheSpikerAI : BossMain
         _uiPanel.SetActive(true);
         _uiBossBar.SetMaxHP(MaxHealth);
     }
+
+    public void ChangeHP(int hp)
+    {
+        _uiBossBar.HealthChange(hp);
+        if (hp == 0)
+            _uiBossBar.PlayDeath();
+    }
     private void Update()
     {
 
@@ -46,10 +53,11 @@ public class TheSpikerAI : BossMain
 
     protected override IEnumerator HurtPlay()
     {
+        if (Dead) yield break;
         m_spriteRenderer.color = Color.red;
         Color tempColorLerped = m_SpriteColor;
         m_enemyMovement.SetHurt(true);
-        _uiBossBar.HealthChange(Health);
+        ChangeHP(Health);
         float lerp = 0f;
 
         while (lerp < 1f)

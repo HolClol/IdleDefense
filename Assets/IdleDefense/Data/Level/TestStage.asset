@@ -20,7 +20,7 @@ MonoBehaviour:
     - EnemySpawn:
       - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
         SpawnChance: 100
-        SpawnCap: 100
+        SpawnCap: 10
         BonusHealthMulti: 0
         BonusExpMulti: 0
       SpawnRate: 1
@@ -30,12 +30,12 @@ MonoBehaviour:
     - EnemySpawn:
       - EnemyPrefab: {fileID: 1341003208591917980, guid: 53b014495e6ab7d4bb6799ac6431a26d, type: 3}
         SpawnChance: 100
-        SpawnCap: 100
+        SpawnCap: 10
         BonusHealthMulti: 0
         BonusExpMulti: 0
       - EnemyPrefab: {fileID: 5219670946529330705, guid: 874d6ddcfbbb6f7449fab6816655a6cf, type: 3}
-        SpawnChance: 100
-        SpawnCap: 100
+        SpawnChance: 30
+        SpawnCap: 10
         BonusHealthMulti: 0
         BonusExpMulti: 0
       SpawnRate: 1
