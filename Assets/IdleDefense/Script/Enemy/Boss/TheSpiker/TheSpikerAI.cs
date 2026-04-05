@@ -16,7 +16,7 @@ public class TheSpikerAI : BossMain
     protected override void Start()
     {
         _uiBossBar = _uiPanel.GetComponent<UIBossBar>();
-        m_enemyDeath = GetComponent<EnemyDeathHandler>();
+        m_enemyDeath = GetComponentInParent<EnemyDeathHandler>();
         m_enemyMovement = GetComponent<EnemyMovement>();
         
         EnemyName = gameObject.name;

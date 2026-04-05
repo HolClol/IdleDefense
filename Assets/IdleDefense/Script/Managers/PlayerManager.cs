@@ -18,7 +18,7 @@ public class PlayerManager : MonoBehaviour
     public int MaxRage = 100;
     
     [Header("Stats")]
-    [SerializeField] int EXPToLevelUp = 250;
+    [SerializeField] int EXPToLevelUp = 200;
     [SerializeField] int Level = 1;
     #region SET UP VALUES
     public int ExperienceValue, HealthValue, ShieldValue, RageValue, EnemiesEliminated, PointsEarned, CoinsEarned;
@@ -166,7 +166,7 @@ public class PlayerManager : MonoBehaviour
         {
             Level += 1;
             
-            GameManager.Instance.PlayerUpdateStat(new PlayerDataType(EnumDataType.Health, 50));
+            GameManager.Instance.PlayerUpdateStat(EnumDataType.Health, 50);
             UpdateDamage.Invoke(new int[] { 2 });
             UpgradePopUp.Invoke();
             yield return new WaitForSeconds(1f);

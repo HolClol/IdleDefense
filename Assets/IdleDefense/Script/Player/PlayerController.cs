@@ -8,24 +8,6 @@ using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 public class PlayerController : MonoBehaviour
 {
-    [System.Serializable] public class PlayerUpgradeStat {
-        public int UpgradeID;
-        public int UpgradeLevel;
-        public int ElitePath; // IT WE KEEP IT
-
-        public PlayerUpgradeStat(int id, int level, int eliteid) {
-            UpgradeID = id;
-            UpgradeLevel = level;
-            ElitePath = eliteid;
-        }
-    }
-    [System.Serializable] public class PlayerInGameStat {
-        public int BaseDamage = 20;
-        [Range(10, 40)]
-        public float RotateSpeed = 20;
-        public List<PlayerUpgradeStat> Upgrades;
-    }
-
     [Header("Player Set Up")]
     public GameObject CrosshairTarget;
     public GameObject PlayerChar;

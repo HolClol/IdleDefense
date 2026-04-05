@@ -15,7 +15,7 @@ public class PlayerGameStat : MonoBehaviour
         switch (type)
         {
             case 0:
-                PlayerController.PlayerUpgradeStat newUpgrade = new PlayerController.PlayerUpgradeStat(id, level, 0);
+                PlayerUpgradeStat newUpgrade = new PlayerUpgradeStat(id, level, 0);
                 MainController.PlayerStats.Upgrades.Add(newUpgrade);
                 break;
             case 1:

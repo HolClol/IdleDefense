@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8081079579120189455}
   - component: {fileID: 6803428044554500827}
   - component: {fileID: 5092714214718485917}
-  - component: {fileID: 1397878913240912564}
   m_Layer: 6
   m_Name: Component
   m_TagString: Untagged
@@ -77,49 +76,6 @@ MonoBehaviour:
   DamageDealt: 0
   Dead: 0
   m_SpriteColor: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &1397878913240912564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1416664415677957683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d464d8f929e18d47b3496f8663bc857, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyVFXPrefab: {fileID: 11400000, guid: ed614eaf0ac6c154693e9ce50060f374, type: 2}
-  UpdateStat:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: e09cb86794959894c918895ce5d9ee15, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  DecreaseCap:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 24f995fc0777e5b4a92380972034924d, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &5774484664234964824
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,6 +171,7 @@ GameObject:
   - component: {fileID: 1380406969235032802}
   - component: {fileID: 1804823193635013528}
   - component: {fileID: 1537852670157503703}
+  - component: {fileID: 1110478953269015938}
   m_Layer: 6
   m_Name: CubeEnemy
   m_TagString: Enemy
@@ -311,3 +268,46 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1110478953269015938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7791449681480683818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d464d8f929e18d47b3496f8663bc857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyVFXPrefab: {fileID: 11400000, guid: ed614eaf0ac6c154693e9ce50060f374, type: 2}
+  UpdateStat:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: e09cb86794959894c918895ce5d9ee15, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  DecreaseCap:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 24f995fc0777e5b4a92380972034924d, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

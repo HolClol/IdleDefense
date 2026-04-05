@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6544004440995691651}
   - component: {fileID: 5969624011608926854}
   - component: {fileID: 8919878478438542066}
-  - component: {fileID: 1316920235287190051}
   m_Layer: 6
   m_Name: Component
   m_TagString: Untagged
@@ -74,49 +73,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delay: 2
---- !u!114 &1316920235287190051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2785774136870516618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d464d8f929e18d47b3496f8663bc857, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyVFXPrefab: {fileID: 11400000, guid: ed614eaf0ac6c154693e9ce50060f374, type: 2}
-  UpdateStat:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: e09cb86794959894c918895ce5d9ee15, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  DecreaseCap:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 24f995fc0777e5b4a92380972034924d, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &4470205101560659765
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +84,7 @@ GameObject:
   - component: {fileID: 4684202368608216317}
   - component: {fileID: 5414897741636939143}
   - component: {fileID: 8872426336487476191}
+  - component: {fileID: 3721636664039935528}
   m_Layer: 6
   m_Name: TriangleProjectile
   m_TagString: Enemy
@@ -228,6 +185,49 @@ PolygonCollider2D:
       - {x: 0.331498, y: -0.4846816}
       - {x: 0.008182049, y: 0.5126641}
   m_UseDelaunayMesh: 0
+--- !u!114 &3721636664039935528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4470205101560659765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d464d8f929e18d47b3496f8663bc857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyVFXPrefab: {fileID: 11400000, guid: ed614eaf0ac6c154693e9ce50060f374, type: 2}
+  UpdateStat:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: e09cb86794959894c918895ce5d9ee15, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  DecreaseCap:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 24f995fc0777e5b4a92380972034924d, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7171701323474311162
 GameObject:
   m_ObjectHideFlags: 0

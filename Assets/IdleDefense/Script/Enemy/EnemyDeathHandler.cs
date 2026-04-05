@@ -18,7 +18,7 @@ public class EnemyDeathHandler : MonoBehaviour
 
     protected virtual void Start()
     {
-        m_enemyState = GetComponent<EnemyMain>();
+        m_enemyState = GetComponentInChildren<EnemyMain>();
         m_Rb = GetComponentInParent<Rigidbody2D>();
         m_spriteRenderer = transform.parent.GetComponentInChildren<SpriteRenderer>();
     }
@@ -37,10 +37,10 @@ public class EnemyDeathHandler : MonoBehaviour
             m_enemyState.m_SpriteColor = Color.grey;
             gameObject.name = "Molten";
 
-            GameManager.Instance.PlayerUpdateStat(new PlayerDataType(EnumDataType.Experience, m_enemyState.Experience));
-            GameManager.Instance.PlayerUpdateStat(new PlayerDataType(EnumDataType.Coins, m_enemyState.MaxHealth / 50f));
-            GameManager.Instance.PlayerUpdateStat(new PlayerDataType(EnumDataType.Points, m_enemyState.Experience / 100f));
-            GameManager.Instance.PlayerUpdateStat(new PlayerDataType(EnumDataType.EnemyEliminated, 1f));
+            GameManager.Instance.PlayerUpdateStat(EnumDataType.Experience, m_enemyState.Experience);
+            GameManager.Instance.PlayerUpdateStat(EnumDataType.Coins, m_enemyState.MaxHealth / 50f);
+            GameManager.Instance.PlayerUpdateStat(EnumDataType.Points, m_enemyState.Experience / 100f);
+            GameManager.Instance.PlayerUpdateStat(EnumDataType.EnemyEliminated, 1f);
             DecreaseCap.Invoke(new int[] { m_enemyState.EnemyID });
             Destroy(gameObject, 5);
         }
@@ -49,15 +49,15 @@ public class EnemyDeathHandler : MonoBehaviour
         {
             if (!Moltened)
             {
-                GameManager.Instance.PlayerUpdateStat(new PlayerDataType(EnumDataType.Experience, m_enemyState.Experience));
-                GameManager.Instance.PlayerUpdateStat(new PlayerDataType(EnumDataType.Coins, m_enemyState.MaxHealth / 50f));
-                GameManager.Instance.PlayerUpdateStat(new PlayerDataType(EnumDataType.Points, m_enemyState.Experience / 100f));
-                GameManager.Instance.PlayerUpdateStat(new PlayerDataType(EnumDataType.EnemyEliminated, 1f));
+                GameManager.Instance.PlayerUpdateStat(EnumDataType.Experience, m_enemyState.Experience);
+                GameManager.Instance.PlayerUpdateStat(EnumDataType.Coins, m_enemyState.MaxHealth / 50f);
+                GameManager.Instance.PlayerUpdateStat(EnumDataType.Points, m_enemyState.Experience / 100f);
+                GameManager.Instance.PlayerUpdateStat(EnumDataType.EnemyEliminated, 1f);
                 DecreaseCap.Invoke(new int[] { m_enemyState.EnemyID });
                 GameObject ClonedParticle = Instantiate(EnemyVFXPrefab.EffectPrefab[0], transform.position, transform.rotation, GameObject.Find("_Projectiles").transform);
             }
 
-            Destroy(transform.parent.gameObject);
+            Destroy(gameObject);
             m_enemyState.Dead = true;
         }
 
@@ -67,8 +67,9 @@ public class EnemyDeathHandler : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            GameManager.Instance.PlayerUpdateStat(EnumDataType.Health, -m_enemyState.Damage);
             GameObject ClonedParticle = Instantiate(EnemyVFXPrefab.EffectPrefab[1], transform.position, transform.rotation, GameObject.Find("_Projectiles").transform);
-            UpdateStat.Invoke(new int[] { 0, m_enemyState.Damage });
+            
             Destroy(gameObject);
         }
     }
@@ -79,8 +80,9 @@ public class EnemyDeathHandler : MonoBehaviour
         {
             if (trigger.gameObject.CompareTag("Player"))
             {
+                GameManager.Instance.PlayerUpdateStat(EnumDataType.Health, -m_enemyState.Damage);
                 GameObject ClonedParticle = Instantiate(EnemyVFXPrefab.EffectPrefab[1], transform.position, transform.rotation, GameObject.Find("_Projectiles").transform);
-                UpdateStat.Invoke(new int[] { 0, m_enemyState.Damage });
+                
                 Destroy(gameObject);
             }
         }

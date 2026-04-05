@@ -1171,7 +1171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &528720731
 Transform:
   m_ObjectHideFlags: 0
@@ -3300,6 +3300,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6920683055778000055, guid: f3eb4ea5de34e1341b99f0a7abbfb6e3, type: 3}
+      propertyPath: MaxHealth
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3459,6 +3463,10 @@ PrefabInstance:
     - target: {fileID: 4187943480000948256, guid: cd677d311dc483c4ba32e3064df38484, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4341831606922092685, guid: cd677d311dc483c4ba32e3064df38484, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6130761783661965819, guid: cd677d311dc483c4ba32e3064df38484, type: 3}
       propertyPath: CrosshairTarget

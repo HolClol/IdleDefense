@@ -13,7 +13,7 @@ public class TheSpikerDeath : EnemyDeathHandler
     protected override void Start()
     {
         base.Start();
-        BossMain = GetComponent<TheSpikerAI>();
+        BossMain = GetComponentInChildren<TheSpikerAI>();
     }
     public override void DeathCondition()
     {

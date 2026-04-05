@@ -33,7 +33,7 @@ public class EnemyMain : MonoBehaviour, I_Damagable
     // ======================================================
     protected virtual void Start() 
     {
-        m_enemyDeath = GetComponent<EnemyDeathHandler>();
+        m_enemyDeath = GetComponentInParent<EnemyDeathHandler>();
         m_enemyMovement = GetComponent<EnemyMovement>();
         m_spriteRenderer = transform.parent.GetComponentInChildren<SpriteRenderer>();
         m_SpriteColor = m_spriteRenderer.color;

@@ -37,33 +37,33 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadSceneAsync("GameMenu", LoadSceneMode.Additive);
     }
     
-    public void PlayerUpdateStat(PlayerDataType data)
+    public void PlayerUpdateStat(EnumDataType enumType, float value)
     {
-        switch (data.enumType)
+        switch (enumType)
         {
             case EnumDataType.Health:
-                PlayerManager.healthValue += (int)data.value;
+                PlayerManager.healthValue += (int)value;
                 break;
             case EnumDataType.MaxHealth:
-                PlayerManager.MaxHealth += (int)data.value;
-                PlayerUpdateStat(new PlayerDataType(EnumDataType.Health, (int)data.value));
+                PlayerManager.MaxHealth += (int)value;
+                PlayerUpdateStat(EnumDataType.Health, (int)value);
                 break;
             case EnumDataType.Experience:
-                PlayerManager.experienceValue += (int)data.value;
+                PlayerManager.experienceValue += (int)value;
                 break;
             case EnumDataType.Shield:
                 break;
             case EnumDataType.Rage:
-                PlayerManager.rageValue += (int)data.value;
+                PlayerManager.rageValue += (int)value;
                 break;
             case EnumDataType.Coins:
-                PlayerManager.coinsEarned += (int)data.value;
+                PlayerManager.coinsEarned += (int)value;
                 break;
             case EnumDataType.Points:
-                PlayerManager.pointsEarned += (int)data.value;
+                PlayerManager.pointsEarned += (int)value;
                 break;
             case EnumDataType.EnemyEliminated:
-                PlayerManager.enemiesEliminated += (int)data.value;
+                PlayerManager.enemiesEliminated += (int)value;
                 break;
             
         }

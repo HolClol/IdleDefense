@@ -5,17 +5,6 @@ using UnityEngine.Events;
 
 public class DamageCalculateManager : MonoBehaviour
 {
-    [System.Serializable] public class AbilitiesStat
-    {
-        public int UpgradeLevel;
-        public int Damage;
-
-        public AbilitiesStat(int level, int damage)
-        {
-            UpgradeLevel = level;
-            Damage = damage;
-        }
-    }
     public static DamageCalculateManager Instance;
 
     public GameUpgradeInfo UpgradesInfo;
