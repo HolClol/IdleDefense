@@ -15,6 +15,7 @@ public class EnemySpawnController : MonoBehaviour
     [SerializeField] bool CanSpawn;
     [SerializeField] float SpawnRate = 1f;
     public UnityEvent BossCalling;
+    public bool Initialized = false;
 
     private StageInfo.EnemyPrefab enemyPrefabs;
     private List<Transform> enemySpawnPos = new List<Transform>();
@@ -27,14 +28,14 @@ public class EnemySpawnController : MonoBehaviour
     // Stat buff for enemies \\ 
 
     // Game Difficulty Manager \\
-    private float Spawntimer;
-    private float Timer;
+    private float Spawntimer = 999f;
+    private float Timer = 999f;
     private int MultipleSpawn = 1;
 
     // ======================================================
     // This exist for playtesting
     // ======================================================
-    private void Start()
+    private void Awake()
     {
         enemyPrefabs = StageSO.Stage.StageEnemies;
         _enemySpawn = GameObject.Find("_Enemy").transform;
@@ -43,7 +44,14 @@ public class EnemySpawnController : MonoBehaviour
             enemySpawnPos.Add(child);
 
         actualEnemyPrefabs = enemyPrefabs.LevelPrefab[0].EnemySpawn;
+        
+    }
+
+    public void INIT()
+    {
+        Initialized = true;
         Timer = DifficultySpikeTimer;
+        Spawntimer = SpawnRate;
     }
 
     // ======================================================
@@ -51,6 +59,7 @@ public class EnemySpawnController : MonoBehaviour
     // ======================================================
     private void Update()
     {
+        if (!Initialized) { return; }
         if (CanSpawn && Spawntimer <= 0)
             StartCoroutine(SpawnEnemy());
         else
@@ -122,7 +131,7 @@ public class EnemySpawnController : MonoBehaviour
     {
         if (!CanSpawn) 
             yield break;
-
+        
         WaitForSeconds wait = new WaitForSeconds(SpawnRate);
         Spawntimer = SpawnRate;
         yield return wait;

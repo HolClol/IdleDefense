@@ -37,8 +37,10 @@ public class EnemyDeathHandler : MonoBehaviour
             m_enemyState.m_SpriteColor = Color.grey;
             gameObject.name = "Molten";
 
-            UpdateStat.Invoke(new int[] { 1, m_enemyState.Experience });
-            UpdateStat.Invoke(new int[] { 8, m_enemyState.MaxHealth/50, m_enemyState.Experience / 100 });
+            GameManager.Instance.PlayerUpdateStat(new PlayerDataType(EnumDataType.Experience, m_enemyState.Experience));
+            GameManager.Instance.PlayerUpdateStat(new PlayerDataType(EnumDataType.Coins, m_enemyState.MaxHealth / 50f));
+            GameManager.Instance.PlayerUpdateStat(new PlayerDataType(EnumDataType.Points, m_enemyState.Experience / 100f));
+            GameManager.Instance.PlayerUpdateStat(new PlayerDataType(EnumDataType.EnemyEliminated, 1f));
             DecreaseCap.Invoke(new int[] { m_enemyState.EnemyID });
             Destroy(gameObject, 5);
         }
@@ -47,8 +49,10 @@ public class EnemyDeathHandler : MonoBehaviour
         {
             if (!Moltened)
             {
-                UpdateStat.Invoke(new int[] { 1, m_enemyState.Experience });
-                UpdateStat.Invoke(new int[] { 8, m_enemyState.MaxHealth/50, m_enemyState.Experience / 100});
+                GameManager.Instance.PlayerUpdateStat(new PlayerDataType(EnumDataType.Experience, m_enemyState.Experience));
+                GameManager.Instance.PlayerUpdateStat(new PlayerDataType(EnumDataType.Coins, m_enemyState.MaxHealth / 50f));
+                GameManager.Instance.PlayerUpdateStat(new PlayerDataType(EnumDataType.Points, m_enemyState.Experience / 100f));
+                GameManager.Instance.PlayerUpdateStat(new PlayerDataType(EnumDataType.EnemyEliminated, 1f));
                 DecreaseCap.Invoke(new int[] { m_enemyState.EnemyID });
                 GameObject ClonedParticle = Instantiate(EnemyVFXPrefab.EffectPrefab[0], transform.position, transform.rotation, GameObject.Find("_Projectiles").transform);
             }

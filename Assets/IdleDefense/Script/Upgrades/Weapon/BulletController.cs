@@ -91,7 +91,7 @@ public class BulletController : MonoBehaviour
         int Crit = CritHit != intstat[0] ? 1 : 0;
         intstat[0] = CritHit;
         intstat[3] = Crit;
-        DamageCalculateManager.Instance.DamageCalculate(target, intstat, floatstat);
+        GameManager.Instance.SendDamage(target, intstat, floatstat);
     }
 
     public void UpdateStat(int[] intstat, float[] floatstat) {

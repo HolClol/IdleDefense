@@ -35,24 +35,15 @@ public class GameEvent : ScriptableObject
                 gameEventListenerFloat.OnEventFloatRaised(floatstat);
             }
     }
-
-    public void Raise(string[] stringstat)
+    
+    
+    public void Raise<T>(T data) where T : struct
     {
         for (int i = listeners.Count - 1; i >= 0; i--)
-            if (listeners[i] is GameEventListenerString)
+            if (listeners[i] is GameEventListenerStruct<T>)
             {
-                GameEventListenerString gameEventListenerString = listeners[i] as GameEventListenerString;
-                gameEventListenerString.OnEventStringRaised(stringstat);
-            }
-    }
-
-    public void Raise(GameObject target, int[] intstat, float[] floatstat)
-    {
-        for (int i = listeners.Count - 1; i >= 0; i--)
-            if (listeners[i] is GameEventListenerDamage)
-            {
-                GameEventListenerDamage gameEventListenerDamage = listeners[i] as GameEventListenerDamage;
-                gameEventListenerDamage.OnEventDamageRaised(target, intstat, floatstat);
+                GameEventListenerStruct<T> gameEventListenerStruct = listeners[i] as GameEventListenerStruct<T>;
+                gameEventListenerStruct.OnEventStructRaised(data);
             }
     }
 

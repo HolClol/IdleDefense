@@ -65,7 +65,7 @@ public class ProjectileController : MonoBehaviour
             int Crit = CritHit != intstat[0] ? 1 : 0;
             intstat[0] = CritHit;
             intstat[3] = Crit;
-            DamageCalculateManager.Instance.DamageCalculate(target, intstat, floatstat);
+            GameManager.Instance.SendDamage(target, intstat, floatstat);
             StartCoroutine(DamageCooldownPlay(target, floatstat[1]));
         }
             

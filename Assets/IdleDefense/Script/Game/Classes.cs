@@ -16,3 +16,13 @@ public class GameData
         this.UserPoints = 0;
     }
 }
+
+[System.Serializable]
+public class ElitePathOptions
+{
+    public string EliteUpgradeName;
+    public string[] UpgradeDescription;
+    public int AlternateID;
+    public int MaxLevel;
+}
+

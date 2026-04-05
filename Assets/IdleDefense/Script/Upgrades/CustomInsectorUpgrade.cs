@@ -13,9 +13,9 @@ public class CustomInsectorUpgrade : Editor
         UpgradeSO UpgSO = (UpgradeSO)target;
 
         // Draw the enum field
-        UpgSO.UpgradeType = (UpgradeSO.UpgradeTypeEnum)EditorGUILayout.EnumPopup("Upgrade Type", UpgSO.UpgradeType);
-        UpgSO.WeaponType = (UpgradeSO.WeaponTypeEnum)EditorGUILayout.EnumPopup("Weapon Type", UpgSO.WeaponType);
-        UpgSO.DamageType = (UpgradeSO.DamageTypeEnum)EditorGUILayout.EnumPopup("Damage Type", UpgSO.DamageType);
+        UpgSO.UpgradeType = (UpgradeTypeEnum)EditorGUILayout.EnumPopup("Upgrade Type", UpgSO.UpgradeType);
+        UpgSO.WeaponType = (WeaponTypeEnum)EditorGUILayout.EnumPopup("Weapon Type", UpgSO.WeaponType);
+        UpgSO.DamageType = (DamageTypeEnum)EditorGUILayout.EnumPopup("Damage Type", UpgSO.DamageType);
 
         /*// Draw the ScriptableObject reference field
         UpgSO.DamageType = (IntVariable)EditorGUILayout.ObjectField("Damage Type", UpgSO.DamageType, typeof(IntVariable), false);*/
@@ -32,8 +32,8 @@ public class CustomInsectorUpgrade : Editor
         // Conditional field display based on enum selection
         switch (UpgSO.UpgradeType)
         {
-            case UpgradeSO.UpgradeTypeEnum.Weapon:
-            case UpgradeSO.UpgradeTypeEnum.Abilities:
+            case UpgradeTypeEnum.Weapon:
+            case UpgradeTypeEnum.Abilities:
                 // Draw the array of custom class instances
                 SerializedProperty arrayProp = serializedObject.FindProperty("ElitePath");
                 EditorGUILayout.PropertyField(arrayProp, new GUIContent("Elite Path"), true);

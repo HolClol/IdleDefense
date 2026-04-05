@@ -80,7 +80,7 @@ public class UpgradeManager : MonoBehaviour
 
     private int LevelCheckScan(int id)
     {
-        if (UpgradesData.UpgradeInfoTable[id].UpgradeType == UpgradeSO.UpgradeTypeEnum.Weapon)
+        if (UpgradesData.UpgradeInfoTable[id].UpgradeType == UpgradeTypeEnum.Weapon)
             return LevelSelect;
         else
             return Level;
@@ -193,7 +193,7 @@ public class UpgradeManager : MonoBehaviour
         if (UpgradesData.UpgradeInfoTable[ID].MaxLevel <= Level && ObtainedUpgrade.Contains(ID))
                 ObtainedUpgrade.Remove(ID);
         // Save selected upgrades to guarantee one in the next level up
-        else if (UpgradesData.UpgradeInfoTable[ID].UpgradeType != UpgradeSO.UpgradeTypeEnum.Stat && !ObtainedUpgrade.Contains(ID))
+        else if (UpgradesData.UpgradeInfoTable[ID].UpgradeType != UpgradeTypeEnum.Stat && !ObtainedUpgrade.Contains(ID))
             ObtainedUpgrade.Add(ID);
 
         int guarantee = Random.Range(0, 10);
